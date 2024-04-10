@@ -87,10 +87,18 @@
                         </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="criterion-n_estimators" name="criterion" value="n_estimators">
-                        <label class="form-check-label" for="criterion-n_estimators">
-                            n_estimators 
+                        <input class="form-check-input" type="checkbox" id="criterion-n_estimators-checkbox" name="criterion" value="n_estimators">
+                        <label class="form-check-label" for="criterion-n_estimators-checkbox">
+                            n_estimators
                         </label>
+                        <div>
+                            <input class="form-number" type="text" id="criterion-n_estimators-input" name="criterion-n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+
+                            <select id="criterion-n_estimators-select" class="form-select">
+                                <option selected disabled>Select a value</option>
+                                <!-- JavaScript generated options will be added here -->
+                            </select>
+                        </div>
                         <p>
                             n_estimatorsint, default=100<br>
                             The number of trees in the forest.
@@ -118,18 +126,24 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="criterion-min_samples_leaf" name="criterion" value="min_samples_leaf">
-                        <label class="form-check-label" for="criterion-min_samples_leaf">
+                        <input class="form-check-input" type="checkbox" id="criterion-min_samples_leaf-checkbox" name="criterion" value="min_samples_leaf">
+                        <label class="form-check-label" for="criterion-min_samples_leaf-checkbox">
                             min_samples_leaf
                         </label>
+                        <div>
+                            <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="criterion-min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+
+                            <select id="criterion-min_samples_leaf-select" class="form-select">
+                                <option selected disabled>Select a value</option>
+                                <!-- JavaScript generated options will be added here -->
+                            </select>
+                        </div>
                         <p>
                             min_samples_leafint or float, default=1<br>
                             The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
                         </p>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="text" id="option2-custom" placeholder="Custom Input" >
-                    </div>
+              
                 </div>
             </div>
         </div>
@@ -195,38 +209,106 @@
                     if (confirmation) {
                         this.value = ''; // 清空输入
                         this.focus(); // 使输入框重新获取焦点
+                        
+                    }
+                }
+            }
+        });
+
+        // 当复选框被点击时启用/禁用输入框和选择框
+        document.getElementById('criterion-n_estimators-checkbox').addEventListener('change', function () {
+            var input = document.getElementById('criterion-n_estimators-input');
+            var select = document.getElementById('criterion-n_estimators-select');
+            input.disabled = !this.checked;
+            select.disabled = !this.checked;
+            if (this.checked) {
+                input.focus(); // 使输入框获取焦点
+                select.selectedIndex = 0; // 重置选择框
+            } else {
+                input.value = ''; // 清空输入框的值
+                select.selectedIndex = 0; // 重置选择框
+            }
+        });
+
+        // 当输入框失去焦点时进行验证
+        document.getElementById('criterion-n_estimators-input').addEventListener('blur', function () {
+            var value = parseInt(this.value);
+            if (isNaN(value) || value < 1 || value > 100) {
+                if (this.value.trim() !== '') {
+                    var confirmation = confirm('Please enter a positive integer between 1 and 100 for max_depth.');
+                    if (confirmation) {
+                        this.value = ''; // 清空输入
+                        this.focus(); // 使输入框重新获取焦点
+
+                    }
+                }
+            }
+        });
+
+        // 当复选框被点击时启用/禁用输入框和选择框
+        document.getElementById('criterion-min_samples_leaf-checkbox').addEventListener('change', function () {
+            var input = document.getElementById('criterion-min_samples_leaf-input');
+            var select = document.getElementById('criterion-min_samples_leaf-select');
+            input.disabled = !this.checked;
+            select.disabled = !this.checked;
+            if (this.checked) {
+                input.focus(); // 使输入框获取焦点
+                select.selectedIndex = 0; // 重置选择框
+            } else {
+                input.value = ''; // 清空输入框的值
+                select.selectedIndex = 0; // 重置选择框
+            }
+        });
+
+        // 当输入框失去焦点时进行验证
+        document.getElementById('criterion-min_samples_leaf-input').addEventListener('blur', function () {
+            var value = parseInt(this.value);
+            if (isNaN(value) || value < 1 || value > 100) {
+                if (this.value.trim() !== '') {
+                    var confirmation = confirm('Please enter a positive integer between 1 and 100 for max_depth.');
+                    if (confirmation) {
+                        this.value = ''; // 清空输入
+                        this.focus(); // 使输入框重新获取焦点
+
                     }
                 }
             }
         });
 
 
-        // 当选择框的值发生变化时，将其值设置到输入框中
-        document.getElementById('criterion-max_depth-select').addEventListener('change', function () {
-            var input = document.getElementById('criterion-max_depth-input');
-            input.value = this.value;
-        });
 
+        // 函数用于将选择框的值设置到相应的输入框中
+        function updateInputFromSelect(selectId, inputId) {
+            var select = document.getElementById(selectId);
+            var input = document.getElementById(inputId);
+            select.addEventListener('change', function () {
+                input.value = this.value;
+            });
 
-        // Generate options for select element
-        var selectElement = document.getElementById('criterion-max_depth-select');
-        for (var i = 1; i <= 100; i++) {
-            var option = document.createElement('option');
-            option.value = i;
-            option.text = i;
-            selectElement.appendChild(option);
+            // 生成选项
+            for (var i = 1; i <= 100; i++) {
+                var option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                select.appendChild(option);
+            }
+
+            // 添加事件监听器，当选择框的选项更改时更新输入框的值
+            select.addEventListener('change', function () {
+                var selectedValue = parseInt(this.value);
+                input.value = selectedValue;
+            });
         }
-        // 添加事件监听器，当选择框的选项更改时更新输入框的值
-        selectElement.addEventListener('change', function () {
-            var selectedValue = parseInt(this.value);
-            var inputElement = document.getElementById('criterion-max_depth-input');
-            inputElement.value = selectedValue;
-        });
+
+        // 调用函数为每个输入框添加相同的功能
+        updateInputFromSelect('criterion-n_estimators-select', 'criterion-n_estimators-input');
+        updateInputFromSelect('criterion-max_depth-select', 'criterion-max_depth-input');
+        updateInputFromSelect('criterion-min_samples_leaf-select', 'criterion-min_samples_leaf-input');
 
 
         $(document).ready(function () {
             // 当主选项被选择时启用副选项
-            $('#mainOption1, #mainOption2, #mainOption3, #mainOption4').change(function () {
+            $(' #mainOption2').change(function () {
                 var isChecked = $(this).is(':checked');
                 var accordionItem = $(this).closest('.accordion-item');
 
