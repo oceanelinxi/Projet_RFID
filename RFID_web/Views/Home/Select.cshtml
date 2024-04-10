@@ -1,0 +1,268 @@
+﻿@{
+    ViewData["Title"] = "Select Options";
+}
+<style>
+    p {
+        font-family: 'Times New Roman', Times, serif;
+        margin-right: 3em;
+        vertical-align: middle;
+    }
+    label {
+        font-family: 'Times New Roman', Times, serif;
+        margin-right: 3em;
+        vertical-align: middle;
+    }
+    p1 {
+        font-weight: bold;
+    }
+    form-number {
+        width: 20px; /* 设置输入框的宽度 */
+        height: 5px; /* 设置输入框的高度 */
+        font-size: 20px; /* 设置输入框的字体大小 */
+        /* 添加其他样式属性，以满足您的需求 */
+    }
+    
+
+
+</style>
+
+<h1>Méthodes</h1>
+
+<form id="optionsForm">
+    <div class="accordion" id="optionsAccordion">
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption1">
+                <div class="d-flex align-items-center">
+                    <!-- 新添加的包裹 div -->
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption1" value="mainOption1">
+                   <p1>Analytique</p1>
+                </div>
+            </h>
+
+        </div>
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption2">
+                <div class="d-flex align-items-center">
+                    <!-- 新添加的包裹 div -->
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption2" value="mainOption2">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption2" aria-expanded="false" aria-controls="collapseOption2">
+                       
+                        <p1> Random forest</p1>
+                    </button>
+                </div>
+            </h>
+            <div id="collapseOption2" class="accordion-collapse collapse" aria-labelledby="headingOption2" data-bs-parent="#optionsAccordion">
+                <div class="accordion-body">
+                    <p>
+                        Explication :
+                        Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
+                    </p>
+                    <p>Choose one or more sub-options:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="option2-1" value="option2-1">
+                        <label class="form-check-label" for="option2-1">
+                            criterion
+                        </label>
+                        <p>
+                            criterion:{“gini”, “entropy”, “log_loss”}, default=”gini”<br>
+                            The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “log_loss” and “entropy” both for the Shannon information gain, see Mathematical formulation. Note: This parameter is tree-specific.
+                        </p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="criterion-gini" name="criterion" value="gini">
+                            <label class="form-check-label" for="criterion-gini">
+                                Gini
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="criterion-entropy" name="criterion" value="entropy">
+                            <label class="form-check-label" for="criterion-entropy">
+                                Entropy
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="criterion-log_loss" name="criterion" value="log_loss">
+                            <label class="form-check-label" for="criterion-log_loss">
+                                Log Loss
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="criterion-n_estimators" name="criterion" value="n_estimators">
+                        <label class="form-check-label" for="criterion-n_estimators">
+                            n_estimators 
+                        </label>
+                        <p>
+                            n_estimatorsint, default=100<br>
+                            The number of trees in the forest.
+                        </p>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="criterion-max_depth-checkbox">
+                        <label class="form-check-label" for="criterion-max_depth-checkbox">
+                            max_depth:
+                        </label>
+                        <div>
+                            <input class="form-number" type="text" id="criterion-max_depth-input" name="criterion-max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+
+                            <select id="criterion-max_depth-select" class="form-select">
+                                <option selected disabled>Select a value</option>
+                                <!-- JavaScript generated options will be added here -->
+                            </select>
+                        </div>
+                        <label class="form-check-label" for="criterion-max_depth-input">
+                        </label>
+                        <p>
+                            max_depthint, default=None<br>
+                            The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
+                        </p>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="criterion-min_samples_leaf" name="criterion" value="min_samples_leaf">
+                        <label class="form-check-label" for="criterion-min_samples_leaf">
+                            min_samples_leaf
+                        </label>
+                        <p>
+                            min_samples_leafint or float, default=1<br>
+                            The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
+                        </p>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="text" id="option2-custom" placeholder="Custom Input" >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption3">
+                <div class="d-flex align-items-center">
+                    <!-- 新添加的包裹 div -->
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption3" value="mainOption3">
+                    <p1>Naive Bayes</p1>
+                </div>
+                <p>
+                    Explication :
+                    Le modèle Naive Bayes est souvent utilisé dans les domaines où la simplicité et l'interprétabilité sont importantes, ainsi que dans les cas où il y a une grande quantité de données et un grand nombre de caractéristiques à traiter. Bien qu'il puisse être simpliste dans son approche, il peut souvent donner des résultats compétitifs dans de nombreux cas, surtout lorsque l'hypothèse de caractéristiques indépendantes est raisonnablement satisfaite.
+                </p>
+            </h>
+
+        </div>
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption4">
+                <div class="d-flex align-items-center">
+                    <!-- 新添加的包裹 div -->
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption4" value="mainOption4"> 
+                    <p1>Logistic Regression</p1>
+                </div>
+                <p>
+                    Explication :
+                    La régression logistique est une méthode d'apprentissage automatique utilisée principalement pour résoudre des problèmes de classification. Bien que le terme "régression" soit utilisé, il s'agit en réalité d'un algorithme de classification. La régression logistique est basée sur un modèle linéaire et utilise une fonction logistique pour transformer la sortie en valeurs de probabilité entre 0 et 1. Cela permet de prédire la probabilité qu'un événement appartienne à une classe donnée. En pratique, un seuil de probabilité est choisi (généralement 0,5) pour classer les événements en deux catégories.
+                </p>
+            </h>
+
+        </div>
+
+    </div>
+
+    <button type="button" id="nextButton" class="btn btn-primary">Next</button>
+</form>
+
+@section Scripts {
+    <script>
+
+        // 当复选框被点击时启用/禁用输入框和选择框
+        document.getElementById('criterion-max_depth-checkbox').addEventListener('change', function () {
+            var input = document.getElementById('criterion-max_depth-input');
+            var select = document.getElementById('criterion-max_depth-select');
+            input.disabled = !this.checked;
+            select.disabled = !this.checked;
+            if (this.checked) {
+                input.focus(); // 使输入框获取焦点
+                select.selectedIndex = 0; // 重置选择框
+            } else {
+                input.value = ''; // 清空输入框的值
+                select.selectedIndex = 0; // 重置选择框
+            }
+        });
+
+        // 当输入框失去焦点时进行验证
+        document.getElementById('criterion-max_depth-input').addEventListener('blur', function () {
+            var value = parseInt(this.value);
+            if (isNaN(value) || value < 1 || value > 100) {
+                if (this.value.trim() !== '') {
+                    var confirmation = confirm('Please enter a positive integer between 1 and 100 for max_depth.');
+                    if (confirmation) {
+                        this.value = ''; // 清空输入
+                        this.focus(); // 使输入框重新获取焦点
+                    }
+                }
+            }
+        });
+
+
+        // 当选择框的值发生变化时，将其值设置到输入框中
+        document.getElementById('criterion-max_depth-select').addEventListener('change', function () {
+            var input = document.getElementById('criterion-max_depth-input');
+            input.value = this.value;
+        });
+
+
+        // Generate options for select element
+        var selectElement = document.getElementById('criterion-max_depth-select');
+        for (var i = 1; i <= 100; i++) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.text = i;
+            selectElement.appendChild(option);
+        }
+        // 添加事件监听器，当选择框的选项更改时更新输入框的值
+        selectElement.addEventListener('change', function () {
+            var selectedValue = parseInt(this.value);
+            var inputElement = document.getElementById('criterion-max_depth-input');
+            inputElement.value = selectedValue;
+        });
+
+
+        $(document).ready(function () {
+            // 当主选项被选择时启用副选项
+            $('#mainOption1, #mainOption2, #mainOption3, #mainOption4').change(function () {
+                var isChecked = $(this).is(':checked');
+                var accordionItem = $(this).closest('.accordion-item');
+
+                // 启用或禁用副选项
+                accordionItem.find('input[type=checkbox], input[type=text]').prop('disabled', !isChecked);
+
+                // 展开或折叠副选项
+                var collapseTarget = accordionItem.find('.accordion-collapse');
+                if (isChecked) {
+                    collapseTarget.collapse('show');
+                } else {
+                    collapseTarget.collapse('hide');
+                }
+            });
+
+            // 当按钮点击时，执行下一步操作
+            $('#nextButton').click(function () {
+                // 获取选中的选项
+                var selectedOptions = [];
+                $('input[type=checkbox]:checked').each(function () {
+                    selectedOptions.push($(this).val());
+                });
+
+                // 获取输入的自定义值
+                $('input[type=text]').each(function () {
+                    var inputValue = $(this).val();
+                    if (inputValue !== "" && /^\d+$/.test(inputValue)) {
+                        selectedOptions.push(inputValue);
+                    }
+                });
+
+                // 在控制台打印选中的选项
+                console.log(selectedOptions);
+
+                // 这里可以编写代码，执行下一步操作，比如发送选项给后端处理等
+            });
+        });
+    </script>
+}

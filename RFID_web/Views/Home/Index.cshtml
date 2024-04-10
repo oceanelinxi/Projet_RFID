@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Here's your data from API:</p>
+    <p id="apiData"></p>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/Data',
+                method: 'GET',
+                success: function (data) {
+                    $('#apiData').text(data.message);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+}
