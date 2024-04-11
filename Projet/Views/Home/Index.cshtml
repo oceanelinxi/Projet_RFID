@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <br> </br>
+    <br> </br>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload">
+        <div>
+            <label for="files" class="label-upload">Choisissez les fichiers à télécharger (ZIP autorisés) :</label>
+            <input type="file" name="files" multiple>
+        </div>
+        <br> </br>
+        <br> </br>
+        <div>
+            <button type="submit" class="btn-upload">Suivant</button>
+        </div>
+    </form>
+</div>

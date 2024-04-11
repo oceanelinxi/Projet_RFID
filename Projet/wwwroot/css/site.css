@@ -1,0 +1,68 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    /*background-image: url('/images/background.jpg'); 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;*/
+}
+
+.btn-upload {
+    background-color: #e53e3e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .btn-upload:hover {
+        background-color: #c53030;
+    }
+
+.display-4 {
+    color: black;
+    font-weight: bold;
+}
+
+.label-upload {
+    display: block;
+    margin-bottom: 0.5em;
+    color: black;
+    font-size: 1.5em;
+    font-weight: bold;
+}
