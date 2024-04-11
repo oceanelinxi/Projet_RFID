@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\rfid_web\\rfid_web\\views\\home\\select.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|solutionrelative:rfid_web\\views\\home\\select.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\rfid_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|solutionrelative:rfid_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\rfid_web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|solutionrelative:rfid_web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\rfid_web\\rfid_web\\views\\home\\select.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|solutionrelative:rfid_web\\views\\home\\select.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\rfid_web\\rfid_web\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|solutionrelative:rfid_web\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\rfid_web\\rfid_web\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{953DA2A8-D73F-49B0-8313-A1BD93A3A1F6}|RFID_web\\RFID_web.csproj|solutionrelative:rfid_web\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,40 +38,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Select.cshtml",
               "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\Home\\Select.cshtml",
               "RelativeDocumentMoniker": "RFID_web\\Views\\Home\\Select.cshtml",
               "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\Home\\Select.cshtml",
               "RelativeToolTip": "RFID_web\\Views\\Home\\Select.cshtml",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAADMAAAAhAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGUBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-10T09:46:01.31Z",
+              "WhenOpened": "2024-04-11T12:57:22.852Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "RFID_web\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "RFID_web\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAA6wBcAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-10T09:44:58.694Z"
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "RFID_web\\Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "RFID_web\\Views\\_ViewStart.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-11T12:34:52.326Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\Web.config",
+              "RelativeDocumentMoniker": "RFID_web\\Views\\Web.config",
+              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\Web.config",
+              "RelativeToolTip": "RFID_web\\Views\\Web.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-04-11T12:34:50.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "RFID_web\\Views\\Home\\Index.cshtml",
               "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\RFID_web\\RFID_web\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "RFID_web\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAlAAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-10T09:36:41.183Z"
+              "WhenOpened": "2024-04-10T09:36:41.183Z",
+              "EditorCaption": ""
             }
           ]
         }

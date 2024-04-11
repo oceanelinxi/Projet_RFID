@@ -7,23 +7,22 @@
         margin-right: 3em;
         vertical-align: middle;
     }
+
     label {
         font-family: 'Times New Roman', Times, serif;
         margin-right: 3em;
         vertical-align: middle;
     }
+
     p1 {
         font-weight: bold;
     }
+
     form-number {
-        width: 20px; /* 设置输入框的宽度 */
-        height: 5px; /* 设置输入框的高度 */
-        font-size: 20px; /* 设置输入框的字体大小 */
-        /* 添加其他样式属性，以满足您的需求 */
+        width: 20px;
+        height: 5px;
+        font-size: 20px;
     }
-    
-
-
 </style>
 
 <h1>Méthodes</h1>
@@ -33,9 +32,8 @@
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption1">
                 <div class="d-flex align-items-center">
-                    <!-- 新添加的包裹 div -->
                     <input class="form-check-input me-2" type="checkbox" id="mainOption1" value="mainOption1">
-                   <p1>Analytique</p1>
+                    <p1>Analytique</p1>
                 </div>
             </h>
 
@@ -43,14 +41,13 @@
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption2">
                 <div class="d-flex align-items-center">
-                    <!-- 新添加的包裹 div -->
                     <input class="form-check-input me-2" type="checkbox" id="mainOption2" value="mainOption2">
-                   
-                        <p1> Random forest</p1>
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption2" aria-expanded="false" aria-controls="collapseOption2" style="width: 20px; padding: 0; margin-left: 5px;">
-                            <span class="visually-hidden">Toggle sub-options</span>
-                        </button>
-                 
+
+                    <p1> Random forest</p1>
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption2" aria-expanded="false" aria-controls="collapseOption2" style="width: 20px; padding: 0; margin-left: 5px;">
+                        <span class="visually-hidden">Toggle sub-options</span>
+                    </button>
+
                 </div>
             </h>
             <div id="collapseOption2" class="accordion-collapse collapse" aria-labelledby="headingOption2" data-bs-parent="#optionsAccordion">
@@ -112,7 +109,7 @@
                             max_depth:
                         </label>
                         <div>
-                            <input class="form-number" type="text" id="criterion-max_depth-input" name="criterion-max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+                            <input class="form-number" type="text" id="criterion-max_depth-input" name="criterion-max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
                             <select id="criterion-max_depth-select" class="form-select">
                                 <option selected disabled>Select a value</option>
@@ -133,7 +130,7 @@
                             min_samples_leaf
                         </label>
                         <div>
-                            <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="criterion-min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+                            <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="criterion-min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
                             <select id="criterion-min_samples_leaf-select" class="form-select">
                                 <option selected disabled>Select a value</option>
@@ -145,7 +142,7 @@
                             The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
                         </p>
                     </div>
-              
+
                 </div>
             </div>
         </div>
@@ -153,7 +150,7 @@
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption3">
                 <div class="d-flex align-items-center">
-                    <!-- 新添加的包裹 div -->
+
                     <input class="form-check-input me-2" type="checkbox" id="mainOption3" value="mainOption3">
                     <p1>Naive Bayes</p1>
                 </div>
@@ -167,8 +164,8 @@
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption4">
                 <div class="d-flex align-items-center">
-                    <!-- 新添加的包裹 div -->
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption4" value="mainOption4"> 
+
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption4" value="mainOption4">
                     <p1>Logistic Regression</p1>
                 </div>
                 <p>
@@ -181,96 +178,96 @@
 
     </div>
 
-    <button type="button" id="nextButton" class="btn btn-primary">Next</button>
+    <button type="submit" class="btn-upload" id="suivant-btn">Suivant</button>
 </form>
 
 @section Scripts {
     <script>
 
-        // 当复选框被点击时启用/禁用输入框和选择框
+        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
         document.getElementById('criterion-max_depth-checkbox').addEventListener('change', function () {
             var input = document.getElementById('criterion-max_depth-input');
             var select = document.getElementById('criterion-max_depth-select');
             input.disabled = !this.checked;
             select.disabled = !this.checked;
             if (this.checked) {
-                input.focus(); // 使输入框获取焦点
-                select.selectedIndex = 0; // 重置选择框
+                input.focus(); // Mettre le champ de saisie en surbrillance
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
             } else {
-                input.value = ''; // 清空输入框的值
-                select.selectedIndex = 0; // 重置选择框
+                input.value = ''; // Effacer la valeur du champ de saisie
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
             }
         });
 
-        // 当输入框失去焦点时进行验证
+        // Lorsque le champ de saisie perd le focus, effectuer une validation
         document.getElementById('criterion-max_depth-input').addEventListener('blur', function () {
             var value = parseInt(this.value);
             if (isNaN(value) || value < 1 || value > 100) {
                 if (this.value.trim() !== '') {
-                    var confirmation = confirm('Please enter a positive integer between 1 and 100 for max_depth.');
+                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
                     if (confirmation) {
-                        this.value = ''; // 清空输入
-                        this.focus(); // 使输入框重新获取焦点
-                        
+                        this.value = ''; // Effacer la saisie
+                        this.focus(); // Mettre le champ de saisie en surbrillance
+
                     }
                 }
             }
         });
 
-        // 当复选框被点击时启用/禁用输入框和选择框
+        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
         document.getElementById('criterion-n_estimators-checkbox').addEventListener('change', function () {
             var input = document.getElementById('criterion-n_estimators-input');
             var select = document.getElementById('criterion-n_estimators-select');
             input.disabled = !this.checked;
             select.disabled = !this.checked;
             if (this.checked) {
-                input.focus(); // 使输入框获取焦点
-                select.selectedIndex = 0; // 重置选择框
+                input.focus(); // Mettre le champ de saisie en surbrillance
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
             } else {
-                input.value = ''; // 清空输入框的值
-                select.selectedIndex = 0; // 重置选择框
+                input.value = ''; // Effacer la valeur du champ de saisie
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
             }
         });
 
-        // 当输入框失去焦点时进行验证
+        // Lorsque le champ de saisie perd le focus, effectuer une validation
         document.getElementById('criterion-n_estimators-input').addEventListener('blur', function () {
             var value = parseInt(this.value);
             if (isNaN(value) || value < 1 || value > 100) {
                 if (this.value.trim() !== '') {
-                    var confirmation = confirm('Please enter a positive integer between 1 and 100 for max_depth.');
+                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
                     if (confirmation) {
-                        this.value = ''; // 清空输入
-                        this.focus(); // 使输入框重新获取焦点
+                        this.value = ''; // Effacer la saisie
+                        this.focus(); // Mettre le champ de saisie en surbrillance
 
                     }
                 }
             }
         });
 
-        // 当复选框被点击时启用/禁用输入框和选择框
+        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
         document.getElementById('criterion-min_samples_leaf-checkbox').addEventListener('change', function () {
             var input = document.getElementById('criterion-min_samples_leaf-input');
             var select = document.getElementById('criterion-min_samples_leaf-select');
             input.disabled = !this.checked;
             select.disabled = !this.checked;
             if (this.checked) {
-                input.focus(); // 使输入框获取焦点
-                select.selectedIndex = 0; // 重置选择框
+                input.focus(); // Mettre le champ de saisie en surbrillance
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
             } else {
-                input.value = ''; // 清空输入框的值
-                select.selectedIndex = 0; // 重置选择框
+                input.value = ''; // Effacer la valeur du champ de saisie
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
             }
         });
 
-        // 当输入框失去焦点时进行验证
+        // Lorsque le champ de saisie perd le focus, effectuer une validation
         document.getElementById('criterion-min_samples_leaf-input').addEventListener('blur', function () {
             var value = parseInt(this.value);
             if (isNaN(value) || value < 1 || value > 100) {
                 if (this.value.trim() !== '') {
-                    var confirmation = confirm('Please enter a positive integer between 1 and 100 for max_depth.');
+                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
                     if (confirmation) {
-                        this.value = ''; // 清空输入
-                        this.focus(); // 使输入框重新获取焦点
+                        this.value = ''; // Effacer la saisie
+                        this.focus(); // Mettre le champ de saisie en surbrillance
 
                     }
                 }
@@ -279,7 +276,7 @@
 
 
 
-        // 函数用于将选择框的值设置到相应的输入框中
+        // Fonction pour définir la valeur du sélecteur dans le champ de saisie correspondant
         function updateInputFromSelect(selectId, inputId) {
             var select = document.getElementById(selectId);
             var input = document.getElementById(inputId);
@@ -287,7 +284,7 @@
                 input.value = this.value;
             });
 
-            // 生成选项
+            // Générer les options
             for (var i = 1; i <= 100; i++) {
                 var option = document.createElement('option');
                 option.value = i;
@@ -295,29 +292,29 @@
                 select.appendChild(option);
             }
 
-            // 添加事件监听器，当选择框的选项更改时更新输入框的值
+            // Ajouter un écouteur d'événements pour mettre à jour la valeur du champ de saisie lorsque l'option du sélecteur change
             select.addEventListener('change', function () {
                 var selectedValue = parseInt(this.value);
                 input.value = selectedValue;
+
             });
         }
-
-        // 调用函数为每个输入框添加相同的功能
+        // Appeler la fonction pour ajouter la même fonctionnalité à chaque champ de saisie
         updateInputFromSelect('criterion-n_estimators-select', 'criterion-n_estimators-input');
         updateInputFromSelect('criterion-max_depth-select', 'criterion-max_depth-input');
         updateInputFromSelect('criterion-min_samples_leaf-select', 'criterion-min_samples_leaf-input');
 
 
         $(document).ready(function () {
-            // 当主选项被选择时启用副选项
+            // Activer les sous-options lorsque l'option principale est sélectionnée
             $(' #mainOption2').change(function () {
                 var isChecked = $(this).is(':checked');
                 var accordionItem = $(this).closest('.accordion-item');
 
-                // 启用或禁用副选项
+                // Activer ou désactiver les sous-options
                 accordionItem.find('input[type=checkbox], input[type=text]').prop('disabled', !isChecked);
 
-                // 展开或折叠副选项
+                // Déplier ou replier les sous-options
                 var collapseTarget = accordionItem.find('.accordion-collapse');
                 if (isChecked) {
                     collapseTarget.collapse('show');
@@ -326,15 +323,15 @@
                 }
             });
 
-            // 当按钮点击时，执行下一步操作
+            // Lorsque le bouton est cliqué, effectuer l'action suivante
             $('#nextButton').click(function () {
-                // 获取选中的选项
+                // Obtenir les options sélectionnées
                 var selectedOptions = [];
                 $('input[type=checkbox]:checked').each(function () {
                     selectedOptions.push($(this).val());
                 });
 
-                // 获取输入的自定义值
+                // Obtenir les valeurs personnalisées saisies
                 $('input[type=text]').each(function () {
                     var inputValue = $(this).val();
                     if (inputValue !== "" && /^\d+$/.test(inputValue)) {
@@ -342,11 +339,20 @@
                     }
                 });
 
-                // 在控制台打印选中的选项
+                // Afficher les options sélectionnées dans la console
                 console.log(selectedOptions);
 
-                // 这里可以编写代码，执行下一步操作，比如发送选项给后端处理等
+                // Vous pouvez écrire du code ici pour effectuer l'action suivante, comme envoyer les options pour traitement côté serveur, etc.
             });
+        });
+
+        // Ajouter un écouteur d'événements pour le clic sur le bouton
+        document.getElementById("suivant-btn").addEventListener("click", function (event) {
+            // Empêcher le comportement de soumission par défaut du formulaire
+            event.preventDefault();
+            // Exécuter la logique de redirection de la page, ici utiliser window.location.href pour rediriger vers Home/Select
+            window.location.href = "@Url.Action("Image", "Home")";
         });
     </script>
 }
+

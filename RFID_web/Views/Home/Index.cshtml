@@ -4,23 +4,27 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Here's your data from API:</p>
-    <p id="apiData"></p>
+    <br> </br>
+    <br> </br>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload">
+        <div>
+            <label for="files" class="label-upload">Choisissez les fichiers à télécharger (ZIP autorisés) :</label>
+            <input type="file" name="files" multiple>
+        </div>
+        <br> </br>
+        <br> </br>
+        <div>
+            <button type="submit" class="btn-upload" id="suivant-btn">Suivant</button>
+        </div>
+    </form>
 </div>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: '/api/Data',
-                method: 'GET',
-                success: function (data) {
-                    $('#apiData').text(data.message);
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-        });
-    </script>
-}
+<script>
+    // Ajout d'un écouteur d'événements sur le clic du bouton
+    document.getElementById("suivant-btn").addEventListener("click", function (event) {
+        // Empêcher le comportement de soumission par défaut du formulaire
+        event.preventDefault();
+        // Exécution de la logique de redirection de la page, ici en utilisant window.location.href pour rediriger vers Home/Select
+        window.location.href = "@Url.Action("Select", "Home")";
+    });
+</script>

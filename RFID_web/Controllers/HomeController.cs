@@ -33,5 +33,14 @@ namespace RFID_web.Controllers
 
             return View();
         }
+
+        public ActionResult Image()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+    
     }
 }
