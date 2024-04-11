@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "image";
+}
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChartPage.aspx.cs" Inherits="WebApplication.ChartPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Four Bar Chart</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style="width: 80%; margin: auto;">
+            <asp:Chart ID="Chart1" runat="server" Width="400px" Height="400px">
+                <Series>
+                    <asp:Series Name="Series1" ChartType="Column">
+                        <Points>
+                            <asp:DataPoint XValue="Category 1" YValues="50" />
+                            <asp:DataPoint XValue="Category 2" YValues="60" />
+                            <asp:DataPoint XValue="Category 3" YValues="70" />
+                            <asp:DataPoint XValue="Category 4" YValues="80" />
+                        </Points>
+                    </asp:Series>
+                </Series>
+                <ChartAreas>
+                    <asp:ChartArea Name="ChartArea1">
+                        <AxisY Title="Percentage" Interval="10">
+                            <LabelStyle Format="P0" />
+                        </AxisY>
+                    </asp:ChartArea>
+                </ChartAreas>
+            </asp:Chart>
+        </div>
+    </form>
+</body>
+</html>
+
