@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "image";
+}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemple de diagramme à barres</title>
+    <!-- Inclure la bibliothèque Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            width: 400px; /* Définir une largeur fixe */
+            height: 300px; /* Définir une hauteur fixe */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Obtenir l'élément canvas
+        var ctx = document.getElementById('myChart').getContext('2d');
+        // Créer un nouveau graphique
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Diagramme en barres
+            data: {
+                labels: ['Analytique', 'Random Forest', 'Naive Bayes', 'Logistic Regression'], // Étiquettes pour chaque barre
+                datasets: [{
+                    label: 'Exactitude %', 
+                    data: [75, 80, 85, 70], // Valeurs en pourcentage pour chaque barre
+                    backgroundColor: [ // Couleur de fond des barres
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [ // Couleur de bordure des barres
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function (value) { return value + "%" } // Formatage des étiquettes de l'axe des y en pourcentage
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
