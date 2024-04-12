@@ -6,6 +6,7 @@
         font-family: 'Times New Roman', Times, serif;
         margin-right: 3em;
         vertical-align: middle;
+        color: darkgrey;
     }
 
     label {
@@ -56,39 +57,40 @@
                         Explication :
                         Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
                     </p>
-                    <p>Choose one or more sub-options:</p>
+                    <p1>Choose one or more sub-options:</p1>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="option2-1" value="option2-1">
                         <label class="form-check-label" for="option2-1">
-                            criterion
+                           <p1>1.criterion:</p1>
                         </label>
                         <p>
+                            Explication :
                             criterion:{“gini”, “entropy”, “log_loss”}, default=”gini”<br>
                             The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “log_loss” and “entropy” both for the Shannon information gain, see Mathematical formulation. Note: This parameter is tree-specific.
                         </p>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="criterion-gini" name="criterion" value="gini">
                             <label class="form-check-label" for="criterion-gini">
-                                Gini
+                                <p1>Gini</p1>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="criterion-entropy" name="criterion" value="entropy">
                             <label class="form-check-label" for="criterion-entropy">
-                                Entropy
+                                <p1>Entropy</p1>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="criterion-log_loss" name="criterion" value="log_loss">
                             <label class="form-check-label" for="criterion-log_loss">
-                                Log Loss
+                                <p1>Log Loss</p1>
                             </label>
                         </div>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="criterion-n_estimators-checkbox" name="criterion" value="n_estimators">
                         <label class="form-check-label" for="criterion-n_estimators-checkbox">
-                            n_estimators
+                            <p1>2.n_estimators:</p1>
                         </label>
                         <div>
                             <input class="form-number" type="text" id="criterion-n_estimators-input" name="criterion-n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
@@ -99,6 +101,7 @@
                             </select>
                         </div>
                         <p>
+                            Explication :
                             n_estimatorsint, default=100<br>
                             The number of trees in the forest.
                         </p>
@@ -106,7 +109,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="criterion-max_depth-checkbox">
                         <label class="form-check-label" for="criterion-max_depth-checkbox">
-                            max_depth:
+                            <p1>3.max_depth:</p1>
                         </label>
                         <div>
                             <input class="form-number" type="text" id="criterion-max_depth-input" name="criterion-max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
@@ -119,6 +122,7 @@
                         <label class="form-check-label" for="criterion-max_depth-input">
                         </label>
                         <p>
+                            Explication :
                             max_depthint, default=None<br>
                             The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
                         </p>
@@ -127,7 +131,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="criterion-min_samples_leaf-checkbox" name="criterion" value="min_samples_leaf">
                         <label class="form-check-label" for="criterion-min_samples_leaf-checkbox">
-                            min_samples_leaf
+                            <p1>4.min_samples_leaf:</p1>
                         </label>
                         <div>
                             <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="criterion-min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
@@ -138,6 +142,7 @@
                             </select>
                         </div>
                         <p>
+                            Explication :
                             min_samples_leafint or float, default=1<br>
                             The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
                         </p>
