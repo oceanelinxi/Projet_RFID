@@ -1,5 +1,13 @@
 ﻿@{
     ViewBag.Title = "image";
+    // 在 C# 中获取查询字符串参数
+    var mainOption1 = Request.QueryString["mainOption1"];
+    var mainOption2 = Request.QueryString["mainOption2"];
+    var mainOption3 = Request.QueryString["mainOption3"];
+    var mainOption4 = Request.QueryString["mainOption4"];
+    var mainOption5 = Request.QueryString["mainOption5"];
+    var mainOption6 = Request.QueryString["mainOption6"];
+
 }
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,14 +29,41 @@
 
     <script>
         // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
-        function updateChart(selectedOptions) {
+        function updateChart() {
             // Obtenir l'élément canvas
             var ctx = document.getElementById('myChart').getContext('2d');
+            // Créer un tableau pour stocker les valeurs des options sélectionnées
+            var selectedOptions = [];
+            // Vérifier les valeurs des options sélectionnées et les ajouter au tableau
+            if (@mainOption1) {
+                selectedOptions.push(75); // 添加 Analytique 对应的值
+            }
+            if (@mainOption2) {
+                selectedOptions.push(80); // 添加 Random Forest 对应的值
+            }
+            if (@mainOption3) {
+                selectedOptions.push(85); // 添加 Naive Bayes 对应的值
+            }
+            if (@mainOption4) {
+                selectedOptions.push(70); // 添加 Logistic Regression 对应的值
+            }
+            if (@mainOption5) {
+                // 添加 SVM 对应的值
+                selectedOptions.push(78);
+            }
+
+            if (@mainOption6) {
+                // 添加 KNN 对应的值
+                selectedOptions.push(82);
+            }
+            
+            
+
             // Créer un nouveau graphique
             var myChart = new Chart(ctx, {
                 type: 'bar', // Diagramme en barres
                 data: {
-                    labels: ['Analytique', 'Random Forest', 'Naive Bayes', 'Logistic Regression'], // Étiquettes pour chaque barre
+                    labels: ['Analytique', 'Random Forest', 'Naive Bayes', 'Logistic Regression', 'SVM', 'KNN'], // Étiquettes pour chaque barre
                     datasets: [{
                         label: 'Exactitude %',
                         data: selectedOptions, // Valeurs en pourcentage pour chaque barre
@@ -36,13 +71,17 @@
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
                         ],
                         borderColor: [ // Couleur de bordure des barres
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -62,15 +101,9 @@
         }
 
         // Appel de la fonction au chargement de la page
-        updateChart([75, 80, 85, 70]); // Valeurs par défaut
+        updateChart(); // Valeurs passées en tant que paramètres
 
-        // Récupérer les options sélectionnées depuis la page précédente et mettre à jour le graphique
-        var selectedOptions = [75, 80, 85, 70]; // Valeurs par défaut
-        // Exemple de récupération des valeurs depuis la page précédente et mise à jour du graphique
-        // Ici, nous supposons que les valeurs sont stockées dans une variable JavaScript appelée selectedOptionsFromPreviousPage
-        // Vous devrez peut-être ajuster cette partie pour correspondre à la façon dont vous stockez les valeurs provenant de la page précédente
-        // selectedOptions = selectedOptionsFromPreviousPage;
-        // updateChart(selectedOptions);
     </script>
+
 </body>
 </html>
