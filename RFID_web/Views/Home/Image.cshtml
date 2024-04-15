@@ -28,7 +28,7 @@
             var myChart = new Chart(ctx, {
                 type: 'bar', // Diagramme en barres
                 data: {
-                    labels: ['Analytique', 'Random Forest', 'Naive Bayes', 'Logistic Regression'], // Étiquettes pour chaque barre
+                    labels: ['Analytique', 'Random Forest', 'Naive Bayes', 'Logistic Regression', 'SVM', 'KNN'], // Étiquettes pour chaque barre
                     datasets: [{
                         label: 'Exactitude %',
                         data: selectedOptions, // Valeurs en pourcentage pour chaque barre
@@ -36,13 +36,17 @@
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
                         ],
                         borderColor: [ // Couleur de bordure des barres
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -62,15 +66,8 @@
         }
 
         // Appel de la fonction au chargement de la page
-        updateChart([75, 80, 85, 70]); // Valeurs par défaut
+        updateChart([75, 80, 85, 70, 78, 82]); // Valeurs par défaut
 
-        // Récupérer les options sélectionnées depuis la page précédente et mettre à jour le graphique
-        var selectedOptions = [75, 80, 85, 70]; // Valeurs par défaut
-        // Exemple de récupération des valeurs depuis la page précédente et mise à jour du graphique
-        // Ici, nous supposons que les valeurs sont stockées dans une variable JavaScript appelée selectedOptionsFromPreviousPage
-        // Vous devrez peut-être ajuster cette partie pour correspondre à la façon dont vous stockez les valeurs provenant de la page précédente
-        // selectedOptions = selectedOptionsFromPreviousPage;
-        // updateChart(selectedOptions);
     </script>
 </body>
 </html>
