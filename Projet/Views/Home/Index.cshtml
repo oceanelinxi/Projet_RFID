@@ -14,7 +14,17 @@
         <br> </br>
         <br> </br>
         <div>
-            <button type="submit" class="btn-upload">Suivant</button>
+            <button type="submit" class="btn-upload" id="suivant-btn">Suivant</button>
         </div>
     </form>
 </div>
+
+<script>
+    // Ajout d'un écouteur d'événements sur le clic du bouton
+    document.getElementById("suivant-btn").addEventListener("click", function (event) {
+        // Empêcher le comportement de soumission par défaut du formulaire
+        event.preventDefault();
+        // Exécution de la logique de redirection de la page, ici en utilisant window.location.href pour rediriger vers Home/Select
+        window.location.href = "@Url.Action("Select", "Home")";
+    });
+</script>

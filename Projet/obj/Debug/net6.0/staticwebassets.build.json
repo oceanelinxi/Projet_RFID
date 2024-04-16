@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6XK2uWdGfCc+ghqGPxOQTtPy6JAYCnBUcdaEdzRq0pQ=",
+  "Hash": "QnUXgcYFYKMLVRKXOrnu3zTF5Ng9wPPYFfQs+DSMIM4=",
   "Source": "Projet",
   "BasePath": "_content/Projet",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\SOULEY\\source\\repos\\Projet\\Projet\\wwwroot\\images\\background.jpg",
+      "SourceId": "Projet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SOULEY\\source\\repos\\Projet\\Projet\\wwwroot\\",
+      "BasePath": "_content/Projet",
+      "RelativePath": "images/background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\background.jpg"
     },
     {
       "Identity": "C:\\Users\\SOULEY\\source\\repos\\Projet\\Projet\\wwwroot\\js\\site.js",
