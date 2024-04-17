@@ -19,7 +19,7 @@
 </div>
 
 <form id="optionsForm">
-<div id="optionsSection" style="display:none;">
+  <div id="optionsSection" style="display:none;">
     <h1 class="text-center mt-5">Méthodes</h1>
     <div class="accordion" id="optionsAccordion">
       <h class="accordion-header" id="headingOption1">
@@ -29,7 +29,7 @@
                 </div>
             </h>
 
-        </div>
+    </div>
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption2">
                 <div class="d-flex align-items-center">
@@ -142,35 +142,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="accordion-item">
-            <h class="accordion-header" id="headingOption3">
-                <div class="d-flex align-items-center">
-
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption3" value="mainOption3">
-                    <p1>Naive Bayes</p1>
-                </div>
-                <p>
-                    Explication :
-                    Le modèle Naive Bayes est souvent utilisé dans les domaines où la simplicité et l'interprétabilité sont importantes, ainsi que dans les cas où il y a une grande quantité de données et un grand nombre de caractéristiques à traiter. Bien qu'il puisse être simpliste dans son approche, il peut souvent donner des résultats compétitifs dans de nombreux cas, surtout lorsque l'hypothèse de caractéristiques indépendantes est raisonnablement satisfaite.
-                </p>
-            </h>
-
-        </div>
-        <div class="accordion-item">
-            <h class="accordion-header" id="headingOption4">
-                <div class="d-flex align-items-center">
-
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption4" value="mainOption4">
-                    <p1>Logistic Regression</p1>
-                </div>
-                <p>
-                    Explication :
-                    La régression logistique est une méthode d'apprentissage automatique utilisée principalement pour résoudre des problèmes de classification. Bien que le terme "régression" soit utilisé, il s'agit en réalité d'un algorithme de classification. La régression logistique est basée sur un modèle linéaire et utilise une fonction logistique pour transformer la sortie en valeurs de probabilité entre 0 et 1. Cela permet de prédire la probabilité qu'un événement appartienne à une classe donnée. En pratique, un seuil de probabilité est choisi (généralement 0,5) pour classer les événements en deux catégories.
-                </p>
-            </h>
-
-        </div>
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption5">
                 <div class="d-flex align-items-center">
@@ -185,21 +156,56 @@
             </h>
 
         </div>
+
+        <!--Nouveau pour KNN début-->
         <div class="accordion-item">
-            <h class="accordion-header" id="headingOption6">
+            <h class="accordion-header" id="headingOptionKNN">
                 <div class="d-flex align-items-center">
-
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption6" value="mainOption6">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOptionKNN" value="mainOptionKNN">
                     <p1>KNN</p1>
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOptionKNN" aria-expanded="false" aria-controls="collapseOptionKNN" style="width: 20px; padding: 0; margin-left: 5px;">
+                        <span class="visually-hidden">Toggle sub-options</span>
+                    </button>
                 </div>
-                <p>
-                    Explication :                   
-            KNN (k-Nearest Neighbors) est un algorithme d'apprentissage supervisé utilisé pour la classification et la régression. Dans le cas de la classification, il attribue une classe à un nouvel exemple en fonction de la classe majoritaire parmi ses k plus proches voisins dans l'espace des caractéristiques. Dans le cas de la régression, il prédit une valeur en faisant la moyenne des valeurs des k plus proches voisins.
-            </p>
             </h>
-
+            <div id="collapseOptionKNN" class="accordion-collapse collapse" aria-labelledby="headingOptionKNN" data-bs-parent="#optionsAccordion">
+                <div class="accordion-body">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="optionKNN-1" value="optionKNN-1">
+                        <label class="form-check-label" for="optionKNN-1">
+                            <p1>1. n_neighbors:</p1>
+                        </label>
+                        <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" placeholder="5" min="1" max="100">
+                        <p>Number of neighbors to use by default for kneighbors queries.</p>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="optionKNN-2" value="optionKNN-2">
+                        <label class="form-check-label" for="optionKNN-2">
+                            <p1>2. weights:</p1>
+                        </label>
+                        <select id="weights-select" class="form-select">
+                            <option value="uniform">Uniform</option>
+                            <option value="distance">Distance</option>
+                        </select>
+                        <p>Weight function used in prediction.</p>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="optionKNN-3" value="optionKNN-3">
+                        <label class="form-check-label" for="optionKNN-3">
+                            <p1>3. metric:</p1>
+                        </label>
+                        <select id="metric-select" class="form-select">
+                            <option value="minkowski">Minkowski</option>
+                            <option value="euclidean">Euclidean</option>
+                            <option value="manhattan">Manhattan</option>
+                        </select>
+                        <p>Metric to use for distance computation.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+        <!--Nouveau pour KNN fin-->
+  </div>
 
 
 </form>
@@ -378,10 +384,18 @@
             // Exécuter la logique de redirection de la page, ici utiliser window.location.href pour rediriger vers Home/Select
             window.location.href = "@Url.Action("Image", "Home")";
         });
+
+        document.getElementById('mainOptionKNN').addEventListener('change', function () {
+            var inputs = document.querySelectorAll('#collapseOptionKNN .form-check-input');
+            inputs.forEach(input => input.disabled = !this.checked);
+        });
+
+  
     </script>
 }
 
 <script>
+    //Script bouton OK
     document.getElementById('okButton').addEventListener('click', function () {
         var optionsSection = document.getElementById('optionsSection');
         if (optionsSection.style.display === "none") {

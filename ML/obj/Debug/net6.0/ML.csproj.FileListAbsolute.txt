@@ -223,3 +223,4 @@ C:\Users\SOULEY\source\repos\ML\ML\obj\Debug\net6.0\refint\ML.dll
 C:\Users\SOULEY\source\repos\ML\ML\obj\Debug\net6.0\ML.pdb
 C:\Users\SOULEY\source\repos\ML\ML\obj\Debug\net6.0\ML.genruntimeconfig.cache
 C:\Users\SOULEY\source\repos\ML\ML\obj\Debug\net6.0\ref\ML.dll
+C:\Users\SOULEY\source\repos\ML\ML\obj\Debug\net6.0\ML.sourcelink.json

@@ -21,7 +21,7 @@ namespace ML.Controllers
            {
 
                var content = new StringContent(JsonConvert.SerializeObject(null), System.Text.Encoding.UTF8, "application/json");
-               var response = await client.PostAsync("http://localhost:5208/analytical", content);
+               var response = await client.PostAsync("http://localhost:5200/analytical", content);
                var result = await response.Content.ReadAsStringAsync();
                var meth = "Tabry1";
 
@@ -31,8 +31,8 @@ namespace ML.Controllers
 
            return View("Page2");
        }*/
-        /[HttpPost]
-         public async Task<IActionResult> RFClassifier(int hyperparameter1, int hyperparameter2, int hyperparameter3 )
+        [HttpPost]
+         public async Task<IActionResult> RFClassifier(string hyperparameter1, string hyperparameter2, string hyperparameter3 )
          {
              using (var client = new HttpClient())
              {
@@ -59,6 +59,37 @@ namespace ML.Controllers
              return View("ResultRF");
          }
 
+        /*[HttpPost]
+        public async Task<IActionResult> KNNClassifier(string hyperparameter1, string selectedItem1, string selectedItem2, string selectedItem3)
+        {
+            using (var client = new HttpClient())
+            {
+                var requestData = new
+                {
+                    Hyperparameter1 = hyperparameter1,
+
+                    Hyperparameter2 = selectedItem1,
+
+                    Hyperparameter3 = selectedItem2,
+
+                    Hyperparameter4 = selectedItem3
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/KNNClassifier", content);
+                var result4 = await response.Content.ReadAsStringAsync();
+
+                ViewBag.Hyperparameter1 = hyperparameter1;
+                ViewBag.Hyperparameter2 = selectedItem1;
+                ViewBag.Hyperparameter3 = selectedItem2;
+                ViewBag.Hyperparameter4 = selectedItem3;
+
+                ViewBag.Result4 = result4;
+            }
+
+            return View("ResultMethode4");
+        }
+        */
 
         /*[HttpPost("upload")]
         public IActionResult Upload(IFormFile file)
