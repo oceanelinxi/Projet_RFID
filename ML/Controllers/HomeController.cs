@@ -60,7 +60,7 @@ namespace ML.Controllers
          }
 
         /*[HttpPost]
-        public async Task<IActionResult> KNNClassifier(string hyperparameter1, string selectedItem1, string selectedItem2, string selectedItem3)
+        public async Task<IActionResult> KNNClassifier(string hyperparameter1, string selectedItem1, string selectedItem2)
         {
             using (var client = new HttpClient())
             {
@@ -72,7 +72,7 @@ namespace ML.Controllers
 
                     Hyperparameter3 = selectedItem2,
 
-                    Hyperparameter4 = selectedItem3
+                   
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -82,12 +82,12 @@ namespace ML.Controllers
                 ViewBag.Hyperparameter1 = hyperparameter1;
                 ViewBag.Hyperparameter2 = selectedItem1;
                 ViewBag.Hyperparameter3 = selectedItem2;
-                ViewBag.Hyperparameter4 = selectedItem3;
+                
 
                 ViewBag.Result4 = result4;
             }
 
-            return View("ResultMethode4");
+            return View("ResultKNN");
         }
         */
 
