@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace RFID_web.Controllers
 {
@@ -30,6 +34,7 @@ namespace RFID_web.Controllers
       }*/
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -56,6 +61,30 @@ namespace RFID_web.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public async Task<ActionResult> SVM(float C_input, string kernel_select, int degree_input, string gamma_select)
+        {
+            using (var client = new HttpClient())
+            {
+                var requestData = new
+                {
+                    C = C_input,
+                    Kernel = kernel_select,
+                    Degree = degree_input,
+                    Gamma = gamma_select
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/SVM", content);//modifier selon python
+                var result = await response.Content.ReadAsStringAsync();
+
+                ViewBag.Result = result;
+            }
+
+            return View("Index");
+        }
+
         public ActionResult Image()
         {
             ViewBag.Message = "Your contact page.";
@@ -63,6 +92,13 @@ namespace RFID_web.Controllers
             return View();
         }
 
-    
+        public ActionResult Fin()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+
     }
 }

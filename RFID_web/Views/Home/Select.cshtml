@@ -28,7 +28,6 @@
 
 <h1>Méthodes</h1>
 
-<form id="optionsForm">
     <div class="accordion" id="optionsAccordion">
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption1">
@@ -127,87 +126,88 @@
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption5">
                 <div class="d-flex align-items-center">
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption5" value="mainOption5">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption" value="mainOption5">
                     <p1>SVM</p1>
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption5" aria-expanded="false" aria-controls="collapseOption5" style="width: 20px; padding: 0; margin-left: 5px;">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption3" aria-expanded="false" aria-controls="collapseOption3" style="width: 20px; padding: 0; margin-left: 5px;">
                         <span class="visually-hidden">Toggle sub-options</span>
                     </button>
                 </div>
             </h>
-            <div id="collapseOption5" class="accordion-collapse collapse" aria-labelledby="headingOption5" data-bs-parent="#optionsAccordion">
+            <div id="collapseOption3" class="accordion-collapse collapse" aria-labelledby="headingOption3" data-bs-parent="#optionsAccordion">
                 <div class="accordion-body">
-                    <p>
-                        Explication :
-                        Le Support Vector Machine (SVM) est un algorithme d'apprentissage supervisé utilisé pour la classification et la régression. Son principe de base est de trouver un hyperplan qui sépare les données en deux catégories de manière à maximiser la marge entre les deux catégories. En classification, l'objectif du SVM est de trouver un hyperplan optimal qui sépare les points de données des différentes classes. En régression, le SVM cherche à maximiser la marge entre les points de données et l'hyperplan, tout en minimisant les écarts des points de données par rapport à l'hyperplan.
-                    </p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="C-checkbox" name="C" value="C">
-                        <label class="form-check-label" for="C-checkbox">
-                            <p1>1. C:</p1>
-                        </label>
-                        <div>
-                            <input class="form-number" type="text" id="C-input" name="C-input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                    <form id="formOption3" class="option-form" action="/submit_option3" method="post">
+                        <p>
+                            Explication :
+                            Le Support Vector Machine (SVM) est un algorithme d'apprentissage supervisé utilisé pour la classification et la régression. Son principe de base est de trouver un hyperplan qui sépare les données en deux catégories de manière à maximiser la marge entre les deux catégories. En classification, l'objectif du SVM est de trouver un hyperplan optimal qui sépare les points de données des différentes classes. En régression, le SVM cherche à maximiser la marge entre les points de données et l'hyperplan, tout en minimisant les écarts des points de données par rapport à l'hyperplan.
+                        </p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="C-checkbox" name="C" value="C">
+                            <label class="form-check-label" for="C-checkbox">
+                                <p1>1. C:</p1>
+                            </label>
+                            <div>
+                                <input class="form-number" type="text" id="C_input" name="C_input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            </div>
+                            <p>
+                                Explanation:
+                                C: float, default value = 1.0<br>
+                                Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
+                            </p>
                         </div>
-                        <p>
-                            Explanation:
-                            C: float, default value = 1.0<br>
-                            Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
-                        </p>
-                    </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="kernel-checkbox" name="kernel" value="kernel">
-                        <label class="form-check-label" for="kernel-checkbox">
-                            <p1>2. Kernel:</p1>
-                        </label>
-                        <select id="kernel-select" class="form-select">
-                            <option selected disabled>Select a kernel</option>
-                            <option value="linear">Linear</option>
-                            <option value="poly">Polynomial</option>
-                            <option value="rbf">RBF</option>
-                            <option value="sigmoid">Sigmoid</option>
-                            <option value="precomputed">Precomputed</option>
-                        </select>
-                        <p>
-                            Explanation:
-                            Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
-                            Description: Defines the shape of the boundary between the different classes of the model.
-                        </p>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="kernel-checkbox" name="kernel" value="kernel">
+                            <label class="form-check-label" for="kernel-checkbox">
+                                <p1>2. Kernel:</p1>
+                            </label>
+                            <select id="kernel_select" class="form-select">
+                                <option selected disabled>Select a kernel</option>
+                                <option value="linear">Linear</option>
+                                <option value="poly">Polynomial</option>
+                                <option value="rbf">RBF</option>
+                                <option value="sigmoid">Sigmoid</option>
+                                <option value="precomputed">Precomputed</option>
+                            </select>
+                            <p>
+                                Explanation:
+                                Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
+                                Description: Defines the shape of the boundary between the different classes of the model.
+                            </p>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="degree-checkbox" name="degree" value="degree">
-                        <label class="form-check-label" for="degree-checkbox">
-                            <p1>3. Degree:</p1>
-                        </label>
-                        <input class="form-number" type="number" id="degree-input" name="degree-input" style="width: 200px;" placeholder="Enter a positive integer" min="1" max="10">
-                        <p>
-                            Explanation:
-                            Degree: int, default=3<br>
-                            Degree of the polynomial (in the case where kernel = 'poly'). Degree > 0. Ignored if kernel is not 'poly'.
-                        </p>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="degree-checkbox" name="degree" value="degree">
+                            <label class="form-check-label" for="degree-checkbox">
+                                <p1>3. Degree:</p1>
+                            </label>
+                            <input class="form-number" type="number" id="degree_input" name="degree_input" style="width: 200px;" placeholder="Enter a positive integer" min="1" max="10">
+                            <p>
+                                Explanation:
+                                Degree: int, default=3<br>
+                                Degree of the polynomial (in the case where kernel = 'poly'). Degree > 0. Ignored if kernel is not 'poly'.
+                            </p>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gamma-checkbox" name="gamma" value="gamma">
-                        <label class="form-check-label" for="gamma-checkbox">
-                            <p1>4. Gamma:</p1>
-                        </label>
-                        <select id="gamma-select" class="form-select">
-                            <option selected disabled>Select a value</option>
-                            <option value="scale">Scale</option>
-                            <option value="auto">Auto</option>
-                        </select>
-                        <p>
-                            Explanation:
-                            Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
-                            Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
-                            If gamma='scale', it takes the value 1/(n_features * X.var()).
-                            If ‘auto’, it uses 1 / n_features.
-                            If float, it must be positive.
-                        </p>
-                    </div>
-
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gamma-checkbox" name="gamma" value="gamma">
+                            <label class="form-check-label" for="gamma-checkbox">
+                                <p1>4. Gamma:</p1>
+                            </label>
+                            <select id="gamma_select" class="form-select">
+                                <option selected disabled>Select a value</option>
+                                <option value="scale">Scale</option>
+                                <option value="auto">Auto</option>
+                            </select>
+                            <p>
+                                Explanation:
+                                Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
+                                Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
+                                If gamma='scale', it takes the value 1/(n_features * X.var()).
+                                If ‘auto’, it uses 1 / n_features.
+                                If float, it must be positive.
+                            </p>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -230,7 +230,7 @@
     </div>
 
     <button type="submit" class="btn-upload" id="suivant-btn">Suivant</button>
-</form>
+
 
 @section Scripts {
     <script>
@@ -404,7 +404,34 @@
             // Empêcher le comportement de soumission par défaut du formulaire
             event.preventDefault();
             // Exécuter la logique de redirection de la page, ici utiliser window.location.href pour rediriger vers Home/Select
-            window.location.href = "@Url.Action("Image", "Home")";
+            window.location.href = "@Url.Action("Fin", "Home")";
+        });
+
+        document.getElementById('suivant-btn').addEventListener('click', function () {
+            var checkedOptions = document.querySelectorAll('.accordion-item input[type="checkbox"]:checked');
+            var formData = new FormData();
+
+            checkedOptions.forEach(function (option) {
+                var form = option.closest('.accordion-item').querySelector('.option-form');
+                var formFields = new FormData(form);
+                formFields.forEach(function (value, key) {
+                    formData.append(key, value);
+                });
+            });
+
+            // deposer toutes les donnees de chaque form
+            fetch('/submit_selected_options', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    // resoudre les donnees retournant
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
     </script>
 }
