@@ -1,13 +1,5 @@
 ﻿@{
     ViewBag.Title = "image";
-    // 在 C# 中获取查询字符串参数
-    var mainOption1 = Request.QueryString["mainOption1"];
-    var mainOption2 = Request.QueryString["mainOption2"];
-    var mainOption3 = Request.QueryString["mainOption3"];
-    var mainOption4 = Request.QueryString["mainOption4"];
-    var mainOption5 = Request.QueryString["mainOption5"];
-    var mainOption6 = Request.QueryString["mainOption6"];
-
 }
 <!DOCTYPE html>
 <html lang="fr">
@@ -29,36 +21,9 @@
 
     <script>
         // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
-        function updateChart() {
+        function updateChart(selectedOptions) {
             // Obtenir l'élément canvas
             var ctx = document.getElementById('myChart').getContext('2d');
-            // Créer un tableau pour stocker les valeurs des options sélectionnées
-            var selectedOptions = [];
-            // Vérifier les valeurs des options sélectionnées et les ajouter au tableau
-            if (@mainOption1) {
-                selectedOptions.push(75); // 添加 Analytique 对应的值
-            }
-            if (@mainOption2) {
-                selectedOptions.push(80); // 添加 Random Forest 对应的值
-            }
-            if (@mainOption3) {
-                selectedOptions.push(85); // 添加 Naive Bayes 对应的值
-            }
-            if (@mainOption4) {
-                selectedOptions.push(70); // 添加 Logistic Regression 对应的值
-            }
-            if (@mainOption5) {
-                // 添加 SVM 对应的值
-                selectedOptions.push(78);
-            }
-
-            if (@mainOption6) {
-                // 添加 KNN 对应的值
-                selectedOptions.push(82);
-            }
-            
-            
-
             // Créer un nouveau graphique
             var myChart = new Chart(ctx, {
                 type: 'bar', // Diagramme en barres
@@ -101,9 +66,8 @@
         }
 
         // Appel de la fonction au chargement de la page
-        updateChart(); // Valeurs passées en tant que paramètres
+        updateChart([75, 80, 85, 70, 78, 82]); // Valeurs par défaut
 
     </script>
-
 </body>
 </html>

@@ -58,44 +58,16 @@
                         Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
                     </p>
                     <p1>Choose one or more sub-options:</p1>
+              
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="option2-1" value="option2-1">
-                        <label class="form-check-label" for="option2-1">
-                           <p1>1.criterion:</p1>
-                        </label>
-                        <p>
-                            Explication :
-                            criterion:{“gini”, “entropy”, “log_loss”}, default=”gini”<br>
-                            The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “log_loss” and “entropy” both for the Shannon information gain, see Mathematical formulation. Note: This parameter is tree-specific.
-                        </p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="criterion-gini" name="criterion" value="gini">
-                            <label class="form-check-label" for="criterion-gini">
-                                <p1>Gini</p1>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="criterion-entropy" name="criterion" value="entropy">
-                            <label class="form-check-label" for="criterion-entropy">
-                                <p1>Entropy</p1>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="criterion-log_loss" name="criterion" value="log_loss">
-                            <label class="form-check-label" for="criterion-log_loss">
-                                <p1>Log Loss</p1>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="criterion-n_estimators-checkbox" name="criterion" value="n_estimators">
-                        <label class="form-check-label" for="criterion-n_estimators-checkbox">
-                            <p1>2.n_estimators:</p1>
+                        <input class="form-check-input" type="checkbox" id="n_estimators-checkbox" name="n_estimators" value="n_estimators">
+                        <label class="form-check-label" for="n_estimators-checkbox">
+                            <p1>1.n_estimators:</p1>
                         </label>
                         <div>
-                            <input class="form-number" type="text" id="criterion-n_estimators-input" name="criterion-n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+                            <input class="form-number" type="text" id="n_estimators-input" name="n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
 
-                            <select id="criterion-n_estimators-select" class="form-select">
+                            <select id="n_estimators-select" class="form-select">
                                 <option selected disabled>Select a value</option>
                                 <!-- JavaScript generated options will be added here -->
                             </select>
@@ -107,19 +79,19 @@
                         </p>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="criterion-max_depth-checkbox">
-                        <label class="form-check-label" for="criterion-max_depth-checkbox">
-                            <p1>3.max_depth:</p1>
+                        <input class="form-check-input" type="checkbox" id="max_depth-checkbox">
+                        <label class="form-check-label" for="max_depth-checkbox">
+                            <p1>2.max_depth:</p1>
                         </label>
                         <div>
-                            <input class="form-number" type="text" id="criterion-max_depth-input" name="criterion-max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
+                            <input class="form-number" type="text" id="max_depth-input" name="max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
-                            <select id="criterion-max_depth-select" class="form-select">
+                            <select id="max_depth-select" class="form-select">
                                 <option selected disabled>Select a value</option>
                                 <!-- JavaScript generated options will be added here -->
                             </select>
                         </div>
-                        <label class="form-check-label" for="criterion-max_depth-input">
+                        <label class="form-check-label" for="max_depth-input">
                         </label>
                         <p>
                             Explication :
@@ -129,14 +101,14 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="criterion-min_samples_leaf-checkbox" name="criterion" value="min_samples_leaf">
-                        <label class="form-check-label" for="criterion-min_samples_leaf-checkbox">
-                            <p1>4.min_samples_leaf:</p1>
+                        <input class="form-check-input" type="checkbox" id="min_samples_leaf-checkbox" name="min_samples_leaf" value="min_samples_leaf">
+                        <label class="form-check-label" for="min_samples_leaf-checkbox">
+                            <p1>3.min_samples_leaf:</p1>
                         </label>
                         <div>
-                            <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="criterion-min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
+                            <input class="form-number" type="text" id="min_samples_leaf-input" name="min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
-                            <select id="criterion-min_samples_leaf-select" class="form-select">
+                            <select id="min_samples_leaf-select" class="form-select">
                                 <option selected disabled>Select a value</option>
                                 <!-- JavaScript generated options will be added here -->
                             </select>
@@ -186,12 +158,88 @@
 
                     <input class="form-check-input me-2" type="checkbox" id="mainOption5" value="mainOption5">
                     <p1>SVM</p1>
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption5" aria-expanded="false" aria-controls="collapseOption5" style="width: 20px; padding: 0; margin-left: 5px;">
+                        <span class="visually-hidden">Toggle sub-options</span>
+                    </button>
                 </div>
-                <p>
-                    Explication :
-                    Le Support Vector Machine (SVM) est un algorithme d'apprentissage supervisé utilisé pour la classification et la régression. Son principe de base est de trouver un hyperplan qui sépare les données en deux catégories de manière à maximiser la marge entre les deux catégories. En classification, l'objectif du SVM est de trouver un hyperplan optimal qui sépare les points de données des différentes classes. En régression, le SVM cherche à maximiser la marge entre les points de données et l'hyperplan, tout en minimisant les écarts des points de données par rapport à l'hyperplan. 
-            </p>
             </h>
+            <div id="collapseOption5" class="accordion-collapse collapse" aria-labelledby="headingOption5" data-bs-parent="#optionsAccordion">
+                <div class="accordion-body">
+                    <p>
+                        Explication :
+                        Le Support Vector Machine (SVM) est un algorithme d'apprentissage supervisé utilisé pour la classification et la régression. Son principe de base est de trouver un hyperplan qui sépare les données en deux catégories de manière à maximiser la marge entre les deux catégories. En classification, l'objectif du SVM est de trouver un hyperplan optimal qui sépare les points de données des différentes classes. En régression, le SVM cherche à maximiser la marge entre les points de données et l'hyperplan, tout en minimisant les écarts des points de données par rapport à l'hyperplan.
+                    </p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="C-checkbox" name="C" value="C">
+                        <label class="form-check-label" for="C-checkbox">
+                            <p1>1. C:</p1>
+                        </label>
+                        <div>
+                            <input class="form-number" type="text" id="C-input" name="C-input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                        </div>
+                        <p>
+                            Explanation:
+                            C: float, default value = 1.0<br>
+                            Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
+                        </p>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="kernel-checkbox" name="kernel" value="kernel">
+                        <label class="form-check-label" for="kernel-checkbox">
+                            <p1>2. Kernel:</p1>
+                        </label>
+                        <select id="kernel-select" class="form-select">
+                            <option selected disabled>Select a kernel</option>
+                            <option value="linear">Linear</option>
+                            <option value="poly">Polynomial</option>
+                            <option value="rbf">RBF</option>
+                            <option value="sigmoid">Sigmoid</option>
+                            <option value="precomputed">Precomputed</option>
+                        </select>
+                        <p>
+                            Explanation:
+                            Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
+                            Description: Defines the shape of the boundary between the different classes of the model.
+                        </p>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="degree-checkbox" name="degree" value="degree">
+                        <label class="form-check-label" for="degree-checkbox">
+                            <p1>3. Degree:</p1>
+                        </label>
+                        <input class="form-number" type="number" id="degree-input" name="degree-input" style="width: 200px;" placeholder="Enter a positive integer" min="1" max="10">
+                        <p>
+                            Explanation:
+                            Degree: int, default=3<br>
+                            Degree of the polynomial (in the case where kernel = 'poly'). Degree > 0. Ignored if kernel is not 'poly'.
+                        </p>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gamma-checkbox" name="gamma" value="gamma">
+                        <label class="form-check-label" for="gamma-checkbox">
+                            <p1>4. Gamma:</p1>
+                        </label>
+                        <select id="gamma-select" class="form-select">
+                            <option selected disabled>Select a value</option>
+                            <option value="scale">Scale</option>
+                            <option value="auto">Auto</option>
+                        </select>
+                        <p>
+                            Explanation:
+                            Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
+                            Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
+                            If gamma='scale', it takes the value 1/(n_features * X.var()).
+                            If ‘auto’, it uses 1 / n_features.
+                            If float, it must be positive.
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
 
         </div>
         <div class="accordion-item">
@@ -339,7 +387,7 @@
         updateInputFromSelect('criterion-min_samples_leaf-select', 'criterion-min_samples_leaf-input');
 
 
-        $(document).ready(function () {
+       $(document).ready(function () {
             // Activer les sous-options lorsque l'option principale est sélectionnée
             $(' #mainOption2').change(function () {
                 var isChecked = $(this).is(':checked');
