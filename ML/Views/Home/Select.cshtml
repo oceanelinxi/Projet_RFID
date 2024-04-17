@@ -1,0 +1,371 @@
+﻿
+@{
+    ViewData["Title"] = "Select";
+}
+
+<h1>Méthodes</h1>
+
+<form id="optionsForm">
+    <div class="accordion" id="optionsAccordion">
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption1">
+                <div class="d-flex align-items-center">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption1" value="mainOption1">
+                    <p1>Analytique</p1>
+                </div>
+            </h>
+
+        </div>
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption2">
+                <div class="d-flex align-items-center">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption2" value="mainOption2">
+
+                    <p1> Random forest</p1>
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption2" aria-expanded="false" aria-controls="collapseOption2" style="width: 20px; padding: 0; margin-left: 5px;">
+                        <span class="visually-hidden">Toggle sub-options</span>
+                    </button>
+
+                </div>
+            </h>
+            <div id="collapseOption2" class="accordion-collapse collapse" aria-labelledby="headingOption2" data-bs-parent="#optionsAccordion">
+                <div class="accordion-body">
+                    <p>
+                        Explication :
+                        Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
+                    </p>
+                    <p1>Choose one or more sub-options:</p1>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="option2-1" value="option2-1">
+                        <label class="form-check-label" for="option2-1">
+                            <p1>1.criterion:</p1>
+                        </label>
+                        <p>
+                            Explication :
+                            criterion:{“gini”, “entropy”, “log_loss”}, default=”gini”<br>
+                            The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “log_loss” and “entropy” both for the Shannon information gain, see Mathematical formulation. Note: This parameter is tree-specific.
+                        </p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="criterion-gini" name="criterion" value="gini">
+                            <label class="form-check-label" for="criterion-gini">
+                                <p1>Gini</p1>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="criterion-entropy" name="criterion" value="entropy">
+                            <label class="form-check-label" for="criterion-entropy">
+                                <p1>Entropy</p1>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="criterion-log_loss" name="criterion" value="log_loss">
+                            <label class="form-check-label" for="criterion-log_loss">
+                                <p1>Log Loss</p1>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="criterion-n_estimators-checkbox" name="criterion" value="n_estimators">
+                        <label class="form-check-label" for="criterion-n_estimators-checkbox">
+                            <p1>2.n_estimators:</p1>
+                        </label>
+                        <div>
+                            <input class="form-number" type="text" id="criterion-n_estimators-input" name="criterion-n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+
+                            <select id="criterion-n_estimators-select" class="form-select">
+                                <option selected disabled>Select a value</option>
+                                <!-- JavaScript generated options will be added here -->
+                            </select>
+                        </div>
+                        <p>
+                            Explication :
+                            n_estimatorsint, default=100<br>
+                            The number of trees in the forest.
+                        </p>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="criterion-max_depth-checkbox">
+                        <label class="form-check-label" for="criterion-max_depth-checkbox">
+                            <p1>3.max_depth:</p1>
+                        </label>
+                        <div>
+                            <input class="form-number" type="text" id="criterion-max_depth-input" name="criterion-max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
+
+                            <select id="criterion-max_depth-select" class="form-select">
+                                <option selected disabled>Select a value</option>
+                                <!-- JavaScript generated options will be added here -->
+                            </select>
+                        </div>
+                        <label class="form-check-label" for="criterion-max_depth-input">
+                        </label>
+                        <p>
+                            Explication :
+                            max_depthint, default=None<br>
+                            The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
+                        </p>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="criterion-min_samples_leaf-checkbox" name="criterion" value="min_samples_leaf">
+                        <label class="form-check-label" for="criterion-min_samples_leaf-checkbox">
+                            <p1>4.min_samples_leaf:</p1>
+                        </label>
+                        <div>
+                            <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="criterion-min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
+
+                            <select id="criterion-min_samples_leaf-select" class="form-select">
+                                <option selected disabled>Select a value</option>
+                                <!-- JavaScript generated options will be added here -->
+                            </select>
+                        </div>
+                        <p>
+                            Explication :
+                            min_samples_leafint or float, default=1<br>
+                            The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption3">
+                <div class="d-flex align-items-center">
+
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption3" value="mainOption3">
+                    <p1>Naive Bayes</p1>
+                </div>
+                <p>
+                    Explication :
+                    Le modèle Naive Bayes est souvent utilisé dans les domaines où la simplicité et l'interprétabilité sont importantes, ainsi que dans les cas où il y a une grande quantité de données et un grand nombre de caractéristiques à traiter. Bien qu'il puisse être simpliste dans son approche, il peut souvent donner des résultats compétitifs dans de nombreux cas, surtout lorsque l'hypothèse de caractéristiques indépendantes est raisonnablement satisfaite.
+                </p>
+            </h>
+
+        </div>
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption4">
+                <div class="d-flex align-items-center">
+
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption4" value="mainOption4">
+                    <p1>Logistic Regression</p1>
+                </div>
+                <p>
+                    Explication :
+                    La régression logistique est une méthode d'apprentissage automatique utilisée principalement pour résoudre des problèmes de classification. Bien que le terme "régression" soit utilisé, il s'agit en réalité d'un algorithme de classification. La régression logistique est basée sur un modèle linéaire et utilise une fonction logistique pour transformer la sortie en valeurs de probabilité entre 0 et 1. Cela permet de prédire la probabilité qu'un événement appartienne à une classe donnée. En pratique, un seuil de probabilité est choisi (généralement 0,5) pour classer les événements en deux catégories.
+                </p>
+            </h>
+
+        </div>
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption5">
+                <div class="d-flex align-items-center">
+
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption5" value="mainOption5">
+                    <p1>SVM</p1>
+                </div>
+                <p>
+                    Explication :
+                    Le Support Vector Machine (SVM) est un algorithme d'apprentissage supervisé utilisé pour la classification et la régression. Son principe de base est de trouver un hyperplan qui sépare les données en deux catégories de manière à maximiser la marge entre les deux catégories. En classification, l'objectif du SVM est de trouver un hyperplan optimal qui sépare les points de données des différentes classes. En régression, le SVM cherche à maximiser la marge entre les points de données et l'hyperplan, tout en minimisant les écarts des points de données par rapport à l'hyperplan.
+                </p>
+            </h>
+
+        </div>
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption6">
+                <div class="d-flex align-items-center">
+
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption6" value="mainOption6">
+                    <p1>KNN</p1>
+                </div>
+                <p>
+                    Explication :
+                    KNN (k-Nearest Neighbors) est un algorithme d'apprentissage supervisé utilisé pour la classification et la régression. Dans le cas de la classification, il attribue une classe à un nouvel exemple en fonction de la classe majoritaire parmi ses k plus proches voisins dans l'espace des caractéristiques. Dans le cas de la régression, il prédit une valeur en faisant la moyenne des valeurs des k plus proches voisins.
+                </p>
+            </h>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn-upload" id="suivant-btn">Suivant</button>
+</form>
+
+@section Scripts {
+    <script>
+        //max_depth
+        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
+        document.getElementById('criterion-max_depth-checkbox').addEventListener('change', function () {
+            var input = document.getElementById('criterion-max_depth-input');
+            var select = document.getElementById('criterion-max_depth-select');
+            input.disabled = !this.checked;
+            select.disabled = !this.checked;
+            if (this.checked) {
+                input.focus(); // Mettre le champ de saisie en surbrillance
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
+            } else {
+                input.value = ''; // Effacer la valeur du champ de saisie
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
+            }
+        });
+
+        // Lorsque le champ de saisie perd le focus, effectuer une validation
+        document.getElementById('criterion-max_depth-input').addEventListener('blur', function () {
+            var value = parseInt(this.value);
+            if (isNaN(value) || value < 1 || value > 100) {
+                if (this.value.trim() !== '') {
+                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
+                    if (confirmation) {
+                        this.value = ''; // Effacer la saisie
+                        this.focus(); // Mettre le champ de saisie en surbrillance
+
+                    }
+                }
+            }
+        });
+
+        //n_estimators
+        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
+        document.getElementById('criterion-n_estimators-checkbox').addEventListener('change', function () {
+            var input = document.getElementById('criterion-n_estimators-input');
+            var select = document.getElementById('criterion-n_estimators-select');
+            input.disabled = !this.checked;
+            select.disabled = !this.checked;
+            if (this.checked) {
+                input.focus(); // Mettre le champ de saisie en surbrillance
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
+            } else {
+                input.value = ''; // Effacer la valeur du champ de saisie
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
+            }
+        });
+
+        // Lorsque le champ de saisie perd le focus, effectuer une validation
+        document.getElementById('criterion-n_estimators-input').addEventListener('blur', function () {
+            var value = parseInt(this.value);
+            if (isNaN(value) || value < 1 || value > 100) {
+                if (this.value.trim() !== '') {
+                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
+                    if (confirmation) {
+                        this.value = ''; // Effacer la saisie
+                        this.focus(); // Mettre le champ de saisie en surbrillance
+
+                    }
+                }
+            }
+        });
+
+        //min_samples_leaf
+        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
+        document.getElementById('criterion-min_samples_leaf-checkbox').addEventListener('change', function () {
+            var input = document.getElementById('criterion-min_samples_leaf-input');
+            var select = document.getElementById('criterion-min_samples_leaf-select');
+            input.disabled = !this.checked;
+            select.disabled = !this.checked;
+            if (this.checked) {
+                input.focus(); // Mettre le champ de saisie en surbrillance
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
+            } else {
+                input.value = ''; // Effacer la valeur du champ de saisie
+                select.selectedIndex = 0; // Réinitialiser le sélecteur
+            }
+        });
+
+        // Lorsque le champ de saisie perd le focus, effectuer une validation
+        document.getElementById('criterion-min_samples_leaf-input').addEventListener('blur', function () {
+            var value = parseInt(this.value);
+            if (isNaN(value) || value < 1 || value > 100) {
+                if (this.value.trim() !== '') {
+                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
+                    if (confirmation) {
+                        this.value = ''; // Effacer la saisie
+                        this.focus(); // Mettre le champ de saisie en surbrillance
+
+                    }
+                }
+            }
+        });
+
+
+
+        // Fonction pour définir la valeur du sélecteur dans le champ de saisie correspondant
+        function updateInputFromSelect(selectId, inputId) {
+            var select = document.getElementById(selectId);
+            var input = document.getElementById(inputId);
+            select.addEventListener('change', function () {
+                input.value = this.value;
+            });
+
+            // Générer les options
+            for (var i = 1; i <= 100; i++) {
+                var option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                select.appendChild(option);
+            }
+
+            // Ajouter un écouteur d'événements pour mettre à jour la valeur du champ de saisie lorsque l'option du sélecteur change
+            select.addEventListener('change', function () {
+                var selectedValue = parseInt(this.value);
+                input.value = selectedValue;
+
+            });
+        }
+        // Appeler la fonction pour ajouter la même fonctionnalité à chaque champ de saisie
+        updateInputFromSelect('criterion-n_estimators-select', 'criterion-n_estimators-input');
+        updateInputFromSelect('criterion-max_depth-select', 'criterion-max_depth-input');
+        updateInputFromSelect('criterion-min_samples_leaf-select', 'criterion-min_samples_leaf-input');
+
+
+        $(document).ready(function () {
+            // Activer les sous-options lorsque l'option principale est sélectionnée
+            $(' #mainOption2').change(function () {
+                var isChecked = $(this).is(':checked');
+                var accordionItem = $(this).closest('.accordion-item');
+
+                // Activer ou désactiver les sous-options
+                accordionItem.find('input[type=checkbox], input[type=text]').prop('disabled', !isChecked);
+
+                // Déplier ou replier les sous-options
+                var collapseTarget = accordionItem.find('.accordion-collapse');
+                if (isChecked) {
+                    collapseTarget.collapse('show');
+                } else {
+                    collapseTarget.collapse('hide');
+                }
+            });
+
+            // Lorsque le bouton est cliqué, effectuer l'action suivante
+            $('#nextButton').click(function () {
+                // Obtenir les options sélectionnées
+                var selectedOptions = [];
+                $('input[type=checkbox]:checked').each(function () {
+                    selectedOptions.push($(this).val());
+                });
+
+                // Obtenir les valeurs personnalisées saisies
+                $('input[type=text]').each(function () {
+                    var inputValue = $(this).val();
+                    if (inputValue !== "" && /^\d+$/.test(inputValue)) {
+                        selectedOptions.push(inputValue);
+                    }
+                });
+
+                // Afficher les options sélectionnées dans la console
+                console.log(selectedOptions);
+
+                // Vous pouvez écrire du code ici pour effectuer l'action suivante, comme envoyer les options pour traitement côté serveur, etc.
+            });
+        });
+
+        // Ajouter un écouteur d'événements pour le clic sur le bouton
+        document.getElementById("suivant-btn").addEventListener("click", function (event) {
+            // Empêcher le comportement de soumission par défaut du formulaire
+            event.preventDefault();
+            // Exécuter la logique de redirection de la page, ici utiliser window.location.href pour rediriger vers Home/Select
+            window.location.href = "@Url.Action("Image", "Home")";
+        });
+    </script>
+}
+
+
+

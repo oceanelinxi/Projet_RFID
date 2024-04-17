@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Image";
+}
+
+    <style>
+        canvas {
+            width: 400px; /* Définir une largeur fixe */
+            height: 300px; /* Définir une hauteur fixe */
+        }
+    </style>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
+        function updateChart(selectedOptions) {
+            // Obtenir l'élément canvas
+            var ctx = document.getElementById('myChart').getContext('2d');
+            // Créer un nouveau graphique
+            var myChart = new Chart(ctx, {
+                type: 'bar', // Diagramme en barres
+                data: {
+                    labels: ['Analytique', 'Random Forest', 'Naive Bayes', 'Logistic Regression', 'SVM', 'KNN'], // Étiquettes pour chaque barre
+                    datasets: [{
+                        label: 'Exactitude %',
+                        data: selectedOptions, // Valeurs en pourcentage pour chaque barre
+                        backgroundColor: [ // Couleur de fond des barres
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [ // Couleur de bordure des barres
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { return value + "%" } // Formatage des étiquettes de l'axe des y en pourcentage
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        // Appel de la fonction au chargement de la page
+        updateChart([75, 80, 85, 70, 78, 82]); // Valeurs par défaut
+
+    </script>
+
+
