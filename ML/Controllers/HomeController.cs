@@ -31,7 +31,28 @@ namespace ML.Controllers
             return View("ResultAnalytique");
         }
 
+        //SVM
+        public async Task<ActionResult> Methode_SVM(string gamma_select,float C_input, string kernel_select )
+        {
+            using (var client = new HttpClient())
+            {
+                var requestData = new
+                {
+                    Gamma = gamma_select,
+                    C = C_input,
+                    Kernel = kernel_select
+                    
+                };
+            
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/SVM", content);//modifier selon python
+                var resultSVM = await response.Content.ReadAsStringAsync();
 
+                ViewBag.Result = resultSVM;
+            }
+
+            return View("ResultSVM");
+        }
 
         /*RANDOM FOREST*/
         /*[HttpPost]
@@ -61,6 +82,8 @@ namespace ML.Controllers
 
              return View("ResultRF");
          }
+        
+    
         /*KNN
         [HttpPost]
         public async Task<IActionResult> KNN(string hyperparameter1, string selectedItem1, string selectedItem2)
@@ -109,16 +132,6 @@ namespace ML.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-        public IActionResult ResultRF()
-        {
-            return View();
-
-        }
-        public IActionResult ResultKNN()
-        {
-            return View();
-
         }
 
         public ActionResult Image()

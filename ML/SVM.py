@@ -1,16 +1,22 @@
-import pandas as pd
+from sklearn.model_selection import cross_val_score, KFold, cross_val_predict
+from sklearn.svm import SVC
+from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
 import numpy as np
-import matplotlib.pyplot as plt
+import pandas as pd
 import os
+import matplotlib.pyplot as plt
 import datetime
 
-def reflist(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
-    # pathfile = path_file
+
+def pretraitement_knn():
+    
+    pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'
+
+    # reflist: list of epc in each box
     reflist = pd.DataFrame()
     # 
     files=os.listdir(pathfile)
     for file in files:
-        # print(file)
         if file.startswith('reflist_'):
             temp=pd.read_csv(os.path.join(pathfile,file),sep=',').reset_index(drop=True)[['Epc']]
             temp['refListId']=file.split('.')[0]
@@ -18,17 +24,16 @@ def reflist(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
             #reflist=reflist.append(temp)
     reflist=reflist.rename(columns = {'refListId':'refListId_actual'})
     reflist['refListId_actual'] = reflist['refListId_actual'].apply(lambda x:int(x[8:]))
+
     Q_refListId_actual=reflist.groupby('refListId_actual')['Epc'].nunique().rename('Q refListId_actual').reset_index(drop=False)
     reflist=pd.merge(reflist,Q_refListId_actual,on='refListId_actual',how='left')
-    return reflist
-
-def df_tags(pathfile = r'data_anonymous/'):
+    
     df=pd.DataFrame()
-# 
-    files=os.listdir(pathfile)
+    # 
+    #files=os.listdir(pathfile)
     for file in files:
         if file.startswith('ano_APTags'):
-            # print(file)
+       
             temp=pd.read_csv(os.path.join(pathfile,file),sep=',')
             df= pd.concat([df, temp], axis = 0)
     df['LogTime'] = pd.to_datetime (df['LogTime'] ,format='%Y-%m-%d-%H:%M:%S') 
@@ -40,10 +45,10 @@ def df_tags(pathfile = r'data_anonymous/'):
     Ant_loc=pd.DataFrame({'Ant':[1,2,3,4],'loc':['in','in','out','out']})
     df=pd.merge(df,Ant_loc,on=['Ant'])
     df=df.sort_values('LogTime').reset_index(drop=True)
-    return df 
 
-def timing(pathfile = r'data_anonymous/'):
-    # timing: photocells a time window for each box: start/stop (ciuchStart, ciuchStop)
+    tags = df
+
+        # timing: photocells a time window for each box: start/stop (ciuchStart, ciuchStop)
     file=r'ano_supply-process.2019-11-07-CUT.csv'
     timing=pd.read_csv(os.path.join(pathfile,file),sep=',')
     timing['file']=file
@@ -55,8 +60,9 @@ def timing(pathfile = r'data_anonymous/'):
     timing=timing.sort_values('date')
     timing.loc[:,'refListId']=timing.loc[:,'refListId'].apply(lambda x:int(x[8:]))
     timing=timing[['refListId', 'ciuchStart', 'ciuchStop']]
-
-    # ciuchStart_up starts upstream ciuchStart, half way in between the previous stop and the actual start
+    
+    
+        # ciuchStart_up starts upstream ciuchStart, half way in between the previous stop and the actual start
     timing[['ciuchStop_last']]=timing[['ciuchStop']].shift(1)
     timing[['refListId_last']]=timing[['refListId']].shift(1)
     timing['ciuchStartup']=timing['ciuchStart'] - (timing['ciuchStart'] - timing['ciuchStop_last'])/2
@@ -69,8 +75,9 @@ def timing(pathfile = r'data_anonymous/'):
     timing['ciuchStopdown']= timing['ciuchStartup'].shift(-1)
     timing.loc[len(timing)-1,'ciuchStopdown']=timing.loc[len(timing)-1,'ciuchStop']+datetime.timedelta(seconds=10)
     timing=timing[['refListId', 'refListId_last','ciuchStartup', 'ciuchStart','ciuchStop','ciuchStopdown']]
-
-    # t0_run = a new run starts when box 0 shows up
+    
+    
+        # t0_run = a new run starts when box 0 shows up
     t0_run=timing[timing['refListId']==0] [['ciuchStartup']]
     t0_run=t0_run.rename(columns={'ciuchStartup':'t0_run'})
     t0_run=t0_run.groupby('t0_run').size().cumsum().rename('run').reset_index(drop=False)
@@ -80,9 +87,8 @@ def timing(pathfile = r'data_anonymous/'):
     timing=pd.merge_asof(timing,t0_run,left_on='ciuchStartup',right_on='t0_run', direction='backward')
     timing=timing.sort_values('ciuchStop')
     timing=timing[['run', 'refListId', 'refListId_last', 'ciuchStartup','ciuchStart','ciuchStop','ciuchStopdown','t0_run']]
-    return timing
 
-def timing_slices(timing):
+    
     slices = pd.DataFrame()
     for i, row in timing.iterrows():
         ciuchStartup = row['ciuchStartup']
@@ -91,19 +97,19 @@ def timing_slices(timing):
         ciuchStopdown = row['ciuchStopdown']
         steps = 3
 
-        # Cr�ation des tranches "up"
+        # Création des tranches "up"
         up = pd.DataFrame(index=pd.date_range(start=ciuchStartup, end=ciuchStart, periods=steps)) \
             .reset_index(drop=False).rename(columns={'index': 'slice'})
         up['slice_id'] = ['up_' + str(x) for x in range(steps)]
         slices = pd.concat([slices, up], ignore_index=True)
 
-        # Cr�ation des tranches "mid"
+        # Création des tranches "mid"
         mid = pd.DataFrame(index=pd.date_range(start=ciuchStart, end=ciuchStop, periods=steps)) \
             .reset_index(drop=False).rename(columns={'index': 'slice'})
         mid['slice_id'] = ['mid_' + str(x) for x in range(steps)]
         slices = pd.concat([slices, mid], ignore_index=True)
 
-        # Cr�ation des tranches "down"
+        # Création des tranches "down"
         down = pd.DataFrame(index=pd.date_range(start=ciuchStop, end=ciuchStopdown, periods=steps)) \
             .reset_index(drop=False).rename(columns={'index': 'slice'})
         down['slice_id'] = ['down_' + str(x) for x in range(steps)]
@@ -115,92 +121,138 @@ def timing_slices(timing):
     timing_slices=pd.merge_asof(slices,timing,left_on='slice',right_on='ciuchStartup',direction='backward')
     timing_slices=timing_slices[['run', 'refListId', 'refListId_last','slice_id','slice',  \
                                  'ciuchStartup', 'ciuchStart', 'ciuchStop', 'ciuchStopdown','t0_run']]
-
-    return timing_slices
-
-def df_timing_slices(timing_slices, timing, df):
+    
+    # merge between df and timing
+    # merge_asof needs sorted df > df_ref
     df=df[ (df['LogTime']>=timing['ciuchStartup'].min()) & (df['LogTime']<=timing['ciuchStopdown'].max())  ]
     df=df.sort_values('LogTime')
+    # 
     # each row in df_ref is merged with the last row in timing where timing (ciuchstart_up) < df_ref (logtime)
-
+    # 
     # df_timing=pd.merge_asof(df_ref,timing,left_on=['LogTime'],right_on=['ciuchStartup'],direction='backward')
     # df_timing=df_timing.dropna()
     # df_timing=df_timing.sort_values('LogTime').reset_index(drop=True)
     # df_timing=df_timing[['run', 'Epc','refListId', 'refListId_last', 'ciuchStartup',\
     #                      'LogTime', 'ciuchStop', 'ciuchStopdown','Rssi', 'loc', 'refListId_actual']]
+    # 
     # each row in df_ref is merged with the last row in timing_slices where timing (slice) < df_ref (logtime)
+    # 
     df_timing_slices=pd.merge_asof(df,timing_slices,left_on=['LogTime'],right_on=['slice'],direction='backward')
     df_timing_slices=df_timing_slices.dropna()
     df_timing_slices=df_timing_slices.sort_values('slice').reset_index(drop=True)
     df_timing_slices=df_timing_slices[['run', 'Epc','refListId', 'refListId_last', 'ciuchStartup','slice_id','slice','LogTime', \
                           'ciuchStart','ciuchStop', 'ciuchStopdown', 'Rssi', 'loc','t0_run']]
     df_timing_slices['reflist_run_id'] = df_timing_slices['refListId'].astype(str) +"_"+ df_timing_slices['run'].astype(str)
-
+    
     # runs 16 23 32 40 have missing boxes: discarded
     # also run 1 is the start, no previous box: discarded
-    # r
+    # run 18: box 0 run at the end
+    # 
     timing=timing[~timing['run'].isin([1,18,16,23,32,40])]
     timing_slices=timing_slices[~timing_slices['run'].isin([1,18,16,23,32,40])]
     df_timing_slices=df_timing_slices[~df_timing_slices['run'].isin([1,18,16,23,32,40])]
 
     df_timing_slices=df_timing_slices.sort_values(['LogTime','Epc'])
+    
     # df_timing_slices['dt']=
     df_timing_slices['dt']=(df_timing_slices['LogTime']-df_timing_slices['t0_run']).apply(lambda x:x.total_seconds())
-
-    return df_timing_slices
-
-
-def analytical(df_timing_slices, timing_slices, reflist):
-    ana = df_timing_slices.groupby(['Epc', 'reflist_run_id', 'slice_id', 'loc']) ['Rssi'].max()\
-    .unstack('loc', fill_value =- 110).reset_index(drop=False)
-
-    order=pd.DataFrame(timing_slices['slice_id'].unique(), columns=['slice_id'])
-    order['order']=order. index
-
-    ana=pd.merge(ana, order, on='slice_id', how='left')
-    ana = ana [['Epc', 'reflist_run_id', 'slice_id', 'in', 'out', 'order']]
-    # Last subslice_id with out>in
-    ana_out =ana [ ana['out']>ana['in'] ] \
-    .sort_values(['Epc', 'reflist_run_id', 'order'], ascending=False) \
-    .drop_duplicates(['Epc', 'reflist_run_id'])
-    # first subslice_id with in/out
-    ana_in =ana [ ana['in']>ana['out'] ] \
-    .sort_values(['Epc', 'reflist_run_id', 'order'], ascending=True) \
-    .drop_duplicates(['Epc', 'reflist_run_id'])
-
-    ana = pd.merge(ana_in, ana_out, on=['Epc', 'reflist_run_id'], suffixes=['_IN', '_OUT'], how='inner')\
-    .sort_values(['Epc', 'reflist_run_id'])
-    ana = pd.merge(ana, reflist, on='Epc', how='left')
-
-    ana['pred_ana_bool']= ana['reflist_run_id'].apply(lambda x:x.split('_')[0]).astype('int64') == ana['refListId_actual']
-
-    return ana
-
-def methode_analytique():
-    pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'
-    Reflist = reflist(pathfile)
-    Timing = timing(pathfile)
-    df = df_tags(pathfile)
-    Timing_slices = timing_slices(Timing)
-    Df_timing_slices = df_timing_slices(Timing_slices, Timing, df)
-    analytics = analytical(Df_timing_slices, Timing_slices, Reflist)
-    trues, total = analytics[analytics['pred_ana_bool']==True].shape[0], analytics.shape[0]
-    accur = 100 * trues / total
-
-    # Nombre de tags trouv� par carton par tour
-
-    cartons = analytics[['reflist_run_id','refListId_actual','Q refListId_actual', 'pred_ana_bool']]
-    cartons['n_true'] = cartons['pred_ana_bool'].astype(int)
-    cartons['run_id'] = cartons['reflist_run_id'].str.split('_').str[1]
     
-    pred1 = cartons[['refListId_actual','reflist_run_id','Q refListId_actual','n_true','run_id']].groupby(['refListId_actual','Q refListId_actual','run_id'])['n_true'].sum()
-    pred2 = cartons[['refListId_actual','run_id','pred_ana_bool']].groupby(['refListId_actual','run_id']).count()
-    #pred1.merge(pred2 on 
+    timing['reflist_run_id']= timing['refListId'].astype(str)+"_"+ timing['run'].astype(str)
+    timing['window_width']=(timing['ciuchStopdown']-timing['ciuchStartup']).apply(lambda x:x.total_seconds())
+    windows=timing[['reflist_run_id', 'window_width']]
+    rssi_quantite=1
+    return [df_timing_slices, windows,rssi_quantite,reflist]
 
-    result = pd.merge(pred2.rename(columns = {'reflist_run_id':'Total_tags_et_tour', 'pred_ana_bool':'Nombre de predictions'}), \
-                  pd.DataFrame(pred1), on = ['refListId_actual','run_id'], how='inner')
 
-    result.sort_values(by=['refListId_actual','run_id'], ascending=True).to_csv('resultats methode anaytique.csv')
-    print(accur)
+def dataset(df_timing_slices, windows, rssi_quantite):
+    ds_rssi = df_timing_slices.groupby(['Epc', 'reflist_run_id', 'slice_id', 'loc'])['Rssi'].quantile(rssi_quantite) \
+                 .unstack(['slice_id', 'loc'], fill_value=-110)
+    ds_rssi.columns = [x[0] + '_' + x[1] for x in ds_rssi.columns]
+    ds_rssi = ds_rssi.reset_index(drop=False)
+    
+    ds_rc = df_timing_slices.groupby(['Epc', 'reflist_run_id', 'slice_id', 'loc']).size() \
+               .unstack(['slice_id', 'loc'], fill_value=0)
+    ds_rc.columns = [x[0] + '_' + x[1] for x in ds_rc.columns]
+    ds_rc = ds_rc.reset_index(drop=False)
+    
+    ds = pd.merge(ds_rssi, ds_rc, on=['Epc', 'reflist_run_id'], suffixes=['_rssi', '_rc'])
+    ds = pd.merge(ds, windows, on='reflist_run_id', how='left')
+    
+    Q_Epcs_window = df_timing_slices.groupby(['reflist_run_id'])['Epc'].nunique().rename('Epcs_window').reset_index(drop=False)
+    ds = pd.merge(ds, Q_Epcs_window, on='reflist_run_id', how='left')
+    
+    Q_reads_window = df_timing_slices.groupby(['reflist_run_id']).size().rename('reads_window').reset_index(drop=False)
+    ds = pd.merge(ds, Q_reads_window, on='reflist_run_id', how='left')
+    
+    ds=pd.merge(ds, pretraitement_knn()[3], on='Epc', how='left')
+    ds['actual']=ds['reflist_run_id'].apply(lambda x: x.split ('_')[0]).astype('int64')== ds['refListId_actual']
+    ds['actual'] = ds ['actual'].replace({True: 'IN' , False: 'OUT'})
 
-    return accur 
+    
+    return ds
+
+colonne=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns
+
+
+def Xcols_func(features, Xcols_all):
+    Features=pd.DataFrame(\
+        [\
+         ['all', True, True, False, True, True, True],\
+         ['rssi & rc only', True, True, False, False, False, False],\
+         ['rssi & rc_mid', True, True, True, False, False, False],\
+         ['rssi only', True, False, True, False, False, False],\
+         ['rc only', False, True, False, False, False, False],\
+        ], columns=['features', 'rssi', 'rc', 'rc_mid_only', 'Epcs_window', 'reads_window', 'window_width'])
+    Features
+
+    Features_temp = Features[Features['features']==features]
+    
+    X=[]
+    rssi = Features_temp ['rssi'].values[0]
+    rc = Features_temp['rc'].values[0]
+    rc_mid_only = Features_temp['rc_mid_only'].values[0]
+    Epcs_window =  Features_temp['Epcs_window'].values[0]
+    reads_window =  Features_temp['reads_window'].values[0]
+    window_width =  Features_temp['window_width'].values[0]
+    
+    X_rssi = [x for x in colonne if rssi*'rssi' in x.split('_')]
+    X_rc = [x for x in colonne if rc*'rc' in x.split('_')]
+    
+    X = X_rssi + X_rc
+    
+    if Epcs_window:
+        X.append('Epcs_window')
+    if reads_window:
+        X.append('reads_window')
+    if window_width:
+        X.append('window_width')
+        
+    return X
+
+def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
+    
+    print('In the function')
+    print((gammas, c, kernels))
+    from sklearn.preprocessing import LabelEncoder
+    label_encoder = LabelEncoder()
+    ds=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2])
+    X=ds[Xcols_func('rssi & rc only',dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns)]
+    ds['actual']=label_encoder.fit_transform(ds['actual'])
+    y=ds['actual']
+    svm_model = SVC(gamma=gammas, C=c, kernel=kernels)
+    
+   
+    kf = KFold(n_splits=5, shuffle=True)
+    
+    cv_scores = cross_val_score(svm_model, X, y, cv=kf)
+    
+   
+    #print("Scores de validation croisée:", cv_scores)
+    
+    mean_score = np.mean(cv_scores)
+    #print("Score moyen de validation croisée:", mean_score)
+    
+    y_pred_cv = cross_val_predict(svm_model, X, y, cv=kf)
+    
+    
+    return mean_score
