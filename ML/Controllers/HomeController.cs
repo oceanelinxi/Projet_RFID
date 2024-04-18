@@ -14,6 +14,7 @@ namespace ML.Controllers
         {
             _logger = logger;
         }
+
         public async Task<ActionResult> Methode_analytique()
         {
             using (var client = new HttpClient())
@@ -29,6 +30,9 @@ namespace ML.Controllers
 
             return View("ResultAnalytique");
         }
+
+
+
         /*RANDOM FOREST*/
         /*[HttpPost]
          public async Task<IActionResult> RandomForest(string hyperparameter1, string hyperparameter2, string hyperparameter3)/*à remplacer suivant le nom donneé par Randy
@@ -56,8 +60,8 @@ namespace ML.Controllers
              }
 
              return View("ResultRF");
-         }*/
-        /*KNN*/
+         }
+        /*KNN
         [HttpPost]
         public async Task<IActionResult> KNN(string hyperparameter1, string selectedItem1, string selectedItem2)
         {
@@ -87,31 +91,7 @@ namespace ML.Controllers
             }
 
             return View("ResultKNN");
-        }
-
-
-        [HttpPost]
-        public async Task<ActionResult> SVM(float C_input, string kernel_select, int degree_input, string gamma_select)
-        {
-            using (var client = new HttpClient())
-            {
-                var requestData = new
-                {
-                    C = C_input,
-                    Kernel = kernel_select,
-                    Degree = degree_input,
-                    Gamma = gamma_select
-                };
-
-                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:5000/SVM", content);//modifier selon python
-                var result = await response.Content.ReadAsStringAsync();
-
-                ViewBag.Result = result;
-            }
-
-            return View("Index");
-        }
+        }*/
 
 
         public IActionResult Index()

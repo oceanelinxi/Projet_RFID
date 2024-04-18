@@ -18,10 +18,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\SOULEY\source\repos\ML\ML
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/SOULEY/source/repos/ML/ML/Views/Home/Fin.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGaW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/SOULEY/source/repos/ML/ML/Views/Home/Image.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -36,14 +32,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/SOULEY/source/repos/ML/ML/Views/Home/ResultAnalytique.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRBbmFseXRpcXVlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/SOULEY/source/repos/ML/ML/Views/Home/ResultKNN.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRLTk4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/SOULEY/source/repos/ML/ML/Views/Home/ResultRF.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRSRi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/SOULEY/source/repos/ML/ML/Views/Home/Select.cshtml]

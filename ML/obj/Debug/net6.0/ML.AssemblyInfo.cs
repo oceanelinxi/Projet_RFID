@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ML")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f04076465233034f5b4545573aae1985f7439d74")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffd87af174202d948d62cd254b2f7d2acd770582")]
 [assembly: System.Reflection.AssemblyProductAttribute("ML")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ML")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
