@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import os
 import datetime
 
@@ -24,7 +24,6 @@ def reflist(pathfile = r'data_anonymous/'):
 
 def df_tags(pathfile = r'data_anonymous/'):
     df=pd.DataFrame()
-# 
     files=os.listdir(pathfile)
     for file in files:
         if file.startswith('ano_APTags'):
@@ -177,9 +176,10 @@ def analytical(df_timing_slices, timing_slices, reflist):
     return ana
 
 def methode_analytique():
-    Reflist = reflist()
-    Timing = timing()
-    df = df_tags()
+    pathfile = r'../data_anonymous'
+    Reflist = reflist(pathfile)
+    Timing = timing(pathfile)
+    df = df_tags(pathfile)
     Timing_slices = timing_slices(Timing)
     Df_timing_slices = df_timing_slices(Timing_slices, Timing, df)
     analytics = analytical(Df_timing_slices, Timing_slices, Reflist)
@@ -194,9 +194,9 @@ def methode_analytique():
     
     pred1 = cartons[['refListId_actual','reflist_run_id','Q refListId_actual','n_true','run_id']].groupby(['refListId_actual','Q refListId_actual','run_id'])['n_true'].sum()
     pred2 = cartons[['refListId_actual','run_id','pred_ana_bool']].groupby(['refListId_actual','run_id']).count()
-    #pred1.merge(pred2 on 
+    #pred1.merge(pred2 on ) 
 
-    result = pd.merge(pred2.rename(columns = {'reflist_run_id':'Total_tags_et_tour', 'pred_ana_bool':'Nombre de prédictions'}), \
+    result = pd.merge(pred2.rename(columns = {'reflist_run_id':'Total_tags_et_tour', 'pred_ana_bool':'Nombre de predictions'}), \
                   pd.DataFrame(pred1), on = ['refListId_actual','run_id'], how='inner')
 
     result.sort_values(by=['refListId_actual','run_id'], ascending=True).to_csv('resultats methode anaytique.csv')
