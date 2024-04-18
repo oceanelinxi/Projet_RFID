@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from analytique import methode_analytique
+from RandomForest import RFcross_validation
 from SVM import train_and_evaluate_svm
 from knn import knnn
 app = Flask(__name__)
@@ -14,6 +15,18 @@ def analytique():
     #prediction = 0.75
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy})
+
+@app.route('/RandomForest',methods= ['POST'])
+def random_forest():
+    # Get the input parameters from the request
+    input_params = request.get_json()
+
+    # Call the predict() function to make a prediction with SVM
+    accuracy = RFcross_validation(input_params['n_estimators'],\
+                input_params['max_depth'], input_params['min_samples_leaf'])
+    # Return the prediction as JSON
+    return jsonify({'accuracy': accuracy})
+ 
 
 @app.route('/SVM', methods=['POST'])
 def svm():

@@ -28,6 +28,29 @@ namespace ML.Controllers
                 ViewBag.AnalytiqueResult = result;
             }
 
+            return View("Index");
+        }
+        //Random_Forest
+        public async Task<ActionResult> RandomForest( int n_est, int max_d, int min_samples)
+        {
+            using (var client = new HttpClient())
+            {
+                var requestData = new
+                {
+                  
+                    n_estimators = n_est,
+                    max_depth = max_d,
+                    min_samples_leaf = min_samples
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/RandomForest'", content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                ViewBag.Result = result;
+                ViewBag.method = "Random Forest";
+            }
+
             return View("Image");
         }
 
@@ -84,67 +107,10 @@ namespace ML.Controllers
 
             return View("Image");
         }
-        /*RANDOM FOREST*/
-        /*[HttpPost]
-         public async Task<IActionResult> RandomForest(string hyperparameter1, string hyperparameter2, string hyperparameter3)/*à remplacer suivant le nom donneé par Randy
-        {
-             using (var client = new HttpClient())
-             {
-                 var requestData = new
-                 {
-                     Hyperparameter1 = hyperparameter1,
-
-                     Hyperparameter2 = hyperparameter2,
-
-                     Hyperparameter3 = hyperparameter3
-
-                 };
-
-                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                 var response = await client.PostAsync("http://localhost:5000/RandomForest", content);/*à remplacer suivant le nom donneé par Randy
-                 var resultRF = await response.Content.ReadAsStringAsync();
-
-                 ViewBag.Hyperparameter1 = hyperparameter1;
-                 ViewBag.Hyperparameter2 = hyperparameter2;
-                 ViewBag.Hyperparameter3 = hyperparameter3;
-                 ViewBag.RFResult = resultRF; //Resultat Random Forest
-             }
-
-             return View("ResultRF");
-         }
         
     
-        /*KNN
-        [HttpPost]
-        public async Task<IActionResult> KNN(string hyperparameter1, string selectedItem1, string selectedItem2)
-        {
-            using (var client = new HttpClient())
-            {
-                var requestData = new
-                {
-                    Hyperparameter1 = hyperparameter1,
-
-                    Hyperparameter2 = selectedItem1,
-
-                    Hyperparameter3 = selectedItem2,
-
-                   
-                };
-
-                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:5000/KNN", content);
-                var resultKNN = await response.Content.ReadAsStringAsync();
-
-                ViewBag.Hyperparameter1 = hyperparameter1;
-                ViewBag.Hyperparameter2 = selectedItem1;
-                ViewBag.Hyperparameter3 = selectedItem2;
-                
-
-                ViewBag.KNNResult = resultKNN;
-            }
-
-            return View("ResultKNN");
-        }*/
+      
+      
 
 
         public IActionResult Index()
