@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from analytique import methode_analytique
 from SVM import train_and_evaluate_svm
+from knn import knnn
 app = Flask(__name__)
 
 @app.route('/analytique', methods=['POST'])
@@ -23,6 +24,21 @@ def svm():
     # Call the predict() function to make a prediction with SVM
     accuracy = train_and_evaluate_svm(input_params['Gamma'], input_params['C'], input_params['Kernel'])
     
+    # Return the prediction as JSON
+    return jsonify({'accuracy': accuracy})
+
+@app.route('/knn', methods=['POST'])
+def knn():
+    # Get the input parameters from the request
+    input_params = request.get_json()
+    hyperparameter1_value = int(input_params['Hyperparameter1'])
+    hyperparameter2_value = str(input_params['Hyperparameter2'])
+    hyperparameter3_value = str(input_params['Hyperparameter3'])
+ 
+ 
+    # Call the predict() function to make a prediction
+    accuracy = knnn(hyperparameter1_value,hyperparameter2_value,hyperparameter3_value)
+    #prediction = 0.75
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy})
 

@@ -1,12 +1,7 @@
-from sklearn.model_selection import cross_val_score, KFold, cross_val_predict
-from sklearn.svm import SVC
-from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+import os
 import numpy as np
 import pandas as pd
-import os
-import matplotlib.pyplot as plt
 import datetime
-
 
 def pretraitement_knn():
     
@@ -97,19 +92,19 @@ def pretraitement_knn():
         ciuchStopdown = row['ciuchStopdown']
         steps = 3
 
-        # Création des tranches "up"
+        # Cr�ation des tranches "up"
         up = pd.DataFrame(index=pd.date_range(start=ciuchStartup, end=ciuchStart, periods=steps)) \
             .reset_index(drop=False).rename(columns={'index': 'slice'})
         up['slice_id'] = ['up_' + str(x) for x in range(steps)]
         slices = pd.concat([slices, up], ignore_index=True)
 
-        # Création des tranches "mid"
+        # Cr�ation des tranches "mid"
         mid = pd.DataFrame(index=pd.date_range(start=ciuchStart, end=ciuchStop, periods=steps)) \
             .reset_index(drop=False).rename(columns={'index': 'slice'})
         mid['slice_id'] = ['mid_' + str(x) for x in range(steps)]
         slices = pd.concat([slices, mid], ignore_index=True)
 
-        # Création des tranches "down"
+        # Cr�ation des tranches "down"
         down = pd.DataFrame(index=pd.date_range(start=ciuchStop, end=ciuchStopdown, periods=steps)) \
             .reset_index(drop=False).rename(columns={'index': 'slice'})
         down['slice_id'] = ['down_' + str(x) for x in range(steps)]
@@ -229,30 +224,21 @@ def Xcols_func(features, Xcols_all):
         
     return X
 
-def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
-    
-    print('In the function')
-    print((gammas, c, kernels))
+
+def knnn(k_neighbors: int, weight: str, metrics: str):
     from sklearn.preprocessing import LabelEncoder
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.model_selection import cross_val_score
     label_encoder = LabelEncoder()
     ds=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2])
     X=ds[Xcols_func('rssi & rc only',dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns)]
     ds['actual']=label_encoder.fit_transform(ds['actual'])
     y=ds['actual']
-    svm_model = SVC(gamma=gammas, C=c, kernel=kernels)
+    #Cr�ation de l'instance du classificateur KNN
+    knn=KNeighborsClassifier(n_neighbors=k_neighbors,weights=weight,metric=metrics)
     
-   
-    kf = KFold(n_splits=5, shuffle=True)
-    
-    cv_scores = cross_val_score(svm_model, X, y, cv=kf)
-    
-   
-    #print("Scores de validation croisée:", cv_scores)
-    
-    mean_score = np.mean(cv_scores)
-    #print("Score moyen de validation croisée:", mean_score)
-    
-    y_pred_cv = cross_val_predict(svm_model, X, y, cv=kf)
+    accuracy=cross_val_score(knn,X,y,cv=5,scoring='accuracy').mean()
     
     
-    return mean_score*100
+    
+    return accuracy*100

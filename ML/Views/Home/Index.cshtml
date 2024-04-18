@@ -29,36 +29,32 @@
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
                                 const checkboxAnalytique = document.getElementById('mainOption1'); // Assurez-vous que l'ID correspond à votre case à cocher
-                                const checkboxSVM = document.getElementById('mainOption3');
+                              
                             const nextButton = document.getElementById('nextButton'); // Assurez-vous que l'ID correspond à votre bouton suivant
 
                                 function updateNextButtonState() {
                             // Désactiver le bouton suivant initialement
-                                nextButton.disabled = !(checkboxAnalytique.checked || checkboxSVM.checked);
+                                nextButton.disabled = !(checkboxAnalytique.checked );
                                 }
 
                                 updateNextButtonState();
 
                                 // Écouteurs pour les cases à cocher
                                 checkboxAnalytique.addEventListener('change', updateNextButtonState);
-                                checkboxSVM.addEventListener('change', updateNextButtonState);
+                                
 
 
                                 // Écouteur pour le bouton suivant
-                               /* nextButton.addEventListener('click', function () {
+                               nextButton.addEventListener('click', function () {
                                     if (checkboxAnalytique.checked) {
                                         window.location.href = '/Home/Methode_analytique'; // Redirection vers la page Methode_analytique si la case à cocher checkboxAnalytique est cochée
-                                    } else if (checkboxSVM.checked) {
-                                        //window.location.href = '/Home/Methode_SVM'; // Redirection vers la page SVM si la case à cocher checkboxSVM est cochée
-                                        const formSVM = document.getElementById('formOption3');
-                                        formSVM.submit();
-
-                                    }
-                            });*/
+                                    } 
+                            });
                         });
 
                     </script>
                     <p1>Analytique</p1>
+                        <button type="button" id="nextButton" class="btn-upload">Suivant</button>
                     </form>
                 </div>
             </h>
@@ -206,8 +202,8 @@
                                 If float, it must be positive.
                             </p>
                         
-                        <input type="submit" />
-
+                        <input type="submit" value="submit" />
+         
                     </form>
 
                 </div>
@@ -227,36 +223,34 @@
             </h>
             <div id="collapseOptionKNN" class="accordion-collapse collapse" aria-labelledby="headingOptionKNN" data-bs-parent="#optionsAccordion">
                 <div class="accordion-body">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="optionKNN-1" value="optionKNN-1">
-                        <label class="form-check-label" for="optionKNN-1">
+                    <form id="formOption4" class="option-form" method="post" asp-controller="Home" asp-action="KNN">
+                    
                             <p1>1. n_neighbors:</p1>
-                        </label>
+                
                         <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" placeholder="5" min="1" max="100">
                         <p>Number of neighbors to use by default for kneighbors queries.</p>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="optionKNN-2" value="optionKNN-2">
-                        <label class="form-check-label" for="optionKNN-2">
+
                             <p1>2. weights:</p1>
-                        </label>
-                        <select id="weights-select" class="form-select">
+
+                        <select id="weights-select" name="weights" class="form-select">
                             <option value="uniform">uniform</option>
                             <option value="distance">distance</option>
                         </select>
                         <p>Weight function used in prediction.</p>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="optionKNN-3" value="optionKNN-3">
-                        <label class="form-check-label" for="optionKNN-3">
+                  
+     
                             <p1>3. metric:</p1>
-                        </label>
-                        <select id="metric-select" class="form-select">
+                 
+                        <select id="metric-select" name="metric" class="form-select">
                             <option value="minkowski">minkowski</option>
                             <option value="euclidean">euclidean</option>
                             <option value="manhattan">manhattan</option>
                         </select>
                         <p>Metric to use for distance computation.</p>
+                            <input type="submit" value="submit" />
+
+                    </form>
+
                     </div>
                 </div>
             </div>

@@ -25,10 +25,10 @@ namespace ML.Controllers
                 var response = await client.PostAsync("http://localhost:5000/analytique", content);
                 var result = await response.Content.ReadAsStringAsync();
 
-                ViewBag.Result = result;
+                ViewBag.AnalytiqueResult = result;
             }
 
-            return View("ResultAnalytique");
+            return View("Image");
         }
 
         //SVM
@@ -48,12 +48,42 @@ namespace ML.Controllers
                 var response = await client.PostAsync("http://localhost:5000/SVM", content);//modifier selon python
                 var resultSVM = await response.Content.ReadAsStringAsync();
 
-                ViewBag.Result = resultSVM;
+                ViewBag.SVMResult = resultSVM;
             }
 
-            return View("ResultSVM");
+            return View("Image");
         }
 
+        //KNN
+        public async Task<ActionResult> KNN(string n_neighbors, string weights, string metric)
+        {
+            using (var client = new HttpClient())
+            {
+                var requestData = new
+                {
+                    Hyperparameter1 = n_neighbors,
+
+                    Hyperparameter2 = weights,
+
+                    Hyperparameter3 = metric,
+
+
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/knn", content);
+                var resultKNN = await response.Content.ReadAsStringAsync();
+
+                ViewBag.Hyperparameter1 = n_neighbors;
+                ViewBag.Hyperparameter2 = weights;
+                ViewBag.Hyperparameter3 = metric;
+
+
+                ViewBag.KNNResult = resultKNN;
+            }
+
+            return View("Image");
+        }
         /*RANDOM FOREST*/
         /*[HttpPost]
          public async Task<IActionResult> RandomForest(string hyperparameter1, string hyperparameter2, string hyperparameter3)/*à remplacer suivant le nom donneé par Randy
