@@ -248,6 +248,11 @@
             </div>
         </div>
         <!--Nouveau pour KNN fin-->
+        <br />
+        <div>
+            <button type="button" id="nextButton" class="btn-upload">Suivant</button>
+        </div>
+
    </div>
 
 
@@ -529,6 +534,7 @@
             inputs.forEach(input => input.disabled = !this.checked);
         });
 
+       
   
     </script>
 }
@@ -543,4 +549,26 @@
             optionsSection.style.display = "none";
         }
     });
+    //Bouton Suivant
+    document.getElementById('nextButton').addEventListener('click', function () {
+        // Vérifier quelles options sont cochées
+        var isKNNChecked = document.getElementById('mainOptionKNN').checked;
+        var isRFChecked = document.getElementById('mainOption2').checked;
+        var isAnalytiqueChecked = document.getElementById('mainOption1').checked;
+        var isSVMChecked = document.getElementById('mainOption5').checked;
+
+        // Rediriger vers la vue appropriée
+        if (isKNNChecked && !isRFChecked && !isAnalytiqueChecked && !isSVMChecked) {
+            window.location.href = '@Url.Action("ResultKNN", "Home")'; // Modifier le contrôleur et l'action en fonction de vos besoins
+        } else if (!isKNNChecked && isRFChecked && !isAnalytiqueChecked && !isSVMChecked) {
+            window.location.href = '@Url.Action("ResultRF", "Home")';
+        } else if (!isKNNChecked && !isRFChecked && isAnalytiqueChecked && !isSVMChecked) {
+            window.location.href = '@Url.Action("ResultAnalytique", "Home")';
+        } else if (!isKNNChecked && !isRFChecked && !isAnalytiqueChecked && isSVMChecked) {
+            window.location.href = '@Url.Action("ResultSVM", "Home")';
+        } else {
+            alert('Veuillez sélectionner une seule méthode pour continuer.');
+        }
+    });
+
 </script>

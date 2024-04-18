@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Random Forest Results";
+}
+
+
+<h2>Random Forest Results</h2>
+
+<!-- Verify if the result data is present -->
+@if (ViewBag.ResultRF != null)
+{
+    <div>
+        <h3>Model Parameters:</h3>
+        <p><strong>n_estimators:</strong> @ViewBag.Hyperparameter1</p>
+        <p><strong>max_depth:</strong> @ViewBag.Hyperparameter2</p>
+        <p><strong>min_samples_leaf:</strong> @ViewBag.Hyperparameter3</p>
+    </div>
+
+    <div>
+        <h3>Performance Metrics:</h3>
+        <!-- You can display the result using pre-formatted text if it is in JSON or some structured format -->
+        <pre>@ViewBag.ResultRF</pre>
+
+        <!-- Alternatively, if the result is an object, you can display its properties like this -->
+        <p><strong>Accuracy:</strong> @ViewBag.ResultRF.Accuracy</p>
+        <p><strong>Precision:</strong> @ViewBag.ResultRF.Precision</p>
+        <p><strong>Recall:</strong> @ViewBag.ResultRF.Recall</p>
+        <!-- Add more metrics as needed -->
+    </div>
+
+    <!-- If the result includes a confusion matrix or other tabular data, you can display it in a table -->
+    @if (ViewBag.ResultRF.ConfusionMatrix != null)
+    {
+        <div>
+            <h3>Confusion Matrix:</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!-- Assuming it's a binary classification for simplicity -->
+                        <th></th>
+                        <th>Predicted Positive</th>
+                        <th>Predicted Negative</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Actual Positive</th>
+                        <td>@ViewBag.ResultRF.ConfusionMatrix.TruePositive</td>
+                        <td>@ViewBag.ResultRF.ConfusionMatrix.FalseNegative</td>
+                    </tr>
+                    <tr>
+                        <th>Actual Negative</th>
+                        <td>@ViewBag.ResultRF.ConfusionMatrix.FalsePositive</td>
+                        <td>@ViewBag.ResultRF.ConfusionMatrix.TrueNegative</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+}
+else
+{
+    <p>No results to display.</p>
+}
+

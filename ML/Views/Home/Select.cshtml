@@ -34,40 +34,10 @@
                         Explication :
                         Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
                     </p>
-                    <p1>Choose one or more sub-options:</p1>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="option2-1" value="option2-1">
-                        <label class="form-check-label" for="option2-1">
-                            <p1>1.criterion:</p1>
-                        </label>
-                        <p>
-                            Explication :
-                            criterion:{“gini”, “entropy”, “log_loss”}, default=”gini”<br>
-                            The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “log_loss” and “entropy” both for the Shannon information gain, see Mathematical formulation. Note: This parameter is tree-specific.
-                        </p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="criterion-gini" name="criterion" value="gini">
-                            <label class="form-check-label" for="criterion-gini">
-                                <p1>Gini</p1>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="criterion-entropy" name="criterion" value="entropy">
-                            <label class="form-check-label" for="criterion-entropy">
-                                <p1>Entropy</p1>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="criterion-log_loss" name="criterion" value="log_loss">
-                            <label class="form-check-label" for="criterion-log_loss">
-                                <p1>Log Loss</p1>
-                            </label>
-                        </div>
-                    </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="criterion-n_estimators-checkbox" name="criterion" value="n_estimators">
                         <label class="form-check-label" for="criterion-n_estimators-checkbox">
-                            <p1>2.n_estimators:</p1>
+                            <p1>1.n_estimators:</p1>
                         </label>
                         <div>
                             <input class="form-number" type="text" id="criterion-n_estimators-input" name="criterion-n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
@@ -86,7 +56,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="criterion-max_depth-checkbox">
                         <label class="form-check-label" for="criterion-max_depth-checkbox">
-                            <p1>3.max_depth:</p1>
+                            <p1>2.max_depth:</p1>
                         </label>
                         <div>
                             <input class="form-number" type="text" id="criterion-max_depth-input" name="criterion-max_depth-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
@@ -108,7 +78,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="criterion-min_samples_leaf-checkbox" name="criterion" value="min_samples_leaf">
                         <label class="form-check-label" for="criterion-min_samples_leaf-checkbox">
-                            <p1>4.min_samples_leaf:</p1>
+                            <p1>3.min_samples_leaf:</p1>
                         </label>
                         <div>
                             <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="criterion-min_samples_leaf-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">

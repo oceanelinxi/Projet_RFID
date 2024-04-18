@@ -14,26 +14,11 @@ namespace ML.Controllers
         {
             _logger = logger;
         }
+
+        /*RANDOM FOREST*/
         /*[HttpPost]
-      public async Task<IActionResult> Analytical()
-       {
-           using (var client = new HttpClient())
-           {
-
-               var content = new StringContent(JsonConvert.SerializeObject(null), System.Text.Encoding.UTF8, "application/json");
-               var response = await client.PostAsync("http://localhost:5200/analytical", content);
-               var result = await response.Content.ReadAsStringAsync();
-               var meth = "Tabry1";
-
-               ViewBag.Result = result;
-               ViewBag.Metho = meth;
-           }
-
-           return View("Page2");
-       }*/
-        [HttpPost]
-         public async Task<IActionResult> RFClassifier(string hyperparameter1, string hyperparameter2, string hyperparameter3 )
-         {
+         public async Task<IActionResult> RandomForest(string hyperparameter1, string hyperparameter2, string hyperparameter3)/*à remplacer suivant le nom donneé par Randy
+        {
              using (var client = new HttpClient())
              {
                  var requestData = new
@@ -47,20 +32,20 @@ namespace ML.Controllers
                  };
 
                  var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                 var response = await client.PostAsync("http://localhost:5000/RFClassifier", content);
-                 var result1 = await response.Content.ReadAsStringAsync();
+                 var response = await client.PostAsync("http://localhost:5000/RandomForest", content);/*à remplacer suivant le nom donneé par Randy
+                 var resultRF = await response.Content.ReadAsStringAsync();
 
                  ViewBag.Hyperparameter1 = hyperparameter1;
                  ViewBag.Hyperparameter2 = hyperparameter2;
                  ViewBag.Hyperparameter3 = hyperparameter3;
-                 ViewBag.ResultRF = result1; //Resultat Random Forest
+                 ViewBag.RFResult = resultRF; //Resultat Random Forest
              }
 
              return View("ResultRF");
-         }
-
-        /*[HttpPost]
-        public async Task<IActionResult> KNNClassifier(string hyperparameter1, string selectedItem1, string selectedItem2)
+         }*/
+        /*KNN*/
+        [HttpPost]
+        public async Task<IActionResult> KNN(string hyperparameter1, string selectedItem1, string selectedItem2)
         {
             using (var client = new HttpClient())
             {
@@ -76,63 +61,21 @@ namespace ML.Controllers
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:5000/KNNClassifier", content);
-                var result4 = await response.Content.ReadAsStringAsync();
+                var response = await client.PostAsync("http://localhost:5000/KNN", content);
+                var resultKNN = await response.Content.ReadAsStringAsync();
 
                 ViewBag.Hyperparameter1 = hyperparameter1;
                 ViewBag.Hyperparameter2 = selectedItem1;
                 ViewBag.Hyperparameter3 = selectedItem2;
                 
 
-                ViewBag.Result4 = result4;
+                ViewBag.KNNResult = resultKNN;
             }
 
             return View("ResultKNN");
         }
-        */
+        
 
-        /*[HttpPost("upload")]
-        public IActionResult Upload(IFormFile file)
-        {
-            // Vérifier si le fichier est présent
-            if (file == null || file.Length == 0)
-                return BadRequest("Un fichier doit être fourni.");
-
-            // Vérifier l'extension du fichier
-            var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
-            if (fileExtension != ".zip")
-                return BadRequest("Le fichier doit être au format ZIP.");
-
-            // Vérifier le type MIME du fichier
-            if (file.ContentType != "application/zip" && file.ContentType != "application/x-zip-compressed" &&
-                file.ContentType != "application/x-compressed" && file.ContentType != "multipart/x-zip")
-                return BadRequest("Le fichier doit être au format ZIP.");
-
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", file.FileName);
-
-            // Sauvegarder le fichier
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-
-            // Extraire le contenu du fichier ZIP
-            var extractPath = Path.Combine(Directory.GetCurrentDirectory(), "extracted");
-            try
-            {
-                ZipFile.ExtractToDirectory(path, extractPath);
-            }
-            catch (InvalidDataException)
-            {
-                return BadRequest("Le fichier fourni n'est pas un fichier ZIP valide.");
-            }
-
-            // Ici, vous pouvez ajouter votre logique pour traiter les fichiers extraits
-            // ...
-
-            return Ok(new { message = "Fichier téléchargé et extrait avec succès." });
-        }
-        */
         public IActionResult Index()
         {
             return View();
@@ -149,6 +92,16 @@ namespace ML.Controllers
 
             return View();
         }
+        public IActionResult ResultRF()
+        {
+            return View();
+
+        }
+        public IActionResult ResultKNN()
+        {
+            return View();
+
+        }
 
         public ActionResult Image()
         {
@@ -156,6 +109,7 @@ namespace ML.Controllers
 
             return View();
         }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
