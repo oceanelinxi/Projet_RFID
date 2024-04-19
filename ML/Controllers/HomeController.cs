@@ -44,11 +44,10 @@ namespace ML.Controllers
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:5000/RandomForest'", content);
+                var response = await client.PostAsync("http://localhost:5000/RandomForest", content);
                 var result = await response.Content.ReadAsStringAsync();
 
                 ViewBag.Result = result;
-                ViewBag.method = "Random Forest";
             }
 
             return View("Image");

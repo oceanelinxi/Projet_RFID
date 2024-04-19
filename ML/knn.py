@@ -5,7 +5,7 @@ import datetime
 
 def pretraitement_knn():
     
-    pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'
+    pathfile = r'../data_anonymous/'
 
     # reflist: list of epc in each box
     reflist = pd.DataFrame()
@@ -185,8 +185,8 @@ def dataset(df_timing_slices, windows, rssi_quantite):
 
     
     return ds
-
-colonne=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns
+#data = pretraitement_knn()
+#colonne=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns
 
 
 def Xcols_func(features, Xcols_all):
@@ -210,6 +210,8 @@ def Xcols_func(features, Xcols_all):
     reads_window =  Features_temp['reads_window'].values[0]
     window_width =  Features_temp['window_width'].values[0]
     
+    colonne = Xcols_all
+    
     X_rssi = [x for x in colonne if rssi*'rssi' in x.split('_')]
     X_rc = [x for x in colonne if rc*'rc' in x.split('_')]
     
@@ -230,12 +232,13 @@ def knnn(k_neighbors: int, weight: str, metrics: str):
     from sklearn.neighbors import KNeighborsClassifier
     from sklearn.model_selection import cross_val_score
     label_encoder = LabelEncoder()
-    ds=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2])
-    X=ds[Xcols_func('rssi & rc only',dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns)]
+    data = pretraitement_knn() 
+    ds=dataset(data[0],data[1],data[2])
+    X=ds[Xcols_func('rssi & rc only',ds.columns)]
     ds['actual']=label_encoder.fit_transform(ds['actual'])
     y=ds['actual']
     #Cr�ation de l'instance du classificateur KNN
-    knn=KNeighborsClassifier(n_neighbors=k_neighbors,weights=weight,metric=metrics)
+    knn = KNeighborsClassifier(n_neighbors = k_neighbors, weights=weight,metric=metrics)
     
     accuracy=cross_val_score(knn,X,y,cv=5,scoring='accuracy').mean()
     

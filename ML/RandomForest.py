@@ -7,11 +7,11 @@ import datetime
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_predict
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import GridSearchCV
 
 
-def define_reflist(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
+def define_reflist(pathfile ):
     # pathfile = path_file
     reflist = pd.DataFrame()
     # 
@@ -29,7 +29,7 @@ def define_reflist(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
     reflist=pd.merge(reflist,Q_refListId_actual,on='refListId_actual',how='left')
     return reflist
 
-def df_tags(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
+def df_tags(pathfile):
     df=pd.DataFrame()
     files=os.listdir(pathfile)
     for file in files:
@@ -48,7 +48,7 @@ def df_tags(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
     df=df.sort_values('LogTime').reset_index(drop=True)
     return df 
 
-def define_timing(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
+def define_timing(pathfile):
     # timing: photocells a time window for each box: start/stop (ciuchStart, ciuchStop)
     file=r'ano_supply-process.2019-11-07-CUT.csv'
     timing=pd.read_csv(os.path.join(pathfile,file),sep=',')
@@ -227,15 +227,176 @@ def Xcols_func(features, colonne):
         
     return X
 
-def random_forest_accuracy( n_estimator, max_d, min_samples): 
+def pretraitement_knn(path = r'../data_anonymous/'):
+    
+    pathfile = path
 
-    reflist = define_reflist()
-    timing = define_timing()
-    df = df_tags()
-    timing_slices = define_timing_slices(timing)
-    df_timing_slices = define_df_timing_slices(timing_slices, timing, df)
-    windows = define_windows(timing)
-    data = dataset(df_timing_slices, windows, 1, reflist)
+    # reflist: list of epc in each box
+    reflist = pd.DataFrame()
+    # 
+    files=os.listdir(pathfile)
+    for file in files:
+        if file.startswith('reflist_'):
+            temp=pd.read_csv(os.path.join(pathfile,file),sep=',').reset_index(drop=True)[['Epc']]
+            temp['refListId']=file.split('.')[0]
+            reflist = pd.concat([reflist, temp], axis = 0)
+            #reflist=reflist.append(temp)
+    reflist=reflist.rename(columns = {'refListId':'refListId_actual'})
+    reflist['refListId_actual'] = reflist['refListId_actual'].apply(lambda x:int(x[8:]))
+
+    Q_refListId_actual=reflist.groupby('refListId_actual')['Epc'].nunique().rename('Q refListId_actual').reset_index(drop=False)
+    reflist=pd.merge(reflist,Q_refListId_actual,on='refListId_actual',how='left')
+    
+    df=pd.DataFrame()
+    # 
+    #files=os.listdir(pathfile)
+    for file in files:
+        if file.startswith('ano_APTags'):
+       
+            temp=pd.read_csv(os.path.join(pathfile,file),sep=',')
+            df= pd.concat([df, temp], axis = 0)
+    df['LogTime'] = pd.to_datetime (df['LogTime'] ,format='%Y-%m-%d-%H:%M:%S') 
+    df['TimeStamp'] = df['TimeStamp'].astype(float)
+    df['Rssi'] = df['Rssi'].astype(float)
+    df=df.drop(['Reader','EmitPower','Frequency'],axis=1).reset_index(drop=True)
+    df=df[['LogTime', 'Epc', 'Rssi', 'Ant']]
+    # antennas 1 and 2 are facing the box when photocell in/out 
+    Ant_loc=pd.DataFrame({'Ant':[1,2,3,4],'loc':['in','in','out','out']})
+    df=pd.merge(df,Ant_loc,on=['Ant'])
+    df=df.sort_values('LogTime').reset_index(drop=True)
+
+    tags = df
+
+        # timing: photocells a time window for each box: start/stop (ciuchStart, ciuchStop)
+    file=r'ano_supply-process.2019-11-07-CUT.csv'
+    timing=pd.read_csv(os.path.join(pathfile,file),sep=',')
+    timing['file']=file
+    timing['date']=pd.to_datetime(timing['date'],format='%d/%m/%Y %H:%M:%S,%f')
+    timing['ciuchStart']=pd.to_datetime(timing['ciuchStart'],format='%d/%m/%Y %H:%M:%S,%f')
+    timing['ciuchStop']=pd.to_datetime(timing['ciuchStop'],format='%d/%m/%Y %H:%M:%S,%f')
+    timing['timestampStart']=timing['timestampStart'].astype(float)
+    timing['timestampStop']=timing['timestampStop'].astype(float)
+    timing=timing.sort_values('date')
+    timing.loc[:,'refListId']=timing.loc[:,'refListId'].apply(lambda x:int(x[8:]))
+    timing=timing[['refListId', 'ciuchStart', 'ciuchStop']]
+    
+    
+        # ciuchStart_up starts upstream ciuchStart, half way in between the previous stop and the actual start
+    timing[['ciuchStop_last']]=timing[['ciuchStop']].shift(1)
+    timing[['refListId_last']]=timing[['refListId']].shift(1)
+    timing['ciuchStartup']=timing['ciuchStart'] - (timing['ciuchStart'] - timing['ciuchStop_last'])/2
+    # timing start: 10sec before timing
+    timing.loc[0,'refListId_last']=timing.loc[0,'refListId']
+    timing.loc[0,'ciuchStartup']=timing.loc[0,'ciuchStart']-datetime.timedelta(seconds=10)
+    timing.loc[0,'ciuchStop_last']=timing.loc[0,'ciuchStartup']-datetime.timedelta(seconds=10)
+    timing['refListId_last']=timing['refListId_last'].astype(int)
+    # 
+    timing['ciuchStopdown']= timing['ciuchStartup'].shift(-1)
+    timing.loc[len(timing)-1,'ciuchStopdown']=timing.loc[len(timing)-1,'ciuchStop']+datetime.timedelta(seconds=10)
+    timing=timing[['refListId', 'refListId_last','ciuchStartup', 'ciuchStart','ciuchStop','ciuchStopdown']]
+    
+    
+        # t0_run = a new run starts when box 0 shows up
+    t0_run=timing[timing['refListId']==0] [['ciuchStartup']]
+    t0_run=t0_run.rename(columns={'ciuchStartup':'t0_run'})
+    t0_run=t0_run.groupby('t0_run').size().cumsum().rename('run').reset_index(drop=False)
+    t0_run=t0_run.sort_values('t0_run')
+    # 
+    # each row in timing is merged with a last row in t0_run where t0_run (ciuchstart) <= timing (ciuchstart)
+    timing=pd.merge_asof(timing,t0_run,left_on='ciuchStartup',right_on='t0_run', direction='backward')
+    timing=timing.sort_values('ciuchStop')
+    timing=timing[['run', 'refListId', 'refListId_last', 'ciuchStartup','ciuchStart','ciuchStop','ciuchStopdown','t0_run']]
+
+    
+    slices = pd.DataFrame()
+    for i, row in timing.iterrows():
+        ciuchStartup = row['ciuchStartup']
+        ciuchStart = row['ciuchStart']
+        ciuchStop = row['ciuchStop']
+        ciuchStopdown = row['ciuchStopdown']
+        steps = 3
+
+        # Création des tranches "up"
+        up = pd.DataFrame(index=pd.date_range(start=ciuchStartup, end=ciuchStart, periods=steps)) \
+            .reset_index(drop=False).rename(columns={'index': 'slice'})
+        up['slice_id'] = ['up_' + str(x) for x in range(steps)]
+        slices = pd.concat([slices, up], ignore_index=True)
+
+        # Création des tranches "mid"
+        mid = pd.DataFrame(index=pd.date_range(start=ciuchStart, end=ciuchStop, periods=steps)) \
+            .reset_index(drop=False).rename(columns={'index': 'slice'})
+        mid['slice_id'] = ['mid_' + str(x) for x in range(steps)]
+        slices = pd.concat([slices, mid], ignore_index=True)
+
+        # Création des tranches "down"
+        down = pd.DataFrame(index=pd.date_range(start=ciuchStop, end=ciuchStopdown, periods=steps)) \
+            .reset_index(drop=False).rename(columns={'index': 'slice'})
+        down['slice_id'] = ['down_' + str(x) for x in range(steps)]
+        slices = pd.concat([slices, down], ignore_index=True)
+
+    slices.reset_index(drop=False, inplace=True)
+
+    # 
+    timing_slices=pd.merge_asof(slices,timing,left_on='slice',right_on='ciuchStartup',direction='backward')
+    timing_slices=timing_slices[['run', 'refListId', 'refListId_last','slice_id','slice',  \
+                                 'ciuchStartup', 'ciuchStart', 'ciuchStop', 'ciuchStopdown','t0_run']]
+    
+    # merge between df and timing
+    # merge_asof needs sorted df > df_ref
+    df=df[ (df['LogTime']>=timing['ciuchStartup'].min()) & (df['LogTime']<=timing['ciuchStopdown'].max())  ]
+    df=df.sort_values('LogTime')
+    # 
+    # each row in df_ref is merged with the last row in timing where timing (ciuchstart_up) < df_ref (logtime)
+    # 
+    # df_timing=pd.merge_asof(df_ref,timing,left_on=['LogTime'],right_on=['ciuchStartup'],direction='backward')
+    # df_timing=df_timing.dropna()
+    # df_timing=df_timing.sort_values('LogTime').reset_index(drop=True)
+    # df_timing=df_timing[['run', 'Epc','refListId', 'refListId_last', 'ciuchStartup',\
+    #                      'LogTime', 'ciuchStop', 'ciuchStopdown','Rssi', 'loc', 'refListId_actual']]
+    # 
+    # each row in df_ref is merged with the last row in timing_slices where timing (slice) < df_ref (logtime)
+    # 
+    df_timing_slices=pd.merge_asof(df,timing_slices,left_on=['LogTime'],right_on=['slice'],direction='backward')
+    df_timing_slices=df_timing_slices.dropna()
+    df_timing_slices=df_timing_slices.sort_values('slice').reset_index(drop=True)
+    df_timing_slices=df_timing_slices[['run', 'Epc','refListId', 'refListId_last', 'ciuchStartup','slice_id','slice','LogTime', \
+                          'ciuchStart','ciuchStop', 'ciuchStopdown', 'Rssi', 'loc','t0_run']]
+    df_timing_slices['reflist_run_id'] = df_timing_slices['refListId'].astype(str) +"_"+ df_timing_slices['run'].astype(str)
+    
+    # runs 16 23 32 40 have missing boxes: discarded
+    # also run 1 is the start, no previous box: discarded
+    # run 18: box 0 run at the end
+    # 
+    timing=timing[~timing['run'].isin([1,18,16,23,32,40])]
+    timing_slices=timing_slices[~timing_slices['run'].isin([1,18,16,23,32,40])]
+    df_timing_slices=df_timing_slices[~df_timing_slices['run'].isin([1,18,16,23,32,40])]
+
+    df_timing_slices=df_timing_slices.sort_values(['LogTime','Epc'])
+    
+    # df_timing_slices['dt']=
+    df_timing_slices['dt']=(df_timing_slices['LogTime']-df_timing_slices['t0_run']).apply(lambda x:x.total_seconds())
+    
+    timing['reflist_run_id']= timing['refListId'].astype(str)+"_"+ timing['run'].astype(str)
+    timing['window_width']=(timing['ciuchStopdown']-timing['ciuchStartup']).apply(lambda x:x.total_seconds())
+    windows=timing[['reflist_run_id', 'window_width']]
+    rssi_quantite=1
+    return [df_timing_slices, windows,rssi_quantite,reflist]
+
+def random_forest_accuracy(n_estimator, max_d, min_samples, data): 
+    
+    #reflist = define_reflist(pathfile)
+    #timing = define_timing(pathfile)
+    #df = df_tags(pathfile)
+    #timing_slices = define_timing_slices(timing)
+    #df_timing_slices = define_df_timing_slices(timing_slices, timing, df)
+    #windows = define_windows(timing)
+    #data = dataset(df_timing_slices, windows, 1, reflist)
+    
+    # importer les variables df_timing_slices, windows, le quartile (1) et reflist 
+    #   donnee = pretraitement_knn(pathfiles)
+    #   data = dataset(donnee[0], donnee[1], donnee[2], donnee[3])
+
+
     X = data[Xcols_func('all',data.columns)]
     y = data['actual']
     X_train, X_test, y_train, y_test =  train_test_split(X,y,test_size= 0.2)
@@ -245,8 +406,23 @@ def random_forest_accuracy( n_estimator, max_d, min_samples):
     y_pred = rf.predict(X_test)
     return 100 * accuracy_score(y_test, y_pred)
     
-def RFcross_validation( n_estimator, max_d, min_samples):
-    scores = []
-    for _ in range(20):
-        scores.append(random_forest_accuracy( n_estimator, max_d, min_samples))
-    return np.mean(scores)*100
+def RFcross_validation( n_estimator, max_d, min_samples,data):
+
+    # Définir le modèle de forêt aléatoire
+    clf = RandomForestClassifier(n_estimators = n_estimator, max_depth = max_d, min_samples_leaf=min_samples)
+
+    # Définir le nombre de plis de validation croisée
+    k = 5
+    
+    # Charger les données
+    X = data[Xcols_func('all',data.columns)]
+    y = data['actual']
+
+    # Effectuer la validation croisée et obtenir les prédictions
+    y_pred = cross_val_predict(clf, X, y, cv=k)
+
+    # Calculer l'exactitude du modèle sur l'ensemble des données
+    accuracy = accuracy_score(y, y_pred)
+
+    return accuracy
+

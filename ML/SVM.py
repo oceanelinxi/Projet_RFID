@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 import datetime
 
 
-def pretraitement_knn():
+def pretraitement_knn(path = r'../data_anonymous/'):
     
-    pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'
+    pathfile = path
 
     # reflist: list of epc in each box
     reflist = pd.DataFrame()
@@ -191,7 +191,9 @@ def dataset(df_timing_slices, windows, rssi_quantite):
     
     return ds
 
-colonne=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns
+# pretraitee = pretraitement_knn(r'../data_anonymous')
+
+# colonne=dataset(pretraitee[0],pretraitee[1],pretraitee[2]).columns
 
 
 def Xcols_func(features, Xcols_all):
@@ -215,6 +217,8 @@ def Xcols_func(features, Xcols_all):
     reads_window =  Features_temp['reads_window'].values[0]
     window_width =  Features_temp['window_width'].values[0]
     
+    colonne = Xcols_all
+
     X_rssi = [x for x in colonne if rssi*'rssi' in x.split('_')]
     X_rc = [x for x in colonne if rc*'rc' in x.split('_')]
     
@@ -235,8 +239,13 @@ def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
     print((gammas, c, kernels))
     from sklearn.preprocessing import LabelEncoder
     label_encoder = LabelEncoder()
-    ds=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2])
-    X=ds[Xcols_func('rssi & rc only',dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns)]
+
+    pretraitee = pretraitement_knn()
+    # ds=dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2])
+    # X = ds[Xcols_func('rssi & rc only',dataset(pretraitement_knn()[0],pretraitement_knn()[1],pretraitement_knn()[2]).columns)]
+
+    ds = dataset(pretraitee[0], pretraitee[1], pretraitee[2])
+    X = ds[Xcols_func('rssi & rc only',ds.columns)]
     ds['actual']=label_encoder.fit_transform(ds['actual'])
     y=ds['actual']
     svm_model = SVC(gamma=gammas, C=c, kernel=kernels)
@@ -252,7 +261,9 @@ def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
     mean_score = np.mean(cv_scores)
     #print("Score moyen de validation croisée:", mean_score)
     
-    y_pred_cv = cross_val_predict(svm_model, X, y, cv=kf)
+    # La ligne suivante est commentée car elle n'est pas utilisée 
+    # et il faut optimiser le code pour éviter les longues périodes d'attentes coté client'
+    #  y_pred_cv = cross_val_predict(svm_model, X, y, cv=kf)
     
     
     return mean_score*100

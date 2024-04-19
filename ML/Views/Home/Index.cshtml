@@ -151,52 +151,52 @@
             <div id="collapseOption3" class="accordion-collapse collapse" aria-labelledby="headingOption3" data-bs-parent="#optionsAccordion">
                 <div class="accordion-body">
                     <form id="formOption3" class="option-form" method="post" asp-controller="Home" asp-action="Methode_SVM">
-                    
-                                <p1>1. C:</p1>
-                           
-                            <div>
-                                <input class="form-number" type="text" id="C-input" name="C_input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="1.0" oninput="this.value = this.value.replace(/[^\d.]/g,'')">
-                            </div>
-                            <p>
-                                Explanation:
-                                C: float, default value = 1.0<br>
-                                Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
-                            </p>
-                       
+
+                        <p1>1. C:</p1>
+
+                        <div>
+                            <input class="form-number" type="text" id="C-input" name="C_input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="1.0" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                        </div>
+                        <p>
+                            Explanation:
+                            C: float, default value = 1.0<br>
+                            Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
+                        </p>
+
 
                         <p1>2. Kernel:</p1>
-                            <select id="kernel-select" name="kernel_select" class="form-select">
-                                <option value="linear">linear</option>
-                                <option value="poly">polynomial</option>
-                                <option value="rbf" selected>rbf</option>
-                                <option value="sigmoid">sigmoid</option>
-                                <option value="precomputed">precomputed</option>
-                            </select>
-                            <p>
-                                Explanation:
-                                Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
-                                Description: Defines the shape of the boundary between the different classes of the model.
-                            </p>
-                    
+                        <select id="kernel-select" name="kernel_select" class="form-select">
+                            <option value="linear">linear</option>
+                            <option value="poly">polynomial</option>
+                            <option value="rbf" selected>rbf</option>
+                            <option value="sigmoid">sigmoid</option>
+                            <option value="precomputed">precomputed</option>
+                        </select>
+                        <p>
+                            Explanation:
+                            Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
+                            Description: Defines the shape of the boundary between the different classes of the model.
+                        </p>
 
-            
-                                <p1>3. Gamma:</p1>
-                          
-                            <select id="gamma-select" name="gamma_select" class="form-select">
-                                <option value="scale" selected>scale</option>
-                                <option value="auto">auto</option>
-                            </select>
-                            <p>
-                                Explanation:
-                                Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
-                                Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
-                                If gamma='scale', it takes the value 1/(n_features * X.var()).
-                                If ‘auto’, it uses 1 / n_features.
-                                If float, it must be positive.
-                            </p>
-                        
+
+
+                        <p1>3. Gamma:</p1>
+
+                        <select id="gamma-select" name="gamma_select" class="form-select">
+                            <option value="scale" selected>scale</option>
+                            <option value="auto">auto</option>
+                        </select>
+                        <p>
+                            Explanation:
+                            Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
+                            Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
+                            If gamma='scale', it takes the value 1/(n_features * X.var()).
+                            If ‘auto’, it uses 1 / n_features.
+                            If float, it must be positive.
+                        </p>
+
                         <input type="submit" value="submit" />
-         
+
                     </form>
 
                 </div>
