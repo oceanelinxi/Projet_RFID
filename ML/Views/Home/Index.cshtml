@@ -54,7 +54,7 @@
                     
                             <p1>1.n_estimators:</p1>
                         <div>
-                            <input class="form-number" type="text" id="criterion-n_estimators-input" name="n_est" style="width: 230px;" placeholder="Enter a positive integer value" pattern="\d+(\.\d+)?" value="1" oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="text" id="criterion-n_estimators-input" name="n_est" style="width: 230px;" placeholder="Enter a positive integer value" pattern="\d+(\.\d+)?" value="70" oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                         </div>
                         
                         <p>
@@ -67,7 +67,7 @@
                             <p1>2.max_depth:</p1>
                    
                         <div>
-                            <input class="form-number" type="text" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
+                        <input class="form-number" type="text" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="25"  pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
                         </div>
                         <label class="form-check-label" for="criterion-max_depth-input">
@@ -83,7 +83,7 @@
                             <p1>3.min_samples_leaf:</p1>
                      
                         <div>
-                            <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
+                        <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="15"  pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
                            
                         </div>
@@ -180,7 +180,7 @@
                     
                             <p1>1. n_neighbors:</p1>
                 
-                        <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" placeholder="5" min="1" max="100">
+                        <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100">
                         <p>Number of neighbors to use by default for kneighbors queries.</p>
 
                             <p1>2. weights:</p1>
@@ -329,17 +329,6 @@
             }
         });
 
-        // Degree
-        document.getElementById('degree-checkbox').addEventListener('change', function () {
-            var input = document.getElementById('degree-input');
-            input.disabled = !this.checked;
-            if (this.checked) {
-                input.value = '3'; // Définir la valeur par défaut lors de l'activation
-            } else {
-                input.value = ''; // Effacer la valeur du champ de saisie
-            }
-        });
-
         // Gamma
         document.getElementById('gamma-checkbox').addEventListener('change', function () {
             var select = document.getElementById('gamma-select');
@@ -353,7 +342,7 @@
             var input = document.getElementById('n_neighbors-input');
             input.disabled = !this.checked;
             if (this.checked) {
-                input.value = 5; // La valeur par défaut pour n_neighbors
+                input.value = '5'; // La valeur par défaut pour n_neighbors
             } else {
                 input.value = ''; // Effacer la valeur du champ de saisie
             }
