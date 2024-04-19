@@ -18,51 +18,24 @@
     </form>
 </div>
 
-<form id="optionsForm">
+<form id="optionsForm" class="option-form" method="post" asp-controller="Home" asp-action="ExecuteMachineLearningTasks">
   <div id="optionsSection" style="display:none;">
       <h1 class="text-center mt-5">Méthodes</h1>
      <div class="accordion" id="optionsAccordion">
       <h class="accordion-header" id="headingOption1">
                 <div class="d-flex align-items-center">
-                    <form id="formOption1" class="option-form" action="/submit_option1" method="post">
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption1" value="mainOption1">
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                                const checkboxAnalytique = document.getElementById('mainOption1'); // Assurez-vous que l'ID correspond à votre case à cocher
-                              
-                            const nextButton = document.getElementById('nextButton'); // Assurez-vous que l'ID correspond à votre bouton suivant
 
-                                function updateNextButtonState() {
-                            // Désactiver le bouton suivant initialement
-                                nextButton.disabled = !(checkboxAnalytique.checked );
-                                }
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption1" name="mainOption1" value="true">
 
-                                updateNextButtonState();
-
-                                // Écouteurs pour les cases à cocher
-                                checkboxAnalytique.addEventListener('change', updateNextButtonState);
-                                
-
-
-                                // Écouteur pour le bouton suivant
-                               nextButton.addEventListener('click', function () {
-                                    if (checkboxAnalytique.checked) {
-                                        window.location.href = '/Home/Methode_analytique'; // Redirection vers la page Methode_analytique si la case à cocher checkboxAnalytique est cochée
-                                    } 
-                            });
-                        });
-
-                    </script>
                     <p1>Analytique</p1>
-                        <button type="button" id="nextButton" class="btn-upload">Suivant</button>
-                    </form>
+                  
                 </div>
             </h>
      </div>
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption2">
                 <div class="d-flex align-items-center">
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption2" value="mainOption2">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption2" name="mainOption2" value="true">
 
                     <p1> Random forest</p1>
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption2" aria-expanded="false" aria-controls="collapseOption2" style="width: 20px; padding: 0; margin-left: 5px;">
@@ -73,12 +46,11 @@
             </h>
             <div id="collapseOption2" class="accordion-collapse collapse" aria-labelledby="headingOption2" data-bs-parent="#optionsAccordion">
                 <div class="accordion-body">
-                    <form id="formOption2" class="option-form" method="post" asp-controller="Home" asp-action="RandomForest">
-                    <p>
+                   <p>
                         Explication :
                         Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
                     </p>
-                    <p1>Choose one or more sub-options:</p1>
+                        <p1>Choose one or more sub-options:</p1></br>
                     
                             <p1>1.n_estimators:</p1>
                         <div>
@@ -97,10 +69,6 @@
                         <div>
                             <input class="form-number" type="text" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
-                            <select id="criterion-max_depth-select" class="form-select">
-                                <option selected disabled>Select a value</option>
-                                <!-- JavaScript generated options will be added here -->
-                            </select>
                         </div>
                         <label class="form-check-label" for="criterion-max_depth-input">
                         </label>
@@ -117,10 +85,7 @@
                         <div>
                             <input class="form-number" type="text" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')">
 
-                            <select id="criterion-min_samples_leaf-select" class="form-select">
-                                <option selected disabled>Select a value</option>
-                                <!-- JavaScript generated options will be added here -->
-                            </select>
+                           
                         </div>
                         <p>
                             Explication :
@@ -128,10 +93,8 @@
                             The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
                         </p>
 
-                    <input type="submit" value="submit" />
-
-                    </form>
-
+              
+  
                 </div>
             </div>
         </div>
@@ -141,7 +104,7 @@
         <div class="accordion-item">
             <h class="accordion-header" id="headingOption3">
                 <div class="d-flex align-items-center">
-                    <input class="form-check-input me-2" type="checkbox" id="mainOption3" value="mainOption3">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption3" name="mainOption3" value="true">
                     <p1>SVM</p1>
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption3" aria-expanded="false" aria-controls="collapseOption3" style="width: 20px; padding: 0; margin-left: 5px;">
                         <span class="visually-hidden">Toggle sub-options</span>
@@ -150,7 +113,7 @@
             </h>
             <div id="collapseOption3" class="accordion-collapse collapse" aria-labelledby="headingOption3" data-bs-parent="#optionsAccordion">
                 <div class="accordion-body">
-                    <form id="formOption3" class="option-form" method="post" asp-controller="Home" asp-action="Methode_SVM">
+               
 
                         <p1>1. C:</p1>
 
@@ -195,19 +158,16 @@
                             If float, it must be positive.
                         </p>
 
-                        <input type="submit" value="submit" />
-
-                    </form>
-
                 </div>
             </div>
         </div>
+
             <!--Nouveau pour SVM fin-->
         <!--Nouveau pour KNN début-->
         <div class="accordion-item">
             <h class="accordion-header" id="headingOptionKNN">
                 <div class="d-flex align-items-center">
-                    <input class="form-check-input me-2" type="checkbox" id="mainOptionKNN" value="mainOptionKNN">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption4" name="mainOption4" value="true">
                     <p1>KNN</p1>
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOptionKNN" aria-expanded="false" aria-controls="collapseOptionKNN" style="width: 20px; padding: 0; margin-left: 5px;">
                         <span class="visually-hidden">Toggle sub-options</span>
@@ -216,7 +176,7 @@
             </h>
             <div id="collapseOptionKNN" class="accordion-collapse collapse" aria-labelledby="headingOptionKNN" data-bs-parent="#optionsAccordion">
                 <div class="accordion-body">
-                    <form id="formOption4" class="option-form" method="post" asp-controller="Home" asp-action="KNN">
+                  
                     
                             <p1>1. n_neighbors:</p1>
                 
@@ -240,25 +200,25 @@
                             <option value="manhattan">manhattan</option>
                         </select>
                         <p>Metric to use for distance computation.</p>
-                            <input type="submit" value="submit" />
+                           
 
-                    </form>
+                    
 
                     </div>
                 </div>
             </div>
+
+        <br />
+
+        <input type="submit" value="submit" />
         </div>
         <!--Nouveau pour KNN fin-->
-        <br />
-        <!--<form id="formOption2" class="option-form" action="/submit_option" method="post">
-        <div>
-            <button type="button" id="nextButton" class="btn-upload">Suivant</button>
-        </div>
-        </form>-->
-   </div>
+       
 
+   
 
 </form>
+
 
 @section Scripts {
     <script>
@@ -460,7 +420,7 @@
             }
         });
 
-
+        
 
         // Fonction pour définir la valeur du sélecteur dans le champ de saisie correspondant
         function updateInputFromSelect(selectId, inputId) {
@@ -546,7 +506,15 @@
         });
 
         
+        //Savoir si le bouton de la methode analytique est cochee
+        var checkbox = document.getElementById('mainOption1');
 
+        // Vérifie si la case à cocher est cochée
+        if (checkbox.checked) {
+            console.log('La case à cocher est cochée.');
+        } else {
+            console.log('La case à cocher n\'est pas cochée.');
+        }
     </script>
 }
    

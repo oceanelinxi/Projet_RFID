@@ -25,8 +25,7 @@ def random_forest():
     input_params = request.get_json()
 
     # Call the predict() function to make a prediction with SVM
-    accuracy = RFcross_validation(input_params['n_estimators'],\
-                input_params['max_depth'], input_params['min_samples_leaf'],data)
+    accuracy = RFcross_validation(input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'],data)
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy})
  

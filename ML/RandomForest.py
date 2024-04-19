@@ -424,5 +424,5 @@ def RFcross_validation( n_estimator, max_d, min_samples,data):
     # Calculer l'exactitude du modèle sur l'ensemble des données
     accuracy = accuracy_score(y, y_pred)
 
-    return accuracy
+    return accuracy*100
 

@@ -1,30 +1,38 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <br> </br>
-    <br> </br>
     <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload">
         <div>
             <label for="files" class="label-upload">Choisissez les fichiers à télécharger (ZIP autorisés) :</label>
             <input type="file" name="files" multiple>
         </div>
-        <br> </br>
-        <br> </br>
         <div>
-            <button type="submit" class="btn-upload" id="suivant-btn">Suivant</button>
+            <button type="submit" class="btn-upload" id="suivant-btn">OK</button>
         </div>
     </form>
 </div>
+
+<div id="page-content"></div>
+
 
 <script>
     // Ajout d'un écouteur d'événements sur le clic du bouton
     document.getElementById("suivant-btn").addEventListener("click", function (event) {
         // Empêcher le comportement de soumission par défaut du formulaire
         event.preventDefault();
-        // Exécution de la logique de redirection de la page, ici en utilisant window.location.href pour rediriger vers Home/Select
-        window.location.href = "@Url.Action("Select", "Home")";
+        // Exécution de la logique AJAX pour charger le contenu de la page Home/Select
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "@Url.Action("Select", "Home")", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Insertion de la réponse (le contenu de la page) dans la div page-content
+                document.getElementById("page-content").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
     });
 </script>
