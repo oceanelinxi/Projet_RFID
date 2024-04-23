@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 import os
 import datetime
 
-def reflist(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
+
+
+
+
+def reflist(pathfile = r'Uploads/data_anonymous'):
     # pathfile = path_file
     reflist = pd.DataFrame()
     # 
@@ -22,7 +26,7 @@ def reflist(pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'):
     reflist=pd.merge(reflist,Q_refListId_actual,on='refListId_actual',how='left')
     return reflist
 
-def df_tags(pathfile = r'data_anonymous/'):
+def df_tags(pathfile = r'Uploads/data_anonymous'):
     df=pd.DataFrame()
 # 
     files=os.listdir(pathfile)
@@ -42,7 +46,7 @@ def df_tags(pathfile = r'data_anonymous/'):
     df=df.sort_values('LogTime').reset_index(drop=True)
     return df 
 
-def timing(pathfile = r'data_anonymous/'):
+def timing(pathfile = r'Uploads/data_anonymous'):
     # timing: photocells a time window for each box: start/stop (ciuchStart, ciuchStop)
     file=r'ano_supply-process.2019-11-07-CUT.csv'
     timing=pd.read_csv(os.path.join(pathfile,file),sep=',')
@@ -177,7 +181,7 @@ def analytical(df_timing_slices, timing_slices, reflist):
     return ana
 
 def methode_analytique():
-    pathfile = r'C:/Users/Oceane/Downloads/data_anonymous/'
+    pathfile = r'Uploads/data_anonymous'
     Reflist = reflist(pathfile)
     Timing = timing(pathfile)
     df = df_tags(pathfile)
@@ -200,7 +204,7 @@ def methode_analytique():
     result = pd.merge(pred2.rename(columns = {'reflist_run_id':'Total_tags_et_tour', 'pred_ana_bool':'Nombre de predictions'}), \
                   pd.DataFrame(pred1), on = ['refListId_actual','run_id'], how='inner')
 
-    result.sort_values(by=['refListId_actual','run_id'], ascending=True).to_csv('resultats methode anaytique.csv')
+    #result.sort_values(by=['refListId_actual','run_id'], ascending=True).to_csv('resultats methode anaytique.csv')
     print(accur)
 
     return accur 

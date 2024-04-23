@@ -5,7 +5,7 @@ import datetime
 
 def pretraitement_knn():
     
-    pathfile = r'../data_anonymous/'
+    pathfile = r'Uploads/data_anonymous'
 
     # reflist: list of epc in each box
     reflist = pd.DataFrame()

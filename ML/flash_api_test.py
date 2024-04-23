@@ -3,7 +3,15 @@ from analytique import methode_analytique
 from RandomForest import RFcross_validation, pretraitement_knn, dataset
 from SVM import train_and_evaluate_svm
 from knn import knnn
+from analytique import methode_analytique
+import zipfile
 app = Flask(__name__)
+
+
+def unzip_file(file_path, extract_to):
+    with zipfile.ZipFile(file_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_to)
+
 
 
 @app.route('/analytique', methods=['POST'])
@@ -11,6 +19,8 @@ def analytique():
     # Get the input parameters from the request
     input_params = request.get_json()
     
+    
+
     # Call the predict() function to make a prediction
     accuracy = methode_analytique()
     #prediction = 0.75
@@ -41,6 +51,20 @@ def svm():
     
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy})
+
+@app.route('/Chemin', methods=['POST'])
+def chemin():
+    # Get the input parameters from the request
+    data = request.get_json()
+    chemin=data.get('chemin')
+    # Remplacer "\\" par "/"
+    chemin = chemin.replace("\\", "/")
+    print( chemin)
+    unzip_file(chemin,"Uploads/data_anonymous")
+    return chemin
+   
+  
+
 
 @app.route('/knn', methods=['POST'])
 def knn():

@@ -227,7 +227,7 @@ def Xcols_func(features, colonne):
         
     return X
 
-def pretraitement_knn(path = r'../data_anonymous/'):
+def pretraitement_knn(path = r'Uploads/data_anonymous'):
     
     pathfile = path
 

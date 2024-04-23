@@ -17,6 +17,47 @@ namespace ML.Controllers
             _logger = logger;
         }
 
+
+        public async Task<IActionResult> Upload()
+        {
+            foreach (var file in Request.Form.Files)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var uploadDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                var filePath = Path.Combine(uploadDirectory, fileName);
+
+                // Vérifier si le répertoire existe, sinon le créer
+                if (!Directory.Exists(uploadDirectory))
+                {
+                    Directory.CreateDirectory(uploadDirectory);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                using (var client = new HttpClient())
+                {
+                    var requestData = new
+                    {
+                        chemin = filePath,
+                    };
+
+                    var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync("http://localhost:5000/Chemin", content);
+                   
+
+                   
+                }
+
+                // Retourner le chemin du fichier téléchargé dans l'en-tête de réponse HTTP
+                return View("Index");
+            }
+
+            // Si aucun fichier n'a été téléchargé, retourner une réponse BadRequest
+            return BadRequest("Aucun fichier téléchargé.");
+        }
         public async Task<string> Methode_analytique()
         {
             using (var client = new HttpClient())

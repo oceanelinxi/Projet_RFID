@@ -6,14 +6,15 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <br> </br>
-    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload">
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload" target="uploadFrame">
         <div>
+            <iframe id="uploadFrame" name="uploadFrame" style="display: none;"></iframe>
             <label for="files" class="label-upload">Choisissez les fichiers à télécharger (ZIP autorisés) :</label>
             <input type="file" name="files" multiple>
         </div>
         <br> </br>
         <div>
-            <button type="button" id="okButton" class="btn-upload">OK</button>
+            <button type="submit" id="okButton" class="btn-upload">OK</button>
         </div>
     </form>
 </div>
