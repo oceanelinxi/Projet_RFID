@@ -92,9 +92,9 @@ def knn():
     #prediction = 0.
     
     duree = (datetime.now()- start_knn)
-    print('Duree de knn : {}'.format(duree))
+    print('Duree de knn : {} : '.format(duree, duree.seconds))
     print('accuracy', accuracy)
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy, 'duree':duree})
+    return jsonify({'accuracy': accuracy, 'duree':duree.seconds})
 
 app.run(host='0.0.0.0', port=5000)
