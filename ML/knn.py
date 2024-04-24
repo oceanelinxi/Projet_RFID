@@ -227,16 +227,15 @@ def Xcols_func(features, Xcols_all):
     return X
 
 
-def knnn(k_neighbors: int, weight: str, metrics: str):
+def knnn(k_neighbors: int, weight: str, metrics: str, ds:pd.DataFrame):
     from sklearn.preprocessing import LabelEncoder
     from sklearn.neighbors import KNeighborsClassifier
     from sklearn.model_selection import cross_val_score
     label_encoder = LabelEncoder()
-    data = pretraitement_knn() 
-    ds=dataset(data[0],data[1],data[2])
-    X=ds[Xcols_func('rssi & rc only',ds.columns)]
-    ds['actual']=label_encoder.fit_transform(ds['actual'])
-    y=ds['actual']
+    # data = pretraitement_knn() 
+    # ds = dataset(data[0],data[1],data[2])
+    X = ds[Xcols_func('rssi & rc only',ds.columns)]
+    y = LabelEncoder().fit_transform(ds['actual'])
     #Cr�ation de l'instance du classificateur KNN
     knn = KNeighborsClassifier(n_neighbors = k_neighbors, weights=weight,metric=metrics)
     
