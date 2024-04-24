@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_predict
 from sklearn.metrics import accuracy_score
 
+BEST_PARAMETERS = {'max_depth': 17, 'min_samples_leaf': 1, 'n_estimators': 33}
 
 def define_reflist(pathfile ):
     # pathfile = path_file
@@ -382,7 +383,8 @@ def pretraitement_knn(path = r'Uploads/data_anonymous'):
     rssi_quantite=1
     return [df_timing_slices, windows,rssi_quantite,reflist]
 
-def random_forest_accuracy(n_estimator, max_d, min_samples, data): 
+def random_forest_accuracy(n_estimator = BEST_PARAMETERS["n_estimators"], max_d = BEST_PARAMETERS["max_depth"], 
+                                    min_samples = BEST_PARAMETERS["min_samples_leaf"], data): 
     
     #reflist = define_reflist(pathfile)
     #timing = define_timing(pathfile)
@@ -406,10 +408,11 @@ def random_forest_accuracy(n_estimator, max_d, min_samples, data):
     y_pred = rf.predict(X_test)
     return 100 * accuracy_score(y_test, y_pred)
     
-def RFcross_validation( n_estimator, max_d, min_samples,data):
+def RFcross_validation( n_estimator = BEST_PARAMETERS["n_estimators"], max_d = BEST_PARAMETERS["max_depth"], 
+                            min_samples = BEST_PARAMETERS["min_samples_leaf"], data):
 
     # Définir le modèle de forêt aléatoire
-    clf = RandomForestClassifier(n_estimators = n_estimator, max_depth = max_d, min_samples_leaf=min_samples)
+    clf = RandomForestClassifier(n_estimators = n_estimator, max_depth = max_d, min_samples_leaf = min_samples)
 
     # Définir le nombre de plis de validation croisée
     k = 5

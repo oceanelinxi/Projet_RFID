@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import datetime
 
+BEST_PARAMETERS = {'metric': 'manhattan', 'n_neighbors': 8, 'weights': 'distance'}
 def pretraitement_knn():
     
     pathfile = r'Uploads/data_anonymous'
@@ -227,7 +228,7 @@ def Xcols_func(features, Xcols_all):
     return X
 
 
-def knnn(k_neighbors: int, weight: str, metrics: str, ds:pd.DataFrame):
+def knnn(k_neighbors = 8, weight = 'distance', metrics = 'manhattan', ds:pd.DataFrame):
     from sklearn.preprocessing import LabelEncoder
     from sklearn.neighbors import KNeighborsClassifier
     from sklearn.model_selection import cross_val_score
@@ -240,7 +241,5 @@ def knnn(k_neighbors: int, weight: str, metrics: str, ds:pd.DataFrame):
     knn = KNeighborsClassifier(n_neighbors = k_neighbors, weights=weight,metric=metrics)
     
     accuracy=cross_val_score(knn,X,y,cv=5,scoring='accuracy').mean()
-    
-    
     
     return accuracy*100
