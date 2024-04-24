@@ -27,7 +27,7 @@ def analytique():
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy})
 
-pretrait = pretraitement_knn(r'../data_anonymous')
+pretrait = pretraitement_knn(r'Uploads/data_anonymous')
 data = dataset(pretrait[0], pretrait[1], pretrait[2], pretrait[3])
 @app.route('/RandomForest',methods= ['POST'])
 def random_forest():
