@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 import datetime
 
 
-def pretraitement_knn(path = r'../data_anonymous/'):
+def pretraitement_knn(path = r'Uploads/data_anonymous'):
     
     pathfile = path
-
+    print(pathfile)
     # reflist: list of epc in each box
     reflist = pd.DataFrame()
     # 

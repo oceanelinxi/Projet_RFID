@@ -5,6 +5,7 @@ from SVM import train_and_evaluate_svm
 from knn import knnn
 from analytique import methode_analytique
 import zipfile
+import os
 app = Flask(__name__)
 
 
@@ -27,8 +28,12 @@ def analytique():
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy})
 
-pretrait = pretraitement_knn(r'Uploads/data_anonymous')
-data = dataset(pretrait[0], pretrait[1], pretrait[2], pretrait[3])
+# Chemin du dossier
+dossier = 'Uploads/data_anonymous'
+if os.path.exists(dossier):
+    # Le dossier existe, donc tu peux executer la fonction de pretraitement
+    pretrait = pretraitement_knn(dossier)
+    data = dataset(pretrait[0], pretrait[1], pretrait[2], pretrait[3])
 @app.route('/RandomForest',methods= ['POST'])
 def random_forest():
     # Get the input parameters from the request
