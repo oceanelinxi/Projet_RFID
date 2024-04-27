@@ -9,67 +9,67 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ML
 build_property.RootNamespace = ML
-build_property.ProjectDir = C:\Users\Ken\Desktop\Projet_RFID 1\Projet_RFID\ML\
+build_property.ProjectDir = D:\moi\etude\ISN\C#\Web_RFID\ML\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Ken\Desktop\Projet_RFID 1\Projet_RFID\ML
+build_property.MSBuildProjectDirectory = D:\moi\etude\ISN\C#\Web_RFID\ML
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Home/Image.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/Historique.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIaXN0b3JpcXVlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/Image.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Home/Index.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-<<<<<<< HEAD
 [D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/Index3.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleDMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/Index_2.cshtml]
-=======
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Home/Index_2.cshtml]
->>>>>>> c3d76063ed23e9d14dd4629e917613991276582b
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleF8yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Home/Privacy.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Home/ResultAnalytique.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/ResultAnalytique.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRBbmFseXRpcXVlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Home/ResultSVM.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/ResultSVM.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRTVk0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Home/Select.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Home/Select.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWxlY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Shared/Error.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/_ViewImports.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/_ViewStart.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ken/Desktop/Projet_RFID 1/Projet_RFID/ML/Views/Shared/_Layout.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/ML/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-xxkd9zujr6

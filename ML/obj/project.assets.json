@@ -9544,19 +9544,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ken\\.nuget\\packages\\": {}
+    "C:\\Users\\Oceane\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ken\\Desktop\\Projet_RFID 1\\Projet_RFID\\ML\\ML.csproj",
+      "projectUniqueName": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\ML.csproj",
       "projectName": "ML",
-      "projectPath": "C:\\Users\\Ken\\Desktop\\Projet_RFID 1\\Projet_RFID\\ML\\ML.csproj",
-      "packagesPath": "C:\\Users\\Ken\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ken\\Desktop\\Projet_RFID 1\\Projet_RFID\\ML\\obj\\",
+      "projectPath": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\ML.csproj",
+      "packagesPath": "C:\\Users\\Oceane\\.nuget\\packages\\",
+      "outputPath": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Ken\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Oceane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9611,7 +9616,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
