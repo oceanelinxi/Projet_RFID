@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ML1.props" />
+</Project>
