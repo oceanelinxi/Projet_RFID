@@ -3,28 +3,8 @@
   "WorkspaceRootPath": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\randomforest.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\randomforest.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\knn.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\knn.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\analytique.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\analytique.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\flash_api_test.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\flash_api_test.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\views\\home\\image.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\views\\home\\image.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\views\\home\\index3.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\views\\home\\index3.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -38,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,86 +30,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RandomForest.py",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\RandomForest.py",
-              "RelativeDocumentMoniker": "ML\\RandomForest.py",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\RandomForest.py",
-              "RelativeToolTip": "ML\\RandomForest.py",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-04-23T18:39:26.572Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Image.cshtml",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Image.cshtml",
-              "RelativeDocumentMoniker": "ML\\Views\\Home\\Image.cshtml",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Image.cshtml",
-              "RelativeToolTip": "ML\\Views\\Home\\Image.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T14:36:16.518Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "flash_api_test.py",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\flash_api_test.py",
-              "RelativeDocumentMoniker": "ML\\flash_api_test.py",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\flash_api_test.py",
-              "RelativeToolTip": "ML\\flash_api_test.py",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADwAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-04-23T12:27:09.342Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "analytique.py",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\analytique.py",
-              "RelativeDocumentMoniker": "ML\\analytique.py",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\analytique.py",
-              "RelativeToolTip": "ML\\analytique.py",
-              "ViewState": "AQIAALEAAAAAAAAAAAAAALcAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-04-23T12:27:38.449Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "ML\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "ML\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAqwC8AAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T12:52:54.501Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "ML\\Views\\Home\\Index.cshtml",
               "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "ML\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAB0AAAA",
+              "ViewState": "AQIAAMoAAAAAAAAAAAAAANUAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T12:48:17.123Z"
+              "WhenOpened": "2024-04-27T19:19:23.556Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "knn.py",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\knn.py",
-              "RelativeDocumentMoniker": "ML\\knn.py",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\knn.py",
-              "RelativeToolTip": "ML\\knn.py",
-              "ViewState": "AQIAANUAAAAAAAAAAAAAAAcAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-04-23T12:40:34.36Z"
+              "DocumentIndex": 0,
+              "Title": "Index3.cshtml",
+              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Index3.cshtml",
+              "RelativeDocumentMoniker": "ML\\Views\\Home\\Index3.cshtml",
+              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Index3.cshtml",
+              "RelativeToolTip": "ML\\Views\\Home\\Index3.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-25T20:52:05.669Z",
+              "EditorCaption": ""
             }
           ]
         }

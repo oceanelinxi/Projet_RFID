@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Index3";
+}
+
+<div class="text-center">
+    <h2>Choisir une méthode</h2>
+    <select id="methodeSelect">
+        <option value="svm">SVM</option>
+        <option value="knn">KNN</option>
+        <option value="RandomForest">Random Forest</option>
+    </select>
+    <button type="button" id="btnOK">OK</button><br><br>
+</div>
+
+<div id="optionsSection" style="display:none;" class="text-center">
+    <h3>Paramètres</h3>
+    <select id="parametre"></select>
+    <button type="button" id="btnSub">soumettre</button><br><br>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        document.getElementById('btnOK').addEventListener('click', function () {
+            var optionsSection = document.getElementById('optionsSection');
+            var choixMethode = document.getElementById('methodeSelect').value;
+
+            // Afficher les paramètres correspondants selon la méthode choisie
+            if (optionsSection.style.display === "none") {
+                optionsSection.style.display = "block";
+                // Définir les options de paramètres en fonction de la méthode choisie
+                var parametreSelect = document.getElementById('parametre');
+                parametreSelect.innerHTML = ''; // Effacer les options existantes
+
+                if (choixMethode === "svm") {
+                    // Ajouter les options de paramètres SVM
+                    addOption(parametreSelect, "svm_parametre1", "Paramètre SVM 1");
+                    addOption(parametreSelect, "svm_parametre2", "Paramètre SVM 2");
+                } else if (choixMethode === "knn") {
+                    // Ajouter les options de paramètres KNN
+                    addOption(parametreSelect, "knn_parametre1", "Paramètre KNN 1");
+                    addOption(parametreSelect, "knn_parametre2", "Paramètre KNN 2");
+                } else if (choixMethode === "RandomForest") {
+                    // Ajouter les options de paramètres Random Forest
+                    addOption(parametreSelect, "rf_parametre1", "Paramètre Random Forest 1");
+                    addOption(parametreSelect, "rf_parametre2", "Paramètre Random Forest 2");
+                }
+            } else {
+                optionsSection.style.display = "none";
+            }
+        });
+
+        // Fonction pour ajouter une option à un élément select
+        function addOption(selectElement, value, text) {
+            var option = document.createElement('option');
+            option.value = value;
+            option.text = text;
+            selectElement.appendChild(option);
+        }
+    </script>
+}

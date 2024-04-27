@@ -216,6 +216,12 @@ namespace ML.Controllers
             // 返回到 Image 视图
             return View("Image");
         }
+        public ActionResult Index3()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
 
 
 
