@@ -228,10 +228,14 @@ def Xcols_func(features, Xcols_all):
     return X
 
 
-def knnn(k_neighbors = 8, weight = 'distance', metrics = 'manhattan', ds:pd.DataFrame):
+def knnn(ds:pd.DataFrame,k_neighbors = 8, weight = 'distance', metrics = 'manhattan' ):
     from sklearn.preprocessing import LabelEncoder
     from sklearn.neighbors import KNeighborsClassifier
     from sklearn.model_selection import cross_val_score
+    from sklearn.model_selection import cross_val_predict
+    import matplotlib.pyplot as plt
+
+
     label_encoder = LabelEncoder()
     # data = pretraitement_knn() 
     # ds = dataset(data[0],data[1],data[2])
@@ -240,6 +244,16 @@ def knnn(k_neighbors = 8, weight = 'distance', metrics = 'manhattan', ds:pd.Data
     #Cr�ation de l'instance du classificateur KNN
     knn = KNeighborsClassifier(n_neighbors = k_neighbors, weights=weight,metric=metrics)
     
-    accuracy=cross_val_score(knn,X,y,cv=5,scoring='accuracy').mean()
+    y_pred = cross_val_predict(knn, X, y, cv=20)
+    accuracies=cross_val_score(knn,X,y,cv=5,scoring='accuracy')
+    accuracy= accuracies.mean()
+    
+    
+    # Créer un boxplot pour les valeurs prédites
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(accuracies, labels=['Accuracy'], patch_artist=True)
+    plt.title('Distribution des Accuracies pour le KNN')
+    plt.ylabel('Accuracy')
+    plt.savefig('courbes/boxplot/knn/knn_accuracy.png')
     
     return accuracy*100

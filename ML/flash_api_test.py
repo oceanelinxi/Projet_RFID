@@ -46,7 +46,7 @@ def random_forest():
 
     # Call the predict() function to make a prediction with SVM
     
-    accuracy = RFcross_validation(input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'], data)
+    accuracy = RFcross_validation(data,input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'])
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy})
  
@@ -88,7 +88,7 @@ def knn():
  
  
     # Call the predict() function to make a prediction
-    accuracy = knnn(hyperparameter1_value,hyperparameter2_value,hyperparameter3_value,data)
+    accuracy = knnn(data,hyperparameter1_value,hyperparameter2_value,hyperparameter3_value)
     #prediction = 0.
     
     duree = (datetime.now()- start_knn)

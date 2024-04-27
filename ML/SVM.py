@@ -251,10 +251,18 @@ def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
     svm_model = SVC(gamma=gammas, C=c, kernel=kernels)
     
    
-    kf = KFold(n_splits=5, shuffle=True)
+    kf = KFold(n_splits=20, shuffle=True)
     
-    cv_scores = cross_val_score(svm_model, X, y, cv=kf)
+    cv_scores = cross_val_score(svm_model, X, y, cv=kf,scoring='accuracy')
     
+    
+    
+    # Créer un boxplot pour les valeurs prédites
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(cv_scores, labels=['Accuracy'], patch_artist=True)
+    plt.title('Distribution des Accuracies pour le SVM')
+    plt.ylabel('Accuracy')
+    plt.savefig('courbes/boxplot/svm/svm_accuracy.png')
    
     #print("Scores de validation croisée:", cv_scores)
     
