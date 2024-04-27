@@ -1,15 +1,17 @@
 
 import pandas as pd
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import os
 import datetime
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_predict
+from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
 
+BEST_PARAMETERS = {'max_depth': 17, 'min_samples_leaf': 1, 'n_estimators': 33}
 
 def define_reflist(pathfile ):
     # pathfile = path_file
@@ -382,7 +384,8 @@ def pretraitement_knn(path = r'Uploads/data_anonymous'):
     rssi_quantite=1
     return [df_timing_slices, windows,rssi_quantite,reflist]
 
-def random_forest_accuracy(n_estimator, max_d, min_samples, data): 
+def random_forest_accuracy(data,n_estimator = BEST_PARAMETERS["n_estimators"], max_d = BEST_PARAMETERS["max_depth"], 
+                                    min_samples = BEST_PARAMETERS["min_samples_leaf"]): 
     
     #reflist = define_reflist(pathfile)
     #timing = define_timing(pathfile)
@@ -406,10 +409,11 @@ def random_forest_accuracy(n_estimator, max_d, min_samples, data):
     y_pred = rf.predict(X_test)
     return 100 * accuracy_score(y_test, y_pred)
     
-def RFcross_validation( n_estimator, max_d, min_samples,data):
+def RFcross_validation( data,n_estimator = BEST_PARAMETERS["n_estimators"], max_d = BEST_PARAMETERS["max_depth"], 
+                            min_samples = BEST_PARAMETERS["min_samples_leaf"]):
 
     # Définir le modèle de forêt aléatoire
-    clf = RandomForestClassifier(n_estimators = n_estimator, max_depth = max_d, min_samples_leaf=min_samples)
+    clf = RandomForestClassifier(n_estimators = n_estimator, max_depth = max_d, min_samples_leaf = min_samples)
 
     # Définir le nombre de plis de validation croisée
     k = 5
@@ -419,10 +423,20 @@ def RFcross_validation( n_estimator, max_d, min_samples,data):
     y = data['actual']
 
     # Effectuer la validation croisée et obtenir les prédictions
-    y_pred = cross_val_predict(clf, X, y, cv=k)
+    #y_pred = cross_val_predict(clf, X, y, cv=k)
 
+    accuracies=cross_val_score(clf,X,y,cv=20,scoring='accuracy')
+    accuracy= accuracies.mean()
+    
+    
+    # Créer un boxplot pour les valeurs prédites
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(accuracies, labels=['Accuracy'], patch_artist=True)
+    plt.title('Distribution des Accuracies pour le KNN')
+    plt.ylabel('Accuracy')
+    plt.savefig('courbes/boxplot/rf/rf_accuracy.png')
     # Calculer l'exactitude du modèle sur l'ensemble des données
-    accuracy = accuracy_score(y, y_pred)
+    #accuracy = accuracy_score(y, y_pred)
 
     return accuracy*100
 
