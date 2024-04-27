@@ -3,3 +3,74 @@
     ViewData["Title"] = "Index3";
 }
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sélection de date et d'options</title>
+    <!-- 引入 flatpickr 样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>Sélection de date et d'options</h2>
+        <form>
+            <label for="startTime">Début :</label>
+            <input type="text" id="startTime" name="startTime" placeholder="Sélectionnez la date et l'heure" style="width: 250px;">
+            <br><br>
+            <label for="endTime">Fin :</label>
+            <input type="text" id="endTime" name="endTime" placeholder="Sélectionnez la date et l'heure" style="width: 250px;">
+            <br><br>
+            <label for="modele">Modèle :</label>
+            <select id="modele">
+                <option value="svm">SVM</option>
+                <option value="knn">KNN</option>
+                <option value="RandomForest">Random Forest</option>
+                <!-- 添加更多的模型选项 -->
+            </select>
+            <br><br>
+            <label for="user">Utilisateur :</label>
+            <select id="user">
+                <option value="user1">Utilisateur 1</option>
+                <option value="user2">Utilisateur 2</option>
+                <option value="user3">Utilisateur 3</option>
+                <!-- 添加更多的用户选项 -->
+            </select>
+            <br><br>
+            <button type="button" onclick="submitForm()">Soumettre</button>
+        </form>
+    </div>
+
+    <!-- 引入 flatpickr 库和法语本地化 -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+
+    <script>
+        // 初始化 flatpickr 实例，并设置法语本地化
+        flatpickr("#startTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            locale: "fr"
+        });
+
+        flatpickr("#endTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            locale: "fr"
+        });
+
+        function submitForm() {
+            const startTime = document.getElementById("startTime").value;
+            const endTime = document.getElementById("endTime").value;
+            const modele = document.getElementById("modele").value;
+            const user = document.getElementById("user").value;
+
+            console.log("Début :", startTime);
+            console.log("Fin :", endTime);
+            console.log("Modèle :", modele);
+            console.log("Utilisateur :", user);
+        }
+    </script>
+</body>
+</html>
