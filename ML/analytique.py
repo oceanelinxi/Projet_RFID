@@ -28,7 +28,7 @@ def reflist(pathfile = r'Uploads/data_anonymous'):
 
 def df_tags(pathfile = r'Uploads/data_anonymous'):
     df=pd.DataFrame()
-# 
+
     files=os.listdir(pathfile)
     for file in files:
         if file.startswith('ano_APTags'):
@@ -193,16 +193,16 @@ def methode_analytique():
 
     # Nombre de tags trouv� par carton par tour
 
-    cartons = analytics[['reflist_run_id','refListId_actual','Q refListId_actual', 'pred_ana_bool']]
-    cartons['n_true'] = cartons['pred_ana_bool'].astype(int)
-    cartons['run_id'] = cartons['reflist_run_id'].str.split('_').str[1]
+    #  cartons = analytics[['reflist_run_id','refListId_actual','Q refListId_actual', 'pred_ana_bool']]
+    #  cartons['n_true'] = cartons['pred_ana_bool'].astype(int)
+    #  cartons['run_id'] = cartons['reflist_run_id'].str.split('_').str[1]
     
-    pred1 = cartons[['refListId_actual','reflist_run_id','Q refListId_actual','n_true','run_id']].groupby(['refListId_actual','Q refListId_actual','run_id'])['n_true'].sum()
-    pred2 = cartons[['refListId_actual','run_id','pred_ana_bool']].groupby(['refListId_actual','run_id']).count()
+    #  pred1 = cartons[['refListId_actual','reflist_run_id','Q refListId_actual','n_true','run_id']].groupby(['refListId_actual','Q refListId_actual','run_id'])['n_true'].sum()
+    #  pred2 = cartons[['refListId_actual','run_id','pred_ana_bool']].groupby(['refListId_actual','run_id']).count()
     #pred1.merge(pred2 on 
 
-    result = pd.merge(pred2.rename(columns = {'reflist_run_id':'Total_tags_et_tour', 'pred_ana_bool':'Nombre de predictions'}), \
-                  pd.DataFrame(pred1), on = ['refListId_actual','run_id'], how='inner')
+    #  result = pd.merge(pred2.rename(columns = {'reflist_run_id':'Total_tags_et_tour', 'pred_ana_bool':'Nombre de predictions'}), \
+    #                pd.DataFrame(pred1), on = ['refListId_actual','run_id'], how='inner')
 
     #result.sort_values(by=['refListId_actual','run_id'], ascending=True).to_csv('resultats methode anaytique.csv')
     print(accur)
