@@ -181,6 +181,7 @@ def analytical(df_timing_slices, timing_slices, reflist):
     return ana
 
 def methode_analytique():
+    start = datetime.datetime.now()
     pathfile = r'Uploads/data_anonymous'
     Reflist = reflist(pathfile)
     Timing = timing(pathfile)
@@ -190,7 +191,7 @@ def methode_analytique():
     analytics = analytical(Df_timing_slices, Timing_slices, Reflist)
     trues, total = analytics[analytics['pred_ana_bool']==True].shape[0], analytics.shape[0]
     accur = 100 * trues / total
-
+    print('Duree d\'execution : {}'.format(datetime.datetime.now()-start))
     # Nombre de tags trouv� par carton par tour
 
     #  cartons = analytics[['reflist_run_id','refListId_actual','Q refListId_actual', 'pred_ana_bool']]
