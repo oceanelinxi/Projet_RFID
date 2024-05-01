@@ -32,7 +32,8 @@
                 <div class="accordion-body">
                     <p>
                         Explication :
-                        Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
+                        Le "Random Forest", traduit en français par "Forêt Aléatoire", est un algorithme d'apprentissage automatique faisant partie de la catégorie des méthodes d'ensemble (Ensemble Learning). 
+                        Il est basé sur la construction d'arbres de décision et est utilisé pour la classification et la régression.
                     </p>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="criterion-n_estimators-checkbox" name="criterion" value="n_estimators">
@@ -40,7 +41,7 @@
                             <p1>1.n_estimators:</p1>
                         </label>
                         <div>
-                            <input class="form-number" type="text" id="criterion-n_estimators-input" name="criterion-n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
+                            <input class="form-number" type="text" id="criterion-n_estimators-input" name="criterion-n_estimators-input" placeholder="Enter a positive integer between 1 and 100" pattern="\d*" maxlength="3" value="33" oninput="this.value = this.value.replace(/\D/g,'')" disabled>
 
                             <select id="criterion-n_estimators-select" class="form-select">
                                 <option selected disabled>Select a value</option>
@@ -49,8 +50,9 @@
                         </div>
                         <p>
                             Explication :
-                            n_estimatorsint, default=100<br>
-                            The number of trees in the forest.
+                            n_estimators int, default=33<br>
+                            Le nombre d'arbres dans la forêt. Plus la valeur est grande mieux le modèle est entraîné.<br />
+                            <b>Cependant une valeur trop élevée causerait le surentrainement du modèle et une diminution de la précision finale.</b>
                         </p>
                     </div>
                     <div class="form-check">
@@ -70,7 +72,7 @@
                         </label>
                         <p>
                             Explication :
-                            max_depthint, default=None<br>
+                            max_depth int, default=None<br>
                             The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
                         </p>
                     </div>
@@ -214,7 +216,7 @@
             var value = parseInt(this.value);
             if (isNaN(value) || value < 1 || value > 100) {
                 if (this.value.trim() !== '') {
-                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
+                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour n_estimators.');
                     if (confirmation) {
                         this.value = ''; // Effacer la saisie
                         this.focus(); // Mettre le champ de saisie en surbrillance
