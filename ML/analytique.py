@@ -200,7 +200,7 @@ def methode_analytique():
     
     #  pred1 = cartons[['refListId_actual','reflist_run_id','Q refListId_actual','n_true','run_id']].groupby(['refListId_actual','Q refListId_actual','run_id'])['n_true'].sum()
     #  pred2 = cartons[['refListId_actual','run_id','pred_ana_bool']].groupby(['refListId_actual','run_id']).count()
-    #pred1.merge(pred2 on 
+    #  pred1.merge(pred2 on 
 
     #  result = pd.merge(pred2.rename(columns = {'reflist_run_id':'Total_tags_et_tour', 'pred_ana_bool':'Nombre de predictions'}), \
     #                pd.DataFrame(pred1), on = ['refListId_actual','run_id'], how='inner')
