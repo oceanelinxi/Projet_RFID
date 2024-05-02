@@ -1,0 +1,111 @@
+﻿@{
+    // 从 ViewBag 中获取值并提取数字
+    float analytiqueResult = ExtractNumber(ViewBag.AnalytiqueResult);
+    float svmResult = ExtractNumber(ViewBag.SVMResult);
+    float knnResult = ExtractNumber(ViewBag.KNNResult);
+    float randomForestResult = ExtractNumber(ViewBag.RandomForestResult);
+
+    // 提取数字的方法
+    float ExtractNumber(string result)
+    {
+        if (!string.IsNullOrEmpty(result))
+        {
+            // 解析 JSON 字符串
+            dynamic jsonResult = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
+            if (jsonResult != null && jsonResult.accuracy != null)
+            {
+                // 将 accuracy 字段的值转换为浮点数并返回
+                return (float)jsonResult.accuracy;
+            }
+        }
+        return 0; // 默认返回值，根据需求进行修改
+    }
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
+</main>
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
+</main>
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h3>Précision de la méthode SVM : @svmResult </h3>
+</main>
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h3>Précision de la méthode KNN : @knnResult </h3>
+</main>
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <!-- Inclure la bibliothèque Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            width: 400px; /* Définir une largeur fixe */
+            height: 300px; /* Définir une hauteur fixe */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
+        function updateChart(selectedOptions) {
+            // Obtenir l'élément canvas
+            var ctx = document.getElementById('myChart').getContext('2d');
+            // Créer un nouveau graphique
+            var myChart = new Chart(ctx, {
+                type: 'bar', // Diagramme en barres
+                data: {
+                    labels: ['Analytique','Random Forest', 'SVM', 'KNN'], // Étiquettes pour chaque barre
+                    datasets: [{
+                        label: 'Exactitude %',
+                        data: selectedOptions, // Valeurs en pourcentage pour chaque barre
+                        backgroundColor: [ // Couleur de fond des barres
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: [ // Couleur de bordure des barres
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { return value + "%" } // Formatage des étiquettes de l'axe des y en pourcentage
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        // Appel de la fonction au chargement de la page avec les valeurs par défaut
+        updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult ]);
+    </script>
+</body>
+</html>

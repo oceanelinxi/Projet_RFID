@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\views\\home\\historique.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\views\\home\\historique.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\views\\home\\index3.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\views\\home\\index3.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\ml\\views\\home\\historique.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CFEA36C8-C65D-4932-8C9F-D05976F1EF4E}|ML\\ML.csproj|solutionrelative:ml\\views\\home\\historique.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,20 +38,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ML\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ML\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAMYAAAAAAAAAAAAiwM0AAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T20:03:30.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Historique.cshtml",
               "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Historique.cshtml",
               "RelativeDocumentMoniker": "ML\\Views\\Home\\Historique.cshtml",
               "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Historique.cshtml",
               "RelativeToolTip": "ML\\Views\\Home\\Historique.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAYwBsAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-27T19:51:51.215Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "ML\\Views\\Home\\Index.cshtml",
@@ -55,12 +71,11 @@
               "RelativeToolTip": "ML\\Views\\Home\\Index.cshtml",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAANUAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-27T19:19:23.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T19:19:23.556Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Index3.cshtml",
               "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\Views\\Home\\Index3.cshtml",
               "RelativeDocumentMoniker": "ML\\Views\\Home\\Index3.cshtml",
@@ -68,8 +83,7 @@
               "RelativeToolTip": "ML\\Views\\Home\\Index3.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-25T20:52:05.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T20:52:05.669Z"
             }
           ]
         }
