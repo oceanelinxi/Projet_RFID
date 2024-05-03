@@ -227,9 +227,19 @@ namespace MLnew.Controllers
         public ActionResult Index3()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Visiteur"))
+                {
+                    return RedirectToAction("IndexVisiteur");
+                }
+                else if (User.IsInRole("Expert"))
+                {
+                    return View("Index3");
+                }
+            }
+            return RedirectToPage("/Account/Login", new { area = "Identity" });
+        }        
 
         public ActionResult Historique()
         {
