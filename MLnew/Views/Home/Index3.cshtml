@@ -9,6 +9,8 @@
         <option value="svm">SVM</option>
         <option value="knn">KNN</option>
         <option value="RandomForest">Random Forest</option>
+        <option value="RegressionLogistique">Regresion Logistique</option>
+        <option value="NaiveBayes">Naive Bayes</option>
     </select>
     <button type="button" id="btnOK">OK</button><br><br>
 </div>
@@ -36,16 +38,20 @@
 
                 if (choixMethode === "svm") {
                     // Ajouter les options de paramètres SVM
-                    addOption(parametreSelect, "svm_parametre1", "Paramètre SVM 1");
-                    addOption(parametreSelect, "svm_parametre2", "Paramètre SVM 2");
+                    addOption(parametreSelect, "svm_C", "C");
+                    addOption(parametreSelect, "svm_gamma", "Gamma");
                 } else if (choixMethode === "knn") {
                     // Ajouter les options de paramètres KNN
-                    addOption(parametreSelect, "knn_parametre1", "Paramètre KNN 1");
-                    addOption(parametreSelect, "knn_parametre2", "Paramètre KNN 2");
+                    addOption(parametreSelect, "knn_nneighbors", "n_neighbors");
                 } else if (choixMethode === "RandomForest") {
                     // Ajouter les options de paramètres Random Forest
-                    addOption(parametreSelect, "rf_parametre1", "Paramètre Random Forest 1");
-                    addOption(parametreSelect, "rf_parametre2", "Paramètre Random Forest 2");
+                    addOption(parametreSelect, "rf_nestimators", "n_estimators");
+                    addOption(parametreSelect, "rf_maxdepth", "max_depth");
+                    addOption(parametreSelect, "rf_minsamples_leaf", "min_samples_leaf");
+                } else if (choixMethode === "NaiveBayes") {
+                    addOption(parametreSelect, "nb_alpha", "Alpha");
+                } else if (choixMethode === "RegressionLogistique") {
+                    addOption(parametreSelect, "rl_C", "C");
                 }
             } else {
                 optionsSection.style.display = "none";
