@@ -1,27 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Index3";
 }
+<form method="post" asp-controller="Home" asp-action="CourbesPrecision">
+    <div class="text-center">
+        <h2>Choisir une méthode</h2>
+        <span>Méthode：</span>
+        <select id="methodeSelect">
+            <option value="svm">SVM</option>
+            <option value="knn">KNN</option>
+            <option value="RandomForest">Random Forest</option>
+            <option value="RegressionLogistique">Regresion Logistique</option>
+            <option value="NaiveBayes">Naive Bayes</option>
+        </select>
+        <button type="button" id="btnOK">OK</button><br><br>
+    </div>
 
-<div class="text-center">
-    <h2>Choisir une méthode</h2>
-    <span>Méthode：</span>
-    <select id="methodeSelect">
-        <option value="svm">SVM</option>
-        <option value="knn">KNN</option>
-        <option value="RandomForest">Random Forest</option>
-        <option value="RegressionLogistique">Regresion Logistique</option>
-        <option value="NaiveBayes">Naive Bayes</option>
-    </select>
-    <button type="button" id="btnOK">OK</button><br><br>
-</div>
-
-<div id="optionsSection" style="display:none;" class="text-center">
-    <h3>Paramètres</h3>
-    <span>Hyperparamètre：</span>
-    <select id="parametre"></select>
-    <button type="button" id="btnSub">soumettre</button><br><br>
-</div>
-
+    <div id="optionsSection" style="display:none;" class="text-center">
+        <h3>Paramètres</h3>
+        <span>Hyperparamètre：</span>
+        <select id="parametre"></select>
+        <!--
+        <button type="button" id="btnSub">soumettre</button><br><br>
+        -->
+        <button type="submit" id="btnSub">soumettre</button><br><br>
+    </div>
+</form>
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

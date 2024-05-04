@@ -77,8 +77,6 @@ namespace MLnew.Controllers
                     var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
                     var response = await client.PostAsync("http://localhost:5000/Chemin", content);
 
-
-
                 }
 
                 // Retourner le chemin du fichier téléchargé dans l'en-tête de réponse HTTP
@@ -135,7 +133,6 @@ namespace MLnew.Controllers
                     Gamma = gamma_select,
                     C = C_input,
                     Kernel = kernel_select
-
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -160,8 +157,6 @@ namespace MLnew.Controllers
                     Hyperparameter2 = weights,
 
                     Hyperparameter3 = metric,
-
-
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -224,6 +219,8 @@ namespace MLnew.Controllers
             // 返回到 Image 视图
             return View("Image");
         }
+
+        //Page de precision et hyperparametre
         public ActionResult Index3()
         {
             ViewBag.Message = "Your contact page.";
@@ -239,8 +236,26 @@ namespace MLnew.Controllers
                 }
             }
             return RedirectToPage("/Account/Login", new { area = "Identity" });
-        }        
+        }
 
+        public async Task<ActionResult> CourbesPrecision(string ml, string hp)
+        {
+            using (var client = new HttpClient())
+            {
+                var requestData = new
+                {
+                    methode = ml,
+                    hyperparametre = hp
+                };
+                 
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/CourbesPrecision", content);
+                var result = await response.Content.ReadAsStringAsync();
+                
+                ViewBag.path = result;
+                return View("PrecisionModeles");
+            }
+        }
         public ActionResult Historique()
         {
             ViewBag.Message = "Your contact page.";
