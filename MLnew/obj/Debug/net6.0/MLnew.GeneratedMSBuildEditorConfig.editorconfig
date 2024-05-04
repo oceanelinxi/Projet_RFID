@@ -9,231 +9,231 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MLnew
 build_property.RootNamespace = MLnew
-build_property.ProjectDir = C:\Users\SOULEY\source\repos\MLnew\MLnew\
+build_property.ProjectDir = D:\moi\etude\ISN\C#\Web_RFID\MLnew\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\SOULEY\source\repos\MLnew\MLnew
+build_property.MSBuildProjectDirectory = D:\moi\etude\ISN\C#\Web_RFID\MLnew
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/AccessDenied.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ConfirmEmailChange.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ConfirmEmailChange.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxDb25maXJtRW1haWxDaGFuZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ExternalLogin.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ExternalLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxFeHRlcm5hbExvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Lockout.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Lockout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2Nrb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/LoginWith2fa.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/LoginWith2fa.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbldpdGgyZmEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/LoginWithRecoveryCode.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/LoginWithRecoveryCode.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbldpdGhSZWNvdmVyeUNvZGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRGVsZXRlUGVyc29uYWxEYXRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/Disable2fa.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/Disable2fa.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRGlzYWJsZTJmYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/DownloadPersonalData.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/DownloadPersonalData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRG93bmxvYWRQZXJzb25hbERhdGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/Email.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/Email.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRW5hYmxlQXV0aGVudGljYXRvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/ExternalLogins.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/ExternalLogins.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXh0ZXJuYWxMb2dpbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/GenerateRecoveryCodes.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/GenerateRecoveryCodes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcR2VuZXJhdGVSZWNvdmVyeUNvZGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/Index.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/PersonalData.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/PersonalData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcUGVyc29uYWxEYXRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/ResetAuthenticator.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/ResetAuthenticator.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcUmVzZXRBdXRoZW50aWNhdG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcU2V0UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/ShowRecoveryCodes.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/ShowRecoveryCodes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcU2hvd1JlY292ZXJ5Q29kZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/TwoFactorAuthentication.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/TwoFactorAuthentication.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcVHdvRmFjdG9yQXV0aGVudGljYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1N0YXR1c01lc3NhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ResendEmailConfirmation.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ResendEmailConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNlbmRFbWFpbENvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/_StatusMessage.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/_StatusMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfU3RhdHVzTWVzc2FnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/Error.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/Historique.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/Historique.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIaXN0b3JpcXVlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/Image.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/Image.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/Index.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/Index3.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/Index3.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleDMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/Index_2.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/Index_2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleF8yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/Privacy.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/ResultAnalytique.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/ResultAnalytique.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRBbmFseXRpcXVlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/ResultSVM.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/ResultSVM.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXN1bHRTVk0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Home/Select.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Home/Select.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWxlY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Shared/Error.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Shared/_LoginPartial.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/_ViewImports.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/_ViewStart.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SOULEY/source/repos/MLnew/MLnew/Views/Shared/_Layout.cshtml]
+[D:/moi/etude/ISN/C\#/Web_RFID/MLnew/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-pz988ntrvv
