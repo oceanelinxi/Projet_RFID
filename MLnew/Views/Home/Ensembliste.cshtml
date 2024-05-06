@@ -1,0 +1,74 @@
+﻿@page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methode Ensembliste</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        button {
+            margin-bottom: 10px;
+        }
+
+        .result {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Methode Ensembliste</h1>
+
+    <!-- Buttons for Adaboost and XGBoost -->
+    <button type="button" onclick="showResult('Adaboost')">Adaboost</button>
+    <button type="button" onclick="showResult('XGBoost')">XGBoost</button>
+
+    <!-- Area to display results -->
+    <div id="resultArea"></div>
+
+    <script>
+        // 用于跟踪算法是否已经展示过结果的状态
+        var adaboostShown = false;
+        var xgboostShown = false;
+
+        function showResult(algorithm) {
+            var resultText = "";
+            var algorithmName = "";
+
+            // 检查算法是否已经展示过结果，如果展示过则直接返回
+            if ((algorithm === "Adaboost" && adaboostShown) || (algorithm === "XGBoost" && xgboostShown)) {
+                return;
+            }
+
+            if (algorithm === "Adaboost") {
+                algorithmName = "Adaboost";
+                resultText = "Resultat = 50%";
+                adaboostShown = true; // 标记Adaboost已展示过结果
+            } else if (algorithm === "XGBoost") {
+                algorithmName = "XGBoost";
+                resultText = "Resultat = 60%";
+                xgboostShown = true; // 标记XGBoost已展示过结果
+            }
+
+            // 创建一个包含算法标识和结果的 <p> 元素
+            var resultElement = document.createElement('p');
+            resultElement.textContent = algorithmName + ": " + resultText;
+            resultElement.classList.add('result'); // 添加 CSS 类名用于样式控制
+
+            // 查找用于显示结果的区域
+            var resultArea = document.getElementById('resultArea');
+
+            // 将结果元素添加到结果区域中
+            resultArea.appendChild(resultElement);
+
+            // 禁用已展示过结果的按钮
+            var button = document.querySelector('button[value="' + algorithm + '"]');
+            button.disabled = true;
+        }
+    </script>
+</body>
+</html>
