@@ -73,9 +73,13 @@ def chemin():
     print( chemin)
     unzip_file(chemin,"Uploads/data_anonymous")
     return chemin
-   
-  
 
+@app.route('/CourbesPrecision', methods=['POST'])
+def cheminCourbe():
+    model_and_hp = request.get_json()
+    print(model_and_hp)
+    picpath = "~/images/precision/" + model_and_hp['methode'] + "/" + model_and_hp['hyperparametre'].split('-')[1] + ".png"
+    return jsonfy({'path' : picpath})
 
 @app.route('/knn', methods=['POST'])
 def knn():
