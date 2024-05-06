@@ -259,13 +259,34 @@ namespace MLnew.Controllers
         public ActionResult Historique()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Visiteur"))
+                {
+                    return RedirectToAction("IndexVisiteur");
+                }
+                else if (User.IsInRole("Expert"))
+                {
+                    return View("Historique");
+                }
+            }
+            return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
         public ActionResult Ensembliste()
         {
             ViewBag.Message = "Your contact page.";
-
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Visiteur"))
+                {
+                    return RedirectToAction("IndexVisiteur");
+                }
+                else if (User.IsInRole("Expert"))
+                {
+                    return View("Ensembliste");
+                }
+            }
+            return RedirectToPage("/Account/Login", new { area = "Identity" });
             return View();
         }
         public ActionResult ResultSVM()
