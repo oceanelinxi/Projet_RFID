@@ -253,7 +253,7 @@ namespace MLnew.Controllers
                 var result = await response.Content.ReadAsStringAsync();
                 
                 ViewBag.path = result;
-                return View("PrecisionModeles");
+                return View("ResultSVM");
             }
         }
         public ActionResult Historique()
