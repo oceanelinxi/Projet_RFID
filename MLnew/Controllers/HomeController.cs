@@ -234,9 +234,9 @@ namespace MLnew.Controllers
                 {
 
                     Nom = "Methode_SVM",
-                    Param1 = gamma_select.ToString(),
-                    Param2 = C_input.ToString(),
-                    Param3 = kernel_select.ToString()
+                    Param1 = C_input.ToString(),
+                    Param2 = kernel_select.ToString(),
+                    Param3 = gamma_select.ToString()
                 };
 
                 _context.Methode.Add(methode);
