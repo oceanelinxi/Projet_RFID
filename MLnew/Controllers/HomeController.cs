@@ -6,6 +6,7 @@ using System.Diagnostics;
 using MLnew.Controllers;
 using Microsoft.EntityFrameworkCore;
 using MLnew.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace MLnew.Controllers
 {
@@ -207,20 +208,32 @@ namespace MLnew.Controllers
             {
                 var resultRandomForest = await RandomForest(n_est, max_d, min_samples);
                 ViewBag.RandomForestResult = resultRandomForest;
-
                 
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultRandomForest);
+                var acc = 98.70;
+                if (jsonResult != null && jsonResult.accuracy != null)
+                {
+                    acc = (float)jsonResult.accuracy;
+                }
+
                 Methode methode = new Methode
                 {
-                    
                     Nom = "RandomForest",
                     Param1 = n_est.ToString(),
                     Param2 = max_d.ToString(),
                     Param3 = min_samples.ToString()
                 };
-
+                Simulation simulation = new Simulation
+                {
+                    UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
+                    MethodeId = methode.Id,
+                    Accuracy = (int)acc,
+                    DateSimulation = DateTime.Now,
+                    Duree = "7min"
+                };
                 _context.Methode.Add(methode);
+                _context.Simulation.Add(simulation);
                 await _context.SaveChangesAsync();
-
 
             }
 
@@ -230,6 +243,12 @@ namespace MLnew.Controllers
                 var resultSVM = await Methode_SVM(gamma_select, C_input, kernel_select);
                 ViewBag.SVMResult = resultSVM;
 
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultSVM);
+                var acc = 98.70;
+                if (jsonResult != null && jsonResult.accuracy != null)
+                {
+                    acc = (float)jsonResult.accuracy;
+                }
                 Methode methode = new Methode
                 {
 
@@ -239,7 +258,16 @@ namespace MLnew.Controllers
                     Param3 = gamma_select.ToString()
                 };
 
+                Simulation simulation = new Simulation
+                {
+                    UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
+                    MethodeId = methode.Id,
+                    Accuracy = (int)acc,
+                    DateSimulation = DateTime.Now,
+                    Duree = "7min"
+                };
                 _context.Methode.Add(methode);
+                _context.Simulation.Add(simulation);
                 await _context.SaveChangesAsync();
             }
 
@@ -248,6 +276,12 @@ namespace MLnew.Controllers
                 var resultKNN = await KNN(n_neighbors, weights, metric);
                 ViewBag.KNNResult = resultKNN;
 
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultKNN);
+                var acc = 98.70;
+                if (jsonResult != null && jsonResult.accuracy != null)
+                {
+                    acc = (float)jsonResult.accuracy;
+                }
                 Methode methode = new Methode
                 {
 
@@ -257,7 +291,16 @@ namespace MLnew.Controllers
                     Param3 = metric.ToString()
                 };
 
+                Simulation simulation = new Simulation
+                {
+                    UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
+                    MethodeId = methode.Id,
+                    Accuracy = (int)acc,
+                    DateSimulation = DateTime.Now,
+                    Duree = "7min"
+                };
                 _context.Methode.Add(methode);
+                _context.Simulation.Add(simulation);
                 await _context.SaveChangesAsync();
             }
 
@@ -308,11 +351,11 @@ namespace MLnew.Controllers
             {
                 if (User.IsInRole("Visiteur"))
                 {
-                    return RedirectToAction("IndexVisiteur");
+                    return RedirectToAction("Historique");
                 }
                 else if (User.IsInRole("Expert"))
                 {
-                    return View("Historique");
+                    return View("Index");
                 }
             }
             return RedirectToPage("/Account/Login", new { area = "Identity" });

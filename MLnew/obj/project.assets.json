@@ -11488,6 +11488,7 @@
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.25",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.29",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.29",
+      "Microsoft.EntityFrameworkCore >= 6.0.29",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.29",
       "Microsoft.EntityFrameworkCore.Sqlite >= 6.0.29",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.29",
@@ -11495,23 +11496,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\glenn\\.nuget\\packages\\": {},
+    "C:\\Users\\pc\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\glenn\\Projet_RFID\\MLnew\\MLnew.csproj",
+      "projectUniqueName": "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID\\MLnew\\MLnew.csproj",
       "projectName": "MLnew",
-      "projectPath": "C:\\Users\\glenn\\Projet_RFID\\MLnew\\MLnew.csproj",
-      "packagesPath": "C:\\Users\\glenn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\glenn\\Projet_RFID\\MLnew\\obj\\",
+      "projectPath": "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID\\MLnew\\MLnew.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID\\MLnew\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\glenn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11533,6 +11534,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -11548,6 +11554,10 @@
             "version": "[6.0.29, )"
           },
           "Microsoft.AspNetCore.Identity.UI": {
+            "target": "Package",
+            "version": "[6.0.29, )"
+          },
+          "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[6.0.29, )"
           },
@@ -11589,7 +11599,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
