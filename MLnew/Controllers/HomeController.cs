@@ -3,16 +3,21 @@ using Microsoft.AspNetCore.Mvc;
 using MLnew.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using MLnew.Controllers;
+using Microsoft.EntityFrameworkCore;
+using MLnew.Data;
 
 namespace MLnew.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+   
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -202,18 +207,58 @@ namespace MLnew.Controllers
             {
                 var resultRandomForest = await RandomForest(n_est, max_d, min_samples);
                 ViewBag.RandomForestResult = resultRandomForest;
+
+                
+                Methode methode = new Methode
+                {
+                    
+                    Nom = "RandomForest",
+                    Param1 = n_est.ToString(),
+                    Param2 = max_d.ToString(),
+                    Param3 = min_samples.ToString()
+                };
+
+                _context.Methode.Add(methode);
+                await _context.SaveChangesAsync();
+
+
             }
+
 
             if (mainOption3 == true)
             {
                 var resultSVM = await Methode_SVM(gamma_select, C_input, kernel_select);
                 ViewBag.SVMResult = resultSVM;
+
+                Methode methode = new Methode
+                {
+
+                    Nom = "Methode_SVM",
+                    Param1 = gamma_select.ToString(),
+                    Param2 = C_input.ToString(),
+                    Param3 = kernel_select.ToString()
+                };
+
+                _context.Methode.Add(methode);
+                await _context.SaveChangesAsync();
             }
 
             if (mainOption4 == true)
             {
                 var resultKNN = await KNN(n_neighbors, weights, metric);
                 ViewBag.KNNResult = resultKNN;
+
+                Methode methode = new Methode
+                {
+
+                    Nom = "KNN",
+                    Param1 = n_neighbors.ToString(),
+                    Param2 = weights.ToString(),
+                    Param3 = metric.ToString()
+                };
+
+                _context.Methode.Add(methode);
+                await _context.SaveChangesAsync();
             }
 
             // 返回到 Image 视图

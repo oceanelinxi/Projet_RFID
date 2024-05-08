@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MLnew")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9b9ecd5fe83b9cee1984dfe4caf792952af1918")]
 [assembly: System.Reflection.AssemblyProductAttribute("MLnew")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MLnew")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

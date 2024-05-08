@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -95,6 +96,7 @@ namespace MLnew.Controllers
 
             return CreatedAtAction("GetMethode", new { id = methode.Id }, methode);
         }
+        
 
         // DELETE: api/Methodes/5
         [HttpDelete("{id}")]
@@ -120,5 +122,6 @@ namespace MLnew.Controllers
         {
             return (_context.Methode?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }
