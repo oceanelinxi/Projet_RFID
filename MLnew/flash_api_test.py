@@ -18,15 +18,16 @@ def unzip_file(file_path, extract_to):
 
 @app.route('/analytique', methods=['POST'])
 def analytique():
+    start = datetime.now()
     # Get the input parameters from the request
-    input_params = request.get_json()
-       
+    input_params = request.get_json()       
 
     # Call the predict() function to make a prediction
     accuracy = methode_analytique()
-    #prediction = 0.75
+    duree_ana = (datetime.now() - start).seconds
+    print ("duree methode analytique : {}".format(duree_ana))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy})
+    return jsonify({'accuracy': accuracy, 'duree':duree_ana})
 
 # Chemin du dossier
 dossier = 'Uploads/data_anonymous'
@@ -41,14 +42,15 @@ if os.path.exists(dossier):
 
 @app.route('/RandomForest',methods= ['POST'])
 def random_forest():
+    start = datetime.now()
     # Get the input parameters from the request
     input_params = request.get_json()
-
-    # Call the predict() function to make a prediction with SVM
     
     accuracy = RFcross_validation(data,input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'])
+    duree_rf = (datetime.now() - start ).seconds
+    print('Duree de rf'.format(duree_rf))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy})
+    return jsonify({'accuracy': accuracy, 'duree':duree_rf})
  
 
 @app.route('/SVM', methods=['POST'])
