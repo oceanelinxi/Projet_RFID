@@ -24,10 +24,10 @@ def analytique():
 
     # Call the predict() function to make a prediction
     accuracy = methode_analytique()
-    duree_ana = (datetime.now() - start).seconds
-    print ("duree methode analytique : {}".format(duree_ana))
+    duree_ana = (datetime.now() - start)
+    print ("duree methode analytique : {}".format(duree_ana.seconds))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy, 'duree':duree_ana})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree_ana)})
 
 # Chemin du dossier
 dossier = 'Uploads/data_anonymous'
@@ -47,23 +47,25 @@ def random_forest():
     input_params = request.get_json()
     
     accuracy = RFcross_validation(data,input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'])
-    duree_rf = (datetime.now() - start ).seconds
-    print('Duree de rf'.format(duree_rf))
+    duree_rf = datetime.now() - start 
+    print('Duree de rf : {}'.format(duree_rf.seconds))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy, 'duree':duree_rf})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree_rf)})
  
 
 @app.route('/SVM', methods=['POST'])
 def svm():
+    start = datetime.now()
     # Get the input parameters from the request
     input_params = request.get_json()
     print(input_params)
     print((input_params['Gamma'], input_params['C'], input_params['Kernel']))
     # Call the predict() function to make a prediction with SVM
     accuracy = train_and_evaluate_svm(input_params['Gamma'], input_params['C'], input_params['Kernel'])
-    
+    duree_svm = (datetime.now()-start)
+    print('Duree svm {}'.format(duree_svm.seconds))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree_svm)})
 
 @app.route('/Chemin', methods=['POST'])
 def chemin():
@@ -92,15 +94,13 @@ def knn():
     hyperparameter2_value = str(input_params['Hyperparameter2'])
     hyperparameter3_value = str(input_params['Hyperparameter3'])
  
- 
     # Call the predict() function to make a prediction
     accuracy = knnn(data,hyperparameter1_value,hyperparameter2_value,hyperparameter3_value)
-    #prediction = 0.
     
     duree = (datetime.now()- start_knn)
-    print('Duree de knn : {} : '.format(duree, duree.seconds))
+    print('Duree de knn : {}'.format(duree, duree.seconds))
     print('accuracy', accuracy)
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy, 'duree':duree.seconds})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree)})
 
 app.run(host='0.0.0.0', port=5000)

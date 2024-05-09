@@ -235,8 +235,8 @@ def Xcols_func(features, Xcols_all):
 
 def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
     
-    print('In the function')
-    print((gammas, c, kernels))
+    # print('In the function')
+    # print((gammas, c, kernels))
     from sklearn.preprocessing import LabelEncoder
     label_encoder = LabelEncoder()
 
@@ -254,7 +254,6 @@ def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
     kf = KFold(n_splits=20, shuffle=True)
     
     cv_scores = cross_val_score(svm_model, X, y, cv=kf,scoring='accuracy')
-    
     
     
     # Créer un boxplot pour les valeurs prédites

@@ -7,6 +7,8 @@ using MLnew.Controllers;
 using Microsoft.EntityFrameworkCore;
 using MLnew.Data;
 using Microsoft.AspNetCore.Http;
+using NuGet.Protocol;
+using System.Security.Claims;
 
 namespace MLnew.Controllers
 {
@@ -148,7 +150,6 @@ namespace MLnew.Controllers
                 return resultSVM;
             }
 
-
         }
 
         //KNN
@@ -223,7 +224,7 @@ namespace MLnew.Controllers
                 };
                 Simulation simulation = new Simulation
                 {
-                    UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier), 
                     MethodeId = methode.Id,
                     Accuracy = acc,
                     DateSimulation = DateTime.Now,
@@ -257,7 +258,7 @@ namespace MLnew.Controllers
 
                 Simulation simulation = new Simulation
                 {
-                    UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     MethodeId = methode.Id,
                     Accuracy = acc,
                     DateSimulation = DateTime.Now,
@@ -289,7 +290,7 @@ namespace MLnew.Controllers
 
                 Simulation simulation = new Simulation
                 {
-                    UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     MethodeId = methode.Id,
                     Accuracy = (int)acc,
                     DateSimulation = DateTime.Now,
