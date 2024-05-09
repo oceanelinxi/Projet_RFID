@@ -12,7 +12,7 @@ namespace MLnew.Models
         [Column("MethodeId")]
         public int MethodeId { get; set; }
 
-        public int Accuracy { get; set; }
+        public float Accuracy { get; set; }
 
         public string Duree { get; set; }//la duree peut etre convertie en string avec python
 

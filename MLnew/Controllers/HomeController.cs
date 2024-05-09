@@ -209,10 +209,10 @@ namespace MLnew.Controllers
                 ViewBag.RandomForestResult = resultRandomForest;
                 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultRandomForest);
-                var acc = 98;
+                var acc = 98.2;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
-                    acc = (int)jsonResult.accuracy;
+                    acc = (float)jsonResult.accuracy;
                 }
 
                 Methode methode = new Methode
@@ -230,7 +230,7 @@ namespace MLnew.Controllers
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier), 
                     MethodeId = all_methods[size-1].Id 
                        ,
-                    Accuracy = acc,
+                    Accuracy = (float)acc,
                     DateSimulation = DateTime.Now,
                     Duree = jsonResult.duree
                 };
@@ -246,10 +246,10 @@ namespace MLnew.Controllers
                 ViewBag.SVMResult = resultSVM;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultSVM);
-                var acc = 98;
+                var acc = 98.2;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
-                    acc = (int)jsonResult.accuracy;
+                    acc = (float)jsonResult.accuracy;
                 }
                 Methode methode = new Methode
                 {
@@ -269,7 +269,7 @@ namespace MLnew.Controllers
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     MethodeId = all_methods[size - 1].Id
                        ,
-                    Accuracy = acc,
+                    Accuracy = (float)acc,
                     DateSimulation = DateTime.Now,
                     Duree = jsonResult.duree
                 };
@@ -284,10 +284,10 @@ namespace MLnew.Controllers
                 ViewBag.KNNResult = resultKNN;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultKNN);
-                var acc = 98;
+                var acc = 98.23;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
-                    acc = (int)jsonResult.accuracy;
+                    acc = (float)jsonResult.accuracy;
                 }
                 Methode methode = new Methode
                 {
@@ -305,7 +305,7 @@ namespace MLnew.Controllers
                 {
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     MethodeId = all_methods[size - 1].Id,
-                    Accuracy = acc,
+                    Accuracy = (float)acc,
                     DateSimulation = DateTime.Now,
                     Duree = jsonResult.duree
                 };
