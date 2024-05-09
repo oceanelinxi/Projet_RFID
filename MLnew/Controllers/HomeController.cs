@@ -9,6 +9,7 @@ using MLnew.Data;
 using Microsoft.AspNetCore.Http;
 using NuGet.Protocol;
 using System.Security.Claims;
+using System.Drawing;
 
 namespace MLnew.Controllers
 {
@@ -201,6 +202,40 @@ namespace MLnew.Controllers
             {
                 var resultAnalytique = await Methode_analytique();
                 ViewBag.AnalytiqueResult = resultAnalytique;
+
+                dynamic jsonResult = JsonConvert.DeserializeObject(resultAnalytique);
+                var acc = 98.2;
+                if (jsonResult != null && jsonResult.accuracy != null)
+                {
+                    acc = (float)jsonResult.accuracy;
+                }
+
+                Methode methode = new Methode
+                {
+                    Nom = "MethodeAnalytique",
+                    Param1 = "aucun",
+                    Param2 = "aucun",
+                    Param3 = "aucun"
+                };
+                _context.Methode.Add(methode);
+
+                await _context.SaveChangesAsync();
+                var all_methods = await _context.Methode.ToListAsync();
+                int size = all_methods.Count;
+                Simulation simulation = new Simulation
+                {
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    MethodeId = all_methods[size - 1].Id,
+                    Accuracy = (float)acc,
+                    DateSimulation = DateTime.Now,
+                    Duree = jsonResult.duree
+                };
+
+                _context.Simulation.Add(simulation);
+                
+               
+                await _context.SaveChangesAsync();
+
             }
 
             if (mainOption2 == true)
@@ -223,6 +258,7 @@ namespace MLnew.Controllers
                     Param3 = min_samples.ToString()
                 };
                 _context.Methode.Add(methode);
+                await _context.SaveChangesAsync();
                 var all_methods = await _context.Methode.ToListAsync();
                 int size = all_methods.Count;
                 Simulation simulation = new Simulation
@@ -259,9 +295,8 @@ namespace MLnew.Controllers
                     Param2 = kernel_select.ToString(),
                     Param3 = gamma_select.ToString()
                 };
-
-
                 _context.Methode.Add(methode);
+                await _context.SaveChangesAsync();
                 var all_methods = await _context.Methode.ToListAsync();
                 int size = all_methods.Count;
                 Simulation simulation = new Simulation
@@ -296,9 +331,8 @@ namespace MLnew.Controllers
                     Param2 = weights.ToString(),
                     Param3 = metric.ToString()
                 };
-
-
-                _context.Methode.Add(methode);
+                 _context.Methode.Add(methode);
+                await _context.SaveChangesAsync();
                 var all_methods = await _context.Methode.ToListAsync();
                 int size = all_methods.Count;
                 Simulation simulation = new Simulation

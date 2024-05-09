@@ -21,13 +21,7 @@ namespace MLnew.Models
                 }
                 // Sinon on en ajoute un
                 context.Methode.AddRange(
-                new Methode
-                {
-                    Nom = "KNN",
-                    Param1 = "1",
-                    Param2 = "linear",
-                    Param3 = "minkowski",
-                }
+                
                 );
                 context.SaveChanges();
             }

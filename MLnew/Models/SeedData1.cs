@@ -22,14 +22,7 @@ namespace MLnew.Models
                 }
                 // Sinon on en ajoute un
                 context.Simulation.AddRange(
-                new Simulation
-                {
-                    UserId = "3cc83b57-f298-4cec-8d15-e75ee9fd1d4f",
-                    MethodeId = 1,
-                    Accuracy = 1,
-                    Duree = "2min",
-                    DateSimulation = DateTime.Now,
-                }
+               
                 );
                 context.SaveChanges();
             }
