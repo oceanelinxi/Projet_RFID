@@ -196,13 +196,11 @@ namespace MLnew.Controllers
 
         public async Task<ActionResult> ExecuteMachineLearningTasks(bool? mainOption1, bool? mainOption2, bool? mainOption3, bool? mainOption4, int n_est, int max_d, int min_samples, string gamma_select, float C_input, string kernel_select, string n_neighbors, string weights, string metric)
         {
-
             if (mainOption1 == true)
             {
                 var resultAnalytique = await Methode_analytique();
                 ViewBag.AnalytiqueResult = resultAnalytique;
             }
-
 
             if (mainOption2 == true)
             {
@@ -210,10 +208,10 @@ namespace MLnew.Controllers
                 ViewBag.RandomForestResult = resultRandomForest;
                 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultRandomForest);
-                var acc = 98.70;
+                var acc = 98;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
-                    acc = (float)jsonResult.accuracy;
+                    acc = (int)jsonResult.accuracy;
                 }
 
                 Methode methode = new Methode
@@ -227,9 +225,9 @@ namespace MLnew.Controllers
                 {
                     UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
                     MethodeId = methode.Id,
-                    Accuracy = (int)acc,
+                    Accuracy = acc,
                     DateSimulation = DateTime.Now,
-                    Duree = "7min"
+                    Duree = jsonResult.duree
                 };
                 _context.Methode.Add(methode);
                 _context.Simulation.Add(simulation);
@@ -237,17 +235,16 @@ namespace MLnew.Controllers
 
             }
 
-
             if (mainOption3 == true)
             {
                 var resultSVM = await Methode_SVM(gamma_select, C_input, kernel_select);
                 ViewBag.SVMResult = resultSVM;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultSVM);
-                var acc = 98.70;
+                var acc = 98;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
-                    acc = (float)jsonResult.accuracy;
+                    acc = (int)jsonResult.accuracy;
                 }
                 Methode methode = new Methode
                 {
@@ -262,9 +259,9 @@ namespace MLnew.Controllers
                 {
                     UserId = "5e401ae6-19bf-4569-925b-121f37cb4a79",
                     MethodeId = methode.Id,
-                    Accuracy = (int)acc,
+                    Accuracy = acc,
                     DateSimulation = DateTime.Now,
-                    Duree = "7min"
+                    Duree = jsonResult.duree
                 };
                 _context.Methode.Add(methode);
                 _context.Simulation.Add(simulation);
@@ -277,14 +274,13 @@ namespace MLnew.Controllers
                 ViewBag.KNNResult = resultKNN;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultKNN);
-                var acc = 98.70;
+                var acc = 98;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
-                    acc = (float)jsonResult.accuracy;
+                    acc = (int)jsonResult.accuracy;
                 }
                 Methode methode = new Methode
                 {
-
                     Nom = "KNN",
                     Param1 = n_neighbors.ToString(),
                     Param2 = weights.ToString(),
@@ -297,7 +293,7 @@ namespace MLnew.Controllers
                     MethodeId = methode.Id,
                     Accuracy = (int)acc,
                     DateSimulation = DateTime.Now,
-                    Duree = "7min"
+                    Duree = jsonResult.duree
                 };
                 _context.Methode.Add(methode);
                 _context.Simulation.Add(simulation);
