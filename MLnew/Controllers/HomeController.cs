@@ -222,15 +222,19 @@ namespace MLnew.Controllers
                     Param2 = max_d.ToString(),
                     Param3 = min_samples.ToString()
                 };
+                _context.Methode.Add(methode);
+                var all_methods = await _context.Methode.ToListAsync();
+                int size = all_methods.Count;
                 Simulation simulation = new Simulation
                 {
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier), 
-                    MethodeId = methode.Id,
+                    MethodeId = all_methods[size-1].Id 
+                       ,
                     Accuracy = acc,
                     DateSimulation = DateTime.Now,
                     Duree = jsonResult.duree
                 };
-                _context.Methode.Add(methode);
+                
                 _context.Simulation.Add(simulation);
                 await _context.SaveChangesAsync();
 
@@ -256,15 +260,20 @@ namespace MLnew.Controllers
                     Param3 = gamma_select.ToString()
                 };
 
+
+                _context.Methode.Add(methode);
+                var all_methods = await _context.Methode.ToListAsync();
+                int size = all_methods.Count;
                 Simulation simulation = new Simulation
                 {
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                    MethodeId = methode.Id,
+                    MethodeId = all_methods[size - 1].Id
+                       ,
                     Accuracy = acc,
                     DateSimulation = DateTime.Now,
                     Duree = jsonResult.duree
                 };
-                _context.Methode.Add(methode);
+
                 _context.Simulation.Add(simulation);
                 await _context.SaveChangesAsync();
             }
@@ -288,15 +297,19 @@ namespace MLnew.Controllers
                     Param3 = metric.ToString()
                 };
 
+
+                _context.Methode.Add(methode);
+                var all_methods = await _context.Methode.ToListAsync();
+                int size = all_methods.Count;
                 Simulation simulation = new Simulation
                 {
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                    MethodeId = methode.Id,
-                    Accuracy = (int)acc,
+                    MethodeId = all_methods[size - 1].Id,
+                    Accuracy = acc,
                     DateSimulation = DateTime.Now,
                     Duree = jsonResult.duree
                 };
-                _context.Methode.Add(methode);
+
                 _context.Simulation.Add(simulation);
                 await _context.SaveChangesAsync();
             }
