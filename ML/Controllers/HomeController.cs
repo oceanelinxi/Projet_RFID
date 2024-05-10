@@ -222,6 +222,12 @@ namespace ML.Controllers
 
             return View();
         }
+        public ActionResult ResultSVM()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
 
         public ActionResult Historique()
         {

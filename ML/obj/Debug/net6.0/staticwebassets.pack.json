@@ -17,6 +17,22 @@
       "PackagePath": "staticwebassets\\images\\background.jpg"
     },
     {
+      "Id": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\wwwroot\\images\\n_estimators.png",
+      "PackagePath": "staticwebassets\\images\\n_estimators.png"
+    },
+    {
+      "Id": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\wwwroot\\images\\precision\\RandomForest\\max_depth.png",
+      "PackagePath": "staticwebassets\\images\\precision\\RandomForest\\max_depth.png"
+    },
+    {
+      "Id": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\wwwroot\\images\\precision\\RandomForest\\min_samples_leaf.png",
+      "PackagePath": "staticwebassets\\images\\precision\\RandomForest\\min_samples_leaf.png"
+    },
+    {
+      "Id": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\wwwroot\\images\\precision\\RandomForest\\n_estimators.png",
+      "PackagePath": "staticwebassets\\images\\precision\\RandomForest\\n_estimators.png"
+    },
+    {
       "Id": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\ML\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
