@@ -1,12 +1,29 @@
 ﻿
 @{
-    ViewData["Title"] = "ResultSVM";
+    ViewData["Title"] = "Coure der Précision";
+    string pic = "~/images/n_estimators";
 
+    if (!string.IsNullOrEmpty(ViewBag.path))
+    {
+        dynamic jsonResult = Newtonsoft.Json.JsonConvert.DeserializeObject(ViewBag.path);
+        if (jsonResult != null && jsonResult.path != null)
+        {
+            // 将 accuracy 字段的值转换为浮点数并返回
+          pic = jsonResult.path;
+        }
+    }
 }
 
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode SVM : @ViewBag.Result </h3>
-    <img src="~/images/n_estimators.png" alt="RandomForest n_estimators " width="1000px" height="800px" />
+    <h3>Précision de la méthode SVM :  @pic</h3>
+    @if (!string.IsNullOrEmpty(pic))
+    {
+        <img src="~/images/n_estimators" alt="RandomForest n_estimators " width="1000px" height="800px" />
+    }
+    else
+    {
+        <p>Image not found.</p>
+    }
 </main>
 

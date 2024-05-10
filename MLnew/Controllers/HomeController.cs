@@ -179,7 +179,6 @@ namespace MLnew.Controllers
                 return resultKNN;
             }
 
-
         }
 
         public ActionResult Select()
