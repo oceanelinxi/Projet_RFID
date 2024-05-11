@@ -20,15 +20,14 @@ def unzip_file(file_path, extract_to):
 def analytique():
     start = datetime.now()
     # Get the input parameters from the request
-    input_params = request.get_json()
-    
+    input_params = request.get_json()       
+
     # Call the predict() function to make a prediction
     accuracy = methode_analytique()
-    print("methode_analytique : {}".format(accuracy))
-    duree = datetime.now() - start
-    print("duree methode_analytique : {}".format(duree))
+    duree_ana = (datetime.now() - start)
+    print ("duree methode analytique : {}".format(duree_ana.seconds))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy, 'duree' : duree.seconds})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree_ana)})
 
 # Chemin du dossier
 dossier = 'Uploads/data_anonymous'
@@ -43,43 +42,49 @@ if os.path.exists(dossier):
 
 @app.route('/RandomForest',methods= ['POST'])
 def random_forest():
-    start_rf = datetime.now()
+    start = datetime.now()
     # Get the input parameters from the request
     input_params = request.get_json()
-
-    # Call the predict() function to make a prediction with SVM
     
     accuracy = RFcross_validation(data,input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'])
-    duree_rf = datetime.now() - start_rf
-    print("Accuracy : {}\nDuree du RandomForest : {} ".format(accuracy, duree_rf))
+    duree_rf = datetime.now() - start 
+    print('Duree de rf : {}'.format(duree_rf.seconds))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy, 'duree' : duree_rf.seconds})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree_rf)})
  
 
 @app.route('/SVM', methods=['POST'])
 def svm():
-    start_svm = datetime.now()
+    start = datetime.now()
     # Get the input parameters from the request
     input_params = request.get_json()
-   
+    print(input_params)
+    print((input_params['Gamma'], input_params['C'], input_params['Kernel']))
     # Call the predict() function to make a prediction with SVM
     accuracy = train_and_evaluate_svm(input_params['Gamma'], input_params['C'], input_params['Kernel'])
-    duree_svm = datetime.now() - start_svm
-    print ("SVM accuracy :{1} \nDuree de SVM : {2} ".format(accuracy, duree_svm))
+    duree_svm = (datetime.now()-start)
+    print('Duree svm {}'.format(duree_svm.seconds))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy,'duree':duree_svm.seconds})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree_svm)})
 
 @app.route('/Chemin', methods=['POST'])
 def chemin():
     # Get the input parameters from the request
     data = request.get_json()
-    #  chemin=data.get('chemin')
+    chemin=data.get('chemin')
     # Remplacer "\\" par "/"
     chemin = chemin.replace("\\", "/")
-    #  print( chemin)
+    print( chemin)
     unzip_file(chemin,"Uploads/data_anonymous")
     return chemin
-   
+
+@app.route('/CourbesPrecision', methods=['POST'])
+def cheminCourbe():
+    model_and_hp = request.get_json()
+    model, hparam = model_and_hp['methode'], model_and_hp['hyperparametre']
+    print(" model, hparam : ",model, hparam.split('-'))
+    picpath = "~/images/precision/" + str(model) + "/" + str(hparam.split('-')[1]) + ".png"
+    return jsonify({'path' : picpath})
 
 @app.route('/knn', methods=['POST'])
 def knn():
@@ -93,10 +98,10 @@ def knn():
     # Call the predict() function to make a prediction
     accuracy = knnn(data,hyperparameter1_value,hyperparameter2_value,hyperparameter3_value)
     
+    duree = (datetime.now()- start_knn)
+    print('Duree de knn : {}'.format(duree, duree.seconds))
     print('accuracy', accuracy)
-    duree_knn = (datetime.now() - start_knn)
-    print('Duree de knn : {} : {}'.format(duree, duree.seconds))
     # Return the prediction as JSON
-    return jsonify({'accuracy': accuracy, 'duree':duree.seconds})
+    return jsonify({'accuracy': accuracy, 'duree':str(duree)})
 
 app.run(host='0.0.0.0', port=5000)
