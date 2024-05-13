@@ -77,3 +77,7 @@ D:\moi\etude\ISN\C#\Web_RFID\RFID_web\RFID_web\bin\roslyn\vbc.exe.config
 D:\moi\etude\ISN\C#\Web_RFID\RFID_web\RFID_web\bin\roslyn\vbc.rsp
 D:\moi\etude\ISN\C#\Web_RFID\RFID_web\RFID_web\bin\roslyn\VBCSCompiler.exe
 D:\moi\etude\ISN\C#\Web_RFID\RFID_web\RFID_web\bin\roslyn\VBCSCompiler.exe.config
+D:\moi\etude\ISN\C#\Web_RFID\RFID_web\obj\Debug\RFID_web.csproj.AssemblyReference.cache
+D:\moi\etude\ISN\C#\Web_RFID\RFID_web\obj\Debug\RFID_web.csproj.CoreCompileInputs.cache
+D:\moi\etude\ISN\C#\Web_RFID\RFID_web\obj\Debug\RFID_web.dll
+D:\moi\etude\ISN\C#\Web_RFID\RFID_web\obj\Debug\RFID_web.pdb
