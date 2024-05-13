@@ -9,9 +9,11 @@
         if (jsonResult != null && jsonResult.path != null)
         {
             // 将 accuracy 字段的值转换为浮点数并返回
-          pic = jsonResult.path;
+            pic = jsonResult.path;
         }
     }
+    string methodML = ViewBag.MLmodel;
+    string hp = ViewBag.hparam;
 }
 
 <main aria-labelledby="title">
@@ -19,6 +21,35 @@
     <h3>Précision de la méthode SVM :  @pic</h3>
     @if (!string.IsNullOrEmpty(pic))
     {
+        if(methodML == "RandomForest")
+        {
+            if(hp == "rf-n_estimators")
+            {
+                <img src="~/images/precision/RandomForest/n_estimators.png" 
+                alt="RandomForest n_estimators " width="1000px" height="800px" />
+            }
+            if (hp == "rf-min_samples_leaf")
+            {
+                <img src="~/images/precision/RandomForest/min_samples_leaf.png"
+                     alt="RandomForest min_samples_leaf " width="1000px" height="800px" />
+            }
+            if (hp == "rf-max_depth")
+            {
+                <img src="~/images/precision/RandomForest/max_depth.png"
+                alt="RandomForest max_depth " width="1000px" height="800px" />
+            }
+        }
+        if (methodML == "svm")
+        {
+            if (hp == "svm-C")
+            {
+                <img src="~/images/precision/SVM/C.png"
+                     alt="SVM C " width="1000px" height="800px" />
+            }
+        }
+
+
+
          <img src="~/images/precision/RandomForest/n_estimators.png" alt="RandomForest n_estimators " width="1000px" height="800px" />
     }
     else
