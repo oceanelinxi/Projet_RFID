@@ -395,7 +395,7 @@ namespace MLnew.Controllers
             {
                 if (User.IsInRole("Visiteur"))
                 {
-                    return RedirectToAction("Historique");
+                    return View("Historique");
                 }
                 else if (User.IsInRole("Expert"))
                 {
