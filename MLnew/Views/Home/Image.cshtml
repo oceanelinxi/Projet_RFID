@@ -20,27 +20,44 @@
         }
         return 0; // 默认返回值，根据需求进行修改
     }
+    
 }
 
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
 </main>
+
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
 </main>
+@if (randomForestResult != 0)
+{
+    <button id="showImageButton_rf">Afficher boxplot</button>
+    <img id="monImage_rf" src="" style="display:none;" width="500px" height="300px" />
+}
+
 
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode SVM : @svmResult </h3>
 </main>
+@if (svmResult != 0)
+{
+    <button id="showImageButton_svm">Afficher boxplot</button>
+    <img id="monImage_svm" src="" style="display:none;" width="500px" height="300px" />
+}
 
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode KNN : @knnResult </h3>
 </main>
-
+@if (knnResult != 0)
+{
+    <button id="showImageButton_knn">Afficher boxplot</button>
+    <img id="monImage_knn" src="" style="display:none;" width="500px" height="300px" />
+}
 
 
 
@@ -60,6 +77,7 @@
     </style>
 </head>
 <body>
+
     <canvas id="myChart"></canvas>
 
     <script>
@@ -109,3 +127,56 @@
     </script>
 </body>
 </html>
+
+
+<script>
+    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image randomforest
+    document.getElementById('showImageButton_rf').addEventListener('click', function () {
+  
+        var cheminImage_rf = "/Images/boxplot/rf/rf_accuracy.png";
+
+        // Obtenir l'élément image
+        var monImage_rf = document.getElementById('monImage_rf');
+
+        // Définir l'attribut src de l'image avec le chemin de l'image
+        monImage_rf.src = cheminImage_rf;
+        if (monImage_rf.style.display == 'none') {
+            monImage_rf.style.display = 'block';
+        } else {
+            monImage_rf.style.display = 'none';
+        }
+        // Afficher l'image
+        
+    });
+
+    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image svm
+    document.getElementById('showImageButton_svm').addEventListener('click', function () {
+
+        var cheminImage_svm = "/images/boxplot/svm/svm_accuracy.png";
+
+        var monImage_svm = document.getElementById('monImage_svm');
+
+        monImage_svm.src = cheminImage_svm;
+        if (monImage_svm.style.display == 'none') {
+            monImage_svm.style.display = 'block';
+        } else {
+            monImage_svm.style.display = 'none';
+        }
+    });
+
+    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image knn
+    document.getElementById('showImageButton_knn').addEventListener('click', function () {
+
+        var cheminImage_knn = "/images/boxplot/knn/knn_accuracy.png";
+
+        var monImage_knn = document.getElementById('monImage_knn');
+
+        monImage_knn.src = cheminImage_knn;
+
+        if (monImage_knn.style.display == 'none') {
+            monImage_knn.style.display = 'block';
+        } else {
+            monImage_knn.style.display = 'none';
+        }
+    });
+</script>

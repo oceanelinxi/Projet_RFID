@@ -432,7 +432,7 @@ def RFcross_validation( data,n_estimator = BEST_PARAMETERS["n_estimators"], max_
     # Créer un boxplot pour les valeurs prédites
     plt.figure(figsize=(10, 6))
     plt.boxplot(accuracies, labels=['Accuracy'], patch_artist=True)
-    plt.title('Distribution des Accuracies pour le KNN')
+    plt.title('Distribution des Accuracies pour le RF')
     plt.ylabel('Accuracy')
     plt.savefig('wwwroot/images/boxplot/rf/rf_accuracy.png')
     # Calculer l'exactitude du modèle sur l'ensemble des données

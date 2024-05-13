@@ -29,4 +29,8 @@
     <None Include="wwwroot\images\n_estimators.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="courbes\boxplot\rf\" />
+  </ItemGroup>
+
 </Project>
