@@ -36,10 +36,40 @@
             <button type="button" onclick="submitForm()">Soumettre</button>
         </form>
     </div>
+    <div>
+        <table class="model">
+            <thead>
+                <tr>
+                    <th style="width: 25">Id</th>
+                    <th style="width: 400">    Methode    </th>
+                    <th style="width: 100">Accuracy</th>
+                    <th style="width: 100">   Duree   </th>
+                    <th style="width: 100">Date de simulation</th>
+                    <th style="width: 100"> Param 1</th>
+                    <th style="width: 100"> Param 2</th>
+                    <th style="width: 100"> Param 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Simulation sim in ViewBag.simulation)
+                {
+                    <tr>
+                        <td>@sim.Id</td>
+                        <td>@sim.Methode.Nom</td>
+                        <td>@sim.Accuracy</td>
+                        <td>@sim.Duree</td>
+                        <td>@sim.DateSimulation</td>
+                        <td>@sim.Methode.Param1</td>
+                        <td>@sim.Methode.Param2</td>
+                        <td>@sim.Methode.Param3</td>
 
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
-
     <script>
         flatpickr("#startTime", {
             enableTime: true,

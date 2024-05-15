@@ -10,6 +10,7 @@ namespace MLnew.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
+            /*
             using (var context = new ApplicationDbContext(
             serviceProvider.GetRequiredService<
             DbContextOptions<ApplicationDbContext>>()))
@@ -26,6 +27,7 @@ namespace MLnew.Models
                 );
                 context.SaveChanges();
             }
+            */
         }
     }
 }
