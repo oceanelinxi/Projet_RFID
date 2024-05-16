@@ -430,21 +430,9 @@ namespace MLnew.Controllers
         }
         public async Task<ActionResult> IndexHistorique()
         {
-            List<Methode> methodes = new List<Methode>();
-            // Retrieve Méthodes from the repository
             var simulations = await _context.Simulation.Include(b => b.Methode).ToListAsync();
             ViewBag.simulation = simulations;
-            /*Methode empty = new Methode();
-            empty.Nom = "Methode introuvable";
-            foreach(Simulation sim in simulations)
-            {
-                methodes.
-            }
-            ViewBag.methode = methodes;
-            ViewBag.range = Enumerable.Range(1, simulations.Count);
-            */
-
-            // Return the view with the list of Méthodes
+            
             return View("Historique");
         }
 

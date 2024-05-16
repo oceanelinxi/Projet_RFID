@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID - Copie\\MLnew\\MLnew.csproj": {}
+    "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\MLnew.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID - Copie\\MLnew\\MLnew.csproj": {
+    "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\MLnew.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID - Copie\\MLnew\\MLnew.csproj",
+        "projectUniqueName": "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\MLnew.csproj",
         "projectName": "MLnew",
-        "projectPath": "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID - Copie\\MLnew\\MLnew.csproj",
-        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pc\\anaconda3\\Jupiter Lab\\Projet S8\\Projet_RFID - Copie\\MLnew\\obj\\",
+        "projectPath": "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\MLnew.csproj",
+        "packagesPath": "C:\\Users\\Ken\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Ken\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
