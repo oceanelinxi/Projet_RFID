@@ -1,9 +1,9 @@
 ﻿@{
     // 从 ViewBag 中获取值并提取数字
-    float analytiqueResult = ExtractNumber(ViewBag.AnalytiqueResult);
-    float svmResult = ExtractNumber(ViewBag.SVMResult);
-    float knnResult = ExtractNumber(ViewBag.KNNResult);
-    float randomForestResult = ExtractNumber(ViewBag.RandomForestResult);
+    string analytiqueResult = ExtractNumber(ViewBag.AnalytiqueResult).ToString().Replace(",", ".");
+    string svmResult = ExtractNumber(ViewBag.SVMResult).ToString().Replace(",", ".");
+    string knnResult = ExtractNumber(ViewBag.KNNResult).ToString().Replace(",", ".");
+    string randomForestResult = ExtractNumber(ViewBag.RandomForestResult).ToString().Replace(",", ".");
 
     // 提取数字的方法
     float ExtractNumber(string result)
@@ -32,7 +32,7 @@
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
 </main>
-@if (randomForestResult != 0)
+@if (randomForestResult != null)
 {
     <button id="showImageButton_rf">Afficher boxplot</button>
     <img id="monImage_rf" src="" style="display:none;" width="500px" height="300px" />
@@ -43,7 +43,7 @@
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode SVM : @svmResult </h3>
 </main>
-@if (svmResult != 0)
+@if (svmResult != null)
 {
     <button id="showImageButton_svm">Afficher boxplot</button>
     <img id="monImage_svm" src="" style="display:none;" width="500px" height="300px" />
@@ -53,7 +53,7 @@
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode KNN : @knnResult </h3>
 </main>
-@if (knnResult != 0)
+@if (knnResult != null)
 {
     <button id="showImageButton_knn">Afficher boxplot</button>
     <img id="monImage_knn" src="" style="display:none;" width="500px" height="300px" />
