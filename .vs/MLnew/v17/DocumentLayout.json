@@ -7,37 +7,8 @@
       "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\mlnew\\models\\simulation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\models\\simulation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\mlnew\\views\\home\\image.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\views\\home\\image.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MLnew/True/SqlTable/dbo.Simulation.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\mlnew\\views\\home\\resultsvm.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\views\\home\\resultsvm.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\mlnew\\views\\home\\historique.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\views\\home\\historique.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MLnew/True/SqlTable/dbo.AspNetUserRoles.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\mlnew\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MLnew/True/SqlTable/dbo.AspNetUsers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\mlnew\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|d:\\moi\\etude\\isn\\c#\\web_rfid\\mlnew\\wwwroot\\css\\style_index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{B7A9BBCC-5DE1-4A9F-B4FA-3DE1C75DCD22}|MLnew\\MLnew.csproj|solutionrelative:mlnew\\wwwroot\\css\\style_index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -65,111 +36,44 @@
               "RelativeDocumentMoniker": "MLnew\\Views\\Home\\Index.cshtml",
               "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "MLnew\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAGAAAAAAAAAAAAAAAHoAAAA/AAAA",
+              "ViewState": "AQIAAJsBAAAAAAAAAAAAALwBAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-05-13T11:23:33.843Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Image.cshtml",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Home\\Image.cshtml",
-              "RelativeDocumentMoniker": "MLnew\\Views\\Home\\Image.cshtml",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Home\\Image.cshtml",
-              "RelativeToolTip": "MLnew\\Views\\Home\\Image.cshtml",
-              "ViewState": "AQIAAIcAAAAAAAAAAAAAwKYAAABRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-13T11:17:21.885Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "dbo.Simulation [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MLnew/True/SqlTable/dbo.Simulation.sql",
-              "ToolTip": "dbo.Simulation [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-13T11:10:23.991Z"
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "f0f9814e-5b28-4e4b-bf51-bfd8afe190c4",
+        "Display": 0,
+        "X": 804,
+        "Y": 157,
+        "Width": 958,
+        "Height": 749,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Simulation.cs",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Models\\Simulation.cs",
-              "RelativeDocumentMoniker": "MLnew\\Models\\Simulation.cs",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Models\\Simulation.cs",
-              "RelativeToolTip": "MLnew\\Models\\Simulation.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-13T11:10:04.926Z",
+              "Title": "Style_Index.css",
+              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\wwwroot\\css\\Style_Index.css",
+              "RelativeDocumentMoniker": "MLnew\\wwwroot\\css\\Style_Index.css",
+              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\wwwroot\\css\\Style_Index.css",
+              "RelativeToolTip": "MLnew\\wwwroot\\css\\Style_Index.css",
+              "ViewState": "AQIAAGwAAAAAAAAAAAAAAIgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-05-15T13:03:53.088Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Historique.cshtml",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Home\\Historique.cshtml",
-              "RelativeDocumentMoniker": "MLnew\\Views\\Home\\Historique.cshtml",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Home\\Historique.cshtml",
-              "RelativeToolTip": "MLnew\\Views\\Home\\Historique.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-13T11:10:01.032Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ResultSVM.cshtml",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Home\\ResultSVM.cshtml",
-              "RelativeDocumentMoniker": "MLnew\\Views\\Home\\ResultSVM.cshtml",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Home\\ResultSVM.cshtml",
-              "RelativeToolTip": "MLnew\\Views\\Home\\ResultSVM.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAABmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-13T10:33:48.988Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "dbo.AspNetUserRoles [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MLnew/True/SqlTable/dbo.AspNetUserRoles.sql",
-              "ToolTip": "dbo.AspNetUserRoles [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-13T10:20:59.175Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "MLnew\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "MLnew\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABUAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-13T09:05:36.297Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "dbo.AspNetUsers [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MLnew/True/SqlTable/dbo.AspNetUsers.sql",
-              "ToolTip": "dbo.AspNetUsers [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-10T20:40:34.812Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "MLnew\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\moi\\etude\\ISN\\C#\\Web_RFID\\MLnew\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "MLnew\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAHoBAAAAAAAAAAAuwI0BAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-10T12:23:19.154Z"
             }
           ]
         }
