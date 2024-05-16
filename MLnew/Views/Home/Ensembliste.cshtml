@@ -1,5 +1,4 @@
-﻿@page
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +7,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
         }
 
         button {
@@ -18,57 +16,377 @@
         .result {
             margin-bottom: 10px;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
+    <script>
+        function showResult(algorithm) {
+            const resultArea = document.getElementById('resultArea');
+            resultArea.textContent = 'Results for ' + algorithm;
+        }
+
+       
+
+        function updateExplanation() {
+            const select = document.getElementById('algorithmSelect');
+            const KNNDiv = document.getElementById('KNNDiv');
+            const SVMDiv = document.getElementById('SVMDiv');
+            const RFDiv = document.getElementById('RFDiv');
+
+            if (select.value === 'KNN') {
+                KNNDiv.classList.remove('hidden');
+                SVMDiv.classList.add('hidden');
+                RFDiv.classList.add('hidden');
+            } 
+            if (select.value === 'SVM') {
+                SVMDiv.classList.remove('hidden');
+                KNNDiv.classList.add('hidden');
+                RFDiv.classList.add('hidden');
+            }
+            if (select.value === 'Random Forest') { 
+                RFDiv.classList.remove('hidden');
+                KNNDiv.classList.add('hidden');
+                SVMDiv.classList.add('hidden');
+            }
+            
+        }
+    </script>
 </head>
 <body>
-    <h1>Methode Ensembliste</h1>
+   
 
-    <!-- Buttons for Adaboost and XGBoost -->
-    <button type="button" onclick="showResult('Adaboost')">Adaboost</button>
-    <button type="button" onclick="showResult('XGBoost')">XGBoost</button>
+    <!-- Button to show options -->
+    
 
     <!-- Area to display results -->
     <div id="resultArea"></div>
 
-    <script>
-        // 用于跟踪算法是否已经展示过结果的状态
-        var adaboostShown = false;
-        var xgboostShown = false;
+    <form id="optionsForm" class="option-form" method="post" asp-controller="Home" asp-action="ExecuteMachineLearningTasks">
+        <div id="optionsSection" >
+            <h1 class="text-center mt-5">Méthodes</h1>
 
-        function showResult(algorithm) {
-            var resultText = "";
-            var algorithmName = "";
+            <div class="accordion-item">
+                <h class="accordion-header" id="headingOption2">
+                    <div class="d-flex align-items-center">
+                        <input class="form-check-input me-2" type="checkbox" id="mainOption2" name="mainOption2" value="true">
+                        <p1> AdaBoost</p1>
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption2" aria-expanded="false" aria-controls="collapseOption2" style="width: 20px; padding: 0; margin-left: 5px;">
+                            <span class="visually-hidden">Toggle sub-options</span>
+                        </button>
+                    </div>
+                </h>
+                <div id="collapseOption2" class="accordion-collapse collapse" aria-labelledby="headingOption2" data-bs-parent="#optionsAccordion">
+                    <div class="accordion-body">
+                        <select id="algorithmSelect" onchange="updateExplanation()">
+                            <option value="KNN">KNN</option>
+                            <option value="SVM">SVM</option>
+                            <option value="Random Forest">Random Forest</option>
+                        </select>
+                    
 
-            // 检查算法是否已经展示过结果，如果展示过则直接返回
-            if ((algorithm === "Adaboost" && adaboostShown) || (algorithm === "XGBoost" && xgboostShown)) {
-                return;
-            }
+                        <div id="KNNDiv" class="hidden">
+                            <div class="accordion-body">
 
-            if (algorithm === "Adaboost") {
-                algorithmName = "Adaboost";
-                resultText = "Resultat = 50%";
-                adaboostShown = true; // 标记Adaboost已展示过结果
-            } else if (algorithm === "XGBoost") {
-                algorithmName = "XGBoost";
-                resultText = "Resultat = 60%";
-                xgboostShown = true; // 标记XGBoost已展示过结果
-            }
 
-            // 创建一个包含算法标识和结果的 <p> 元素
-            var resultElement = document.createElement('p');
-            resultElement.textContent = algorithmName + ": " + resultText;
-            resultElement.classList.add('result'); // 添加 CSS 类名用于样式控制
+                                <p1>1. n_neighbors:</p1>
 
-            // 查找用于显示结果的区域
-            var resultArea = document.getElementById('resultArea');
+                                <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>
+                                <p>Number of neighbors to use by default for kneighbors queries.</p>
 
-            // 将结果元素添加到结果区域中
-            resultArea.appendChild(resultElement);
+                                <p1>2. weights:</p1>
 
-            // 禁用已展示过结果的按钮
-            var button = document.querySelector('button[value="' + algorithm + '"]');
-            button.disabled = true;
-        }
-    </script>
+                                <select id="weights-select" name="weights" class="form-select">
+                                    <option value="uniform">uniform</option>
+                                    <option value="distance">distance</option>
+                                </select>
+                                <p>Weight function used in prediction.</p>
+
+
+                                <p1>3. metric:</p1>
+
+                                <select id="metric-select" name="metric" class="form-select">
+                                    <option value="minkowski">minkowski</option>
+                                    <option value="euclidean">euclidean</option>
+                                    <option value="manhattan">manhattan</option>
+                                </select>
+                                <p>Metric to use for distance computation.</p>
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div id="SVMDiv" class="hidden">
+                            <div class="accordion-body">
+
+
+                                <p1>1. C:</p1>
+
+                                <div>
+                                    <input class="form-number" type="number" id="C-input" name="C_input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="1.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                </div>
+                                <p>
+                                    Explanation:
+                                    C: float, default value = 1.0<br>
+                                    Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
+                                </p>
+
+
+                                <p1>2. Kernel:</p1>
+                                <select id="kernel-select" name="kernel_select" class="form-select">
+                                    <option value="linear">linear</option>
+                                    <option value="poly">polynomial</option>
+                                    <option value="rbf" selected>rbf</option>
+                                    <option value="sigmoid">sigmoid</option>
+                                    <option value="precomputed">precomputed</option>
+                                </select>
+                                <p>
+                                    Explanation:
+                                    Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
+                                    Description: Defines the shape of the boundary between the different classes of the model.
+                                </p>
+
+
+
+                                <p1>3. Gamma:</p1>
+
+                                <select id="gamma-select" name="gamma_select" class="form-select">
+                                    <option value="scale" selected>scale</option>
+                                    <option value="auto">auto</option>
+                                </select>
+                                <p>
+                                    Explanation:
+                                    Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
+                                    Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
+                                    If gamma='scale', it takes the value 1/(n_features * X.var()).
+                                    If ‘auto’, it uses 1 / n_features.
+                                    If float, it must be positive.
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div id="RFDiv" class="hidden">
+                            <div class="accordion-body">
+                               
+
+                                <p1>1.n_estimators:</p1>
+                                <div>
+                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="33" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                                </div>
+
+                                <p>
+                                    Explication :
+                                    n_estimators int, default=33<br>
+                                    Le nombre d'arbres de décision dans la forêt. Plus il est élevé, plus le modèle aura de la facilité à apprendre.<br />
+                                    Cependant si la valeur est trop élevé pour les données, le modèle risque d'être surentraîné et de mal se généraliser.
+                                </p>
+
+
+                                <p1>2.max_depth:</p1>
+
+                                <div>
+                                    <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="8" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
+
+                                </div>
+                                <label class="form-check-label" for="criterion-max_depth-input">
+                                </label>
+                                <p>
+                                    Explication :
+                                    max_depthint, default=None<br>
+                                    The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
+                                </p>
+
+
+
+                                <p1>3.min_samples_leaf:</p1>
+
+                                <div>
+                                    <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="1" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
+
+
+                                </div>
+                                <p>
+                                    Explication :
+                                    min_samples_leafint or float, default=1<br>
+                                    The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
+                                </p>
+
+
+
+                            </div>
+
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="accordion-item">
+            <h class="accordion-header" id="headingOption2">
+                <div class="d-flex align-items-center">
+                    <input class="form-check-input me-2" type="checkbox" id="mainOption2" name="mainOption2" value="true">
+                    <p1> AdaBoost</p1>
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption2" aria-expanded="false" aria-controls="collapseOption2" style="width: 20px; padding: 0; margin-left: 5px;">
+                        <span class="visually-hidden">Toggle sub-options</span>
+                    </button>
+                </div>
+            </h>
+            <div id="collapseOption2" class="accordion-collapse collapse" aria-labelledby="headingOption2" data-bs-parent="#optionsAccordion">
+                <div class="accordion-body">
+                    <select id="algorithmSelect" onchange="updateExplanation()">
+                        <option value="KNN">KNN</option>
+                        <option value="SVM">SVM</option>
+                        <option value="Random Forest">Random Forest</option>
+                    </select>
+
+
+                    <div id="KNNDiv" class="hidden">
+                        <div class="accordion-body">
+
+
+                            <p1>1. n_neighbors:</p1>
+
+                            <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>
+                            <p>Number of neighbors to use by default for kneighbors queries.</p>
+
+                            <p1>2. weights:</p1>
+
+                            <select id="weights-select" name="weights" class="form-select">
+                                <option value="uniform">uniform</option>
+                                <option value="distance">distance</option>
+                            </select>
+                            <p>Weight function used in prediction.</p>
+
+
+                            <p1>3. metric:</p1>
+
+                            <select id="metric-select" name="metric" class="form-select">
+                                <option value="minkowski">minkowski</option>
+                                <option value="euclidean">euclidean</option>
+                                <option value="manhattan">manhattan</option>
+                            </select>
+                            <p>Metric to use for distance computation.</p>
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div id="SVMDiv" class="hidden">
+                        <div class="accordion-body">
+
+
+                            <p1>1. C:</p1>
+
+                            <div>
+                                <input class="form-number" type="number" id="C-input" name="C_input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="1.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                            </div>
+                            <p>
+                                Explanation:
+                                C: float, default value = 1.0<br>
+                                Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
+                            </p>
+
+
+                            <p1>2. Kernel:</p1>
+                            <select id="kernel-select" name="kernel_select" class="form-select">
+                                <option value="linear">linear</option>
+                                <option value="poly">polynomial</option>
+                                <option value="rbf" selected>rbf</option>
+                                <option value="sigmoid">sigmoid</option>
+                                <option value="precomputed">precomputed</option>
+                            </select>
+                            <p>
+                                Explanation:
+                                Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
+                                Description: Defines the shape of the boundary between the different classes of the model.
+                            </p>
+
+
+
+                            <p1>3. Gamma:</p1>
+
+                            <select id="gamma-select" name="gamma_select" class="form-select">
+                                <option value="scale" selected>scale</option>
+                                <option value="auto">auto</option>
+                            </select>
+                            <p>
+                                Explanation:
+                                Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
+                                Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
+                                If gamma='scale', it takes the value 1/(n_features * X.var()).
+                                If ‘auto’, it uses 1 / n_features.
+                                If float, it must be positive.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div id="RFDiv" class="hidden">
+                        <div class="accordion-body">
+
+
+                            <p1>1.n_estimators:</p1>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="33" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            </div>
+
+                            <p>
+                                Explication :
+                                n_estimators int, default=33<br>
+                                Le nombre d'arbres de décision dans la forêt. Plus il est élevé, plus le modèle aura de la facilité à apprendre.<br />
+                                Cependant si la valeur est trop élevé pour les données, le modèle risque d'être surentraîné et de mal se généraliser.
+                            </p>
+
+
+                            <p1>2.max_depth:</p1>
+
+                            <div>
+                                <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="8" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
+
+                            </div>
+                            <label class="form-check-label" for="criterion-max_depth-input">
+                            </label>
+                            <p>
+                                Explication :
+                                max_depthint, default=None<br>
+                                The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
+                            </p>
+
+
+
+                            <p1>3.min_samples_leaf:</p1>
+
+                            <div>
+                                <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="1" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
+
+
+                            </div>
+                            <p>
+                                Explication :
+                                min_samples_leafint or float, default=1<br>
+                                The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
+                            </p>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+      
+        <br />
+        <input type="submit" value="submit" />
+    </form>
 </body>
 </html>

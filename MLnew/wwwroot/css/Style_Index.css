@@ -1,0 +1,139 @@
+﻿﻿.Titre {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.label-upload {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 25px; /* 字体大小 */
+}
+
+
+
+body {
+    //background-color: #ddeedf;
+    //background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    /* 渐变背景 */
+    background: linear-gradient(125deg,#b7f5de,#b0f4e6,#f5fac8);
+    /* 指定背景图像的大小 */
+    background-size: 500%;
+    /* 执行动画：动画名 时长 线性的 无限次播放 */
+    animation: bgAnimation 15s linear infinite;
+}
+
+/* 定义动画 */
+@keyframes bgAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+.zip {
+    border: 0px solid #000000;
+    text-align: center;
+}
+
+
+#okButton {
+    padding: 10px 20px; /* 按钮内边距 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    color: #ffffff; /* 文本颜色 */
+    background-color: #5fbdb0; /* 背景颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 鼠标悬停样式为手型 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    transition: background-color 0.3s ease; /* 背景颜色过渡效果 */
+}
+
+    #okButton:hover {
+        background-color: #669b7c; /* 悬停时的背景颜色 */
+    }
+
+.sousTitre {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+}
+
+.optionSection {
+    width: 100%;
+    max-width: 400px; /* 容器最大宽度 */
+    margin: 0 auto; /* 居中显示 */
+}
+
+/* 手风琴项样式 */
+.accordion-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+/* 手风琴标题样式 */
+.accordion-header {
+    width: 100%;
+    padding: 20px;
+    background-color: #8bcfcc;
+    color: #fff;
+    font-size: 16px;
+    text-align: center; /* 将文本居中对齐 */
+    margin-right: 20px; /* 在右侧增加间距 */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px; /* 添加圆角 */
+}
+
+    /* 手风琴标题悬停样式 */
+    .accordion-header:hover {
+        background-color: #23a393; /* 悬停时的背景色 */
+    }
+
+
+/* 手风琴内容样式 */
+.accordion-content {
+    padding: 15px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    line-height: 1.6;
+    transition: max-height 0.3s ease; /* 过渡效果 */
+    max-height: 0; /* 初始时内容区域高度为0 */
+    overflow: hidden;
+}
+
+/* 手风琴项展开状态样式 */
+.accordion-item.active .accordion-content {
+    max-height: 300px; /* 展开时的最大高度 */
+}
+
+
+.accordion-button.collapsed {
+    padding: 1px; /* 调整折叠状态下按钮的内边距 */
+    width: 35px;
+    margin-left: 20px; /* 在左侧增加间距 */
+}
+
+.accordion-button::after {
+    display: inline-block;
+    font-size: 12px; /* 设置伪元素的字体大小 */
+    margin-left: 5px; /* 调整伪元素的左侧外边距 */
+}
+/* 当复选框选中时，修改其相邻的 accordion-header 的背景颜色 */
+input[type="checkbox"]:checked + .accordion-header {
+    background-color: #ffcc00; /* 设置选中时 accordion-header 的背景颜色为黄色 */
+    color: #000; /* 设置选中时 accordion-header 的文本颜色为黑色 */
+}

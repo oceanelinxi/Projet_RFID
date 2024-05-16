@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ug+35d5sWmwUG9BfhFyFjcaBvZLVO8Twc3vmSqpxUeo=",
+  "Hash": "9iCTyVCpZGHpSgI7FJl7XLVb+FBtVG2Swu6hLnRBSzY=",
   "Source": "MLnew",
   "BasePath": "_content/MLnew",
   "Mode": "Default",
@@ -1212,6 +1212,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\wwwroot\\css\\Style_Index.css",
+      "SourceId": "MLnew",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\wwwroot\\",
+      "BasePath": "_content/MLnew",
+      "RelativePath": "css/Style_Index.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Style_Index.css"
     },
     {
       "Identity": "C:\\Users\\Ken\\Desktop\\Projet_RFID\\MLnew\\wwwroot\\favicon.ico",
