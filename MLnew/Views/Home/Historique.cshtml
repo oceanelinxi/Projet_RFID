@@ -20,10 +20,11 @@
 
             <input type="checkbox" id="userCheckbox" name="userCheckbox">
             <label for="user">2.Utilisateur :</label>
-            <select id="user">
-                <option value="user1">Utilisateur 1</option>
-                <option value="user2">Utilisateur 2</option>
-                <option value="user3">Utilisateur 3</option>
+            <select id="user" name="userIds">
+                @foreach (var user in ViewBag.users)
+                {
+                    <option value=@user.Id>@user.UserName</option>
+                }
             </select><br><br>
 
             <input type="checkbox" id="modeleCheckbox" name="modeleCheckbox">
@@ -37,39 +38,41 @@
             <button type="button" onclick="submitForm()">Soumettre</button>
         </form>
     </div>
-    <div>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th style="width: 25">Id</th>
-                    <th style="width: 400">    Methode    </th>
-                    <th style="width: 100">Accuracy</th>
-                    <th style="width: 100">   Duree   </th>
-                    <th style="width: 100">Date de simulation</th>
-                    <th style="width: 100"> Param 1</th>
-                    <th style="width: 100"> Param 2</th>
-                    <th style="width: 100"> Param 3</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Simulation sim in ViewBag.simulation)
-                {
+    @if (ViewBag.simulation != null)
+    {
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <td>@sim.Id</td>
-                        <td>@sim.Methode.Nom</td>
-                        <td>@sim.Accuracy</td>
-                        <td>@sim.Duree</td>
-                        <td>@sim.DateSimulation</td>
-                        <td>@sim.Methode.Param1</td>
-                        <td>@sim.Methode.Param2</td>
-                        <td>@sim.Methode.Param3</td>
-
+                        <th style="width: 25">Id</th>
+                        <th style="width: 400">    Methode    </th>
+                        <th style="width: 100">Accuracy</th>
+                        <th style="width: 100">   Duree   </th>
+                        <th style="width: 100">Date de simulation</th>
+                        <th style="width: 100"> Param 1</th>
+                        <th style="width: 100"> Param 2</th>
+                        <th style="width: 100"> Param 3</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <br /><br /><br />
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (Simulation sim in ViewBag.simulation)
+                    {
+                        <tr>
+                            <td>@sim.Id</td>
+                            <td>@sim.Methode.Nom</td>
+                            <td>@sim.Accuracy</td>
+                            <td>@sim.Duree</td>
+                            <td>@sim.DateSimulation</td>
+                            <td>@sim.Methode.Param1</td>
+                            <td>@sim.Methode.Param2</td>
+                            <td>@sim.Methode.Param3</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br /><br /><br />
+        </div>
+    }
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
     <script>

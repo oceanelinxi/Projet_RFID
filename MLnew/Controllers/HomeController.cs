@@ -428,11 +428,25 @@ namespace MLnew.Controllers
 
             return View();
         }
+        public List<dynamic> GetAllUsers()
+        {
+            // Define the SQL query to fetch only "Visiteur" Roles
+            string sql = @"SELECT * FROM [dbo].[AspNetUsers] 
+                            WHERE Id IN (SELECT DISTINCT UserId FROM [dbo].[AspNetUserRoles] WHERE RoleId = 1)";
+
+            // Execute the SQL query using FromSql and map to dynamic objects
+            dynamic users = _context.Users.FromSqlRaw(sql).ToList<dynamic>();
+
+            return users; // Or return the data as needed
+        }
+
         public async Task<ActionResult> IndexHistorique()
         {
-            var simulations = await _context.Simulation.Include(b => b.Methode).ToListAsync();
-            ViewBag.simulation = simulations;
-            
+            // Liste des utilisteurs 
+            var userList = GetAllUsers();
+
+            ViewBag.users = userList;
+
             return View("Historique");
         }
 
