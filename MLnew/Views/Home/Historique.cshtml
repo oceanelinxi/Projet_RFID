@@ -90,6 +90,16 @@
             locale: "fr"
         });
 
+        document.getElementById('selectionForm').addEventListener('submit', function (event) {
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+
+            if (!startTime || !endTime) {
+                alert('Veuillez sélectionner les dates de début et de fin.');
+                event.preventDefault();  // 阻止表单提交
+            }
+        });
+
         function submitForm() {
             const form = document.getElementById("selectionForm");
             const formData = new FormData(form);
