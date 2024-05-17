@@ -30,7 +30,7 @@ namespace MLnew.Controllers
             {
                 if (User.IsInRole("Visiteur"))
                 {
-                    return RedirectToAction("IndexVisiteur");
+                    return RedirectToAction("IndexHistorique");
                 }
                 else if (User.IsInRole("Expert"))
                 {

@@ -2,6 +2,10 @@ import os
 import numpy as np
 import pandas as pd
 import datetime
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import cross_val_score
 
 BEST_PARAMETERS = {'metric': 'manhattan', 'n_neighbors': 8, 'weights': 'distance'}
 def pretraitement_knn():
@@ -257,3 +261,54 @@ def knnn(ds:pd.DataFrame,k_neighbors = 8, weight = 'distance', metrics = 'manhat
     plt.savefig('courbes/boxplot/knn/knn_accuracy.png')
     
     return accuracy*100
+
+
+
+
+ 
+def evaluate_adaboost_dt(base_estimator_depth, n_estimators, learning_rate, cv_folds):
+    # Génération de données simulées
+    X, y = make_classification(n_samples=1000, n_features=20, n_informative=2, n_redundant=10, random_state=42)
+    # Création du modèle de base (arbre de décision)
+    base_estimator = DecisionTreeClassifier(max_depth=base_estimator_depth)
+    # Création du modèle AdaBoost avec les hyperparamètres spécifiés
+    ada = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=n_estimators, learning_rate=learning_rate, random_state=42)
+    # Validation croisée pour évaluer l'accuracy
+    accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
+    # Calcul de la moyenne des scores de précision
+    mean_accuracy = accuracies.mean()
+    return mean_accuracy
+ 
+# Exemple d'utilisation
+mean_accuracy = evaluate_adaboost_dt(base_estimator_depth=1, n_estimators=50, learning_rate=1.0, cv_folds=5)
+print(f"Mean accuracy of the model across all folds: {mean_accuracy}")
+
+
+def evaluate_adaboost_knn(n_neighbors, n_estimators, learning_rate, cv_folds):
+    # Génération de données simulées
+    X, y = make_classification(n_samples=1000, n_features=20, n_informative=2, n_redundant=10, random_state=42)
+    # Création du modèle de base (KNN)
+    base_estimator = KNeighborsClassifier(n_neighbors=n_neighbors)
+    # Création du modèle AdaBoost avec les hyperparamètres spécifiés
+    ada = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=n_estimators, learning_rate=learning_rate, random_state=42)
+    # Validation croisée pour évaluer l'accuracy
+    accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
+    # Calcul de la moyenne des scores de précision
+    mean_accuracy = accuracies.mean()
+    return mean_accuracy
+
+
+
+
+def evaluate_adaboost_svm(C, kernel, gamma, n_estimators, learning_rate, cv_folds):
+    # Génération de données simulées
+    X, y = make_classification(n_samples=1000, n_features=20, n_informative=2, n_redundant=10, random_state=42)
+    # Création du modèle de base (SVM)
+    base_estimator = SVC(C=C, kernel=kernel, gamma=gamma)
+    # Création du modèle AdaBoost avec les hyperparamètres spécifiés
+    ada = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=n_estimators, learning_rate=learning_rate, random_state=42)
+    # Validation croisée pour évaluer l'accuracy
+    accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
+    # Calcul de la moyenne des scores de précision
+    mean_accuracy = accuracies.mean()
+    return mean_accuracy

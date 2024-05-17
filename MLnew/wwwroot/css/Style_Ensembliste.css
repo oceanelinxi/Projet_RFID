@@ -1,19 +1,4 @@
-﻿﻿.Titre {
-    font-family: "DM Serif Display", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 50px;
-}
-
-.label-upload {
-    font-family: "DM Serif Display", serif;
-    font-weight: 100;
-    font-style: normal;
-    font-size: 25px; /* 字体大小 */
-}
-
-
-
+﻿
 body {
     //background-color: #ddeedf;
     //background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
@@ -40,41 +25,9 @@ body {
     }
 }
 
-
-
-.zip {
-    border: 0px solid #000000;
-    text-align: center;
-}
-
-
-#okButton {
-    padding: 10px 20px; /* 按钮内边距 */
-    font-size: 16px; /* 字体大小 */
-    font-weight: bold; /* 字体加粗 */
-    color: #ffffff; /* 文本颜色 */
-    background-color: #5fbdb0; /* 背景颜色 */
-    border: none; /* 去掉边框 */
-    border-radius: 5px; /* 圆角边框 */
-    cursor: pointer; /* 鼠标悬停样式为手型 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
-    transition: background-color 0.3s ease; /* 背景颜色过渡效果 */
-}
-
-    #okButton:hover {
-        background-color: #AFEEEE; /* 悬停时的背景颜色 */
-    }
-
-.sousTitre {
-    font-family: "DM Serif Display", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 40px;
-}
-
 .optionSection {
     width: 100%;
-    max-width: 400px; /* 容器最大宽度 */
+    max-width: 200px; /* 容器最大宽度 */
     margin: 0 auto; /* 居中显示 */
 }
 
@@ -88,6 +41,7 @@ body {
 }
 /* 手风琴标题样式 */
 .accordion-header {
+    display: block;
     width: 100%;
     padding: 20px;
     background-color: #8bcfcc;
@@ -118,18 +72,17 @@ body {
 }
 
 
-.accordion-button{
+.accordion-button {
     padding: 1px; /* 调整展开状态下按钮的内边距 */
     width: 35px;
-    margin-left: 20px; /* 在左侧增加间距 */
-
+    margin-left: 30px; /* 在左侧增加间距 */
 }
+
     .accordion-button::after {
-    display: inline-block;
-    font-size: 12px; /* 设置伪元素的字体大小 */
-    margin-left: 5px; /* 调整伪元素的左侧外边距 */
-}
-
+        display: inline-block;
+        font-size: 12px; /* 设置伪元素的字体大小 */
+        margin-left: 5px; /* 调整伪元素的左侧外边距 */
+    }
 
 
 /*explication */

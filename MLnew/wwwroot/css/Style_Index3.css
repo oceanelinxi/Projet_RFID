@@ -1,0 +1,63 @@
+﻿
+
+
+body {
+    //background-color: #ddeedf;
+    //background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    /* 渐变背景 */
+    background: linear-gradient(125deg,#b7f5de,#b0f4e6,#f5fac8);
+    /* 指定背景图像的大小 */
+    background-size: 500%;
+    /* 执行动画：动画名 时长 线性的 无限次播放 */
+    animation: bgAnimation 15s linear infinite;
+}
+
+/* 定义动画 */
+@keyframes bgAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+#btnOK {
+    padding: 10px 20px; /* 按钮内边距 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    color: #ffffff; /* 文本颜色 */
+    background-color: #5fbdb0; /* 背景颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 鼠标悬停样式为手型 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    transition: background-color 0.3s ease; /* 背景颜色过渡效果 */
+}
+
+    #btnOK:hover {
+        background-color: #AFEEEE; /* 悬停时的背景颜色 */
+    }
+
+#btnSub {
+    padding: 10px 20px; /* 按钮内边距 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    color: #ffffff; /* 文本颜色 */
+    background-color: #5fbdb0; /* 背景颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 鼠标悬停样式为手型 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    transition: background-color 0.3s ease; /* 背景颜色过渡效果 */
+}
+
+    #btnSub:hover {
+        background-color: #AFEEEE; /* 悬停时的背景颜色 */
+    }

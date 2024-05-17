@@ -1,6 +1,8 @@
 from sklearn.model_selection import cross_val_score, KFold, cross_val_predict
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+from xgboost import XGBClassifier
+from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import pandas as pd
 import os
@@ -274,3 +276,22 @@ def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
     
     
     return mean_score*100
+
+
+
+ 
+def train_and_evaluate_xgboost(booster:str, n_estimators:int):
+    ds = dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2])
+    X = ds[Xcols_func('rssi & rc only', dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2]).columns)]
+    label_encoder = LabelEncoder()
+    ds['actual'] = label_encoder.fit_transform(ds['actual'])
+    y = ds['actual']
+
+    xgb_model = XGBClassifier(booster= booster, n_estimators=n_estimators, num_parallel_tree=n_estimators)
+    kf = KFold(n_splits=5, shuffle=True)
+
+    cv_scores = cross_val_score(xgb_model, X, y, cv=kf)
+    mean_score = np.mean(cv_scores)
+
+    y_pred_cv = cross_val_predict(xgb_model, X, y, cv=kf)
+    return mean_score

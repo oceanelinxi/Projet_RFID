@@ -86,6 +86,10 @@ def cheminCourbe():
     picpath = "~/images/precision/" + str(model) + "/" + str(hparam.split('-')[1]) + ".png"
     return jsonify({'path' : picpath})
 
+
+@app.route('/XGDT', methods=['POST'])
+
+
 @app.route('/knn', methods=['POST'])
 def knn():
     # Get the input parameters from the request
