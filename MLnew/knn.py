@@ -272,7 +272,7 @@ def evaluate_adaboost_dt(base_estimator_depth, n_estimators, learning_rate, cv_f
     # Création du modèle de base (arbre de décision)
     base_estimator = DecisionTreeClassifier(max_depth=base_estimator_depth)
     # Création du modèle AdaBoost avec les hyperparamètres spécifiés
-    ada = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=n_estimators, learning_rate=learning_rate, random_state=42)
+    ada = AdaBoostClassifier( n_estimators=n_estimators, learning_rate=learning_rate, random_state=42)
     # Validation croisée pour évaluer l'accuracy
     accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
     # Calcul de la moyenne des scores de précision
