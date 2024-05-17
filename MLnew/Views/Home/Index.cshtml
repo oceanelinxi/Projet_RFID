@@ -18,14 +18,14 @@
 
     <div class="zip">
         <h1 class="Titre">Welcome</h1>
-        <br> </br>
+
         <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload" target="uploadFrame">
             <div>
                 <iframe id="uploadFrame" name="uploadFrame" style="display: none;"></iframe>
                 <label for="files" class="label-upload">Choisissez les fichiers à télécharger (ZIP autorisés) :</label>
                 <input id="fileInput" type="file" name="files" multiple>
             </div>
-            <br> </br>
+
             <div>
                 <button type="submit" id="okButton" class="btn-upload">OK</button>
             </div>
@@ -34,7 +34,9 @@
 
     <form id="optionsForm" class="option-form" method="post" asp-controller="Home" asp-action="ExecuteMachineLearningTasks">
         <div id="optionsSection" style="display:none;">
-            <h1 class="sousTitre">Méthodes</h1>
+            <p>
+                <h1 class="sousTitre">Méthodes</h1>
+            </p>
             <div class="accordion-item" id="optionsAccordion">
                 <h3 class="accordion-header" id="headingOption1">
                     <div class="d-flex align-items-center">
@@ -56,15 +58,24 @@
                 </h3>
                 <div id="collapseOption2" class="accordion-collapse collapse" aria-labelledby="headingOption2">
                     <div class="accordion-body">
-                        <p><strong>Explication :</strong> Le "Random Forest" est un algorithme d'apprentissage automatique utilisé pour la classification et la régression. Il est basé sur la construction d'arbres de décision.</p>
-                        <p><strong>Choose one or more sub-options:</strong></p>
+                        <div class="explication">
+                            <p><strong>Explication :</strong> Le "Random Forest" est un algorithme d'apprentissage automatique utilisé pour la classification et la régression. Il est basé sur la construction d'arbres de décision.</p>
+                        </div>
                         <div>
-                            <p><strong>1. n_estimators:</strong></p>
-                            <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="33" required>
-                            <p><strong>2. max_depth:</strong></p>
-                            <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="8" min="1" max="100" required>
-                            <p><strong>3. min_samples_leaf:</strong></p>
-                            <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="1" min="1" max="100" required>
+                            <p><strong>Choose one or more sub-options:</strong></p>
+
+                            <p>
+                                <strong>1. n_estimators:</strong>
+                                <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="33" required>
+                            </p>
+                            <p>
+                                <strong>2. max_depth:</strong>
+                                <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="8" min="1" max="100" required>
+                            </p>
+                            <p>
+                                <strong>3. min_samples_leaf:</strong>
+                                <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="1" min="1" max="100" required>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -82,21 +93,27 @@
                 </h3>
                 <div id="collapseOption3" class="accordion-collapse collapse" aria-labelledby="headingOption3">
                     <div class="accordion-body">
-                        <p><strong>1. C:</strong></p>
-                        <input class="form-number" type="number" id="C-input" name="C_input" placeholder="Enter a positive float value" step="0.1" value="1.0" required>
-                        <p><strong>2. Kernel:</strong></p>
-                        <select id="kernel-select" name="kernel_select" class="form-select">
-                            <option value="linear">Linear</option>
-                            <option value="poly">Polynomial</option>
-                            <option value="rbf" selected>RBF</option>
-                            <option value="sigmoid">Sigmoid</option>
-                            <option value="precomputed">Precomputed</option>
-                        </select>
-                        <p><strong>3. Gamma:</strong></p>
-                        <select id="gamma-select" name="gamma_select" class="form-select">
-                            <option value="scale" selected>Scale</option>
-                            <option value="auto">Auto</option>
-                        </select>
+                        <p>
+                            <strong>1. C:</strong>
+                            <input class="form-number" type="number" id="C-input" name="C_input" placeholder="Enter a positive float value" step="0.1" value="1" required>
+                        </p>
+                        <p>
+                            <strong>2. Kernel:</strong>
+                            <select id="kernel-select" name="kernel_select" class="form-select">
+                                <option value="linear">Linear</option>
+                                <option value="poly">Polynomial</option>
+                                <option value="rbf" selected>RBF</option>
+                                <option value="sigmoid">Sigmoid</option>
+                                <option value="precomputed">Precomputed</option>
+                            </select>
+                        </p>
+                        <p>
+                            <strong>3. Gamma:</strong>
+                            <select id="gamma-select" name="gamma_select" class="form-select">
+                                <option value="scale" selected>Scale</option>
+                                <option value="auto">Auto</option>
+                            </select>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -113,26 +130,32 @@
                 </h3>
                 <div id="collapseOptionKNN" class="accordion-collapse collapse" aria-labelledby="headingOptionKNN">
                     <div class="accordion-body">
-                        <p><strong>1. n_neighbors:</strong></p>
-                        <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>
-                        <p><strong>2. weights:</strong></p>
-                        <select id="weights-select" name="weights" class="form-select">
-                            <option value="uniform">Uniform</option>
-                            <option value="distance">Distance</option>
-                        </select>
-                        <p><strong>3. metric:</strong></p>
-                        <select id="metric-select" name="metric" class="form-select">
-                            <option value="minkowski">Minkowski</option>
-                            <option value="euclidean">Euclidean</option>
-                            <option value="manhattan">Manhattan</option>
-                        </select>
+                        <p>
+                            <strong>1. n_neighbors:</strong>
+                            <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>
+                        </p>
+                        <p>
+                            <strong>2. weights:</strong>
+                            <select id="weights-select" name="weights" class="form-select">
+                                <option value="uniform">Uniform</option>
+                                <option value="distance">Distance</option>
+                            </select>
+                        </p>
+                        <p>
+                            <strong>3. metric:</strong>
+                            <select id="metric-select" name="metric" class="form-select">
+                                <option value="minkowski">Minkowski</option>
+                                <option value="euclidean">Euclidean</option>
+                                <option value="manhattan">Manhattan</option>
+                            </select>
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <br />
 
-            <input type="submit" value="submit" />
+
+            <input type="submit" id="submit" value="submit" />
         </div>
         <!--Nouveau pour KNN fin-->
 

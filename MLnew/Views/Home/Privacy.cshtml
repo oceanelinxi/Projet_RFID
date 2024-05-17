@@ -1,6 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+@{
+    //ViewBag.Title = "Equipe 1 RFID ML";
+    ViewBag.Message = "Voici nos members";
+}
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+    <p>"Le classement est sans ordre particulier."</p>
+    <ul>
+        <li>
+            <strong>TCHUISSEU SAMOU Randy Noé</strong>
 
-<p>Use this page to detail your site's privacy policy.</p>
+        </li>
+        <li>
+            <strong>KENMOGNE SIMO Glenn Anthony</strong>
+
+        </li>
+        <li>
+            <strong>FU Boya</strong>
+
+        </li>
+        <li>
+            <strong>SOULEY Achraf Chérif</strong>
+
+        </li>
+        <li>
+            <strong>CAPO-CHICHI Charly Ken Mahoutondji</strong>
+
+        </li>
+    </ul>
+</main>
