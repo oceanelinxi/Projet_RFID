@@ -389,22 +389,7 @@ namespace MLnew.Controllers
                 return View("ResultSVM");
             }
         }
-        public ActionResult Historique()
-        {
-            ViewBag.Message = "Your contact page.";
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Visiteur"))
-                {
-                    return View("Historique");
-                }
-                else if (User.IsInRole("Expert"))
-                {
-                    return View("Index");
-                }
-            }
-            return RedirectToPage("/Account/Login", new { area = "Identity" });
-        }
+        
         public ActionResult Ensembliste()
         {
             ViewBag.Message = "Your contact page.";
@@ -427,6 +412,24 @@ namespace MLnew.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public async Task<ActionResult> Historique(string start, string end, string userIds,
+                 string modelName)
+        {
+            dynamic users = GetAllUsers();
+            
+            DateTime startT = DateTime.Parse(start);
+            DateTime endT = DateTime.Parse(end);
+
+            var simulations = await _context.Simulation.Include(b => b.Methode)
+                .Where(s => s.DateSimulation >= startT && s.DateSimulation <= endT)
+                .Where(s => s.UserId == userIds)
+                .Where(j => j.Methode.Nom == modelName)
+                .ToListAsync();
+
+            ViewBag.simulation = simulations;
+            ViewBag.users = users;
+            return View("Historique");
         }
         public List<dynamic> GetAllUsers()
         {

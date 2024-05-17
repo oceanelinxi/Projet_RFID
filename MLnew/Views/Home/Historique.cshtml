@@ -9,14 +9,14 @@
 
 </head>
 <body>
-    <div style="text-align: center; margin-top: 50px;">
+    <div style="text-align: left; margin-top: 50px;">
         <h2>Sélection de date et d'options</h2>
-        <form id="selectionForm">
+        <form id="selectionForm" asp-controller="Home" asp-action="Historique">
             <input type="checkbox" id="dateCheckbox" name="dateCheckbox">
             <label for="startTime">1.Duree-Début :</label>
-            <input type="text" id="startTime" name="startTime" placeholder="Sélectionnez la date et l'heure" style="width: 250px;"><br><br>
+            <input type="text" id="startTime" name="start" placeholder="Sélectionnez la date et l'heure" style="width: 250px;"><br><br>
             <label for="endTime">-Fin :</label>
-            <input type="text" id="endTime" name="endTime" placeholder="Sélectionnez la date et l'heure" style="width: 250px;"><br><br>
+            <input type="text" id="endTime" name="end" placeholder="Sélectionnez la date et l'heure" style="width: 250px;"><br><br>
 
             <input type="checkbox" id="userCheckbox" name="userCheckbox">
             <label for="user">2.Utilisateur :</label>
@@ -29,13 +29,15 @@
 
             <input type="checkbox" id="modeleCheckbox" name="modeleCheckbox">
             <label for="modele">3.Modèle :</label>
-            <select id="modele">
+            <select id="modele" name="modelName">
                 <option value="svm">SVM</option>
                 <option value="knn">KNN</option>
                 <option value="RandomForest">Random Forest</option>
             </select><br><br>
 
-            <button type="button" onclick="submitForm()">Soumettre</button>
+            <button type="button" onclick="submitForm()">Valider Choix</button>
+            <br /><br />
+            <input type="submit" value="Extraire Historique" />
         </form>
     </div>
     @if (ViewBag.simulation != null)
