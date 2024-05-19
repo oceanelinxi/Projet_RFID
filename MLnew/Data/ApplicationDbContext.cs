@@ -25,5 +25,11 @@ namespace MLnew.Data
                 .IsRequired();
            
         }
+
+        public DbSet<MLnew.Models.Modele>? Modele { get; set; }
+
+        public DbSet<MLnew.Models.Parametre>? Parametre { get; set; }
+
+        public DbSet<MLnew.Models.Historique>? Historique { get; set; }
     }
 }

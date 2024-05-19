@@ -3,6 +3,7 @@ from analytique import methode_analytique
 from RandomForest import RFcross_validation, pretraitement_knn, dataset
 from SVM import train_and_evaluate_svm
 from knn import knnn
+from knn import evaluate_adaboost_rf
 from analytique import methode_analytique
 from datetime import datetime
 import zipfile
@@ -87,7 +88,63 @@ def cheminCourbe():
     return jsonify({'path' : picpath})
 
 
-@app.route('/XGDT', methods=['POST'])
+@app.route('/AdaRF', methods=['POST'])
+def ada_rf():
+    input_params = request.get_json()
+    n_estimators = int(input_params['n_estimators'])
+    max_depth = int(input_params['max_depth'])
+    min_samples_leaf = int(input_params['min_samples_leaf'])
+    critere= str(input_params['critere'])
+    min_s_s= int(input_params['min_s_s'])
+    min_w_f= float(input_params['min_w_f'])
+    max_feat= str(input_params['max_feat'])
+    max_l_n= int(input_params['max_l_n'])
+    min_impurity= float(input_params['min_impurity'])
+    boot=bool(input_params['boot'])
+    oob=bool(input_params['oob'])
+    n_job= int(input_params['n_job'])
+    random= int(input_params['random'])
+    verbo= int(input_params['verbo'])
+    warm= bool(input_params['warm'])
+    class_w= str(input_params['class_w'])
+    ccp= float(input_params['ccp'])
+    max_sample= int(input_params['max_sample'])
+    cv=int(input_params['cv'])
+
+    if(class_w=='none'):
+        class_w=None
+    if(max_depth==0):
+        max_depth=None
+    if(max_l_n==0):
+        max_l_n=None
+    if(n_job==0):
+        n_job=None
+    if(random==0):
+        random=None
+    if(max_sample==0):
+        max_sample=None
+    print(n_estimators)
+    print(max_depth)
+    print(min_samples_leaf)
+    print(critere)
+    print(min_s_s)
+    print(min_w_f)
+    print(max_feat)
+    print(max_l_n)
+    print(min_impurity)
+    print(boot)
+    print(oob)
+    print(n_job)
+    print(random)
+    print(verbo)
+    print(warm)
+    print(class_w)
+    print(ccp)
+    print(max_sample)
+    print(cv)
+
+    mean_accuracy=evaluate_adaboost_rf(data,cv,n_estimators,critere,max_depth,min_s_s,min_samples_leaf,min_w_f,max_feat,max_l_n,min_impurity,boot,oob,n_job,random,verbo,warm,class_w,ccp,max_sample)
+    return jsonify({'mean_accuracy': mean_accuracy})
 
 
 @app.route('/knn', methods=['POST'])
