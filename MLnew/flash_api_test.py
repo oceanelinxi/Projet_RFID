@@ -5,6 +5,7 @@ from SVM import train_and_evaluate_svm
 from knn import knnn
 from knn import evaluate_adaboost_rf
 from knn import evaluate_adaboost_svm
+from knn import evaluate_adaboost_knn
 from analytique import methode_analytique
 from datetime import datetime
 import zipfile
@@ -186,12 +187,35 @@ def ada_svm():
     print(cv_svm)
     print(random_s)
     print(verbos)
-
-   
-
- 
-
     mean_accuracy=evaluate_adaboost_svm(data,cv_svm,C,kernels,degre,gamma,coef,shrinkings,prob,tols,cach_size,class_we,verbos,max_it,decision_func,break_t,random_s)
+    return jsonify({'mean_accuracy': mean_accuracy})
+
+
+@app.route('/AdaKNN',methods=['POST'])
+def ada_knn():
+    input_params = request.get_json()
+    n_neighbor=int(input_params['n_neighbor'])
+    weight=str(input_params['weight'])
+    metrics=str(input_params['metrics'])
+    algo=str(input_params['algo'])
+    leaf_sizes=int(input_params['leaf_sizes'])
+    n_job_knn=int(input_params['n_job_knn'])
+    p_knn=float(input_params['p_knn'])
+    cv_fold_knn=int(input_params['cv_fold_knn'])
+   
+    if(n_job_knn==0):
+        n_job_knn=None
+   
+    print(n_neighbor)
+    print(weight)
+    print(metrics)
+    print(algo)
+    print(leaf_sizes)
+    print(n_job_knn)
+    print(p_knn)
+    print(cv_fold_knn)
+    
+    mean_accuracy=evaluate_adaboost_knn(data,cv_fold_knn,n_neighbor, weight, algo, leaf_sizes, p_knn, metrics, n_job_knn)
     return jsonify({'mean_accuracy': mean_accuracy})
 
  

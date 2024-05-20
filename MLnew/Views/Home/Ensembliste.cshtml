@@ -277,7 +277,16 @@
                         <div id="KNNDiv" class="hidden">
                             <div class="accordion-body">
 
-
+                                <p>cv_folds</p>
+                                <div>
+                                    <input class="form-number" type="number" id="criterion-cv_folds_knn-input" name="cv_folds_knn" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                                </div>
+                                <div class="explication">
+                                    <p>
+                                        Explication :
+                                        Determines the cross-validation splitting strategy.
+                                    </p>
+                                </div>
                                 <p>1. n_neighbors:</p>
                                 <div>
                                     <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>

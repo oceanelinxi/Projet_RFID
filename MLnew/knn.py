@@ -291,16 +291,16 @@ def evaluate_adaboost_rf(ds:pd.DataFrame,cv_folds,n_estimators=100,criterion='gi
 #print(f"Mean accuracy of the model across all folds: {mean_accuracy}")
 
 
-def evaluate_adaboost_knn(ds:pd.DataFrame,cv_folds,n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None):
+def evaluate_adaboost_knn(ds:pd.DataFrame,cv_folds,n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', n_jobs=None):
    label_encoder = LabelEncoder()
    # data = pretraitement_knn() 
    # ds = dataset(data[0],data[1],data[2])
    X = ds[Xcols_func('rssi & rc only',ds.columns)]
    y = LabelEncoder().fit_transform(ds['actual'])
    # Création du modèle de base (KNN)
-   base_estimator = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm, leaf_size=leaf_size, p=p, metric=metric, metric_params=metric_params, n_jobs=n_jobs)
+   base_estimator = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm, leaf_size=leaf_size, p=p, metric=metric, n_jobs=n_jobs)
    # Création du modèle AdaBoost avec les hyperparamètres spécifiés
-   ada = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=50, learning_rate=1.0, random_state=42)
+   ada = AdaBoostClassifier(estimator=base_estimator, n_estimators=50, learning_rate=1.0, random_state=42,algorithm='SAMME')
    # Validation croisée pour évaluer l'accuracy
    accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
    # Calcul de la moyenne des scores de précision

@@ -258,6 +258,34 @@ namespace MLnew.Controllers
             }
         }
 
+        public async Task<string> AdaBoostKNN(int n_neighbors, string weights, string metric, string algorithm, int leaf_size, int n_jobs_knn, string p,int cv_folds_knn)
+        {
+            using (var client = new HttpClient())
+            {
+                // Définir le timeout du client HTTP à 200 secondes
+                client.Timeout = TimeSpan.FromSeconds(200);
+                var requestData = new
+                {
+                    n_neighbor = n_neighbors,
+                    weight = weights,
+                    metrics = metric,
+                    algo = algorithm,
+                    leaf_sizes = leaf_size,
+                    n_job_knn = n_jobs_knn,
+                    p_knn = p,
+                    cv_fold_knn= cv_folds_knn
+
+
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/AdaKNN", content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                return result;
+            }
+        }
+
         public ActionResult Select()
         {
             ViewBag.Message = "Your contact page.";
@@ -532,7 +560,8 @@ namespace MLnew.Controllers
 
 
         public async Task<ActionResult> MethodesEnsemblistes(bool? mainOption1, bool? mainOption2, int n_est, int max_d, int min_samples, string criterion, int min_samples_split, float min_weight_fraction_leaf, string max_features, int max_leaf_nodes, float min_impurity_decrease, bool bootstrap, bool oob_score, int n_jobs, int random_state, int verbose, bool warm_start, string class_weight, float ccp_alpha, int max_samples, int cv_folds, string algorithmSelect,
-            string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size, string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm, int n_jobs_knn)
+            string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size, string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm,
+            int n_neighbors,string weights,string metric,string algorithm,int leaf_size,int n_jobs_knn,string p, int cv_folds_knn)
         {
             if (mainOption1 == true)
             {
@@ -568,6 +597,19 @@ namespace MLnew.Controllers
                     {
                         acc = (float)jsonResult.mean_accuracy;
                     }
+                }
+                if(algorithmSelect =="KNN")
+                {
+                    var resultAdaKNN = await AdaBoostKNN( n_neighbors,  weights,  metric,  algorithm,  leaf_size,  n_jobs_knn, p, cv_folds_knn);
+                    ViewBag.AdaBoostKNN = resultAdaKNN;
+
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultAdaKNN);
+                    var acc = 98.2;
+                    if (jsonResult != null && jsonResult.mean_accuracy != null)
+                    {
+                        acc = (float)jsonResult.mean_accuracy;
+                    }
+
                 }
 
             }
