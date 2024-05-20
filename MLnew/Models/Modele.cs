@@ -12,6 +12,6 @@ namespace MLnew.Models
         public int DureeSec { get; set; }
         public string? Nom { get; set; }
         public virtual ICollection<Parametre> Parametres { get; set; } = new List<Parametre>();
-        public Historique Historique { get; set; }
+        public virtual Historique Historique { get; set; }
     }
 }

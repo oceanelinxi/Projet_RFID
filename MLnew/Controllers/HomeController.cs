@@ -287,8 +287,12 @@ namespace MLnew.Controllers
                 {
                     acc = (float)jsonResult.accuracy;
                 }
-
-                Methode methode = new Methode
+                Historique hist = new Historique
+                {
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    DateSimulation = DateTime.Now,
+                };
+                /*Methode methode = new Methode
                 {
                     Nom = "RandomForest",
                     Param1 = n_est.ToString(),
@@ -310,7 +314,7 @@ namespace MLnew.Controllers
                 };
                 
                 _context.Simulation.Add(simulation);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();*/
 
             }
 
@@ -448,19 +452,10 @@ namespace MLnew.Controllers
         {
             using (var client = new HttpClient())
             {
-                /*var requestData = new
-                {
-                    methode = ml,
-                    hyperparametre = hp
-                };
-                 
-                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:5000/CourbesPrecision", content);
-                var result = await response.Content.ReadAsStringAsync();*/
-                ViewBag.MLmodel = ml;
-                ViewBag.hparam = hp;
+               ViewBag.MLmodel = ml;
+               ViewBag.hparam = hp;
                 //ViewBag.path = result;
-                return View("ResultSVM");
+               return View("ResultSVM");
             }
         }
         
