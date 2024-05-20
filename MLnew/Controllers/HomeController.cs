@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using NuGet.Protocol;
 using System.Security.Claims;
 using System.Drawing;
+using Humanizer;
 
 namespace MLnew.Controllers
 {
@@ -182,8 +183,9 @@ namespace MLnew.Controllers
 
         }
 
+
         //Adaboost
-        public async Task<string> AdaBoostRF(int n_est, int max_d, int min_samples,string criterion,int min_samples_split,float min_weight_fraction_leaf,string max_features,int max_leaf_nodes,float min_impurity_decrease,bool bootstrap,bool oob_score,int n_jobs,int random_state,int verbose,bool warm_start,string class_weight,float ccp_alpha,int max_samples,int cv_folds)
+        public async Task<string> AdaBoostRF(int n_est, int max_d, int min_samples, string criterion, int min_samples_split, float min_weight_fraction_leaf, string max_features, int max_leaf_nodes, float min_impurity_decrease, bool bootstrap, bool oob_score, int n_jobs, int random_state, int verbose, bool warm_start, string class_weight, float ccp_alpha, int max_samples, int cv_folds)
         {
             using (var client = new HttpClient())
             {
@@ -194,26 +196,60 @@ namespace MLnew.Controllers
                     n_estimators = n_est,
                     max_depth = max_d,
                     min_samples_leaf = min_samples,
-                    critere= criterion,
-                    min_s_s= min_samples_split,
-                    min_w_f= min_weight_fraction_leaf,
-                    max_feat= max_features,
-                    max_l_n= max_leaf_nodes,
-                    min_impurity= min_impurity_decrease,
-                    boot=bootstrap,
-                    oob=oob_score,
-                    n_job= n_jobs,
-                    random= random_state,
-                    verbo= verbose,
-                    warm= warm_start,
-                    class_w= class_weight,
-                    ccp= ccp_alpha,
-                    max_sample= max_samples,
-                    cv=cv_folds
+                    critere = criterion,
+                    min_s_s = min_samples_split,
+                    min_w_f = min_weight_fraction_leaf,
+                    max_feat = max_features,
+                    max_l_n = max_leaf_nodes,
+                    min_impurity = min_impurity_decrease,
+                    boot = bootstrap,
+                    oob = oob_score,
+                    n_job = n_jobs,
+                    random = random_state,
+                    verbo = verbose,
+                    warm = warm_start,
+                    class_w = class_weight,
+                    ccp = ccp_alpha,
+                    max_sample = max_samples,
+                    cv = cv_folds
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("http://localhost:5000/AdaRF", content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                return result;
+            }
+        }
+            public async Task<string> AdaBoostSVM(string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size,string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm)
+        {
+            using (var client = new HttpClient())
+            {
+                // Définir le timeout du client HTTP à 200 secondes
+                client.Timeout = TimeSpan.FromSeconds(200);
+                var requestData = new
+                {
+                    C = C_input_svm,
+                    kernels = kernel_select,
+                    gamma = gamma_select,
+                    degre = degree,
+                    coef = coef0,
+                    shrinkings = shrinking,
+                    prob = probability,
+                    tols = tol,
+                    cach_size = cache_size,
+                    max_it = max_iter,
+                    decision_func = decision_function_shape,
+                    random_s = random_state_svm,
+                    verbos = verbose_svm,
+                    break_t = break_ties,
+                    class_we = class_weight_svm,
+                    cv_svm = cv_folds_svm,
+                   
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/AdaSVM", content);
                 var result = await response.Content.ReadAsStringAsync();
 
                 return result;
@@ -413,30 +449,43 @@ namespace MLnew.Controllers
         }
 
 
-        public async Task<ActionResult> MethodesEnsemblistes(bool? mainOption1, bool? mainOption2, int n_est, int max_d, int min_samples, string criterion, int min_samples_split, float min_weight_fraction_leaf, string max_features, int max_leaf_nodes, float min_impurity_decrease, bool bootstrap, bool oob_score, int n_jobs, int random_state, int verbose, bool warm_start, string class_weight, float ccp_alpha, int max_samples,int cv_folds,string algorithmSelect)
+        public async Task<ActionResult> MethodesEnsemblistes(bool? mainOption1, bool? mainOption2, int n_est, int max_d, int min_samples, string criterion, int min_samples_split, float min_weight_fraction_leaf, string max_features, int max_leaf_nodes, float min_impurity_decrease, bool bootstrap, bool oob_score, int n_jobs, int random_state, int verbose, bool warm_start, string class_weight, float ccp_alpha, int max_samples, int cv_folds, string algorithmSelect,
+            string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size, string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm, int n_jobs_knn)
         {
             if (mainOption1 == true)
             {
-              
 
-               
+
+
 
             }
 
             if (mainOption2 == true)
             {
-                if(algorithmSelect== "Random Forest")
-                { 
-
-                var resultAdaRF = await AdaBoostRF(n_est, max_d, min_samples, criterion, min_samples_split, min_weight_fraction_leaf, max_features, max_leaf_nodes, min_impurity_decrease, bootstrap, oob_score, n_jobs, random_state, verbose, warm_start, class_weight, ccp_alpha, max_samples, cv_folds);
-                ViewBag.AdaBoostRF = resultAdaRF;
-
-                dynamic jsonResult = JsonConvert.DeserializeObject(resultAdaRF);
-                var acc = 98.2;
-                if (jsonResult != null && jsonResult.mean_accuracy != null)
+                if (algorithmSelect == "Random Forest")
                 {
-                    acc = (float)jsonResult.mean_accuracy;
+
+                    var resultAdaRF = await AdaBoostRF(n_est, max_d, min_samples, criterion, min_samples_split, min_weight_fraction_leaf, max_features, max_leaf_nodes, min_impurity_decrease, bootstrap, oob_score, n_jobs, random_state, verbose, warm_start, class_weight, ccp_alpha, max_samples, cv_folds);
+                    ViewBag.AdaBoostRF = resultAdaRF;
+
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultAdaRF);
+                    var acc = 98.2;
+                    if (jsonResult != null && jsonResult.mean_accuracy != null)
+                    {
+                        acc = (float)jsonResult.mean_accuracy;
+                    }
                 }
+                if (algorithmSelect == "SVM")
+                {
+                    var resultAdaSVM = await AdaBoostSVM(C_input_svm, kernel_select, gamma_select, degree, coef0, shrinking, probability, tol, cache_size, class_weight_svm, verbose_svm, max_iter, decision_function_shape, break_ties, random_state_svm, cv_folds_svm);
+                    ViewBag.AdaBoostSVM = resultAdaSVM;
+
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultAdaSVM);
+                    var acc = 98.2;
+                    if (jsonResult != null && jsonResult.mean_accuracy != null)
+                    {
+                        acc = (float)jsonResult.mean_accuracy;
+                    }
                 }
 
             }

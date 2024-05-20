@@ -279,8 +279,9 @@
 
 
                                 <p>1. n_neighbors:</p>
-
-                                <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>
+                                <div>
+                                    <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>
+                                </div>
                                 <div class="explication">
                                     <p>Number of neighbors to use by default for kneighbors queries.</p>
                                 </div>
@@ -315,12 +316,17 @@
                                     <p>Algorithm used to compute the nearest neighbors</p>
                                 </div>
                                 <p>5.leaf_size</p>
-                                <input class="form-number" type="number" id="leaf_size-input" name="leaf_size" value="30" min="1" max="100" required>
+                                <div>
+                                    <input class="form-number" type="number" id="leaf_size-input" name="leaf_size" value="30" min="1" max="100" required>
+                                </div>
                                 <div class="explication">
                                     <p>Leaf size passed to BallTree or KDTree. This can affect the speed of the construction and query, as well as the memory required to store the tree. The optimal value depends on the nature of the problem.</p>
                                 </div>
                                 <p>6.n_jobs</p>
-                                <input class="form-number" type="number" id="leaf_size-input" name="leaf_size"  min="-1" max="100" required placeholder="None">
+                                <div>
+                                    <input class="form-number" type="number" id="n_jobs_knn-input" name="n_jobs_knn" min="1" max="100" placeholder="None">
+
+                                </div>
                                 <div class="explication">
                                     <p>The number of parallel jobs to run for neighbors search. None means 1 unless in a joblib.parallel_backend context. -1 means using all processors.</p>
                                 </div>
@@ -334,17 +340,27 @@
 
 
 
+
                             </div>
                         </div>
 
                         <div id="SVMDiv" class="hidden">
                             <div class="accordion-body">
 
-
+                                <p>cv_folds</p>
+                                <div>
+                                    <input class="form-number" type="number" id="criterion-cv_folds-input" name="cv_folds_svm" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                                </div>
+                                <div class="explication">
+                                    <p>
+                                        Explication :
+                                        Determines the cross-validation splitting strategy.
+                                    </p>
+                                </div>
                                 <p>1. C:</p>
 
                                 <div>
-                                    <input class="form-number" type="number" id="C-input" name="C_input" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="1.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                    <input class="form-number" type="number" id="C_svm-input" name="C_input_svm" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="1.0" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
@@ -387,7 +403,6 @@
                                         If float, it must be positive.
                                     </p>
                                 </div>
-
                                 <p>4. degree:</p>
                                 <div>
                                     <input class="form-number" type="number" id="degree-input" name="degree" style="width: 230px;" placeholder="Enter a positive int value" pattern="\d+(\.\d+)?" value="3">
@@ -421,7 +436,7 @@
                                 </div>
                                 <p>7.probability</p>
                                 <select id="probability-select" name="probability" class="form-select">
-                                    <option value="True" >True</option>
+                                    <option value="True">True</option>
                                     <option value="False" selected>False</option>
                                 </select>
                                 <div class="explication">
@@ -432,7 +447,8 @@
                                 </div>
                                 <p>8.tol</p>
                                 <div>
-                                    <input class="form-number" type="number" id="tol-input" name="tol" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="0.001" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                    <input class="form-number" type="number" id="tol-input" name="tol" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="0.001"
+                                    oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
@@ -442,7 +458,7 @@
                                 </div>
                                 <p>9.cache_size</p>
                                 <div>
-                                    <input class="form-number" type="number" id="cache_size-input" name="cache_size" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="200" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                    <input class="form-number" type="number" id="cache_size-input" name="cache_size" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="200"  oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
@@ -451,7 +467,7 @@
                                     </p>
                                 </div>
                                 <p>10.class_weight</p>
-                                <select id="class_weight-select" name="class_weight" class="form-select">
+                                <select id="class_weight-select" name="class_weight_svm" class="form-select">
                                     <option value="balanced">balanced</option>
                                     <option value="None" selected>None</option>
                                 </select>
@@ -462,7 +478,7 @@
                                     </p>
                                 </div>
                                 <p>11.verbose</p>
-                                <select id="verbose-select" name="verbose" class="form-select">
+                                <select id="verbose-select" name="verbose_svm" class="form-select">
                                     <option value="True">True</option>
                                     <option value="False" selected>False</option>
                                 </select>
@@ -474,7 +490,7 @@
                                 </div>
                                 <p>12.max_iter</p>
                                 <div>
-                                    <input class="form-number" type="number" id="max_iter-input" name="max_iter" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="-1" min="-1" max="100" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                    <input class="form-number" type="number" id="max_iter-input" name="max_iter" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="-1" min="-1" max="100"  oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
@@ -507,7 +523,7 @@
                                 </div>
                                 <p>15.random_state</p>
                                 <div>
-                                    <input class="form-number" type="number" id="random_state-input" name="random_state" style="width: 230px;" placeholder="None" pattern="\d+(\.\d+)?" min="-1" max="100" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                    <input class="form-number" type="number" id="random_state-input" name="random_state" style="width: 230px;" placeholder="None" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
@@ -515,6 +531,8 @@
                                         Controls the pseudo random number generation for shuffling the data for probability estimates. Ignored when probability is False. Pass an int for reproducible output across multiple function calls.
                                     </p>
                                 </div>
+
+
 
 
 
@@ -554,7 +572,7 @@
                                 <p>2.max_depth:</p>
 
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100"  min="1" max="100" step="1" maxlength="3" ">
+                                    <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3" ">
 
                                 </div>
                                 <label class="form-check-label" for="criterion-max_depth-input">
@@ -644,7 +662,7 @@
                                 </div>
                                 <p>8.max_leaf_nodes</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-max_leaf_nodes-input" name="max_leaf_nodes" placeholder="Enter a positive integer between 1 and 100"  min="1" max="100" step="1" maxlength="3" ">
+                                    <input class="form-number" type="number" id="criterion-max_leaf_nodes-input" name="max_leaf_nodes" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3" ">
 
 
                                 </div>
@@ -695,7 +713,7 @@
                                 </div>
                                 <p>12.n_jobs</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_jobs-input" name="n_jobs" placeholder="Enter a positive integer between 1 and 100"  min="1" max="100" step="1" maxlength="3">
+                                    <input class="form-number" type="number" id="criterion-n_jobs-input" name="n_jobs" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
 
 
                                 </div>
@@ -708,7 +726,7 @@
                                 </div>
                                 <p>13.random_state</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-random_state-input" name="random_state" placeholder="Enter a positive integer between 1 and 100"  min="1" max="100" step="1" maxlength="3" >
+                                    <input class="form-number" type="number" id="criterion-random_state-input" name="random_state" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
 
 
                                 </div>
@@ -721,7 +739,7 @@
                                 </div>
                                 <p>14.verbose</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-verbose-input" name="verbose" placeholder="Enter a positive integer between 1 and 100" value="0" min="0" max="100" step="1" maxlength="3" >
+                                    <input class="form-number" type="number" id="criterion-verbose-input" name="verbose" placeholder="Enter a positive integer between 1 and 100" value="0" min="0" max="100" step="1" maxlength="3">
 
 
                                 </div>

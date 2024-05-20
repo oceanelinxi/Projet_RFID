@@ -6,6 +6,7 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.datasets import make_classification
 from sklearn.model_selection import cross_val_score
+from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -309,15 +310,18 @@ def evaluate_adaboost_knn(ds:pd.DataFrame,cv_folds,n_neighbors=5, weights='unifo
 
 
 
-def evaluate_adaboost_svm(C, kernel, gamma, n_estimators, learning_rate, cv_folds):
-   # Génération de données simulées
-   X, y = make_classification(n_samples=1000, n_features=20, n_informative=2, n_redundant=10, random_state=42)
-   # Création du modèle de base (SVM)
-   base_estimator = SVC(C=C, kernel=kernel, gamma=gamma)
-   # Création du modèle AdaBoost avec les hyperparamètres spécifiés
-   ada = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=n_estimators, learning_rate=learning_rate, random_state=42)
-   # Validation croisée pour évaluer l'accuracy
-   accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
-   # Calcul de la moyenne des scores de précision
-   mean_accuracy = accuracies.mean()
-   return mean_accuracy
+def evaluate_adaboost_svm(ds:pd.DataFrame,cv_folds,C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None):
+    label_encoder = LabelEncoder()
+    # data = pretraitement_knn() 
+    # ds = dataset(data[0],data[1],data[2])
+    X = ds[Xcols_func('rssi & rc only',ds.columns)]
+    y = LabelEncoder().fit_transform(ds['actual'])
+    # Création du modèle de base (KNN)
+    base_estimator = SVC(C=C, kernel=kernel, degree=degree, gamma=gamma, coef0=coef0, shrinking=shrinking, probability=probability, tol=tol, cache_size=cache_size, class_weight=class_weight, verbose=verbose, max_iter=max_iter, decision_function_shape=decision_function_shape, break_ties=break_ties, random_state=random_state)
+    # Création du modèle AdaBoost avec les hyperparamètres spécifiés
+    ada = AdaBoostClassifier(estimator=base_estimator, n_estimators=5, learning_rate=1.0, random_state=42,algorithm='SAMME')
+    # Validation croisée pour évaluer l'accuracy
+    accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
+    # Calcul de la moyenne des scores de précision
+    mean_accuracy = accuracies.mean()
+    return mean_accuracy

@@ -4,6 +4,7 @@ from RandomForest import RFcross_validation, pretraitement_knn, dataset
 from SVM import train_and_evaluate_svm
 from knn import knnn
 from knn import evaluate_adaboost_rf
+from knn import evaluate_adaboost_svm
 from analytique import methode_analytique
 from datetime import datetime
 import zipfile
@@ -145,6 +146,55 @@ def ada_rf():
 
     mean_accuracy=evaluate_adaboost_rf(data,cv,n_estimators,critere,max_depth,min_s_s,min_samples_leaf,min_w_f,max_feat,max_l_n,min_impurity,boot,oob,n_job,random,verbo,warm,class_w,ccp,max_sample)
     return jsonify({'mean_accuracy': mean_accuracy})
+
+@app.route('/AdaSVM',methods=['POST'])
+def ada_svm():
+    input_params = request.get_json()
+    C=float(input_params['C'])
+    kernels=str(input_params['kernels'])
+    gamma=str(input_params['gamma'])
+    degre=int(input_params['degre'])
+    coef=float(input_params['coef'])
+    shrinkings=bool(input_params['shrinkings'])
+    prob=bool(input_params['prob'])
+    tols=float(input_params['tols'])
+    cach_size=float(input_params['cach_size'])
+    max_it=int(input_params['max_it'])
+    decision_func=str(input_params['decision_func'])
+    break_t=bool(input_params['break_t'])
+    class_we=str(input_params['class_we'])
+    cv_svm=int(input_params['cv_svm'])
+    random_s=int(input_params['random_s'])
+    verbos=bool(input_params['verbos'])
+    if(class_we=="None"):
+        class_we=None
+    if(random_s==0):
+        random_s=None
+    print(C)
+    print(kernels)
+    print(gamma)
+    print(degre)
+    print(coef)
+    print(shrinkings)
+    print(prob)
+    print(tols)
+    print(cach_size)
+    print(max_it)
+    print(decision_func)
+    print(break_t)
+    print(class_we)
+    print(cv_svm)
+    print(random_s)
+    print(verbos)
+
+   
+
+ 
+
+    mean_accuracy=evaluate_adaboost_svm(data,cv_svm,C,kernels,degre,gamma,coef,shrinkings,prob,tols,cach_size,class_we,verbos,max_it,decision_func,break_t,random_s)
+    return jsonify({'mean_accuracy': mean_accuracy})
+
+ 
 
 
 @app.route('/knn', methods=['POST'])
