@@ -448,19 +448,10 @@ namespace MLnew.Controllers
         {
             using (var client = new HttpClient())
             {
-                /*var requestData = new
-                {
-                    methode = ml,
-                    hyperparametre = hp
-                };
-                 
-                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:5000/CourbesPrecision", content);
-                var result = await response.Content.ReadAsStringAsync();*/
-                ViewBag.MLmodel = ml;
-                ViewBag.hparam = hp;
+               ViewBag.MLmodel = ml;
+               ViewBag.hparam = hp;
                 //ViewBag.path = result;
-                return View("ResultSVM");
+               return View("ResultSVM");
             }
         }
         
