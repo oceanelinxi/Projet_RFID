@@ -138,6 +138,7 @@ namespace MLnew.Controllers
         {
             using (var client = new HttpClient())
             {
+                client.Timeout = TimeSpan.FromSeconds(200);
                 var requestData = new
                 {
                     Gamma = gamma_select,
@@ -159,6 +160,7 @@ namespace MLnew.Controllers
         {
             using (var client = new HttpClient())
             {
+                client.Timeout = TimeSpan.FromSeconds(200);
                 var requestData = new
                 {
                     Hyperparameter1 = n_neighbors,
@@ -270,8 +272,22 @@ namespace MLnew.Controllers
             return View();
         }
 
-        public async Task<ActionResult> ExecuteMachineLearningTasks(bool? mainOption1, bool? mainOption2, bool? mainOption3, bool? mainOption4, int n_est, int max_d, int min_samples, string gamma_select, float C_input, string kernel_select, string n_neighbors, string weights, string metric)
+        public async Task<ActionResult> ExecuteMachineLearningTasks(bool? mainOption1, bool? mainOption2, bool? mainOption3, bool? mainOption4,
+                     int n_est, int max_d, int min_samples,
+                     string gamma_select, float C_input, string kernel_select,
+                     string n_neighbors, string weights, string metric)
         {
+            //Création de la simulation en  BDD
+            Historique hist = new Historique
+            {
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                DateSimulation = DateTime.Now,
+            };
+            _context.Historique.Add(hist);
+            await _context.SaveChangesAsync();
+            var all_hists = await _context.Historique.ToListAsync();
+            int n_hist = all_hists.Count;
+
             if (mainOption1 == true)
             {
                 var resultAnalytique = await Methode_analytique();
@@ -306,51 +322,70 @@ namespace MLnew.Controllers
                 };
 
                 _context.Simulation.Add(simulation);
-                
-               
+
+
                 await _context.SaveChangesAsync();
 
             }
 
             if (mainOption2 == true)
             {
+                // Obtention des resultats python
                 var resultRandomForest = await RandomForest(n_est, max_d, min_samples);
                 ViewBag.RandomForestResult = resultRandomForest;
-                
+
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultRandomForest);
-                var acc = 98.2;
+                var acc = 98.2; int duree = -1;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
                     acc = (float)jsonResult.accuracy;
                 }
-                Historique hist = new Historique
+                if (jsonResult != null && jsonResult.duree != null)
                 {
-                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                    DateSimulation = DateTime.Now,
-                };
-                /*Methode methode = new Methode
+                    duree = jsonResult.duree;
+                }
+
+                //Enrgistrement dans la base de données
+                Modele model = new Modele
                 {
-                    Nom = "RandomForest",
-                    Param1 = n_est.ToString(),
-                    Param2 = max_d.ToString(),
-                    Param3 = min_samples.ToString()
+                    HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
+                    DureeSec = duree,
+                    Nom = "RandomForest"
                 };
-                _context.Methode.Add(methode);
+                _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
-                var all_methods = await _context.Methode.ToListAsync();
-                int size = all_methods.Count;
-                Simulation simulation = new Simulation
+                var all_models = await _context.Modele.ToListAsync();
+                int n_model = all_models.Count;
+
+                // n_estimators
+                Parametre param2 = new Parametre
                 {
-                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier), 
-                    MethodeId = all_methods[size-1].Id 
-                       ,
-                    Accuracy = (float)acc,
-                    DateSimulation = DateTime.Now,
-                    Duree = jsonResult.duree
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "n_estimators",
+                    Valeur = Convert.ToString(n_est)
                 };
-                
-                _context.Simulation.Add(simulation);
-                await _context.SaveChangesAsync();*/
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // max_depth
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_depth",
+                    Valeur = Convert.ToString(max_d)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // min_samples_leaf
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "min_samples_leaf",
+                    Valeur = Convert.ToString(min_samples)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
 
             }
 
@@ -360,34 +395,56 @@ namespace MLnew.Controllers
                 ViewBag.SVMResult = resultSVM;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultSVM);
-                var acc = 98.2;
+                var acc = 98.2; int duree = -1;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
                     acc = (float)jsonResult.accuracy;
                 }
-                Methode methode = new Methode
+                if (jsonResult != null && jsonResult.duree != null)
                 {
+                    duree = jsonResult.duree;
+                }
 
-                    Nom = "Methode_SVM",
-                    Param1 = C_input.ToString(),
-                    Param2 = kernel_select.ToString(),
-                    Param3 = gamma_select.ToString()
+                //Enrgistrement dans la base de données
+                Modele model = new Modele
+                {
+                    HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
+                    DureeSec = duree,
+                    Nom = "SVM"
                 };
-                _context.Methode.Add(methode);
+                _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
-                var all_methods = await _context.Methode.ToListAsync();
-                int size = all_methods.Count;
-                Simulation simulation = new Simulation
-                {
-                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                    MethodeId = all_methods[size - 1].Id
-                       ,
-                    Accuracy = (float)acc,
-                    DateSimulation = DateTime.Now,
-                    Duree = jsonResult.duree
-                };
+                var all_models = await _context.Modele.ToListAsync();
+                int n_model = all_models.Count;
 
-                _context.Simulation.Add(simulation);
+                // Gamma
+                Parametre param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "gamma",
+                    Valeur = Convert.ToString(gamma_select)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // C
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "C",
+                    Valeur = Convert.ToString(C_input)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // kernel
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "kernel",
+                    Valeur = Convert.ToString(kernel_select)
+                };
+                _context.Parametre.Add(param3);
                 await _context.SaveChangesAsync();
             }
 
@@ -397,33 +454,58 @@ namespace MLnew.Controllers
                 ViewBag.KNNResult = resultKNN;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultKNN);
-                var acc = 98.23;
+                var acc = 98.2; int duree = -1;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
                     acc = (float)jsonResult.accuracy;
                 }
-                Methode methode = new Methode
+                if (jsonResult != null && jsonResult.duree != null)
                 {
-                    Nom = "KNN",
-                    Param1 = n_neighbors.ToString(),
-                    Param2 = weights.ToString(),
-                    Param3 = metric.ToString()
-                };
-                 _context.Methode.Add(methode);
-                await _context.SaveChangesAsync();
-                var all_methods = await _context.Methode.ToListAsync();
-                int size = all_methods.Count;
-                Simulation simulation = new Simulation
-                {
-                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                    MethodeId = all_methods[size - 1].Id,
-                    Accuracy = (float)acc,
-                    DateSimulation = DateTime.Now,
-                    Duree = jsonResult.duree
-                };
+                    duree = jsonResult.duree;
+                }
 
-                _context.Simulation.Add(simulation);
+                //Enrgistrement dans la base de données
+                Modele model = new Modele
+                {
+                    HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
+                    DureeSec = duree,
+                    Nom = "SVM"
+                };
+                _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
+                var all_models = await _context.Modele.ToListAsync();
+                int n_model = all_models.Count;
+
+                // n_neighbors
+                Parametre param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "n_neighbors",
+                    Valeur = Convert.ToString(n_neighbors)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // metric
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "metric",
+                    Valeur = Convert.ToString(metric)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // weights
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "weights",
+                    Valeur = Convert.ToString(weights)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
             }
 
             // 返回到 Image 视图

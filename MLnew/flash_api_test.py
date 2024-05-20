@@ -49,8 +49,8 @@ def random_forest():
     input_params = request.get_json()
     
     accuracy = RFcross_validation(data,input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'])
-    duree_rf = datetime.now() - start 
-    print('Duree de rf : {}'.format(duree_rf.seconds))
+    duree_rf = (datetime.now() - start).seconds
+    print('Duree de rf : {}'.string(duree_rf))
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy, 'duree':str(duree_rf)})
  
@@ -64,8 +64,8 @@ def svm():
     print((input_params['Gamma'], input_params['C'], input_params['Kernel']))
     # Call the predict() function to make a prediction with SVM
     accuracy = train_and_evaluate_svm(input_params['Gamma'], input_params['C'], input_params['Kernel'])
-    duree_svm = (datetime.now()-start)
-    print('Duree svm {}'.format(duree_svm.seconds))
+    duree_svm = (datetime.now()-start).seconds
+    print('Duree svm {}'.format(duree_svm))
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy, 'duree':str(duree_svm)})
 
@@ -209,8 +209,8 @@ def knn():
     # Call the predict() function to make a prediction
     accuracy = knnn(data,hyperparameter1_value,hyperparameter2_value,hyperparameter3_value)
     
-    duree = (datetime.now()- start_knn)
-    print('Duree de knn : {}'.format(duree, duree.seconds))
+    duree = (datetime.now()- start_knn).seconds
+    print('Duree de knn : {}'.format(duree))
     print('accuracy', accuracy)
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy, 'duree':str(duree)})

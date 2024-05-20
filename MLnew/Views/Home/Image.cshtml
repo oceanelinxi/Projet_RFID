@@ -4,6 +4,11 @@
     string svmResult = ExtractNumber(ViewBag.SVMResult).ToString().Replace(",", ".");
     string knnResult = ExtractNumber(ViewBag.KNNResult).ToString().Replace(",", ".");
     string randomForestResult = ExtractNumber(ViewBag.RandomForestResult).ToString().Replace(",", ".");
+    
+    string Analytiqueduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
+    string RFduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
+    string SVMduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
+    string KNNduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
 
     // 提取数字的方法
     float ExtractNumber(string result)
@@ -20,44 +25,61 @@
         }
         return 0; // 默认返回值，根据需求进行修改
     }
-    
+    int ExtractDuree(string result)
+    {
+        if (!string.IsNullOrEmpty(result))
+        {
+            dynamic jsonResult = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
+            if (jsonResult != null && jsonResult.duree != null)
+            {
+                return (int)jsonResult.duree;
+            }
+        }
+        return 0;
+    }
+
 }
 <link rel="stylesheet" href="/css/Style_Image.css">
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
 </main>
-
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
-</main>
-@if (randomForestResult != null)
+@if (ViewBag.randomForestResult != null)
 {
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
+        <h3>Durée d'exécution de la méthode Random Forest : @RFduree </h3>
+
+    </main>
+
     <button id="showImageButton_rf">Afficher boxplot</button>
     <img id="monImage_rf" src="" style="display:none;" width="500px" height="300px" />
 }
 
-
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode SVM : @svmResult </h3>
-</main>
-@if (svmResult != null)
+@if (ViewBag.SVMResult != null)
 {
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode SVM : @svmResult </h3>
+        <h3>Durée d'exécution de la méthode Random Forest : @SVMduree </h3>
+    </main>
+
     <button id="showImageButton_svm">Afficher boxplot</button>
     <img id="monImage_svm" src="" style="display:none;" width="500px" height="300px" />
 }
-
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode KNN : @knnResult </h3>
-</main>
-@if (knnResult != null)
+@if (ViewBag.KNNResult != null)
 {
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode KNN : @knnResult </h3>
+        <h3>Durée d'exécution de la méthode Random Forest : @KNNduree </h3>
+    </main>
+
     <button id="showImageButton_knn">Afficher boxplot</button>
     <img id="monImage_knn" src="" style="display:none;" width="500px" height="300px" />
 }
+
 
 
 
