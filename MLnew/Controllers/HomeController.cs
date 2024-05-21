@@ -223,7 +223,9 @@ namespace MLnew.Controllers
                 return result;
             }
         }
-            public async Task<string> AdaBoostSVM(string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size,string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm)
+
+       
+        public async Task<string> AdaBoostSVM(string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size,string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm)
         {
             using (var client = new HttpClient())
             {
@@ -285,7 +287,87 @@ namespace MLnew.Controllers
                 return result;
             }
         }
+        //XGBoost
+        public async Task<string> XGBoost(string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        {
+            using (var client = new HttpClient())
+            {
+                // Définir le timeout du client HTTP à 200 secondes
+                client.Timeout = TimeSpan.FromSeconds(200);
+                var requestData = new
+                {
+                    Booster = booster,
+                    Silent = silent,
+                    Verbosity = verbosity,
+                    Objective = objective,
+                    EvalMetric = eval_metric,
+                    N_estimators = n_estimators,
+                    EarlyStopping = early_stopping_rounds,
+                    Seed = seed,
+                    Nthread = nthread
+                };
 
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/AdaRF", content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                return result;
+            }
+        }
+        public async Task<string> XGBoostKNN(int knn_neighbors, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        {
+            using (var client = new HttpClient())
+            {
+                // Définir le timeout du client HTTP à 200 secondes
+                client.Timeout = TimeSpan.FromSeconds(200);
+                var requestData = new
+                {
+                    Knn_neighbors = knn_neighbors,
+                    Booster = booster,
+                    Silent = silent,
+                    Verbosity = verbosity,
+                    Objective = objective,
+                    EvalMetric = eval_metric,
+                    N_estimators = n_estimators,
+                    EarlyStopping = early_stopping_rounds,
+                    Seed = seed,
+                    Nthread = nthread
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/AdaRF", content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                return result;
+            }
+        }
+        public async Task<string> XGBoostSVM(string svm_kernel, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        {
+            using (var client = new HttpClient())
+            {
+                // Définir le timeout du client HTTP à 200 secondes
+                client.Timeout = TimeSpan.FromSeconds(200);
+                var requestData = new
+                {
+                    Svm_kernel=svm_kernel,
+                    Booster = booster,
+                    Silent = silent,
+                    Verbosity = verbosity,
+                    Objective = objective,
+                    EvalMetric = eval_metric,
+                    N_estimators = n_estimators,
+                    EarlyStopping = early_stopping_rounds,
+                    Seed = seed,
+                    Nthread = nthread
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:5000/AdaRF", content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                return result;
+            }
+        }
         public ActionResult Select()
         {
             ViewBag.Message = "Your contact page.";
