@@ -11,6 +11,7 @@ namespace MLnew.Models
         public int HistoriqueID { get; set; }
         public int DureeSec { get; set; }
         public string? Nom { get; set; }
+        public float Accuracy {  get; set; }
         public virtual ICollection<Parametre> Parametres { get; set; } = new List<Parametre>();
         public virtual Historique Historique { get; set; }
     }

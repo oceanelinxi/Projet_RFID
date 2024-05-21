@@ -62,9 +62,9 @@ def svm():
     # Get the input parameters from the request
     input_params = request.get_json()
     print(input_params)
-    print((input_params['Gamma'], input_params['C'], input_params['Kernel']))
+    print((input_params['Gamma'], float(input_params['C']), input_params['Kernel']))
     # Call the predict() function to make a prediction with SVM
-    accuracy = train_and_evaluate_svm(input_params['Gamma'], input_params['C'], input_params['Kernel'])
+    accuracy = train_and_evaluate_svm(input_params['Gamma'], float(input_params['C']), input_params['Kernel'])
     duree_svm = (datetime.now()-start).seconds
     print('Duree svm {}'.format(duree_svm))
     # Return the prediction as JSON
