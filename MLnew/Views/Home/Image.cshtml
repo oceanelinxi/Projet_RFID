@@ -4,7 +4,7 @@
     string svmResult = ExtractNumber(ViewBag.SVMResult).ToString().Replace(",", ".");
     string knnResult = ExtractNumber(ViewBag.KNNResult).ToString().Replace(",", ".");
     string randomForestResult = ExtractNumber(ViewBag.RandomForestResult).ToString().Replace(",", ".");
-    
+
     string Analytiqueduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
     string RFduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
     string SVMduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
@@ -40,10 +40,14 @@
 
 }
 <link rel="stylesheet" href="/css/Style_Image.css">
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
-</main>
+@if (ViewBag.AnalytiqueResult != null)
+{
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
+        <h3>Durée d'exécution de la méthode Analytique : @Analytiqueduree </h3>
+    </main>
+}
 @if (ViewBag.randomForestResult != null)
 {
     <main aria-labelledby="title">
@@ -62,7 +66,7 @@
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
         <h3>Précision de la méthode SVM : @svmResult </h3>
-        <h3>Durée d'exécution de la méthode Random Forest : @SVMduree </h3>
+        <h3>Durée d'exécution de la méthode SVM : @SVMduree </h3>
     </main>
 
     <button id="showImageButton_svm">Afficher boxplot</button>
@@ -73,7 +77,7 @@
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
         <h3>Précision de la méthode KNN : @knnResult </h3>
-        <h3>Durée d'exécution de la méthode Random Forest : @KNNduree </h3>
+        <h3>Durée d'exécution de la méthode KNN : @KNNduree </h3>
     </main>
 
     <button id="showImageButton_knn">Afficher boxplot</button>
