@@ -1,4 +1,4 @@
-﻿﻿@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home_Index</title>
     <link rel="stylesheet" href="/css/Style_Index.css">
-    <!--font de mots-->
+    <!-- Font de mots -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
-
     <div class="zip">
         <h1 class="Titre">Welcome</h1>
 
@@ -25,7 +25,6 @@
                 <label for="files" class="label-upload">Choisissez les fichiers à télécharger (ZIP autorisés) :</label>
                 <input id="fileInput" type="file" name="files" multiple>
             </div>
-
             <div>
                 <button type="submit" id="okButton" class="btn-upload">OK</button>
             </div>
@@ -34,9 +33,7 @@
 
     <form id="optionsForm" class="option-form" method="post" asp-controller="Home" asp-action="ExecuteMachineLearningTasks">
         <div id="optionsSection" style="display:none;">
-            <p>
-                <h1 class="sousTitre">Méthodes</h1>
-            </p>
+            <h1 class="sousTitre">Méthodes</h1>
             <div class="accordion-item" id="optionsAccordion">
                 <h3 class="accordion-header" id="headingOption1">
                     <div class="d-flex align-items-center">
@@ -63,7 +60,6 @@
                         </div>
                         <div>
                             <p><strong>Choose one or more sub-options:</strong></p>
-
                             <p>
                                 <strong>1. n_estimators:</strong>
                                 <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="33" required>
@@ -153,319 +149,82 @@
                 </div>
             </div>
 
-
-
             <input type="submit" id="submit" value="submit" />
+            <button type="button" id="generatePdfButton" class="btn-generate-pdf">Generate PDF</button>
         </div>
-        <!--Nouveau pour KNN fin-->
-
-
-
-
     </form>
 
-</body>
-</html>
-
-@section Scripts {
     <script>
-        //Script bouton OK
-        document.getElementById('okButton').addEventListener('click', function () {
+        document.getElementById('okButton').addEventListener('click', function (event) {
             var optionsSection = document.getElementById('optionsSection');
             if (optionsSection.style.display === "none") {
-
                 optionsSection.style.display = "block";
-
             } else {
-
                 optionsSection.style.display = "none";
             }
         });
 
-        /*
-        //max_depth
-        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
-        document.getElementById('criterion-max_depth-checkbox').addEventListener('change', function () {
-            var input = document.getElementById('criterion-max_depth-input');
-            var select = document.getElementById('criterion-max_depth-select');
-            input.disabled = !this.checked;
-            select.disabled = !this.checked;
-            if (this.checked) {
-                input.focus(); // Mettre le champ de saisie en surbrillance
-                select.selectedIndex = 0; // Réinitialiser le sélecteur
-            } else {
-                input.value = ''; // Effacer la valeur du champ de saisie
-                select.selectedIndex = 0; // Réinitialiser le sélecteur
-            }
-        });
+        document.getElementById('generatePdfButton').addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
 
-        // Lorsque le champ de saisie perd le focus, effectuer une validation
-        document.getElementById('criterion-max_depth-input').addEventListener('blur', function () {
-            var value = parseInt(this.value);
-            if (isNaN(value) || value < 1 || value > 100) {
-                if (this.value.trim() !== '') {
-                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
-                    if (confirmation) {
-                        this.value = ''; // Effacer la saisie
-                        this.focus(); // Mettre le champ de saisie en surbrillance
+            doc.setFontSize(16);
+            doc.text("Machine Learning Parameters", 10, 10);
+            doc.setFontSize(12);
 
-                    }
-                }
-            }
-        });
+            let yPos = 20;
 
-        //n_estimators
-        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
-        document.getElementById('criterion-n_estimators-checkbox').addEventListener('change', function () {
-            var input = document.getElementById('criterion-n_estimators-input');
-            var select = document.getElementById('criterion-n_estimators-select');
-            input.disabled = !this.checked;
-            select.disabled = !this.checked;
-            if (this.checked) {
-                input.focus(); // Mettre le champ de saisie en surbrillance
-                select.selectedIndex = 0; // Réinitialiser le sélecteur
-            } else {
-                input.value = ''; // Effacer la valeur du champ de saisie
-                select.selectedIndex = 0; // Réinitialiser le sélecteur
-            }
-        });
-
-        // Lorsque le champ de saisie perd le focus, effectuer une validation
-        document.getElementById('criterion-n_estimators-input').addEventListener('blur', function () {
-            var value = parseInt(this.value);
-            if (isNaN(value) || value < 1 || value > 100) {
-                if (this.value.trim() !== '') {
-                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
-                    if (confirmation) {
-                        this.value = ''; // Effacer la saisie
-                        this.focus(); // Mettre le champ de saisie en surbrillance
-
-                    }
-                }
-            }
-        });
-
-        //min_samples_leaf
-        // Lorsque la case à cocher est cochée ou décochée, activer/désactiver les champs de saisie et les sélecteurs
-        document.getElementById('criterion-min_samples_leaf-checkbox').addEventListener('change', function () {
-            var input = document.getElementById('criterion-min_samples_leaf-input');
-         //   var select = document.getElementById('criterion-min_samples_leaf-select');
-            input.disabled = !this.checked;
-           // select.disabled = !this.checked;
-            if (this.checked) {
-                input.focus(); // Mettre le champ de saisie en surbrillance
-                //select.selectedIndex = 0; // Réinitialiser le sélecteur
-            } else {
-                input.value = ''; // Effacer la valeur du champ de saisie
-               // select.selectedIndex = 0; // Réinitialiser le sélecteur
-            }
-        });
-        // Javascript pour SVM
-        // C
-        document.getElementById('C-checkbox').addEventListener('change', function () {
-            var input = document.getElementById('C-input');
-            input.disabled = !this.checked;
-            if (this.checked) {
-                input.value = '1.0'; // Définir la valeur par défaut lors de l'activation
-            } else {
-                input.value = ''; // Effacer la valeur du champ de saisie
-            }
-        });
-
-        // Kernel
-        document.getElementById('kernel-checkbox').addEventListener('change', function () {
-            var select = document.getElementById('kernel-select');
-            select.disabled = !this.checked;
-            if (!this.checked) {
-                select.selectedIndex = 2; // Réinitialiser le sélecteur
-            }
-        });
-
-        // Gamma
-        document.getElementById('gamma-checkbox').addEventListener('change', function () {
-            var select = document.getElementById('gamma-select');
-            select.disabled = !this.checked;
-            if (!this.checked) {
-                select.selectedIndex = 0; // Réinitialiser le sélecteur
-            }
-        });
-        */
-        //Javascript pour KNN
-        document.getElementById('optionKNN-1').addEventListener('change', function () {
-            var input = document.getElementById('n_neighbors-input');
-            input.disabled = !this.checked;
-            if (this.checked) {
-                input.value = '5'; // La valeur par défaut pour n_neighbors
-            } else {
-                input.value = ''; // Effacer la valeur du champ de saisie
-            }
-        });
-
-        document.getElementById('optionKNN-2').addEventListener('change', function () {
-            var select = document.getElementById('weights-select');
-            select.disabled = !this.checked;
-            if (!this.checked) {
-                select.value = 'uniform'; // Réinitialiser à la valeur par défaut
-            }
-        });
-
-        document.getElementById('optionKNN-3').addEventListener('change', function () {
-            var select = document.getElementById('metric-select');
-            select.disabled = !this.checked;
-            if (!this.checked) {
-                select.value = 'minkowski'; // Réinitialiser à la valeur par défaut
-            }
-        });
-
-        // Pour gérer le déroulement de l'accordéon
-        document.getElementById('mainOptionKNN').addEventListener('change', function () {
-            var collapseElement = document.getElementById('collapseOptionKNN');
-            var accordionButton = document.querySelector('#headingOptionKNN .accordion-button');
-
-            if (this.checked) {
-                // Utiliser Bootstrap Collapse pour montrer les options
-                new bootstrap.Collapse(collapseElement, {
-                    toggle: true
-                });
-                accordionButton.classList.remove('collapsed');
-                collapseElement.classList.add('show');
-            } else {
-                // Utiliser Bootstrap Collapse pour cacher les options
-                new bootstrap.Collapse(collapseElement, {
-                    toggle: true
-                });
-                accordionButton.classList.add('collapsed');
-                collapseElement.classList.remove('show');
-                // Et désactiver les sous-options
-                document.getElementById('optionKNN-1').checked = false;
-                document.getElementById('n_neighbors-input').disabled = true;
-                document.getElementById('optionKNN-2').checked = false;
-                document.getElementById('weights-select').disabled = true;
-                document.getElementById('optionKNN-3').checked = false;
-                document.getElementById('metric-select').disabled = true;
-            }
-        });
-
-
-        // Lorsque le champ de saisie perd le focus, effectuer une validation
-        document.getElementById('criterion-min_samples_leaf-input').addEventListener('blur', function () {
-            var value = parseInt(this.value);
-            if (isNaN(value) || value < 1 || value > 100) {
-                if (this.value.trim() !== '') {
-                    var confirmation = confirm('Veuillez saisir un entier positif entre 1 et 100 pour max_depth.');
-                    if (confirmation) {
-                        this.value = ''; // Effacer la saisie
-                        this.focus(); // Mettre le champ de saisie en surbrillance
-
-                    }
-                }
-            }
-        });
-
-
-
-        // Fonction pour définir la valeur du sélecteur dans le champ de saisie correspondant
-        function updateInputFromSelect(selectId, inputId) {
-            var select = document.getElementById(selectId);
-            var input = document.getElementById(inputId);
-            select.addEventListener('change', function () {
-                input.value = this.value;
-            });
-
-            // Générer les options
-            for (var i = 1; i <= 100; i++) {
-                var option = document.createElement('option');
-                option.value = i;
-                option.text = i;
-                select.appendChild(option);
+            // Random Forest Parameters
+            if (document.getElementById('mainOption2').checked) {
+                doc.text("Random Forest:", 10, yPos);
+                yPos += 10;
+                doc.text(`n_estimators: ${document.getElementById('criterion-n_estimators-input').value}`, 20, yPos);
+                yPos += 10;
+                doc.text(`max_depth: ${document.getElementById('criterion-max_depth-input').value}`, 20, yPos);
+                yPos += 10;
+                doc.text(`min_samples_leaf: ${document.getElementById('criterion-min_samples_leaf-input').value}`, 20, yPos);
+                yPos += 20;
             }
 
-            // Ajouter un écouteur d'événements pour mettre à jour la valeur du champ de saisie lorsque l'option du sélecteur change
-            select.addEventListener('change', function () {
-                var selectedValue = parseInt(this.value);
-                input.value = selectedValue;
-
-            });
-        }
-        // Appeler la fonction pour ajouter la même fonctionnalité à chaque champ de saisie
-        updateInputFromSelect('criterion-n_estimators-select', 'criterion-n_estimators-input');
-        updateInputFromSelect('criterion-max_depth-select', 'criterion-max_depth-input');
-        updateInputFromSelect('criterion-min_samples_leaf-select', 'criterion-min_samples_leaf-input');
-
-
-        $(document).ready(function () {
-            // Activer les sous-options lorsque l'option principale est sélectionnée
-            $(' #mainOption2').change(function () {
-                var isChecked = $(this).is(':checked');
-                var accordionItem = $(this).closest('.accordion-item');
-
-                // Activer ou désactiver les sous-options
-                accordionItem.find('input[type=checkbox], input[type=text]').prop('disabled', !isChecked);
-
-                // Déplier ou replier les sous-options
-                var collapseTarget = accordionItem.find('.accordion-collapse');
-                if (isChecked) {
-                    collapseTarget.collapse('show');
-                } else {
-                    collapseTarget.collapse('hide');
-                }
-            });
-
-            // Lorsque le bouton est cliqué, effectuer l'action suivante
-            $('#nextButton').click(function () {
-                // Obtenir les options sélectionnées
-                var selectedOptions = [];
-                $('input[type=checkbox]:checked').each(function () {
-                    selectedOptions.push($(this).val());
-                });
-
-                // Obtenir les valeurs personnalisées saisies
-                $('input[type=text]').each(function () {
-                    var inputValue = $(this).val();
-                    if (inputValue !== "" && /^\d+$/.test(inputValue)) {
-                        selectedOptions.push(inputValue);
-                    }
-                });
-
-                // Afficher les options sélectionnées dans la console
-                console.log(selectedOptions);
-
-                // Vous pouvez écrire du code ici pour effectuer l'action suivante, comme envoyer les options pour traitement côté serveur, etc.
-            });
-        });
-
-        // Ajouter un écouteur d'événements pour le clic sur le bouton
-        document.getElementById("suivant-btn").addEventListener("click", function (event) {
-            var n_estimators = document.getElementById('criterion-n_estimators-input').value.trim();
-
-            if (n_estimators === '') {
-                // Affiche une alerte indiquant que le champ ne peut pas être vide
-                alert('Ce champ ne peut pas être laissé vide. Veuillez saisir une valeur.');
-            } else {
-                // Empêcher le comportement de soumission par défaut du formulaire
-                event.preventDefault();
-                // Exécuter la logique de redirection de la page, ici utiliser window.location.href pour rediriger vers Home/Select
-                window.location.href = "@Url.Action("Image", "Home")";
+            // SVM Parameters
+            if (document.getElementById('mainOption3').checked) {
+                doc.text("SVM:", 10, yPos);
+                yPos += 10;
+                doc.text(`C: ${document.getElementById('C-input').value}`, 20, yPos);
+                yPos += 10;
+                doc.text(`Kernel: ${document.getElementById('kernel-select').value}`, 20, yPos);
+                yPos += 10;
+                doc.text(`Gamma: ${document.getElementById('gamma-select').value}`, 20, yPos);
+                yPos += 20;
             }
+
+            // KNN Parameters
+            if (document.getElementById('mainOption4').checked) {
+                doc.text("KNN:", 10, yPos);
+                yPos += 10;
+                doc.text(`n_neighbors: ${document.getElementById('n_neighbors-input').value}`, 20, yPos);
+                yPos += 10;
+                doc.text(`weights: ${document.getElementById('weights-select').value}`, 20, yPos);
+                yPos += 10;
+                doc.text(`metric: ${document.getElementById('metric-select').value}`, 20, yPos);
+                yPos += 20;
+            }
+
+            doc.save("ML_Parameters.pdf");
         });
 
-        document.getElementById('mainOptionKNN').addEventListener('change', function () {
-            var inputs = document.querySelectorAll('#collapseOptionKNN .form-check-input');
-            inputs.forEach(input => input.disabled = !this.checked);
+        // JavaScript pour activer/désactiver les sous-options en fonction des cases à cocher
+        document.getElementById('mainOption2').addEventListener('change', function () {
+            document.getElementById('collapseOption2').style.display = this.checked ? 'block' : 'none';
         });
 
+        document.getElementById('mainOption3').addEventListener('change', function () {
+            document.getElementById('collapseOption3').style.display = this.checked ? 'block' : 'none';
+        });
 
-        //Savoir si le bouton de la methode analytique est cochee
-        var checkbox = document.getElementById('mainOption1');
-
-        // Vérifie si la case à cocher est cochée
-        if (checkbox.checked) {
-            console.log('La case à cocher est cochée.');
-        } else {
-            console.log('La case à cocher n\'est pas cochée.');
-        }
-
-
+        document.getElementById('mainOption4').addEventListener('change', function () {
+            document.getElementById('collapseOptionKNN').style.display = this.checked ? 'block' : 'none';
+        });
     </script>
-}
-
+</body>
+</html>
