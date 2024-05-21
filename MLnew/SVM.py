@@ -280,7 +280,7 @@ def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
 
 
  
-def train_and_evaluate_xgboost(booster:str, n_estimators:int):
+def train_and_evaluate_xgboost(booster:str,n_estimators:int,  verbosity:int , objective:str ,eval_metric:str,early_stopping_rounds:int,seed:int,nthread:int):
     ds = dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2])
     X = ds[Xcols_func('rssi & rc only', dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2]).columns)]
     label_encoder = LabelEncoder()
@@ -294,4 +294,64 @@ def train_and_evaluate_xgboost(booster:str, n_estimators:int):
     mean_score = np.mean(cv_scores)
 
     y_pred_cv = cross_val_predict(xgb_model, X, y, cv=kf)
+    return mean_score
+
+def train_and_evaluate_knn_xgboost(knn_neighbors:int, booster:str, n_estimators:int,  verbosity:int , objective:str ,eval_metric:str,early_stopping_rounds:int,seed:int,nthread:int):
+   
+    ds = dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2])
+    X = ds[Xcols_func('rssi & rc only', dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2]).columns)]
+    
+    label_encoder = LabelEncoder()
+    ds['actual'] = label_encoder.fit_transform(ds['actual'])
+    y = ds['actual']
+    
+    X = np.ascontiguousarray(X)
+   
+    knn = KNeighborsClassifier(n_neighbors=knn_neighbors)
+    
+   
+    kf = KFold(n_splits=5, shuffle=True, random_state=42)
+    knn_preds = cross_val_predict(knn, X, y, cv=kf, method='predict_proba')
+    
+   
+    X_combined = np.hstack((X, knn_preds))
+    
+   
+    xgb_model = XGBClassifier(booster=booster, n_estimators=n_estimators, num_parallel_tree=n_estimators,verbosity=verbosity,objective=objective,eval_metric=eval_metric,early_stopping_rounds=early_stopping_rounds,seed=seed,nthread=nthread)
+    
+   
+    cv_scores = cross_val_score(xgb_model, X_combined, y, cv=kf)
+    mean_score = np.mean(cv_scores)
+    
+    return mean_score
+
+def train_and_evaluate_svm_xgboost(svm_kernel:str, booster:str, n_estimators:int,verbosity:int , objective:str ,eval_metric:str,early_stopping_rounds:int,seed:int,nthread:int):
+    
+    ds = dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2])
+    X = ds[Xcols_func('rssi & rc only', dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2]).columns)]
+    
+    label_encoder = LabelEncoder()
+    ds['actual'] = label_encoder.fit_transform(ds['actual'])
+    y = ds['actual']
+    
+   
+    X = np.ascontiguousarray(X)
+
+   
+    svm = SVC(kernel=svm_kernel, probability=True)
+    
+   
+    kf = KFold(n_splits=5, shuffle=True, random_state=42)
+    svm_preds = cross_val_predict(svm, X, y, cv=kf, method='predict_proba')
+    
+ 
+    X_combined = np.hstack((X, svm_preds))
+    
+   
+    xgb_model = XGBClassifier(booster=booster, n_estimators=n_estimators,num_parallel_tree=n_estimators,verbosity=verbosity,objective=objective,eval_metric=eval_metric,early_stopping_rounds=early_stopping_rounds,seed=seed,nthread=nthread)
+    
+   
+    cv_scores = cross_val_score(xgb_model, X_combined, y, cv=kf)
+    mean_score = np.mean(cv_scores)
+    
     return mean_score
