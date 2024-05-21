@@ -206,3 +206,157 @@
         }
     });
 </script>
+<script>
+    // Fonction pour récupérer les paramètres de l'URL
+    function getParamsFromURL() {
+        let params = {};
+        let queryString = window.location.search.substring(1);
+        let pairs = queryString.split('&');
+
+        pairs.forEach(pair => {
+            let parts = pair.split('=');
+            let key = decodeURIComponent(parts[0]);
+            let value = decodeURIComponent(parts[1]);
+            params[key] = JSON.parse(value);
+        });
+
+        return params;
+    }
+
+    // Récupérer les paramètres de l'URL
+    let params = getParamsFromURL();
+    let randomForest = params.randomForest || '';
+    let svm = params.svm || '';
+    let knn = params.knn || '';
+
+    // Utiliser les paramètres récupérés
+    console.log(randomForest);
+    console.log(svm);
+    console.log(knn);
+
+    // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
+    function updateChart(selectedOptions) {
+        // Obtenir l'élément canvas
+        var ctx = document.getElementById('myChart').getContext('2d');
+        // Créer un nouveau graphique
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Diagramme en barres
+            data: {
+                labels: ['Analytique', 'Random Forest', 'SVM', 'KNN'], // Étiquettes pour chaque barre
+                datasets: [{
+                    label: 'Exactitude %',
+                    data: selectedOptions, // Valeurs en pourcentage pour chaque barre
+                    backgroundColor: [ // Couleur de fond des barres
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [ // Couleur de bordure des barres
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function (value) { return value + "%" } // Formatage des étiquettes de l'axe des y en pourcentage
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    // Appel de la fonction au chargement de la page avec les valeurs par défaut
+    updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult ]);
+</script>
+<button id="generatePDFButton">Générer PDF</button>
+<script>
+    // Récupérer les valeurs des résultats et des durées d'exécution
+    var analytiqueResult = parseFloat("@ViewBag.AnalytiqueResult");
+    var randomForestResult = parseFloat("@ViewBag.RandomForestResult");
+    var svmResult = parseFloat("@ViewBag.SVMResult");
+    var knnResult = parseFloat("@ViewBag.KNNResult");
+
+    var Analytiqueduree = parseInt("@ViewBag.Analytiqueduree");
+    var RFduree = parseInt("@ViewBag.RFduree");
+    var SVMduree = parseInt("@ViewBag.SVMduree");
+    var KNNduree = parseInt("@ViewBag.KNNduree");
+</script>
+<script>
+    // Gestionnaire d'événements pour le clic sur le bouton "Générer PDF"
+    document.getElementById('generatePDFButton').addEventListener('click', function () {
+        // Créer un nouvel objet jsPDF
+        var doc = new jsPDF();
+
+        // Ajouter du contenu au PDF
+        doc.text(20, 20, 'Précision de la méthode Analytique : ' + analytiqueResult + '%');
+        doc.text(20, 30, 'Durée d\'exécution de la méthode Analytique : ' + Analytiqueduree + ' ms');
+
+        doc.text(20, 50, 'Précision de la méthode Random Forest : ' + randomForestResult + '%');
+        doc.text(20, 60, 'Durée d\'exécution de la méthode Random Forest : ' + RFduree + ' ms');
+
+        doc.text(20, 80, 'Précision de la méthode SVM : ' + svmResult + '%');
+        doc.text(20, 90, 'Durée d\'exécution de la méthode SVM : ' + SVMduree + ' ms');
+
+        doc.text(20, 110, 'Précision de la méthode KNN : ' + knnResult + '%');
+        doc.text(20, 120, 'Durée d\'exécution de la méthode KNN : ' + KNNduree + ' ms');
+
+        // Enregistrer le PDF
+        doc.save('informations.pdf');
+    });
+        // Fonction pour récupérer les paramètres de l'URL côté client
+        function getParamsFromURL() {
+            let params = {};
+            let queryString = window.location.search.substring(1);
+            let pairs = queryString.split('&');
+
+            pairs.forEach(pair => {
+                let parts = pair.split('=');
+                let key = decodeURIComponent(parts[0]);
+                let value = decodeURIComponent(parts[1]);
+                params[key] = JSON.parse(value);
+            });
+
+            return params;
+        }
+
+    // Gestionnaire d'événements pour le clic sur le bouton "Générer PDF"
+    document.getElementById('generatePDFButton').addEventListener('click', function () {
+        // Créer un nouvel objet jsPDF
+        var doc = new jsPDF();
+
+        // Récupérer les paramètres de l'URL
+        var params = getParamsFromURL();
+        var randomForest = params.randomForest || '';
+        var svm = params.svm || '';
+        var knn = params.knn || '';
+
+        // Ajouter du contenu au PDF
+        doc.text(20, 20, 'Précision de la méthode Analytique : ' + analytiqueResult + '%');
+        doc.text(20, 30, 'Durée d\'exécution de la méthode Analytique : ' + Analytiqueduree + ' ms');
+
+        doc.text(20, 50, 'Précision de la méthode Random Forest : ' + randomForestResult + '%');
+        doc.text(20, 60, 'Durée d\'exécution de la méthode Random Forest : ' + RFduree + ' ms');
+
+        doc.text(20, 80, 'Précision de la méthode SVM : ' + svmResult + '%');
+        doc.text(20, 90, 'Durée d\'exécution de la méthode SVM : ' + SVMduree + ' ms');
+
+        doc.text(20, 110, 'Précision de la méthode KNN : ' + knnResult + '%');
+        doc.text(20, 120, 'Durée d\'exécution de la méthode KNN : ' + KNNduree + ' ms');
+
+        // Enregistrer le PDF
+        doc.save('informations.pdf');
+    });
+
+
+</script>
+
