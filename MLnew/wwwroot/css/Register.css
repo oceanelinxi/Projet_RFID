@@ -1,0 +1,115 @@
+﻿body {
+    background: linear-gradient(125deg,#b7f5de,#b0f4e6,#f5fac8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.body2 {
+    display: flex;
+    justify-content: center;
+}
+
+.register-container {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 60px 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+    .register-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+    .form-group label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #555;
+        text-align: left;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .form-group .input-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #aaa;
+    }
+
+.btn-primary {
+    background: #6e8efb;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.register-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .register-footer a {
+        color: #6e8efb;
+        text-decoration: none;
+        font-size: 14px;
+        display: block;
+        margin-top: 10px;
+    }
+
+        .register-footer a:hover {
+            text-decoration: underline;
+        }
+
+
+.register-container {
+    padding: 40px 20px;
+}
+
+    .register-container h1 {
+        font-size: 20px;
+    }
+
+.btn-primary {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.register-container {
+    padding: 30px 15px;
+}
+
+    .register-container h1 {
+        font-size: 18px;
+    }
+
+.btn-primary {
+    padding: 8px;
+    font-size: 12px;
+}

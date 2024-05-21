@@ -11,6 +11,8 @@ using NuGet.Protocol;
 using System.Security.Claims;
 using System.Drawing;
 using Humanizer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MLnew.Controllers
 {
@@ -18,11 +20,15 @@ namespace MLnew.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-   
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+           
         }
 
         public IActionResult Index()
@@ -33,7 +39,7 @@ namespace MLnew.Controllers
                 {
                     return RedirectToAction("IndexHistorique");
                 }
-                else if (User.IsInRole("Expert"))
+                else if (User.IsInRole("Expert") || User.IsInRole("Administrateur"))
                 {
                     return RedirectToAction("IndexAdmin");
                 }
@@ -42,17 +48,119 @@ namespace MLnew.Controllers
             return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
 
-        [Authorize(Roles = "Expert")]
+        [Authorize(Roles = "Expert,Administrateur")]
         public IActionResult IndexAdmin()
         {
             return View("Index");
         }
+
         [Authorize(Roles = "Visiteur")]
         public IActionResult IndexVisiteur()
         {
             return View("Image");
         }
-        [Authorize(Roles = "Expert")]
+
+        [Authorize(Roles = "Administrateur")]
+        public async Task<IActionResult> ConnectionHistory()
+        {
+            var connectionHistories = await _context.ConnectionHistory.ToListAsync();
+            return View(connectionHistories);
+        }
+
+        [Authorize(Roles = "Administrateur")]
+        public async Task<IActionResult> ManageRole()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            return View(users);
+        }
+
+        [Authorize(Roles = "Administrateur")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Logique pour supprimer l'utilisateur
+            await _userManager.DeleteAsync(user);
+
+            return RedirectToAction(nameof(ManageRole));
+        }
+
+        [Authorize(Roles = "Administrateur")]
+        public async Task<IActionResult> AssignRoles(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var roles = await _roleManager.Roles.ToListAsync();
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            ViewBag.UserId = user.Id;
+            ViewBag.Email = user.Email;
+            ViewBag.Roles = roles.Select(role => new SelectListItem
+            {
+                Value = role.Name,
+                Text = role.Name,
+                Selected = userRoles.Contains(role.Name)
+            }).ToList();
+
+            return View("AssignRoles");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrateur")]
+        public async Task<IActionResult> AssignRoles(string userId, string selectedRole)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            if (userRoles.Contains(selectedRole))
+            {
+                ViewBag.Message = $"L'utilisateur a déjà le rôle '{selectedRole}'.";
+                var roles = await _roleManager.Roles.ToListAsync();
+                ViewBag.UserId = user.Id;
+                ViewBag.Email = user.Email;
+                ViewBag.Roles = roles.Select(role => new SelectListItem
+                {
+                    Value = role.Name,
+                    Text = role.Name,
+                    Selected = userRoles.Contains(role.Name)
+                }).ToList();
+                return View();
+            }
+
+            var removeResult = await _userManager.RemoveFromRolesAsync(user, userRoles);
+
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to remove user roles.");
+                return View();
+            }
+
+            if (!string.IsNullOrEmpty(selectedRole))
+            {
+                var addResult = await _userManager.AddToRoleAsync(user, selectedRole);
+                if (!addResult.Succeeded)
+                {
+                    ModelState.AddModelError("", "Failed to add user role.");
+                    return View();
+                }
+            }
+
+
+            return RedirectToAction(nameof(ManageRole));
+        }
 
         public IActionResult Privacy()
         {
@@ -632,7 +740,7 @@ namespace MLnew.Controllers
                 {
                     return RedirectToAction("IndexVisiteur");
                 }
-                else if (User.IsInRole("Expert"))
+                else if (User.IsInRole("Expert") || User.IsInRole("Administrateur"))
                 {
                     return View("Index3");
                 }
@@ -713,7 +821,7 @@ namespace MLnew.Controllers
                return View("ResultSVM");
             }
         }
-        
+
         public ActionResult Ensembliste()
         {
             ViewBag.Message = "Your contact page.";
@@ -723,7 +831,7 @@ namespace MLnew.Controllers
                 {
                     return RedirectToAction("IndexVisiteur");
                 }
-                else if (User.IsInRole("Expert"))
+                else if (User.IsInRole("Expert") || User.IsInRole("Administrateur"))
                 {
                     return View("Ensembliste");
                 }

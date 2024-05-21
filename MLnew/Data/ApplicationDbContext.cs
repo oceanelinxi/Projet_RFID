@@ -31,5 +31,7 @@ namespace MLnew.Data
         public DbSet<MLnew.Models.Parametre>? Parametre { get; set; }
 
         public DbSet<MLnew.Models.Historique>? Historique { get; set; }
+
+        public DbSet<MLnew.Models.ConnectionHistory>? ConnectionHistory { get; set; }
     }
 }

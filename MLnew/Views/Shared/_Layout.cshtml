@@ -38,6 +38,24 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index3">Precision & Hyperparametres</a>
                                 </li>
                             }
+                            @if (User.IsInRole("Administrateur"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Ensembliste">Méthodes Ensemblistes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index3">Précision & Hyperparametres</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ConnectionHistory">Historique des connexions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ManageRole">Liste des Utilisateurs et Rôles</a>
+                                </li>
+                            }
                             @if (User.IsInRole("Visiteur"))
                             {
                                 <li class="nav-item">

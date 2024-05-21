@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using MLnew.Data;
 
 namespace MLnew.Areas.Identity.Pages.Account
 {
@@ -21,11 +23,15 @@ namespace MLnew.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -84,23 +90,6 @@ namespace MLnew.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
-        {
-            if (!string.IsNullOrEmpty(ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
-            }
-
-            returnUrl ??= Url.Content("~/");
-
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            ReturnUrl = returnUrl;
-        }
-
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -112,11 +101,35 @@ namespace MLnew.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var roles = await _userManager.GetRolesAsync(user);
+                    string role = roles.FirstOrDefault(); // Assuming one role per user
+
+                    // Obtenir le fuseau horaire de la France
+                    TimeZoneInfo franceTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Romance Standard Time");
+                    DateTime loginTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, franceTimeZone);
+
+                    // Créer un nouvel enregistrement de connexion
+                    var connectionHistory = new Models.ConnectionHistory
+                    {
+                        UserEmail = Input.Email,
+                        LoginTime = loginTime,
+                        LogoutTime = null, // LogoutTime est null lors de la connexion c'est logique
+                        Action = $"L'utilisateur s'est connecté comme un {role}."
+                    };
+
+                    // Ajouter l'historique de connexion à la base de données
+                    _context.ConnectionHistory.Add(connectionHistory);
+                    await _context.SaveChangesAsync();
                     return LocalRedirect(returnUrl);
                 }
+
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
@@ -136,5 +149,6 @@ namespace MLnew.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
 }
