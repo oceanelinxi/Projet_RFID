@@ -770,10 +770,10 @@ namespace MLnew.Controllers
                 }
                 if (algorithmSelect == "KNN")
                 {
-                    var resultXGBoostSVM = await XGBoostKNN(knn_neighbors,booster,silent,verbosity,objective,eval_metric,n_estimators,early_stopping_rounds,seed,nthread);
-                    ViewBag.XGBoostSVM = resultXGBoostSVM;
+                    var resultXGBoostKNN = await XGBoostKNN(knn_neighbors,booster,silent,verbosity,objective,eval_metric,n_estimators,early_stopping_rounds,seed,nthread);
+                    ViewBag.XGBoostKNN = resultXGBoostKNN;
 
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostSVM);
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostKNN);
                     var acc = 98.2;
                     if (jsonResult != null && jsonResult.mean_accuracy != null)
                     {
@@ -782,10 +782,10 @@ namespace MLnew.Controllers
                 }
                 if (algorithmSelect == "SVM")
                 {
-                    var resultXGBoostKNN = await XGBoostSVM(svm_kernel, booster, silent, verbosity, objective, eval_metric, n_estimators, early_stopping_rounds, seed, nthread);
-                    ViewBag.XGBoostKNN = resultXGBoostKNN;
+                    var resultXGBoostSVM = await XGBoostSVM(svm_kernel, booster, silent, verbosity, objective, eval_metric, n_estimators, early_stopping_rounds, seed, nthread);
+                    ViewBag.XGBoostSVM = resultXGBoostSVM;
 
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostKNN);
+                    dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostSVM);
                     var acc = 98.2;
                     if (jsonResult != null && jsonResult.mean_accuracy != null)
                     {
