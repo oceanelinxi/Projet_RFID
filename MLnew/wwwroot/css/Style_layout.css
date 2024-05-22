@@ -1,0 +1,9 @@
+﻿/* 导航栏链接悬停时的样式 */
+.navbar-nav .nav-item .nav-link:hover {
+    color: #007bff; /* 设置悬停时的文本颜色 */
+}
+
+/* 导航栏链接悬停时的背景色 */
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* 设置悬停时的背景色 */
+}
