@@ -410,11 +410,11 @@ namespace MLnew.Controllers
                 var requestData = new
                 {
                     Booster = booster,
-                   
+                    N_estimators = n_estimators,
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
-                    N_estimators = n_estimators,
+                   
                     EarlyStopping = early_stopping_rounds,
                     Seed = seed,
                     Nthread = nthread
@@ -437,11 +437,11 @@ namespace MLnew.Controllers
                 {
                     Knn_neighbors = knn_neighbors,
                     Booster = booster,
-                    
+                    N_estimators = n_estimators,
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
-                    N_estimators = n_estimators,
+                 
                     EarlyStopping = early_stopping_rounds,
                     Seed = seed,
                     Nthread = nthread
@@ -462,13 +462,13 @@ namespace MLnew.Controllers
                 client.Timeout = TimeSpan.FromSeconds(200);
                 var requestData = new
                 {
-                    Svm_kernel=svm_kernel,
+                    Svm_kernel = svm_kernel,
                     Booster = booster,
-        
+                    N_estimators = n_estimators,
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
-                    N_estimators = n_estimators,
+                    
                     EarlyStopping = early_stopping_rounds,
                     Seed = seed,
                     Nthread = nthread
@@ -1130,7 +1130,7 @@ namespace MLnew.Controllers
 
                     var resultXGBoost = await  XGBoost(booster, n_estimators, verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
                     ViewBag.XGBoost = resultXGBoost;
-
+                    
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoost);
                     var acc = 98.2;
                     if (jsonResult != null && jsonResult.mean_accuracy != null)
