@@ -46,9 +46,9 @@
                 </h3>
                 <div id="collapseOption1" class="accordion-collapse collapse" aria-labelledby="headingOption1">
                     <div class="accordion-body">
-                       
+
                         <div>
-                            
+
                             <p>
                                 <strong>1. step:</strong>
                             </p>
@@ -60,7 +60,7 @@
 
                                 </p>
                             </div>
-                            
+
                             <p>
                                 <strong>3. t0_run</strong>
                             </p>
@@ -72,8 +72,8 @@
 
                                 </p>
                             </div>
-                            
-                           
+
+
                         </div>
                     </div>
                 </div>
@@ -97,17 +97,246 @@
                         <div>
                             <p><strong>Choose one or more sub-options:</strong></p>
                             <p>
-                                <strong>1. n_estimators:</strong>
+                                1. n_estimators:
                                 <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="33" required>
                             </p>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    n_estimators int, default=33<br>
+                                    Le nombre d'arbres de décision dans la forêt. Plus il est élevé, plus le modèle aura de la facilité à apprendre.<br />
+                                    Cependant si la valeur est trop élevé pour les données, le modèle risque d'être surentraîné et de mal se généraliser.
+                                </p>
+                            </div>
                             <p>
-                                <strong>2. max_depth:</strong>
+                                2. max_depth:
                                 <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="8" min="1" max="100" required>
                             </p>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    max_depthint, default=None<br>
+                                    The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
+                                </p>
+                            </div>
                             <p>
-                                <strong>3. min_samples_leaf:</strong>
+                                3. min_samples_leaf:
                                 <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="1" min="1" max="100" required>
                             </p>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    min_samples_leafint or float, default=1<br>
+                                    The minimum number of samples required to be at a leaf node. A split point at any depth will only be considered if it leaves at least min_samples_leaf training samples in each of the left and right branches. This may have the effect of smoothing the model, especially in regression.
+                                </p>
+
+                            </div>
+                            <p>4.criterion:</p>
+                            <select id="criterion-select" name="criterion_index" class="form-select">
+                                <option value="gini">gini</option>
+                                <option value="entropy">entropy</option>
+                                <option value="log_loss">log_loss</option>
+                            </select>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    The function to measure the quality of a split.
+                                </p>
+
+                            </div>
+                            <p>5.min_samples_split:</p>
+
+                            <div>
+                                <input class="form-number" type="number" id="criterion-min_samples_split-input" name="min_samples_split_index" placeholder="Enter a positive integer between 1 and 100" value="2" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
+
+
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    The minimum number of samples required to split an internal node:<br>
+                                    If int, then consider min_samples_split as the minimum number.
+
+                                    If float, then min_samples_split is a fraction and ceil(min_samples_split * n_samples) are the minimum number of samples for each split.
+                                </p>
+
+                            </div>
+                            <p>6.min_weight_fraction_leaf</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-min_weight_fraction_leaf-input" name="min_weight_fraction_leaf_index" placeholder="Enter a positive float between 1 and 100" value="0.0" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    The minimum weighted fraction of the sum total of weights (of all the input samples) required to be at a leaf node. Samples have equal weight when sample_weight is not provided.
+                                </p>
+
+                            </div>
+                            <p>7.max_features</p>
+                            <select id="max_features-select" name="max_features_index" class="form-select">
+                                <option value="sqrt">sqrt</option>
+                                <option value="log2">log2</option>
+                                <option value="None">None</option>
+                            </select>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    The number of features to consider when looking for the best split:<a href="#"></a>
+                                    If “sqrt”, then max_features=sqrt(n_features).
+
+                                    If “log2”, then max_features=log2(n_features).
+
+                                    If None, then max_features=n_features.
+                                </p>
+
+                            </div>
+                            <p>8.max_leaf_nodes</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-max_leaf_nodes-input" name="max_leaf_nodes_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3" ">
+
+
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Grow trees with max_leaf_nodes in best-first fashion. Best nodes are defined as relative reduction in impurity. If None then unlimited number of leaf nodes.
+                                </p>
+
+                            </div>
+                            <p>9.min_impurity_decrease</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-min_impurity_decrease-input" name="min_impurity_decrease_index" placeholder="Enter a positive float between 1 and 100" value="0.0" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    A node will be split if this split induces a decrease of the impurity greater than or equal to this value.
+                                </p>
+
+                            </div>
+                            <p>10.bootstrap</p>
+                            <select id="bootstrap-select" name="bootstrap_index" class="form-select">
+                                <option value="True">True</option>
+                                <option value="False">False</option>
+
+                            </select>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Whether bootstrap samples are used when building trees. If False, the whole dataset is used to build each tree.
+                                </p>
+
+                            </div>
+                            <p>11.oob_score</p>
+                            <select id="oob_score-select" name="oob_score_index" class="form-select">
+                                <option value="False">False</option>
+                                <option value="True">True</option>
+
+
+                            </select>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Whether to use out-of-bag samples to estimate the generalization score. By default, accuracy_score is used. Provide a callable with signature metric(y_true, y_pred) to use a custom metric. Only available if bootstrap=True
+                                </p>
+
+                            </div>
+                            <p>12.n_jobs</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-n_jobs-input" name="n_jobs_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
+
+
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    The number of jobs to run in parallel. fit, predict, decision_path and apply are all parallelized over the trees. None means 1 unless in a joblib.parallel_backend context. -1 means using all processors. See Glossary for more details.
+                                </p>
+
+                            </div>
+                            <p>13.random_state</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-random_state-input" name="random_state_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
+
+
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Controls both the randomness of the bootstrapping of the samples used when building trees (if bootstrap=True) and the sampling of the features to consider when looking for the best split at each node (if max_features < n_features)
+                                </p>
+
+                            </div>
+                            <p>14.verbose</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-verbose-input" name="verbose_index" placeholder="Enter a positive integer between 1 and 100" value="0" min="0" max="100" step="1" maxlength="3">
+
+
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Controls the verbosity when fitting and predicting.
+                                </p>
+
+                            </div>
+                            <p>15.warm_start</p>
+                            <select id="warm_start-select" name="warm_start_index" class="form-select">
+                                <option value="Falsm">False</option>
+                                <option value="true">True</option>
+
+
+                            </select>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    When set to True, reuse the solution of the previous call to fit and add more estimators to the ensemble, otherwise, just fit a whole new forest.
+                                </p>
+
+                            </div>
+                            <p>16.class_weight</p>
+                            <select id="class_weight-select" name="class_weight_index" class="form-select">
+                                <option value="none">None</option>
+                                <option value="balanced">balanced</option>
+                                <option value="balanced_subsample">balanced_subsample</option>
+
+                            </select>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Weights associated with classes in the form {class_label: weight}. If not given, all classes are supposed to have weight one. For multi-output problems, a list of dicts can be provided in the same order as the columns of y.
+                                </p>
+
+                            </div>
+                            <p>17.ccp_alpha</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-ccp_alpha-input" name="ccp_alpha_index" placeholder="Enter a positive float between 1 and 100" value="0.0" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed.
+                                </p>
+
+                            </div>
+                            <p>18.max_samples</p>
+                            <div>
+                                <input class="form-number" type="number" id="criterion-max_samples-input" name="max_samples_index" placeholder="Enter a positive integer between 1 and 100" value="2" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
+
+
+                            </div>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    If bootstrap is True, the number of samples to draw from X to train each base estimator.
+                                </p>
+
+                            </div>
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -126,11 +355,18 @@
                 <div id="collapseOption3" class="accordion-collapse collapse" aria-labelledby="headingOption3">
                     <div class="accordion-body">
                         <p>
-                            <strong>1. C:</strong>
+                            1. C:
                             <input class="form-number" type="number" id="C-input" name="C_input" placeholder="Enter a positive float value" step="0.1" value="1" required>
                         </p>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                C: float, default value = 1.0<br>
+                                Description: Defines the penalty for the model when it misclassifies. Be careful not to choose too high a value for C to avoid overfitting the model.
+                            </p>
+                        </div>
                         <p>
-                            <strong>2. Kernel:</strong>
+                            2. Kernel:
                             <select id="kernel-select" name="kernel_select" class="form-select">
                                 <option value="linear">Linear</option>
                                 <option value="poly">Polynomial</option>
@@ -139,13 +375,161 @@
                                 <option value="precomputed">Precomputed</option>
                             </select>
                         </p>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
+                                Description: Defines the shape of the boundary between the different classes of the model.
+                            </p>
+                        </div>
+
                         <p>
-                            <strong>3. Gamma:</strong>
+                            3. Gamma:
                             <select id="gamma-select" name="gamma_select" class="form-select">
                                 <option value="scale" selected>Scale</option>
                                 <option value="auto">Auto</option>
                             </select>
                         </p>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Gamma: {‘scale’, ‘auto’} or float, default value =’scale’<br>
+                                Kernel coefficient for ‘rbf’, ‘poly’, and ‘sigmoid’.
+                                If gamma='scale', it takes the value 1/(n_features * X.var()).
+                                If ‘auto’, it uses 1 / n_features.
+                                If float, it must be positive.
+                            </p>
+                        </div>
+                        <p>4. degree:</p>
+                        <div>
+                            <input class="form-number" type="number" id="degree-input" name="degree_index" style="width: 230px;" placeholder="Enter a positive int value" pattern="\d+(\.\d+)?" value="3">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Degree of the polynomial kernel function (‘poly’). Must be non-negative. Ignored by all other kernels.Degree of the polynomial kernel function (‘poly’). Must be non-negative. Ignored by all other kernels.ve.
+                            </p>
+                        </div>
+                        <p>5.coef0</p>
+                        <div>
+                            <input class="form-number" type="number" id="coef0-input" name="coef0_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="0.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Independent term in kernel function. It is only significant in ‘poly’ and ‘sigmoid’.
+                            </p>
+                        </div>
+                        <p>6.shrinking</p>
+                        <select id="shrinking-select" name="shrinking_index" class="form-select">
+                            <option value="True" selected>True</option>
+                            <option value="False">False</option>
+                        </select>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Whether to use the shrinking heuristic
+                            </p>
+                        </div>
+                        <p>7.probability</p>
+                        <select id="probability-select" name="probability_index" class="form-select">
+                            <option value="True">True</option>
+                            <option value="False" selected>False</option>
+                        </select>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Whether to enable probability estimates. This must be enabled prior to calling fit, will slow down that method as it internally uses 5-fold cross-validation, and predict_proba may be inconsistent with predict.
+                            </p>
+                        </div>
+                        <p>8.tol</p>
+                        <div>
+                            <input class="form-number" type="number" id="tol-input" name="tol_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="0.001"
+                                   oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Tolerance for stopping criterion.
+                            </p>
+                        </div>
+                        <p>9.cache_size</p>
+                        <div>
+                            <input class="form-number" type="number" id="cache_size-input" name="cache_size_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="200" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Specify the size of the kernel cache (in MB).
+                            </p>
+                        </div>
+                        <p>10.class_weight</p>
+                        <select id="class_weight-select" name="class_weight_svm_index" class="form-select">
+                            <option value="balanced">balanced</option>
+                            <option value="None" selected>None</option>
+                        </select>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Set the parameter C of class i to class_weight[i]*C for SVC. If not given, all classes are supposed to have weight one. The “balanced” mode uses the values of y to automatically adjust weights inversely proportional to class frequencies in the input data as n_samples / (n_classes * np.bincount(y)).
+                            </p>
+                        </div>
+                        <p>11.verbose</p>
+                        <select id="verbose-select" name="verbose_svm_index" class="form-select">
+                            <option value="True">True</option>
+                            <option value="False" selected>False</option>
+                        </select>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Enable verbose output. Note that this setting takes advantage of a per-process runtime setting in libsvm that, if enabled, may not work properly in a multithreaded context.
+                            </p>
+                        </div>
+                        <p>12.max_iter</p>
+                        <div>
+                            <input class="form-number" type="number" id="max_iter-input" name="max_iter_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="-1" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Hard limit on iterations within solver, or -1 for no limit.
+                            </p>
+                        </div>
+                        <p>13.decision_function_shape</p>
+                        <select id="decision_function_shape-select" name="decision_function_shape_index" class="form-select">
+                            <option value="ovo">ovo</option>
+                            <option value="ovr" selected>ovr</option>
+                        </select>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Whether to return a one-vs-rest (‘ovr’) decision function of shape (n_samples, n_classes) as all other classifiers, or the original one-vs-one (‘ovo’) decision function of libsvm which has shape (n_samples, n_classes * (n_classes - 1) / 2). However, note that internally, one-vs-one (‘ovo’) is always used as a multi-class strategy to train models; an ovr matrix is only constructed from the ovo matrix. The parameter is ignored for binary classification.
+                            </p>
+                        </div>
+
+                        <p>14.break_ties</p>
+                        <select id="break_ties-select" name="break_ties_index" class="form-select">
+                            <option value="True">True</option>
+                            <option value="False" selected>False</option>
+                        </select>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                If true, decision_function_shape='ovr', and number of classes > 2, predict will break ties according to the confidence values of decision_function; otherwise the first class among the tied classes is returned. Please note that breaking ties comes at a relatively high computational cost compared to a simple predict.
+                            </p>
+                        </div>
+                        <p>15.random_state</p>
+                        <div>
+                            <input class="form-number" type="number" id="random_state-input" name="random_state_index" style="width: 230px;" placeholder="None" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explanation:
+                                Controls the pseudo random number generation for shuffling the data for probability estimates. Ignored when probability is False. Pass an int for reproducible output across multiple function calls.
+                            </p>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -163,24 +547,68 @@
                 <div id="collapseOptionKNN" class="accordion-collapse collapse" aria-labelledby="headingOptionKNN">
                     <div class="accordion-body">
                         <p>
-                            <strong>1. n_neighbors:</strong>
+                            1. n_neighbors:
                             <input class="form-number" type="number" id="n_neighbors-input" name="n_neighbors" value="5" min="1" max="100" required>
                         </p>
+                        <div class="explication">
+                            <p>Number of neighbors to use by default for kneighbors queries.</p>
+                        </div>
                         <p>
-                            <strong>2. weights:</strong>
+                            2. weights:
                             <select id="weights-select" name="weights" class="form-select">
                                 <option value="uniform">Uniform</option>
                                 <option value="distance">Distance</option>
                             </select>
                         </p>
+                        <div class="explication">
+                            <p>Weight function used in prediction.</p>
+                        </div>
                         <p>
-                            <strong>3. metric:</strong>
+                            3. metric:
                             <select id="metric-select" name="metric" class="form-select">
                                 <option value="minkowski">Minkowski</option>
                                 <option value="euclidean">Euclidean</option>
                                 <option value="manhattan">Manhattan</option>
                             </select>
                         </p>
+                        <div class="explication">
+                            <p>Metric to use for distance computation.</p>
+                        </div>
+                        <p>4.algorithm</p>
+                        <select id="algorithm-select" name="algorithm_index" class="form-select">
+                            <option value="ball_tree">ball_tree</option>
+                            <option value="kd_tree">kd_tree</option>
+                            <option value="brute">brute</option>
+                            <option value="auto" selected>auto</option>
+                        </select>
+                        <div class="explication">
+                            <p>Algorithm used to compute the nearest neighbors</p>
+                        </div>
+                        <p>5.leaf_size</p>
+                        <div>
+                            <input class="form-number" type="number" id="leaf_size-input" name="leaf_size_index" value="30" min="1" max="100" required>
+                        </div>
+                        <div class="explication">
+                            <p>Leaf size passed to BallTree or KDTree. This can affect the speed of the construction and query, as well as the memory required to store the tree. The optimal value depends on the nature of the problem.</p>
+                        </div>
+                        <p>6.n_jobs</p>
+                        <div>
+                            <input class="form-number" type="number" id="n_jobs_knn-input" name="n_jobs_knn_index" min="1" max="100" placeholder="None">
+
+                        </div>
+                        <div class="explication">
+                            <p>The number of parallel jobs to run for neighbors search. None means 1 unless in a joblib.parallel_backend context. -1 means using all processors.</p>
+                        </div>
+                        <p>7.p</p>
+                        <div>
+                            <input class="form-number" type="number" id="p-input" name="p_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="2.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>Power parameter for the Minkowski metric. When p = 1, this is equivalent to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used. This parameter is expected to be positive.</p>
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
@@ -277,10 +705,10 @@
             // Rediriger vers la page image avec les paramètres
             window.location.href = imageUrl;
 
-          
 
 
-        
+
+
         });
 
         // JavaScript pour activer/désactiver les sous-options en fonction des cases à cocher
