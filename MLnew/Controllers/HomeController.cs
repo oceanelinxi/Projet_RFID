@@ -526,6 +526,7 @@ namespace MLnew.Controllers
                      int max_iter_index,
                      string decision_function_shape_index,
                      bool break_ties_index,
+                     int random_state_index_2,
                      string algorithm_index,
                      int leaf_size_index,
                      int n_jobs_knn_index,
@@ -754,7 +755,7 @@ namespace MLnew.Controllers
                 {
                     ModeleID = all_models[n_model - 1].ModeleID,
                     Nom = "random_state_index",
-                    Valeur = Convert.ToString(bootstrap_index)
+                    Valeur = Convert.ToString(random_state_index)
                 };
                 _context.Parametre.Add(param2);
                 await _context.SaveChangesAsync();
@@ -869,6 +870,129 @@ namespace MLnew.Controllers
                 };
                 _context.Parametre.Add(param3);
                 await _context.SaveChangesAsync();
+                
+                   
+                // degree
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "degree",
+                    Valeur = Convert.ToString(degree_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // coef0
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "coef0",
+                    Valeur = Convert.ToString(coef0_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // shrinking
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "shrinking",
+                    Valeur = Convert.ToString(shrinking_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // probability
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "probability",
+                    Valeur = Convert.ToString(probability_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // tol
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "tol",
+                    Valeur = Convert.ToString(tol_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // cache_size
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "cache_size",
+                    Valeur = Convert.ToString(cache_size_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // class_weight
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "class_weight",
+                    Valeur = Convert.ToString(class_weight_svm_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // verbose
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "verbose",
+                    Valeur = Convert.ToString(verbose_svm_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // max_iter
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_iter",
+                    Valeur = Convert.ToString(max_iter_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // decision_function_shape
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "decision_function_shape",
+                    Valeur = Convert.ToString(decision_function_shape_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // break_ties
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "break_ties",
+                    Valeur = Convert.ToString(break_ties_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // random_state
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "random_state",
+                    Valeur = Convert.ToString(random_state_index_2)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+
             }
 
             if (mainOption4 == true)
@@ -926,6 +1050,46 @@ namespace MLnew.Controllers
                     ModeleID = all_models[n_model - 1].ModeleID,
                     Nom = "weights",
                     Valeur = Convert.ToString(weights)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // algorithm
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "algorithm",
+                    Valeur = Convert.ToString(algorithm_index)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // leaf_size
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "leaf_size",
+                    Valeur = Convert.ToString(leaf_size_index)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // n_jobs
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "n_jobs",
+                    Valeur = Convert.ToString(n_jobs_knn_index)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // p
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "p",
+                    Valeur = Convert.ToString(p_index)
                 };
                 _context.Parametre.Add(param4);
                 await _context.SaveChangesAsync();
