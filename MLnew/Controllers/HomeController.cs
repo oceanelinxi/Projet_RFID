@@ -499,7 +499,37 @@ namespace MLnew.Controllers
                      int n_est, int max_d, int min_samples,
                      string gamma_select, float C_input, string kernel_select,
                      string n_neighbors, string weights, string metric,
-                     int step,int t0_run)
+                     int step,int t0_run,
+                     string criterion_index,
+                     int min_samples_split_index,
+                     float min_weight_fraction_leaf_index,
+                     string max_features_index,
+                     int max_leaf_nodes_index,
+                     float min_impurity_decrease_index, 
+                     bool bootstrap_index,
+                     bool oob_score_index,
+                     int n_jobs_index,
+                     int random_state_index,
+                     int verbose_index,
+                     bool warm_start_index,
+                     string class_weight_index,
+                     float ccp_alpha_index,
+                     int max_samples_index,
+                     int degree_index,
+                     float coef0_index,
+                     bool shrinking_index,
+                     bool probability_index,
+                     string tol_index,
+                     float cache_size_index,
+                     string class_weight_svm_index,
+                     bool verbose_svm_index,
+                     int max_iter_index,
+                     string decision_function_shape_index,
+                     bool break_ties_index,
+                     string algorithm_index,
+                     int leaf_size_index,
+                     int n_jobs_knn_index,
+                     string p_index)
         {
             //Création de la simulation en  BDD
             Historique hist = new Historique
@@ -622,6 +652,159 @@ namespace MLnew.Controllers
                     ModeleID = all_models[n_model - 1].ModeleID,
                     Nom = "min_samples_leaf",
                     Valeur = Convert.ToString(min_samples)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // criterion
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "criterion",
+                    Valeur = Convert.ToString(criterion_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // min_samples_split
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "min_samples_split",
+                    Valeur = Convert.ToString(min_samples_split_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // min_weight_fraction_leaf
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "min_weight_fraction_leaf",
+                    Valeur = Convert.ToString(min_weight_fraction_leaf_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+
+                // max_features
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_features",
+                    Valeur = Convert.ToString(max_features_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // max_leaf_nodes
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_leaf_nodes",
+                    Valeur = Convert.ToString(max_leaf_nodes_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // min_impurity_decrease
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "min_impurity_decrease",
+                    Valeur = Convert.ToString(min_impurity_decrease_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                
+                // bootstrap
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "bootstrap",
+                    Valeur = Convert.ToString(bootstrap_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // oob_score
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "oob_score",
+                    Valeur = Convert.ToString(oob_score_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+              
+                // n_jobs
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "n_jobs",
+                    Valeur = Convert.ToString(n_jobs_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // random_state
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "random_state_index",
+                    Valeur = Convert.ToString(bootstrap_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // verbose
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "verbose",
+                    Valeur = Convert.ToString(verbose_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // warm_start
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "warm_start",
+                    Valeur = Convert.ToString(warm_start_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // class_weight
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "class_weight",
+                    Valeur = Convert.ToString(class_weight_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // ccp_alpha
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "ccp_alpha",
+                    Valeur = Convert.ToString(ccp_alpha_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // max_samples
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_samples",
+                    Valeur = Convert.ToString(max_samples_index)
                 };
                 _context.Parametre.Add(param2);
                 await _context.SaveChangesAsync();
