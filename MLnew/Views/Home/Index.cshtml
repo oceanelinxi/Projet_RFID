@@ -39,8 +39,44 @@
                     <div class="d-flex align-items-center">
                         <input class="form-check-input me-2" type="checkbox" id="mainOption1" name="mainOption1" value="true">
                         <label for="mainOption1">Analytique</label>
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOption1" aria-expanded="false" aria-controls="collapseOption1">
+                            <span class="visually-hidden">Toggle sub-options</span>
+                        </button>
                     </div>
                 </h3>
+                <div id="collapseOption1" class="accordion-collapse collapse" aria-labelledby="headingOption1">
+                    <div class="accordion-body">
+                       
+                        <div>
+                            
+                            <p>
+                                <strong>1. step:</strong>
+                            </p>
+                            <input class="form-number" type="number" id="step-input" name="step" placeholder="Enter a positive integer value" min="1" max="10" value="3" required>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    Number of subslices per slice
+
+                                </p>
+                            </div>
+                            
+                            <p>
+                                <strong>3. t0_run</strong>
+                            </p>
+                            <input class="form-number" type="number" id="t0_run-input" name="t0_run" placeholder="Enter a positive integer between 1 and 100" value="0" min="0" max="9" required>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    a marker or timestamp to track when a new "run" starts in a sequence or process
+
+                                </p>
+                            </div>
+                            
+                           
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="accordion-item">
