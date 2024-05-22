@@ -401,7 +401,7 @@ namespace MLnew.Controllers
             }
         }
         //XGBoost
-        public async Task<string> XGBoost(string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        public async Task<string> XGBoost(string booster, int n_estimators, int verbosity, string objective, string eval_metric, int early_stopping_rounds, int seed, int nthread)
         {
             using (var client = new HttpClient())
             {
@@ -410,7 +410,7 @@ namespace MLnew.Controllers
                 var requestData = new
                 {
                     Booster = booster,
-                    Silent = silent,
+                   
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
@@ -427,7 +427,7 @@ namespace MLnew.Controllers
                 return result;
             }
         }
-        public async Task<string> XGBoostKNN(int knn_neighbors, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        public async Task<string> XGBoostKNN(int knn_neighbors, string booster, int n_estimators, int verbosity, string objective, string eval_metric, int early_stopping_rounds, int seed, int nthread)
         {
             using (var client = new HttpClient())
             {
@@ -437,7 +437,7 @@ namespace MLnew.Controllers
                 {
                     Knn_neighbors = knn_neighbors,
                     Booster = booster,
-                    Silent = silent,
+                    
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
@@ -454,7 +454,7 @@ namespace MLnew.Controllers
                 return result;
             }
         }
-        public async Task<string> XGBoostSVM(string svm_kernel, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        public async Task<string> XGBoostSVM(string svm_kernel, string booster, int n_estimators ,int verbosity, string objective, string eval_metric, int early_stopping_rounds, int seed, int nthread)
         {
             using (var client = new HttpClient())
             {
@@ -464,7 +464,7 @@ namespace MLnew.Controllers
                 {
                     Svm_kernel=svm_kernel,
                     Booster = booster,
-                    Silent = silent,
+        
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
@@ -957,14 +957,14 @@ namespace MLnew.Controllers
 
         public async Task<ActionResult> MethodesEnsemblistes(bool? mainOption1, bool? mainOption2, int n_est, int max_d, int min_samples, string criterion, int min_samples_split, float min_weight_fraction_leaf, string max_features, int max_leaf_nodes, float min_impurity_decrease, bool bootstrap, bool oob_score, int n_jobs, int random_state, int verbose, bool warm_start, string class_weight, float ccp_alpha, int max_samples, int cv_folds, string algorithmSelect,
             string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size, string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm,
-            int n_neighbors,string weights,string metric,string algorithm,int leaf_size,int n_jobs_knn,string p, int cv_folds_knn, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread, int knn_neighbors, string svm_kernel)
+            int n_neighbors,string weights,string metric,string algorithm,int leaf_size,int n_jobs_knn,string p, int cv_folds_knn, string booster, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread, int knn_neighbors, string svm_kernel)
         {
             if (mainOption1 == true)
             {
                 if (algorithmSelect == "Random Forest")
                 {
 
-                    var resultXGBoost = await  XGBoost(booster, silent, verbosity, objective, eval_metric, n_estimators, early_stopping_rounds, seed, nthread);
+                    var resultXGBoost = await  XGBoost(booster, n_estimators, verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
                     ViewBag.XGBoost = resultXGBoost;
 
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoost);
@@ -976,7 +976,7 @@ namespace MLnew.Controllers
                 }
                 if (algorithmSelect == "KNN")
                 {
-                    var resultXGBoostKNN = await XGBoostKNN(knn_neighbors,booster,silent,verbosity,objective,eval_metric,n_estimators,early_stopping_rounds,seed,nthread);
+                    var resultXGBoostKNN = await XGBoostKNN(knn_neighbors,booster, n_estimators, verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread);
                     ViewBag.XGBoostKNN = resultXGBoostKNN;
 
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostKNN);
@@ -988,7 +988,7 @@ namespace MLnew.Controllers
                 }
                 if (algorithmSelect == "SVM")
                 {
-                    var resultXGBoostSVM = await XGBoostSVM(svm_kernel, booster, silent, verbosity, objective, eval_metric, n_estimators, early_stopping_rounds, seed, nthread);
+                    var resultXGBoostSVM = await XGBoostSVM(svm_kernel, booster, n_estimators ,verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
                     ViewBag.XGBoostSVM = resultXGBoostSVM;
 
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostSVM);
