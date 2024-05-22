@@ -553,7 +553,7 @@ namespace MLnew.Controllers
                 ViewBag.RandomForestResult = resultRandomForest;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultRandomForest);
-                var acc = 98.2; int duree = -1;
+                var acc = (float)0.00; int duree = -1;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
                     acc = (float)jsonResult.accuracy;
@@ -568,7 +568,8 @@ namespace MLnew.Controllers
                 {
                     HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
                     DureeSec = duree,
-                    Nom = "RandomForest"
+                    Nom = "RandomForest",
+                    Accuracy = (float)acc
                 };
                 _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
@@ -628,7 +629,8 @@ namespace MLnew.Controllers
                 {
                     HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
                     DureeSec = duree,
-                    Nom = "SVM"
+                    Nom = "SVM",
+                    Accuracy = (float)acc
                 };
                 _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
@@ -687,7 +689,8 @@ namespace MLnew.Controllers
                 {
                     HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
                     DureeSec = duree,
-                    Nom = "SVM"
+                    Nom ="KNN",
+                    Accuracy = (float)acc
                 };
                 _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
@@ -914,12 +917,14 @@ namespace MLnew.Controllers
 
         public async Task<ActionResult> IndexHistorique()
         {
-            // Liste des utilisteurs 
+            /* Liste des utilisteurs 
             var userList = GetAllUsers();
 
-            ViewBag.users = userList;
-
-            return View("Historique");
+            ViewBag.users = userList;*/
+            var modeles = await _context.Modele.Include(b => b.Historique)
+                .ToListAsync();
+            ViewBag.modeles = modeles;
+            return View("NouvelHistorique");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
