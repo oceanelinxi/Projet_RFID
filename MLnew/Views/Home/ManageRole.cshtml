@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "ManageRole";
+    var userRoles = ViewBag.UserRoles as Dictionary<string, IList<string>>;
 }
 
 <head>
@@ -23,6 +24,7 @@
             <tr>
                 <th>Id</th>
                 <th>Email</th>
+                <th>Rôle</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,6 +34,12 @@
                 <tr>
                     <td>@user.Id</td>
                     <td>@user.Email</td>
+                    <td>
+                        @foreach (var role in userRoles[user.Id])
+                        {
+                            <span class="badge bg-info text-dark">@role</span>
+                        }
+                    </td>
                     <td>
                         <a href="@Url.Action("DeleteUser", new { id = user.Id })" class="btn btn-danger">Supprimer</a>
                         <a asp-action="AssignRoles" asp-route-id="@user.Id" class="btn btn-primary">Assigner des rôles</a>

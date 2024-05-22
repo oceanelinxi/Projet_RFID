@@ -307,6 +307,9 @@ namespace MLnew.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModeleID"), 1L, 1);
 
+                    b.Property<float>("Accuracy")
+                        .HasColumnType("real");
+
                     b.Property<int>("DureeSec")
                         .HasColumnType("int");
 

@@ -2,7 +2,6 @@
     ViewData["Title"] = "Assign Roles";
     var userId = ViewBag.UserId;
     var email = ViewBag.Email;
-    var roles = (List<SelectListItem>)ViewBag.Roles;
 }
 @if (ViewBag.Message != null)
 {
@@ -34,6 +33,6 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Sauvegarder</button>
-        <a asp-action="ListUsers" class="btn btn-secondary">Retour</a>
+        <a asp-action="ManageRole" class="btn btn-secondary">Retour</a>
     </form>
 </body>

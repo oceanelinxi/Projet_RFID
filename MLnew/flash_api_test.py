@@ -25,11 +25,12 @@ def analytique():
     start = datetime.now()
     # Get the input parameters from the request
     input_params = request.get_json()       
-
+    steps=int(input_params['steps'])
+    t0=int(input_params['t0'])
     # Call the predict() function to make a prediction
-    accuracy = methode_analytique()
-    duree_ana = (datetime.now() - start)
-    print ("duree methode analytique : {}".format(duree_ana.seconds))
+    accuracy = methode_analytique(steps,t0)
+    duree_ana = (datetime.now() - start).seconds
+    print ("duree methode analytique : {}".format(duree_ana))
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy, 'duree':str(duree_ana)})
 

@@ -71,6 +71,15 @@ namespace MLnew.Controllers
         public async Task<IActionResult> ManageRole()
         {
             var users = await _userManager.Users.ToListAsync();
+            var userRoles = new Dictionary<string, IList<string>>();
+
+            foreach (var user in users)
+            {
+                userRoles[user.Id] = await _userManager.GetRolesAsync(user);
+            }
+
+            ViewBag.Users = users;
+            ViewBag.UserRoles = userRoles;
             return View(users);
         }
 
@@ -98,66 +107,58 @@ namespace MLnew.Controllers
                 return NotFound();
             }
 
-            var roles = await _roleManager.Roles.ToListAsync();
-            var userRoles = await _userManager.GetRolesAsync(user);
-
             ViewBag.UserId = user.Id;
             ViewBag.Email = user.Email;
-            ViewBag.Roles = roles.Select(role => new SelectListItem
-            {
-                Value = role.Name,
-                Text = role.Name,
-                Selected = userRoles.Contains(role.Name)
-            }).ToList();
+            ViewBag.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+
 
             return View("AssignRoles");
         }
 
         [HttpPost]
         [Authorize(Roles = "Administrateur")]
+        [HttpPost]
+        [Authorize(Roles = "Administrateur")]
         public async Task<IActionResult> AssignRoles(string userId, string selectedRole)
         {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(selectedRole))
+            {
+                ModelState.AddModelError(string.Empty, "Invalid user or role.");
+                ViewBag.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+                return View(new { userId = userId });
+            }
+
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return NotFound();
             }
 
-            var userRoles = await _userManager.GetRolesAsync(user);
-
-            if (userRoles.Contains(selectedRole))
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles.Contains(selectedRole))
             {
-                ViewBag.Message = $"L'utilisateur a déjà le rôle '{selectedRole}'.";
-                var roles = await _roleManager.Roles.ToListAsync();
-                ViewBag.UserId = user.Id;
-                ViewBag.Email = user.Email;
-                ViewBag.Roles = roles.Select(role => new SelectListItem
-                {
-                    Value = role.Name,
-                    Text = role.Name,
-                    Selected = userRoles.Contains(role.Name)
-                }).ToList();
-                return View();
+                ModelState.AddModelError(string.Empty, "User already has this role.");
+                ViewBag.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+                return View(new { userId = userId });
             }
 
-            var removeResult = await _userManager.RemoveFromRolesAsync(user, userRoles);
-
-            if (!removeResult.Succeeded)
+            // Remove all existing roles
+            var removeRolesResult = await _userManager.RemoveFromRolesAsync(user, roles);
+            if (!removeRolesResult.Succeeded)
             {
-                ModelState.AddModelError("", "Failed to remove user roles.");
-                return View();
+                ModelState.AddModelError(string.Empty, "Failed to remove user roles.");
+                ViewBag.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+                return View(new { userId = userId });
             }
 
-            if (!string.IsNullOrEmpty(selectedRole))
+            // Add the new selected role
+            var addRoleResult = await _userManager.AddToRoleAsync(user, selectedRole);
+            if (!addRoleResult.Succeeded)
             {
-                var addResult = await _userManager.AddToRoleAsync(user, selectedRole);
-                if (!addResult.Succeeded)
-                {
-                    ModelState.AddModelError("", "Failed to add user role.");
-                    return View();
-                }
+                ModelState.AddModelError(string.Empty, "Failed to add user role.");
+                ViewBag.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+                return View(new { userId = userId });
             }
-
 
             return RedirectToAction(nameof(ManageRole));
         }

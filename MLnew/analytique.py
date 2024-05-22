@@ -46,7 +46,7 @@ def df_tags(pathfile = r'Uploads/data_anonymous'):
     df=df.sort_values('LogTime').reset_index(drop=True)
     return df 
 
-def timing(pathfile = r'Uploads/data_anonymous'):
+def timing(t0:int,pathfile = r'Uploads/data_anonymous'):
     # timing: photocells a time window for each box: start/stop (ciuchStart, ciuchStop)
     file=r'ano_supply-process.2019-11-07-CUT.csv'
     timing=pd.read_csv(os.path.join(pathfile,file),sep=',')
@@ -75,7 +75,7 @@ def timing(pathfile = r'Uploads/data_anonymous'):
     timing=timing[['refListId', 'refListId_last','ciuchStartup', 'ciuchStart','ciuchStop','ciuchStopdown']]
 
     # t0_run = a new run starts when box 0 shows up
-    t0_run=timing[timing['refListId']==0] [['ciuchStartup']]
+    t0_run=timing[timing['refListId']==t0] [['ciuchStartup']]
     t0_run=t0_run.rename(columns={'ciuchStartup':'t0_run'})
     t0_run=t0_run.groupby('t0_run').size().cumsum().rename('run').reset_index(drop=False)
     t0_run=t0_run.sort_values('t0_run')
@@ -86,14 +86,14 @@ def timing(pathfile = r'Uploads/data_anonymous'):
     timing=timing[['run', 'refListId', 'refListId_last', 'ciuchStartup','ciuchStart','ciuchStop','ciuchStopdown','t0_run']]
     return timing
 
-def timing_slices(timing):
+def timing_slices(timing,step:int):
     slices = pd.DataFrame()
     for i, row in timing.iterrows():
         ciuchStartup = row['ciuchStartup']
         ciuchStart = row['ciuchStart']
         ciuchStop = row['ciuchStop']
         ciuchStopdown = row['ciuchStopdown']
-        steps = 3
+        steps = step
 
         # Cr�ation des tranches "up"
         up = pd.DataFrame(index=pd.date_range(start=ciuchStartup, end=ciuchStart, periods=steps)) \
@@ -180,13 +180,13 @@ def analytical(df_timing_slices, timing_slices, reflist):
 
     return ana
 
-def methode_analytique():
+def methode_analytique(step:int,t0_run:int):
     start = datetime.datetime.now()
     pathfile = r'Uploads/data_anonymous'
     Reflist = reflist(pathfile)
-    Timing = timing(pathfile)
+    Timing = timing(t0_run,pathfile)
     df = df_tags(pathfile)
-    Timing_slices = timing_slices(Timing)
+    Timing_slices = timing_slices(Timing,step)
     Df_timing_slices = df_timing_slices(Timing_slices, Timing, df)
     analytics = analytical(Df_timing_slices, Timing_slices, Reflist)
     trues, total = analytics[analytics['pred_ana_bool']==True].shape[0], analytics.shape[0]
