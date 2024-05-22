@@ -268,7 +268,7 @@ def xgboostsvm():
     seed=int(input_params['Seed'])
     nthread=int(input_params['Nthread'])
     
-    mean_accuracy=train_and_evaluate_svm_xgboost(svm_kernel,booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
+    mean_accuracy=train_and_evaluate_knn_xgboost(svm_kernel,booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
     return jsonify({'mean_accuracy': mean_accuracy})
  
 
