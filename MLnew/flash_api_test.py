@@ -227,16 +227,15 @@ def ada_knn():
 def xgboost():
      input_params = request.get_json()
      booster=str(input_params['Booster'])
-     silent=int(input_params['Silent'])
+     n_estimators=int(input_params['N_estimators'])
      verbosity=int(input_params['Verbosity'])
      objective=str(input_params['Objective'])
-     eval_metric=int(input_params['EvalMetric'])
-     n_estimators=int(input_params['N_estimators'])
+     eval_metric=str(input_params['EvalMetric'])
      early_stopping_rounds=int(input_params['EarlyStopping'])
      seed=int(input_params['Seed'])
      nthread=int(input_params['Nthread'])
      
-     mean_accuracy=train_and_evaluate_xgboost(booster,silent,verbosity,objective,eval_metric,n_estimators,early_stopping_rounds,seed,nthread)
+     mean_accuracy=train_and_evaluate_xgboost(booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
      return jsonify({'mean_accuracy': mean_accuracy})
     
 @app.route('/XGBoostKNN', methods=['POST'])
@@ -244,16 +243,15 @@ def xgboostknn():
     input_params = request.get_json()
     knn_neighbors=int(input_params['Knn_neighbors'])
     booster=str(input_params['Booster'])
-    silent=int(input_params['Silent'])
     verbosity=int(input_params['Verbosity'])
     objective=str(input_params['Objective'])
-    eval_metric=int(input_params['EvalMetric'])
+    eval_metric=str(input_params['EvalMetric'])
     n_estimators=int(input_params['N_estimators'])
     early_stopping_rounds=int(input_params['EarlyStopping'])
     seed=int(input_params['Seed'])
     nthread=int(input_params['Nthread'])
     
-    mean_accuracy=train_and_evaluate_knn_xgboost(knn_neighbors,booster,silent,verbosity,objective,eval_metric,n_estimators,early_stopping_rounds,seed,nthread)
+    mean_accuracy=train_and_evaluate_knn_xgboost(knn_neighbors,booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
     return jsonify({'mean_accuracy': mean_accuracy})
     
 @app.route('/XGBoostSVM', methods=['POST'])
@@ -261,16 +259,15 @@ def xgboostsvm():
     input_params = request.get_json()
     svm_kernel=str(input_params['Svm_kernel'])
     booster=str(input_params['Booster'])
-    silent=int(input_params['Silent'])
+    n_estimators=int(input_params['N_estimators'])
     verbosity=int(input_params['Verbosity'])
     objective=str(input_params['Objective'])
-    eval_metric=int(input_params['EvalMetric'])
-    n_estimators=int(input_params['N_estimators'])
+    eval_metric=str(input_params['EvalMetric'])
     early_stopping_rounds=int(input_params['EarlyStopping'])
     seed=int(input_params['Seed'])
     nthread=int(input_params['Nthread'])
     
-    mean_accuracy=train_and_evaluate_svm_xgboost(svm_kernel,booster,silent,verbosity,objective,eval_metric,n_estimators,early_stopping_rounds,seed,nthread)
+    mean_accuracy=train_and_evaluate_svm_xgboost(svm_kernel,booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
     return jsonify({'mean_accuracy': mean_accuracy})
  
 
