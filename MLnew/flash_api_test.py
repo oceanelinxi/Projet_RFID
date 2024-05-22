@@ -77,9 +77,12 @@ def chemin():
     # Get the input parameters from the request
     data = request.get_json()
     chemin=data.get('chemin')
+    fileName=data['nomFichier']
     # Remplacer "\\" par "/"
     chemin = chemin.replace("\\", "/")
-    print( chemin)
+    print( "fileName")
+    print( fileName)
+    print( "fileName")
     unzip_file(chemin,"Uploads/data_anonymous")
     return chemin
 

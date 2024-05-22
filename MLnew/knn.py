@@ -283,7 +283,7 @@ def evaluate_adaboost_rf(ds:pd.DataFrame,cv_folds,n_estimators=100,criterion='gi
    accuracies = cross_val_score(ada, X, y, cv=cv_folds, scoring='accuracy')
    # Calcul de la moyenne des scores de précision
    mean_accuracy = accuracies.mean()
-   return mean_accuracy
+   return mean_accuracy*100
 # Exemple d'utilisation
 #data = pretraitement_knn() 
 #ds = dataset(data[0],data[1],data[2])
