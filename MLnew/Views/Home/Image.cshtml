@@ -95,6 +95,8 @@
     <title>@ViewBag.Title</title>
     <!-- Inclure la bibliothèque Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
     <style>
         canvas {
             width: 400px; /* Définir une largeur fixe */
@@ -103,6 +105,7 @@
     </style>
 </head>
 <body>
+
 
     <canvas id="myChart"></canvas>
 
@@ -151,8 +154,6 @@
         // Appel de la fonction au chargement de la page avec les valeurs par défaut
         updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult ]);
     </script>
-</body>
-</html>
 
 
 <script>
@@ -206,33 +207,9 @@
         }
     });
 </script>
+
 <script>
-    // Fonction pour récupérer les paramètres de l'URL
-    function getParamsFromURL() {
-        let params = {};
-        let queryString = window.location.search.substring(1);
-        let pairs = queryString.split('&');
-
-        pairs.forEach(pair => {
-            let parts = pair.split('=');
-            let key = decodeURIComponent(parts[0]);
-            let value = decodeURIComponent(parts[1]);
-            params[key] = JSON.parse(value);
-        });
-
-        return params;
-    }
-
-    // Récupérer les paramètres de l'URL
-    let params = getParamsFromURL();
-    let randomForest = params.randomForest || '';
-    let svm = params.svm || '';
-    let knn = params.knn || '';
-
-    // Utiliser les paramètres récupérés
-    console.log(randomForest);
-    console.log(svm);
-    console.log(knn);
+  
 
     // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
     function updateChart(selectedOptions) {
@@ -278,85 +255,80 @@
     // Appel de la fonction au chargement de la page avec les valeurs par défaut
     updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult ]);
 </script>
-<button id="generatePDFButton">Générer PDF</button>
+
+
+   
 <script>
     // Récupérer les valeurs des résultats et des durées d'exécution
-    var analytiqueResult = parseFloat("@ViewBag.AnalytiqueResult");
-    var randomForestResult = parseFloat("@ViewBag.RandomForestResult");
-    var svmResult = parseFloat("@ViewBag.SVMResult");
-    var knnResult = parseFloat("@ViewBag.KNNResult");
+    var analytiqueResult = parseFloat("@analytiqueResult");
+    var randomForestResult = parseFloat("@randomForestResult");
+    var svmResult = parseFloat("@svmResult");
+    var knnResult = parseFloat("@knnResult");
 
-    var Analytiqueduree = parseInt("@ViewBag.Analytiqueduree");
-    var RFduree = parseInt("@ViewBag.RFduree");
-    var SVMduree = parseInt("@ViewBag.SVMduree");
-    var KNNduree = parseInt("@ViewBag.KNNduree");
+    var Analytiqueduree = parseInt("@Analytiqueduree");
+    var RFduree = parseInt("@RFduree");
+    var SVMduree = parseInt("@SVMduree");
+    var KNNduree = parseInt("@KNNduree");
 </script>
-<script>
-    // Gestionnaire d'événements pour le clic sur le bouton "Générer PDF"
-    document.getElementById('generatePDFButton').addEventListener('click', function () {
-        // Créer un nouvel objet jsPDF
-        var doc = new jsPDF();
+    <button id="generatePDFButton">Générer PDF</button>
 
-        // Ajouter du contenu au PDF
-        doc.text(20, 20, 'Précision de la méthode Analytique : ' + analytiqueResult + '%');
-        doc.text(20, 30, 'Durée d\'exécution de la méthode Analytique : ' + Analytiqueduree + ' ms');
-
-        doc.text(20, 50, 'Précision de la méthode Random Forest : ' + randomForestResult + '%');
-        doc.text(20, 60, 'Durée d\'exécution de la méthode Random Forest : ' + RFduree + ' ms');
-
-        doc.text(20, 80, 'Précision de la méthode SVM : ' + svmResult + '%');
-        doc.text(20, 90, 'Durée d\'exécution de la méthode SVM : ' + SVMduree + ' ms');
-
-        doc.text(20, 110, 'Précision de la méthode KNN : ' + knnResult + '%');
-        doc.text(20, 120, 'Durée d\'exécution de la méthode KNN : ' + KNNduree + ' ms');
-
-        // Enregistrer le PDF
-        doc.save('informations.pdf');
-    });
-        // Fonction pour récupérer les paramètres de l'URL côté client
+    <script>
+        // Fonction pour extraire les paramètres de l'URL
         function getParamsFromURL() {
-            let params = {};
-            let queryString = window.location.search.substring(1);
-            let pairs = queryString.split('&');
-
-            pairs.forEach(pair => {
-                let parts = pair.split('=');
-                let key = decodeURIComponent(parts[0]);
-                let value = decodeURIComponent(parts[1]);
-                params[key] = JSON.parse(value);
-            });
-
+            // Récupérer l'URL actuelle
+            const urlParams = new URLSearchParams(window.location.search);
+            // Récupérer la valeur du paramètre 'params' de l'URL
+            const paramsString = urlParams.get('params');
+            // Décodez la valeur JSON
+            const decodedParams = decodeURIComponent(paramsString);
+            // Convertir la chaîne JSON en objet JavaScript
+            const params = JSON.parse(decodedParams);
             return params;
         }
 
-    // Gestionnaire d'événements pour le clic sur le bouton "Générer PDF"
-    document.getElementById('generatePDFButton').addEventListener('click', function () {
-        // Créer un nouvel objet jsPDF
-        var doc = new jsPDF();
+        // Appel de la fonction pour récupérer les paramètres de l'URL
+        const params = getParamsFromURL();
 
-        // Récupérer les paramètres de l'URL
-        var params = getParamsFromURL();
-        var randomForest = params.randomForest || '';
-        var svm = params.svm || '';
-        var knn = params.knn || '';
-
-        // Ajouter du contenu au PDF
-        doc.text(20, 20, 'Précision de la méthode Analytique : ' + analytiqueResult + '%');
-        doc.text(20, 30, 'Durée d\'exécution de la méthode Analytique : ' + Analytiqueduree + ' ms');
-
-        doc.text(20, 50, 'Précision de la méthode Random Forest : ' + randomForestResult + '%');
-        doc.text(20, 60, 'Durée d\'exécution de la méthode Random Forest : ' + RFduree + ' ms');
-
-        doc.text(20, 80, 'Précision de la méthode SVM : ' + svmResult + '%');
-        doc.text(20, 90, 'Durée d\'exécution de la méthode SVM : ' + SVMduree + ' ms');
-
-        doc.text(20, 110, 'Précision de la méthode KNN : ' + knnResult + '%');
-        doc.text(20, 120, 'Durée d\'exécution de la méthode KNN : ' + KNNduree + ' ms');
-
-        // Enregistrer le PDF
-        doc.save('informations.pdf');
-    });
+        // Utiliser les paramètres récupérés
+        console.log(params);
 
 
-</script>
+        document.getElementById('generatePDFButton').addEventListener('click', function () {
+            // Créer un nouvel objet jsPDF
+            var doc = new jspdf.jsPDF();
 
+            // Ajouter du contenu au PDF
+
+            if (analytiqueResult) {
+                doc.text(20, 20, 'Précision de la méthode Analytique : ' + analytiqueResult + '%');
+                doc.text(20, 30, 'Durée d\'exécution de la méthode Analytique : ' + Analytiqueduree + ' ms');
+            }
+
+            if (randomForestResult) {
+                doc.text(20, 50, 'Précision de la méthode Random Forest : ' + randomForestResult + '%');
+                doc.text(20, 60, 'Durée d\'exécution de la méthode Random Forest : ' + RFduree + ' ms');
+                doc.text(20, 70, 'Paramètres de RandomForest: '  + JSON.stringify(params));
+            }
+
+            if (svmResult) {
+                doc.text(20, 90, 'Précision de la méthode SVM : ' + svmResult + '%');
+                doc.text(20, 100, 'Durée d\'exécution de la méthode SVM : ' + SVMduree + ' ms');
+                doc.text(20, 110, 'Paramètres de SVM: ' + JSON.stringify(params));
+            }
+
+            if (knnResult) {
+                doc.text(20, 130, 'Précision de la méthode KNN : ' + knnResult + '%');
+                doc.text(20, 140, 'Durée d\'exécution de la méthode KNN : ' + KNNduree + ' ms');
+                doc.text(20, 150, 'Paramètres de KNN: ' + JSON.stringify(params));
+            }
+
+            // Enregistrer le PDF
+            doc.save('informations.pdf');
+        });
+
+
+    </script>
+
+
+</body>
+</html>
