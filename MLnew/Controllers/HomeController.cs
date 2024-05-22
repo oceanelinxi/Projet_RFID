@@ -204,11 +204,14 @@ namespace MLnew.Controllers
             // Si aucun fichier n'a été téléchargé, retourner une réponse BadRequest
             return BadRequest("Aucun fichier téléchargé.");
         }
-        public async Task<string> Methode_analytique()
+        public async Task<string> Methode_analytique(int step,int t0_run)
         {
             using (var client = new HttpClient())
             {
-                var requestData = new { };
+                var requestData = new { 
+                steps=step,
+                t0=t0_run
+                };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("http://localhost:5000/analytique", content);
@@ -493,7 +496,8 @@ namespace MLnew.Controllers
         public async Task<ActionResult> ExecuteMachineLearningTasks(bool? mainOption1, bool? mainOption2, bool? mainOption3, bool? mainOption4,
                      int n_est, int max_d, int min_samples,
                      string gamma_select, float C_input, string kernel_select,
-                     string n_neighbors, string weights, string metric)
+                     string n_neighbors, string weights, string metric,
+                     int step,int t0_run)
         {
             //Création de la simulation en  BDD
             Historique hist = new Historique
@@ -508,41 +512,55 @@ namespace MLnew.Controllers
 
             if (mainOption1 == true)
             {
-                var resultAnalytique = await Methode_analytique();
+                var resultAnalytique = await Methode_analytique(step, t0_run);
                 ViewBag.AnalytiqueResult = resultAnalytique;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultAnalytique);
-                var acc = 98.2;
+                var acc = 98.2; int duree = -1;
                 if (jsonResult != null && jsonResult.accuracy != null)
                 {
                     acc = (float)jsonResult.accuracy;
                 }
-
-                Methode methode = new Methode
+                if (jsonResult != null && jsonResult.duree != null)
                 {
-                    Nom = "MethodeAnalytique",
-                    Param1 = "aucun",
-                    Param2 = "aucun",
-                    Param3 = "aucun"
-                };
-                _context.Methode.Add(methode);
+                    duree = jsonResult.duree;
+                }
 
-                await _context.SaveChangesAsync();
-                var all_methods = await _context.Methode.ToListAsync();
-                int size = all_methods.Count;
-                Simulation simulation = new Simulation
+                //Enrgistrement dans la base de données
+                Modele model = new Modele
                 {
-                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                    MethodeId = all_methods[size - 1].Id,
-                    Accuracy = (float)acc,
-                    DateSimulation = DateTime.Now,
-                    Duree = jsonResult.duree
+                    HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
+                    DureeSec = duree,
+                    Nom = "Analytique",
+                    Accuracy=(float)acc
                 };
-
-                _context.Simulation.Add(simulation);
-
-
+                _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
+                var all_models = await _context.Modele.ToListAsync();
+                int n_model = all_models.Count;
+
+                // step
+                Parametre param = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "step",
+                    Valeur = Convert.ToString(step)
+                };
+                _context.Parametre.Add(param);
+                await _context.SaveChangesAsync();
+
+                // t0_run
+                param = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "t0_run",
+                    Valeur = Convert.ToString(t0_run)
+                };
+                _context.Parametre.Add(param);
+                await _context.SaveChangesAsync();
+
+                
+
 
             }
 
