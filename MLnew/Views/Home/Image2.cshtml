@@ -1,9 +1,14 @@
 ﻿@{
     // 从 ViewBag 中获取值并提取数字
-    string analytiqueResult = ExtractNumber(ViewBag.AnalytiqueResult).ToString().Replace(",", ".");
-    string svmResult = ExtractNumber(ViewBag.SVMResult).ToString().Replace(",", ".");
-    string knnResult = ExtractNumber(ViewBag.KNNResult).ToString().Replace(",", ".");
-    string randomForestResult = ExtractNumber(ViewBag.RandomForestResult).ToString().Replace(",", ".");
+    string AdaBoostRF = ExtractNumber(ViewBag.AdaBoostRF).ToString().Replace(",", ".");
+    string AdaBoostSVM = ExtractNumber(ViewBag.AdaBoostSVM).ToString().Replace(",", ".");
+    string AdaBoostKNN = ExtractNumber(ViewBag.AdaBoostKNN).ToString().Replace(",", ".");
+
+
+   // string AdaBoostRF = ExtractNumber(ViewBag.AdaBoostRF).ToString().Replace(",", ".");
+    //string AdaBoostSVM = ExtractNumber(ViewBag.AdaBoostSVM).ToString().Replace(",", ".");
+    //string AdaBoostKNN = ExtractNumber(ViewBag.AdaBoostKNN).ToString().Replace(",", ".");
+  
 
     // 提取数字的方法
     float ExtractNumber(string result)
@@ -12,52 +17,46 @@
         {
             // 解析 JSON 字符串
             dynamic jsonResult = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
-            if (jsonResult != null && jsonResult.accuracy != null)
+            if (jsonResult != null && jsonResult.mean_accuracy != null)
             {
                 // 将 accuracy 字段的值转换为浮点数并返回
-                return (float)jsonResult.accuracy;
+                return (float)jsonResult.mean_accuracy;
             }
         }
         return 0; // 默认返回值，根据需求进行修改
     }
 
+
 }
 <link rel="stylesheet" href="/css/Style_Image.css">
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
-</main>
-
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
-</main>
-@if (randomForestResult != null)
+@if (ViewBag.AdaBoostRF != null)
 {
-    <button id="showImageButton_rf">Afficher boxplot</button>
-    <img id="monImage_rf" src="" style="display:none;" width="500px" height="300px" />
+    string label_AdaBoostRF = "AdaBoostRF";
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode ensembliste Adaboost avec RandomForest : @AdaBoostRF </h3>
+    </main>
+}
+@if (ViewBag.AdaBoostSVM != null)
+{
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode Random Forest : @AdaBoostSVM </h3>
+    </main>
+
+}
+
+@if (ViewBag.AdaBoostKNN != null)
+{
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode SVM : @AdaBoostKNN </h3>
+    </main>
+
+   
 }
 
 
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode SVM : @svmResult </h3>
-</main>
-@if (svmResult != null)
-{
-    <button id="showImageButton_svm">Afficher boxplot</button>
-    <img id="monImage_svm" src="" style="display:none;" width="500px" height="300px" />
-}
-
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode KNN : @knnResult </h3>
-</main>
-@if (knnResult != null)
-{
-    <button id="showImageButton_knn">Afficher boxplot</button>
-    <img id="monImage_knn" src="" style="display:none;" width="500px" height="300px" />
-}
 
 
 
@@ -69,6 +68,8 @@
     <title>@ViewBag.Title</title>
     <!-- Inclure la bibliothèque Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
     <style>
         canvas {
             width: 400px; /* Définir une largeur fixe */
@@ -77,6 +78,7 @@
     </style>
 </head>
 <body>
+
 
     <canvas id="myChart"></canvas>
 
@@ -89,7 +91,7 @@
             var myChart = new Chart(ctx, {
                 type: 'bar', // Diagramme en barres
                 data: {
-                    labels: ['Analytique', 'Random Forest', 'SVM', 'KNN'], // Étiquettes pour chaque barre
+                    labels: ['AdaBoostRF', 'AdaBoostSVM', 'AdaBoostKNN'], // Étiquettes pour chaque barre
                     datasets: [{
                         label: 'Exactitude %',
                         data: selectedOptions, // Valeurs en pourcentage pour chaque barre
@@ -123,60 +125,25 @@
         }
 
         // Appel de la fonction au chargement de la page avec les valeurs par défaut
-        updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult ]);
+        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN ]);
     </script>
+
+
+
+    <script>
+
+
+
+
+        // Appel de la fonction au chargement de la page avec les valeurs par défaut
+        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN ]);
+    </script>
+
+
+
+   
+
+
+
 </body>
 </html>
-
-
-<script>
-    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image randomforest
-    document.getElementById('showImageButton_rf').addEventListener('click', function () {
-
-        var cheminImage_rf = "/Images/boxplot/rf/rf_accuracy.png";
-
-        // Obtenir l'élément image
-        var monImage_rf = document.getElementById('monImage_rf');
-
-        // Définir l'attribut src de l'image avec le chemin de l'image
-        monImage_rf.src = cheminImage_rf;
-        if (monImage_rf.style.display == 'none') {
-            monImage_rf.style.display = 'block';
-        } else {
-            monImage_rf.style.display = 'none';
-        }
-        // Afficher l'image
-
-    });
-
-    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image svm
-    document.getElementById('showImageButton_svm').addEventListener('click', function () {
-
-        var cheminImage_svm = "/images/boxplot/svm/svm_accuracy.png";
-
-        var monImage_svm = document.getElementById('monImage_svm');
-
-        monImage_svm.src = cheminImage_svm;
-        if (monImage_svm.style.display == 'none') {
-            monImage_svm.style.display = 'block';
-        } else {
-            monImage_svm.style.display = 'none';
-        }
-    });
-
-    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image knn
-    document.getElementById('showImageButton_knn').addEventListener('click', function () {
-
-        var cheminImage_knn = "/images/boxplot/knn/knn_accuracy.png";
-
-        var monImage_knn = document.getElementById('monImage_knn');
-
-        monImage_knn.src = cheminImage_knn;
-
-        if (monImage_knn.style.display == 'none') {
-            monImage_knn.style.display = 'block';
-        } else {
-            monImage_knn.style.display = 'none';
-        }
-    });
-</script>

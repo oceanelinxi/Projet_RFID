@@ -5,10 +5,10 @@
     string knnResult = ExtractNumber(ViewBag.KNNResult).ToString().Replace(",", ".");
     string randomForestResult = ExtractNumber(ViewBag.RandomForestResult).ToString().Replace(",", ".");
 
-    string Analytiqueduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
+    string Analytiqueduree = ExtractDuree(ViewBag.AnalytiqueResult).ToString();
     string RFduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
-    string SVMduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
-    string KNNduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
+    string SVMduree = ExtractDuree(ViewBag.SVMResult).ToString();
+    string KNNduree = ExtractDuree(ViewBag.KNNResult).ToString();
 
     // 提取数字的方法
     float ExtractNumber(string result)
@@ -45,7 +45,7 @@
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
         <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
-        <h3>Durée d'exécution de la méthode Analytique : @Analytiqueduree </h3>
+        <h3>Durée d'exécution de la méthode Analytique (en secondes) : @Analytiqueduree </h3>
     </main>
 }
 @if (ViewBag.randomForestResult != null)
@@ -53,7 +53,7 @@
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
         <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
-        <h3>Durée d'exécution de la méthode Random Forest : @RFduree </h3>
+        <h3>Durée d'exécution de la méthode Random Forest (en secondes) : @RFduree </h3>
 
     </main>
 
@@ -66,7 +66,7 @@
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
         <h3>Précision de la méthode SVM : @svmResult </h3>
-        <h3>Durée d'exécution de la méthode SVM : @SVMduree </h3>
+        <h3>Durée d'exécution de la méthode SVM (en secondes) : @SVMduree </h3>
     </main>
 
     <button id="showImageButton_svm">Afficher boxplot</button>
@@ -77,7 +77,7 @@
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
         <h3>Précision de la méthode KNN : @knnResult </h3>
-        <h3>Durée d'exécution de la méthode KNN : @KNNduree </h3>
+        <h3>Durée d'exécution de la méthode KNN (en secondes) : @KNNduree </h3>
     </main>
 
     <button id="showImageButton_knn">Afficher boxplot</button>
