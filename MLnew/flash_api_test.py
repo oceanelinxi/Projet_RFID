@@ -281,9 +281,21 @@ def knn():
     hyperparameter1_value = int(input_params['Hyperparameter1'])
     hyperparameter2_value = str(input_params['Hyperparameter2'])
     hyperparameter3_value = str(input_params['Hyperparameter3'])
+    hyperparameter4_value = str(input_params['Hyperparameter4'])
+    hyperparameter5_value = int(input_params['Hyperparameter5'])
+    hyperparameter6_value = int(input_params['Hyperparameter6'])
+    hyperparameter7_value = float(input_params['Hyperparameter7'])
+
+    
+    print(hyperparameter7_value)
+
+    if(hyperparameter6_value==0):
+        hyperparameter6_value=None
  
+
+    
     # Call the predict() function to make a prediction
-    accuracy = knnn(data,hyperparameter1_value,hyperparameter2_value,hyperparameter3_value)
+    accuracy = knnn(data,hyperparameter1_value,hyperparameter2_value,hyperparameter3_value,hyperparameter4_value,hyperparameter5_value,hyperparameter7_value,hyperparameter6_value)
     
     duree = (datetime.now()- start_knn).seconds
     print('Duree de knn : {}'.format(duree))

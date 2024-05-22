@@ -269,7 +269,10 @@ namespace MLnew.Controllers
         }
 
         //KNN
-        public async Task<string> KNN(string n_neighbors, string weights, string metric)
+        public async Task<string> KNN(string n_neighbors, string weights, string metric,string algorithm_index,
+                     int leaf_size_index,
+                     int n_jobs_knn_index,
+                     string p_index)
         {
             using (var client = new HttpClient())
             {
@@ -281,6 +284,10 @@ namespace MLnew.Controllers
                     Hyperparameter2 = weights,
 
                     Hyperparameter3 = metric,
+                    Hyperparameter4= algorithm_index,
+                    Hyperparameter5= leaf_size_index,
+                    Hyperparameter6= n_jobs_knn_index,
+                    Hyperparameter7 = p_index
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -290,6 +297,11 @@ namespace MLnew.Controllers
                 ViewBag.Hyperparameter1 = n_neighbors;
                 ViewBag.Hyperparameter2 = weights;
                 ViewBag.Hyperparameter3 = metric;
+                ViewBag.Hyperparameter4 = algorithm_index;
+                ViewBag.Hyperparameter5 = leaf_size_index;
+                ViewBag.Hyperparameter6 = n_jobs_knn_index;
+                ViewBag.Hyperparameter7 = p_index;
+                
 
 
                 return resultKNN;
@@ -997,7 +1009,9 @@ namespace MLnew.Controllers
 
             if (mainOption4 == true)
             {
-                var resultKNN = await KNN(n_neighbors, weights, metric);
+                var resultKNN = await KNN(n_neighbors, weights, metric, algorithm_index,
+                    leaf_size_index,
+                     n_jobs_knn_index, p_index);
                 ViewBag.KNNResult = resultKNN;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultKNN);
