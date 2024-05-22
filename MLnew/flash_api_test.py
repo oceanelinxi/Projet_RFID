@@ -243,10 +243,11 @@ def xgboostknn():
     input_params = request.get_json()
     knn_neighbors=int(input_params['Knn_neighbors'])
     booster=str(input_params['Booster'])
+    n_estimators=int(input_params['N_estimators'])
     verbosity=int(input_params['Verbosity'])
     objective=str(input_params['Objective'])
     eval_metric=str(input_params['EvalMetric'])
-    n_estimators=int(input_params['N_estimators'])
+    
     early_stopping_rounds=int(input_params['EarlyStopping'])
     seed=int(input_params['Seed'])
     nthread=int(input_params['Nthread'])
