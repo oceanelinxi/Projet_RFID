@@ -191,6 +191,7 @@ namespace MLnew.Controllers
                     var requestData = new
                     {
                         chemin = filePath,
+                        nomFichier= fileName
                     };
 
                     var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
