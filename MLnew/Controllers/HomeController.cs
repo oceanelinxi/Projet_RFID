@@ -755,7 +755,7 @@ namespace MLnew.Controllers
                 {
                     ModeleID = all_models[n_model - 1].ModeleID,
                     Nom = "random_state_index",
-                    Valeur = Convert.ToString(bootstrap_index)
+                    Valeur = Convert.ToString(random_state_index)
                 };
                 _context.Parametre.Add(param2);
                 await _context.SaveChangesAsync();
