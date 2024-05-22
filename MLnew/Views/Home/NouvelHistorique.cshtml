@@ -10,43 +10,42 @@
     <link rel="stylesheet" href="/css/Style_Historique.css">
 </head>
 <body>
-    </div>
     
-        <div>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th style="width: 25">Id simulation</th>
-                        <th style="width: 400">    User    </th>
-                        <th style="width: 100">Date Simulation</th>
-                        <th style="width: 100">   Id Modele   </th>
-                        <th style="width: 100">Nom Modele  </th>
-                        <th style="width: 100">Duree </th>
-                        <th style="width: 100">Accuracy</th>
-                        <th style="width: 100"> _</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @if (ViewBag.simulation != null)
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id simulation</th>
+                    <th>    User    </th>
+                    <th>Date Simulation</th>
+                    <th>   Id Modele   </th>
+                    <th>Nom Modele  </th>
+                    <th>Duree </th>
+                    <th>Accuracy</th>
+                    <th> _</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.modeles != null)
                 {
-                    @foreach (Simulation sim in ViewBag.simulation)
+                    foreach (Modele mod in ViewBag.modeles)
                     {
                         <tr>
-                            <td>@sim.Id</td>
-                            <td>@sim.Methode.Nom</td>
-                            <td>@sim.Accuracy</td>
-                            <td>@sim.Duree</td>
-                            <td>@sim.DateSimulation</td>
-                            <td>@sim.Methode.Param1</td>
-                            <td>@sim.Methode.Param2</td>
-                            <td>@sim.Methode.Param3</td>
+                            <td>@mod.HistoriqueID</td>
+                            <td>@mod.Historique.UserId</td>
+                            <td>@mod.Historique.DateSimulation </td>
+                            <td>@mod.ModeleID</td>
+                            <td>@mod.Nom</td>
+                            <td>@mod.DureeSec</td>
+                            <td>@mod.Accuracy</td>
+                            <td> <button>See More</button></td>
                         </tr>
                     }
                 }
             </tbody>
-            </table>
-            <br /><br /><br />
-        </div>
+        </table>
+        <br /><br /><br />
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
