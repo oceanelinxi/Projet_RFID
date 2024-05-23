@@ -302,6 +302,7 @@
             if (analytiqueResult) {
                 doc.text(20, 20, 'Précision de la méthode Analytique : ' + analytiqueResult + '%');
                 doc.text(20, 30, 'Durée d\'exécution de la méthode Analytique : ' + Analytiqueduree + ' ms');
+                doc.text(20, 40, 'Paramètres de la méthode Analytique: ' + JSON.stringify(params));
             }
 
             if (randomForestResult) {
