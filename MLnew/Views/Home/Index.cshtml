@@ -692,13 +692,37 @@
                 const svmParams = {
                     C: document.getElementById('C-input').value,
                     Kernel: document.getElementById('kernel-select').value,
-                    Gamma: document.getElementById('gamma-select').value
+                    Gamma: document.getElementById('gamma-select').value,
+                    degree: document.getElementById('degree-input').value,
+                    coef0: document.getElementById('coef0-input').value,
+                    shrinking: document.getElementById('shrinking-select').value,
+                    probability: document.getElementById('probability-select').value,
+                    tol: document.getElementById('tol-input').value,
+                    cache_size: document.getElementById('cache_size-input').value,
+                    class_weight: document.getElementById('class_weight-select').value,
+                    verbose: document.getElementById('verbose-select').value,
+                    max_iter: document.getElementById('max_iter-input').value,
+                    decision_function_shape: document.getElementById('decision_function_shape-select').value,
+                    break_ties: document.getElementById('break_ties-select').value,
+                    random_state: document.getElementById('random_state-input').value,
                 };
                 params.svm = svmParams;
                 pdfContent.push("SVM:");
                 pdfContent.push(`C: ${svmParams.C}`);
                 pdfContent.push(`Kernel: ${svmParams.Kernel}`);
                 pdfContent.push(`Gamma: ${svmParams.Gamma}`);
+                pdfContent.push(`degree: ${svmParams.degree}`);
+                pdfContent.push(`coef0: ${svmParams.coef0}`);
+                pdfContent.push(`shrinking: ${svmParams.shrinking}`);
+                pdfContent.push(`probability: ${svmParams.probability}`);
+                pdfContent.push(`tol: ${svmParams.tol}`);
+                pdfContent.push(`cache_size: ${svmParams.cache_size} `);
+                pdfContent.push(`class_weight: ${svmParams.class_weight} `);
+                pdfContent.push(`verbose: ${svmParams.verbose} `);
+                pdfContent.push(`max_iter: ${svmParams.max_iter} `);
+                pdfContent.push(`decision_function_shape: ${svmParams.decision_function_shape} `);
+                pdfContent.push(`break_ties: ${svmParams.break_ties} `);
+                pdfContent.push(`random_state: ${svmParams.random_state} `);
                 pdfContent.push('');
             }
 
