@@ -731,13 +731,21 @@
                 const knnParams = {
                     n_neighbors: document.getElementById('n_neighbors-input').value,
                     weights: document.getElementById('weights-select').value,
-                    metric: document.getElementById('metric-select').value
+                    metric: document.getElementById('metric-select').value,
+                    algorithm: document.getElementById('algorithm-select').value,
+                    leaf_size: document.getElementById('leaf_size-input').value,
+                    n_jobs: document.getElementById('n_jobs_knn-input').value,
+                    p: document.getElementById('p-input').value,
                 };
                 params.knn = knnParams;
                 pdfContent.push("KNN:");
                 pdfContent.push(`n_neighbors: ${knnParams.n_neighbors}`);
                 pdfContent.push(`weights: ${knnParams.weights}`);
                 pdfContent.push(`metric: ${knnParams.metric}`);
+                pdfContent.push(`algorithm: ${knnParams.algorithm}`);
+                pdfContent.push(`leaf_size: ${knnParams.leaf_size}`);
+                pdfContent.push(`n_jobs: ${knnParams.n_jobs}`);
+                pdfContent.push(`p: ${knnParams.p}`);
                 pdfContent.push('');
             }
 
