@@ -642,6 +642,18 @@
             let params = {};
             let pdfContent = [];
 
+            //paramètres Analytique
+            if (document.getElementById('mainOption1').checked) {
+                const anaParams = {
+                    step: document.getElementById('step-input').value,
+                    t0_run: document.getElementById('t0_run-input').value,
+                };
+                params.analytique = anaParams;
+                pdfContent.push("Méthode analytique:");
+                pdfContent.push(`step: ${anaParams.step}`);
+                pdfContent.push(`t0_run: ${anaParams.t0_run}`);
+            }
+
             //paramètres RF
             if (document.getElementById('mainOption2').checked) {
                 const rfParams = {
