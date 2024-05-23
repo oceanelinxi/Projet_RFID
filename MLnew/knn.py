@@ -235,7 +235,7 @@ def Xcols_func(features, Xcols_all):
    return X
 
 
-def knnn(ds:pd.DataFrame,k_neighbors = 8, weight = 'distance', metrics = 'manhattan' ):
+def knnn(ds:pd.DataFrame,k_neighbors = 8, weight = 'distance', metrics = 'manhattan',algorithm='auto', leaf_size=30, p=2.0, n_jobs=None ):
    from sklearn.preprocessing import LabelEncoder
    from sklearn.neighbors import KNeighborsClassifier
    from sklearn.model_selection import cross_val_score
@@ -249,7 +249,7 @@ def knnn(ds:pd.DataFrame,k_neighbors = 8, weight = 'distance', metrics = 'manhat
    X = ds[Xcols_func('rssi & rc only',ds.columns)]
    y = LabelEncoder().fit_transform(ds['actual'])
    #Cr�ation de l'instance du classificateur KNN
-   knn = KNeighborsClassifier(n_neighbors = k_neighbors, weights=weight,metric=metrics)
+   knn = KNeighborsClassifier(n_neighbors = k_neighbors, weights=weight,metric=metrics,algorithm=algorithm, leaf_size=leaf_size, p=p, n_jobs=n_jobs)
    
    y_pred = cross_val_predict(knn, X, y, cv=20)
    accuracies=cross_val_score(knn,X,y,cv=5,scoring='accuracy')

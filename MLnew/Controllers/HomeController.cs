@@ -270,7 +270,10 @@ namespace MLnew.Controllers
         }
 
         //KNN
-        public async Task<string> KNN(string n_neighbors, string weights, string metric)
+        public async Task<string> KNN(string n_neighbors, string weights, string metric,string algorithm_index,
+                     int leaf_size_index,
+                     int n_jobs_knn_index,
+                     string p_index)
         {
             using (var client = new HttpClient())
             {
@@ -282,6 +285,10 @@ namespace MLnew.Controllers
                     Hyperparameter2 = weights,
 
                     Hyperparameter3 = metric,
+                    Hyperparameter4= algorithm_index,
+                    Hyperparameter5= leaf_size_index,
+                    Hyperparameter6= n_jobs_knn_index,
+                    Hyperparameter7 = p_index
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -291,6 +298,11 @@ namespace MLnew.Controllers
                 ViewBag.Hyperparameter1 = n_neighbors;
                 ViewBag.Hyperparameter2 = weights;
                 ViewBag.Hyperparameter3 = metric;
+                ViewBag.Hyperparameter4 = algorithm_index;
+                ViewBag.Hyperparameter5 = leaf_size_index;
+                ViewBag.Hyperparameter6 = n_jobs_knn_index;
+                ViewBag.Hyperparameter7 = p_index;
+                
 
 
                 return resultKNN;
@@ -402,7 +414,7 @@ namespace MLnew.Controllers
             }
         }
         //XGBoost
-        public async Task<string> XGBoost(string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        public async Task<string> XGBoost(string booster, int n_estimators, int verbosity, string objective, string eval_metric, int early_stopping_rounds, int seed, int nthread)
         {
             using (var client = new HttpClient())
             {
@@ -411,11 +423,11 @@ namespace MLnew.Controllers
                 var requestData = new
                 {
                     Booster = booster,
-                    Silent = silent,
+                    N_estimators = n_estimators,
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
-                    N_estimators = n_estimators,
+                   
                     EarlyStopping = early_stopping_rounds,
                     Seed = seed,
                     Nthread = nthread
@@ -428,7 +440,7 @@ namespace MLnew.Controllers
                 return result;
             }
         }
-        public async Task<string> XGBoostKNN(int knn_neighbors, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        public async Task<string> XGBoostKNN(int knn_neighbors, string booster, int n_estimators, int verbosity, string objective, string eval_metric, int early_stopping_rounds, int seed, int nthread)
         {
             using (var client = new HttpClient())
             {
@@ -438,11 +450,11 @@ namespace MLnew.Controllers
                 {
                     Knn_neighbors = knn_neighbors,
                     Booster = booster,
-                    Silent = silent,
+                    N_estimators = n_estimators,
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
-                    N_estimators = n_estimators,
+                 
                     EarlyStopping = early_stopping_rounds,
                     Seed = seed,
                     Nthread = nthread
@@ -455,7 +467,7 @@ namespace MLnew.Controllers
                 return result;
             }
         }
-        public async Task<string> XGBoostSVM(string svm_kernel, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread)
+        public async Task<string> XGBoostSVM(string svm_kernel, string booster, int n_estimators ,int verbosity, string objective, string eval_metric, int early_stopping_rounds, int seed, int nthread)
         {
             using (var client = new HttpClient())
             {
@@ -463,13 +475,13 @@ namespace MLnew.Controllers
                 client.Timeout = TimeSpan.FromSeconds(200);
                 var requestData = new
                 {
-                    Svm_kernel=svm_kernel,
+                    Svm_kernel = svm_kernel,
                     Booster = booster,
-                    Silent = silent,
+                    N_estimators = n_estimators,
                     Verbosity = verbosity,
                     Objective = objective,
                     EvalMetric = eval_metric,
-                    N_estimators = n_estimators,
+                    
                     EarlyStopping = early_stopping_rounds,
                     Seed = seed,
                     Nthread = nthread
@@ -500,7 +512,38 @@ namespace MLnew.Controllers
                      int n_est, int max_d, int min_samples,
                      string gamma_select, float C_input, string kernel_select,
                      string n_neighbors, string weights, string metric,
-                     int step,int t0_run)
+                     int step,int t0_run,
+                     string criterion_index,
+                     int min_samples_split_index,
+                     float min_weight_fraction_leaf_index,
+                     string max_features_index,
+                     int max_leaf_nodes_index,
+                     float min_impurity_decrease_index, 
+                     bool bootstrap_index,
+                     bool oob_score_index,
+                     int n_jobs_index,
+                     int random_state_index,
+                     int verbose_index,
+                     bool warm_start_index,
+                     string class_weight_index,
+                     float ccp_alpha_index,
+                     int max_samples_index,
+                     int degree_index,
+                     float coef0_index,
+                     bool shrinking_index,
+                     bool probability_index,
+                     string tol_index,
+                     float cache_size_index,
+                     string class_weight_svm_index,
+                     bool verbose_svm_index,
+                     int max_iter_index,
+                     string decision_function_shape_index,
+                     bool break_ties_index,
+                     int random_state_index_2,
+                     string algorithm_index,
+                     int leaf_size_index,
+                     int n_jobs_knn_index,
+                     string p_index)
         {
             //Création de la simulation en  BDD
             Historique hist = new Historique
@@ -627,6 +670,159 @@ namespace MLnew.Controllers
                 _context.Parametre.Add(param2);
                 await _context.SaveChangesAsync();
 
+                // criterion
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "criterion",
+                    Valeur = Convert.ToString(criterion_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // min_samples_split
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "min_samples_split",
+                    Valeur = Convert.ToString(min_samples_split_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // min_weight_fraction_leaf
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "min_weight_fraction_leaf",
+                    Valeur = Convert.ToString(min_weight_fraction_leaf_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+
+                // max_features
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_features",
+                    Valeur = Convert.ToString(max_features_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // max_leaf_nodes
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_leaf_nodes",
+                    Valeur = Convert.ToString(max_leaf_nodes_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // min_impurity_decrease
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "min_impurity_decrease",
+                    Valeur = Convert.ToString(min_impurity_decrease_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                
+                // bootstrap
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "bootstrap",
+                    Valeur = Convert.ToString(bootstrap_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // oob_score
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "oob_score",
+                    Valeur = Convert.ToString(oob_score_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+              
+                // n_jobs
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "n_jobs",
+                    Valeur = Convert.ToString(n_jobs_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // random_state
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "random_state_index",
+                    Valeur = Convert.ToString(random_state_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // verbose
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "verbose",
+                    Valeur = Convert.ToString(verbose_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // warm_start
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "warm_start",
+                    Valeur = Convert.ToString(warm_start_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // class_weight
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "class_weight",
+                    Valeur = Convert.ToString(class_weight_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // ccp_alpha
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "ccp_alpha",
+                    Valeur = Convert.ToString(ccp_alpha_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
+                // max_samples
+                param2 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_samples",
+                    Valeur = Convert.ToString(max_samples_index)
+                };
+                _context.Parametre.Add(param2);
+                await _context.SaveChangesAsync();
+
             }
 
             if (mainOption3 == true)
@@ -687,11 +883,136 @@ namespace MLnew.Controllers
                 };
                 _context.Parametre.Add(param3);
                 await _context.SaveChangesAsync();
+                
+                   
+                // degree
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "degree",
+                    Valeur = Convert.ToString(degree_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // coef0
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "coef0",
+                    Valeur = Convert.ToString(coef0_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // shrinking
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "shrinking",
+                    Valeur = Convert.ToString(shrinking_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // probability
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "probability",
+                    Valeur = Convert.ToString(probability_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // tol
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "tol",
+                    Valeur = Convert.ToString(tol_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // cache_size
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "cache_size",
+                    Valeur = Convert.ToString(cache_size_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // class_weight
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "class_weight",
+                    Valeur = Convert.ToString(class_weight_svm_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // verbose
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "verbose",
+                    Valeur = Convert.ToString(verbose_svm_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // max_iter
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "max_iter",
+                    Valeur = Convert.ToString(max_iter_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // decision_function_shape
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "decision_function_shape",
+                    Valeur = Convert.ToString(decision_function_shape_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // break_ties
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "break_ties",
+                    Valeur = Convert.ToString(break_ties_index)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+                // random_state
+                param3 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "random_state",
+                    Valeur = Convert.ToString(random_state_index_2)
+                };
+                _context.Parametre.Add(param3);
+                await _context.SaveChangesAsync();
+
+
             }
 
             if (mainOption4 == true)
             {
-                var resultKNN = await KNN(n_neighbors, weights, metric);
+                var resultKNN = await KNN(n_neighbors, weights, metric, algorithm_index,
+                    leaf_size_index,
+                     n_jobs_knn_index, p_index);
                 ViewBag.KNNResult = resultKNN;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultKNN);
@@ -748,6 +1069,46 @@ namespace MLnew.Controllers
                 _context.Parametre.Add(param4);
                 await _context.SaveChangesAsync();
 
+                // algorithm
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "algorithm",
+                    Valeur = Convert.ToString(algorithm_index)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // leaf_size
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "leaf_size",
+                    Valeur = Convert.ToString(leaf_size_index)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // n_jobs
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "n_jobs",
+                    Valeur = Convert.ToString(n_jobs_knn_index)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
+                // p
+                param4 = new Parametre
+                {
+                    ModeleID = all_models[n_model - 1].ModeleID,
+                    Nom = "p",
+                    Valeur = Convert.ToString(p_index)
+                };
+                _context.Parametre.Add(param4);
+                await _context.SaveChangesAsync();
+
             }
 
             // 返回到 Image 视图
@@ -775,16 +1136,16 @@ namespace MLnew.Controllers
 
         public async Task<ActionResult> MethodesEnsemblistes(bool? mainOption1, bool? mainOption2, int n_est, int max_d, int min_samples, string criterion, int min_samples_split, float min_weight_fraction_leaf, string max_features, int max_leaf_nodes, float min_impurity_decrease, bool bootstrap, bool oob_score, int n_jobs, int random_state, int verbose, bool warm_start, string class_weight, float ccp_alpha, int max_samples, int cv_folds, string algorithmSelect,
             string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size, string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm,
-            int n_neighbors,string weights,string metric,string algorithm,int leaf_size,int n_jobs_knn,string p, int cv_folds_knn, string booster, int silent, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread, int knn_neighbors, string svm_kernel)
+            int n_neighbors,string weights,string metric,string algorithm,int leaf_size,int n_jobs_knn,string p, int cv_folds_knn, string booster, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread, int knn_neighbors, string svm_kernel)
         {
             if (mainOption1 == true)
             {
                 if (algorithmSelect == "Random Forest")
                 {
 
-                    var resultXGBoost = await  XGBoost(booster, silent, verbosity, objective, eval_metric, n_estimators, early_stopping_rounds, seed, nthread);
+                    var resultXGBoost = await  XGBoost(booster, n_estimators, verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
                     ViewBag.XGBoost = resultXGBoost;
-
+                    
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoost);
                     var acc = 98.2;
                     if (jsonResult != null && jsonResult.mean_accuracy != null)
@@ -794,7 +1155,7 @@ namespace MLnew.Controllers
                 }
                 if (algorithmSelect == "KNN")
                 {
-                    var resultXGBoostKNN = await XGBoostKNN(knn_neighbors,booster,silent,verbosity,objective,eval_metric,n_estimators,early_stopping_rounds,seed,nthread);
+                    var resultXGBoostKNN = await XGBoostKNN(knn_neighbors,booster, n_estimators, verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread);
                     ViewBag.XGBoostKNN = resultXGBoostKNN;
 
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostKNN);
@@ -806,7 +1167,7 @@ namespace MLnew.Controllers
                 }
                 if (algorithmSelect == "SVM")
                 {
-                    var resultXGBoostSVM = await XGBoostSVM(svm_kernel, booster, silent, verbosity, objective, eval_metric, n_estimators, early_stopping_rounds, seed, nthread);
+                    var resultXGBoostSVM = await XGBoostSVM(svm_kernel, booster, n_estimators ,verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
                     ViewBag.XGBoostSVM = resultXGBoostSVM;
 
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostSVM);
