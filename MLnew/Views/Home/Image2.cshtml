@@ -3,8 +3,11 @@
     string AdaBoostRF = ExtractNumber(ViewBag.AdaBoostRF).ToString().Replace(",", ".");
     string AdaBoostSVM = ExtractNumber(ViewBag.AdaBoostSVM).ToString().Replace(",", ".");
     string AdaBoostKNN = ExtractNumber(ViewBag.AdaBoostKNN).ToString().Replace(",", ".");
-
-
+    string XGRF = ExtractNumber(ViewBag.XGBoost).ToString().Replace(",", ".");
+    string XGKNN = ExtractNumber(ViewBag.XGBoostKNN).ToString().Replace(",", ".");
+    string XGSVM = ExtractNumber(ViewBag.XGBoostSVM).ToString().Replace(",", ".");
+    
+    
    // string AdaBoostRF = ExtractNumber(ViewBag.AdaBoostRF).ToString().Replace(",", ".");
     //string AdaBoostSVM = ExtractNumber(ViewBag.AdaBoostSVM).ToString().Replace(",", ".");
     //string AdaBoostKNN = ExtractNumber(ViewBag.AdaBoostKNN).ToString().Replace(",", ".");
@@ -41,7 +44,7 @@
 {
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
-        <h3>Précision de la méthode Random Forest : @AdaBoostSVM </h3>
+        <h3>Précision de la méthode ensembliste Adaboost avec SVM : @AdaBoostSVM </h3>
     </main>
 
 }
@@ -50,12 +53,41 @@
 {
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
-        <h3>Précision de la méthode SVM : @AdaBoostKNN </h3>
+        <h3>Précision de la méthode ensembliste Adaboost avec KNN : @AdaBoostKNN </h3>
     </main>
 
    
 }
 
+@if (ViewBag.XGBoost != null)
+{
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode ensembliste XGBoost avec RandomForest : @XGRF </h3>
+    </main>
+
+
+}
+
+@if (ViewBag.XGBoostKNN != null)
+{
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode ensembliste XGBoost avec KNN : @XGKNN </h3>
+    </main>
+
+
+}
+
+@if (ViewBag.XGBoostSVM != null)
+{
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
+        <h3>Précision de la méthode ensembliste XGBoost avec SVM : @XGSVM </h3>
+    </main>
+
+
+}
 
 
 
@@ -91,7 +123,7 @@
             var myChart = new Chart(ctx, {
                 type: 'bar', // Diagramme en barres
                 data: {
-                    labels: ['AdaBoostRF', 'AdaBoostSVM', 'AdaBoostKNN'], // Étiquettes pour chaque barre
+                    labels: ['AdaBoostRF', 'AdaBoostSVM', 'AdaBoostKNN','XGRF','XGKNN','XGSVM'], // Étiquettes pour chaque barre
                     datasets: [{
                         label: 'Exactitude %',
                         data: selectedOptions, // Valeurs en pourcentage pour chaque barre
@@ -125,7 +157,7 @@
         }
 
         // Appel de la fonction au chargement de la page avec les valeurs par défaut
-        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN ]);
+        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN, @XGRF , @XGKNN, @XGSVM]);
     </script>
 
 
@@ -136,7 +168,7 @@
 
 
         // Appel de la fonction au chargement de la page avec les valeurs par défaut
-        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN ]);
+        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN, @XGRF, @XGKNN, @XGSVM]);
     </script>
 
 

@@ -301,7 +301,7 @@ def train_and_evaluate_xgboost(booster:str,n_estimators:int,  verbosity:int , ob
     mean_score = np.mean(cv_scores)
 
     y_pred_cv = cross_val_predict(xgb_model, X, y, cv=kf)
-    return mean_score
+    return mean_score*100
 
 def train_and_evaluate_knn_xgboost(knn_neighbors:int, booster:str, n_estimators:int,  verbosity:int , objective:str ,eval_metric:str,early_stopping_rounds:int,seed:int,nthread:int):
    
