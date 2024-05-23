@@ -14,6 +14,7 @@ using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace MLnew.Controllers
 {
     public class HomeController : Controller
@@ -937,13 +938,89 @@ namespace MLnew.Controllers
 
         public async Task<ActionResult> IndexHistorique()
         {
-            /* Liste des utilisteurs 
+            // Liste des utilisteurs 
             var userList = GetAllUsers();
-
-            ViewBag.users = userList;*/
-            var modeles = await _context.Modele.Include(b => b.Historique)
+            ViewBag.users = userList;
+            
+            List<Modele> modeles = await _context.Modele.Include(b => b.Historique)
                 .ToListAsync();
             ViewBag.modeles = modeles;
+                        
+            return View("NouvelHIstorique");
+        }
+        /*
+        public async Task<ActionResult> FilterbyUserId(String userSelect)
+        {
+            var userList = GetAllUsers();
+            ViewBag.users = userList;
+            List<Modele> modeles = await _context.Modele.Include(b => b.Historique)
+                .Where(b => b.Historique.UserId == userSelect)
+                .ToListAsync();
+            ViewBag.modeles = modeles;
+            return View("NouvelHistorique");
+        }
+        public List<Modele> _models;
+        */
+        public async Task<ActionResult> FilterbyModeleName(bool user, bool modele, bool datesim, DateTime start, DateTime end, String userSelect, String modeleSelect)
+        {
+            var userList = GetAllUsers();
+            ViewBag.users = userList;
+
+            List<Modele> modeles = await _context.Modele.Include(b => b.Historique)
+                    .Where(b => b.Nom == modeleSelect)
+                    .Where(b => b.Historique.UserId == userSelect)
+                    .Where(b => b.Historique.DateSimulation> start && b.Historique.DateSimulation < end)
+                     .ToListAsync();
+            if (datesim)
+            {
+                if (!user && modele)
+                {
+                    modeles = await _context.Modele.Include(b => b.Historique)
+                        .Where(b => b.Nom == modeleSelect)
+                        .Where(b => b.Historique.DateSimulation > start && b.Historique.DateSimulation < end)
+                         .ToListAsync();
+                }
+                else if (user && !modele)
+                {
+                    modeles = await _context.Modele.Include(b => b.Historique)
+                        .Where(b => b.Historique.UserId == userSelect)
+                        .Where(b => b.Historique.DateSimulation > start && b.Historique.DateSimulation < end)
+                         .ToListAsync();
+                }
+                else if (!user && !modele)
+                {
+                    modeles = await _context.Modele.Include(b => b.Historique)
+                        .Where(b => b.Historique.DateSimulation > start && b.Historique.DateSimulation < end)
+                         .ToListAsync();
+                }
+            }
+            else
+            {
+                modeles = await _context.Modele.Include(b => b.Historique)
+                    .Where(b => b.Nom == modeleSelect).Where(b => b.Historique.UserId == userSelect)
+                     .ToListAsync();
+
+                if (!user && modele)
+                {
+                    modeles = await _context.Modele.Include(b => b.Historique)
+                        .Where(b => b.Nom == modeleSelect)
+                         .ToListAsync();
+                }
+                else if (user && !modele)
+                {
+                    modeles = await _context.Modele.Include(b => b.Historique)
+                        .Where(b => b.Historique.UserId == userSelect)
+                         .ToListAsync();
+                }
+                else if (!user && !modele)
+                {
+                    modeles = await _context.Modele.Include(b => b.Historique)
+                         .ToListAsync();
+                }
+            }
+            
+            ViewBag.modeles = modeles;
+
             return View("NouvelHistorique");
         }
 
