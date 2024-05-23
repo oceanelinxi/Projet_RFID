@@ -410,10 +410,39 @@ def random_forest_accuracy(data,n_estimator = BEST_PARAMETERS["n_estimators"], m
     return 100 * accuracy_score(y_test, y_pred)
     
 def RFcross_validation( data,n_estimator = BEST_PARAMETERS["n_estimators"], max_d = BEST_PARAMETERS["max_depth"], 
-                            min_samples = BEST_PARAMETERS["min_samples_leaf"]):
+                            min_samples = BEST_PARAMETERS["min_samples_leaf"],
+criterion_index= 'gini',
+                    min_samples_split_index= 2,
+                    min_weight_fraction_leaf_index = 0.0,
+                    max_features_index= 'sqrt',
+                    max_leaf_nodes_index= None,
+                    min_impurity_decrease_index= 0.0,
+                    bootstrap_index= True,
+                    oob_score_index= False,
+                    n_jobs_index= None,
+                    random_state_index= None,
+                    verbose_index= 0,
+                    warm_start_index= False,
+                    class_weight_index= None,
+                    ccp_alpha_index= 0.0,
+                    max_samples_index= None):
 
     # Définir le modèle de forêt aléatoire
-    clf = RandomForestClassifier(n_estimators = n_estimator, max_depth = max_d, min_samples_leaf = min_samples)
+    clf = RandomForestClassifier(n_estimators = n_estimator, max_depth = max_d, min_samples_leaf = min_samples,criterion= criterion_index,
+                    min_samples_split= min_samples_split_index,
+                    min_weight_fraction_leaf = min_weight_fraction_leaf_index,
+                    max_features= max_features_index,
+                    max_leaf_nodes= max_leaf_nodes_index,
+                    min_impurity_decrease= min_impurity_decrease_index,
+                    bootstrap= bootstrap_index,
+                    oob_score= oob_score_index,
+                    n_jobs= n_jobs_index,
+                    random_state= random_state_index,
+                    verbose= verbose_index,
+                    warm_start= warm_start_index,
+                    class_weight= class_weight_index,
+                    ccp_alpha= ccp_alpha_index,
+                    max_samples= max_samples_index)
 
     # Définir le nombre de plis de validation croisée
     k = 5

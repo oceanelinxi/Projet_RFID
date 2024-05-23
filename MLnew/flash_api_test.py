@@ -50,8 +50,38 @@ def random_forest():
     start = datetime.now()
     # Get the input parameters from the request
     input_params = request.get_json()
+
+    if(input_params['class_weight_index']=='none'):
+        input_params['class_weight_index']=None
+    if(input_params['max_leaf_nodes_index']==0):
+        input_params['max_leaf_nodes_index']=None
+    if(input_params['n_jobs_index']==0):
+        input_params['n_jobs_index']=None
+    if(input_params['random_state_index']==0):
+        input_params['random_state_index']=None
+    if(input_params['max_samples_index']==0):
+        input_params['max_samples_index']=None
+
+    print(input_params)
     
-    accuracy = RFcross_validation(data,input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'])
+    accuracy = RFcross_validation(data,input_params['n_estimators'], input_params['max_depth'], input_params['min_samples_leaf'],str(input_params['criterion_index']),
+                    int(input_params['min_samples_split_index']),
+                    float(input_params['min_weight_fraction_leaf_index']),
+                    str(input_params['max_features_index']),
+                    input_params['max_leaf_nodes_index'],
+                    float(input_params['min_impurity_decrease_index']),
+                    bool(input_params['bootstrap_index']),
+                    bool(input_params['oob_score_index']),
+                    input_params['n_jobs_index'],
+                    input_params['random_state_index'],
+                    int(input_params['verbose_index']),
+                    bool(input_params['warm_start_index']),
+                    input_params['class_weight_index'],
+                    float(input_params['ccp_alpha_index']),
+                    input_params['max_samples_index'])
+
+
+
     duree_rf = (datetime.now() - start).seconds
     print('Duree de rf : {}',str(duree_rf))
     # Return the prediction as JSON
@@ -65,8 +95,22 @@ def svm():
     input_params = request.get_json()
     print(input_params)
     print((input_params['Gamma'], float(input_params['C']), input_params['Kernel']))
+    
+
+    if(input_params['class_we']=="None"):
+        input_params['class_we']=None
+    if(input_params['random_s']==0):
+        input_params['random_s']=None
+
     # Call the predict() function to make a prediction with SVM
-    accuracy = train_and_evaluate_svm(input_params['Gamma'], float(input_params['C']), input_params['Kernel'])
+    accuracy = train_and_evaluate_svm(input_params['Gamma'], float(input_params['C']), input_params['Kernel'],
+    int(input_params['degre']), float(input_params['coef']), bool(input_params['shrinkings']), 
+    bool(input_params['prob']), float(input_params['tols']),
+    float(input_params['cach_size']),input_params['class_we'], 
+    bool(input_params['verbos']), int(input_params['max_it']),
+    str(input_params['decision_func']), bool(input_params['break_t']), input_params['random_s'])
+
+
     duree_svm = (datetime.now()-start).seconds
     print('Duree svm {}'.format(duree_svm))
     # Return the prediction as JSON

@@ -228,7 +228,24 @@ namespace MLnew.Controllers
         }
 
         //Random_Forest
-        public async Task<string> RandomForest(int n_est, int max_d, int min_samples)
+        public async Task<string> RandomForest(int n_est, int max_d, int min_samples,
+            
+                     
+                     string criterion_index,
+                     int min_samples_split_index,
+                     float min_weight_fraction_leaf_index,
+                     string max_features_index,
+                     int max_leaf_nodes_index,
+                     float min_impurity_decrease_index,
+                     bool bootstrap_index,
+                     bool oob_score_index,
+                     int n_jobs_index,
+                     int random_state_index,
+                     int verbose_index,
+                     bool warm_start_index,
+                     string class_weight_index,
+                     float ccp_alpha_index,
+                     int max_samples_index)
         {
             using (var client = new HttpClient())
             {
@@ -236,7 +253,30 @@ namespace MLnew.Controllers
                 {
                     n_estimators = n_est,
                     max_depth = max_d,
-                    min_samples_leaf = min_samples
+                    min_samples_leaf = min_samples,
+                    criterion_index= criterion_index,
+                    min_samples_split_index= min_samples_split_index,
+                    min_weight_fraction_leaf_index = min_weight_fraction_leaf_index,
+                    max_features_index= max_features_index,
+                    max_leaf_nodes_index= max_leaf_nodes_index,
+                    min_impurity_decrease_index= min_impurity_decrease_index,
+                    bootstrap_index= bootstrap_index,
+                    oob_score_index= oob_score_index,
+                    n_jobs_index= n_jobs_index,
+                    random_state_index= random_state_index,
+                    verbose_index= verbose_index,
+                    warm_start_index= warm_start_index,
+                    class_weight_index= class_weight_index,
+                    ccp_alpha_index= ccp_alpha_index,
+                    max_samples_index= max_samples_index
+
+
+
+
+
+
+
+
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -248,7 +288,7 @@ namespace MLnew.Controllers
         }
 
         //SVM
-        public async Task<string> Methode_SVM(string gamma_select, float C_input, string kernel_select)
+        public async Task<string> Methode_SVM(string gamma_select, float C_input, string kernel_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size, string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm)
         {
             using (var client = new HttpClient())
             {
@@ -257,7 +297,20 @@ namespace MLnew.Controllers
                 {
                     Gamma = gamma_select,
                     C = C_input,
-                    Kernel = kernel_select
+                    Kernel = kernel_select,
+                    degre = degree,
+                    coef = coef0,
+                    shrinkings = shrinking,
+                    prob = probability,
+                    tols = tol,
+                    cach_size = cache_size,
+                    max_it = max_iter,
+                    decision_func = decision_function_shape,
+                    random_s = random_state_svm,
+                    verbos = verbose_svm,
+                    break_t = break_ties,
+                    class_we = class_weight_svm
+                    
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -613,7 +666,21 @@ namespace MLnew.Controllers
             if (mainOption2 == true)
             {
                 // Obtention des resultats python
-                var resultRandomForest = await RandomForest(n_est, max_d, min_samples);
+                var resultRandomForest = await RandomForest(n_est, max_d, min_samples,  criterion_index,
+                     min_samples_split_index,
+                      min_weight_fraction_leaf_index,
+                      max_features_index,
+                      max_leaf_nodes_index,
+                      min_impurity_decrease_index,
+                      bootstrap_index,
+                      oob_score_index,
+                     n_jobs_index,
+                      random_state_index,
+                      verbose_index,
+                      warm_start_index,
+                      class_weight_index,
+                      ccp_alpha_index,
+                      max_samples_index);
                 ViewBag.RandomForestResult = resultRandomForest;
 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultRandomForest);
@@ -827,9 +894,21 @@ namespace MLnew.Controllers
 
             if (mainOption3 == true)
             {
-                var resultSVM = await Methode_SVM(gamma_select, C_input, kernel_select);
+                var resultSVM = await Methode_SVM(gamma_select, C_input, kernel_select, degree_index,
+                     coef0_index,
+                      shrinking_index,
+                      probability_index,
+                      tol_index,
+                     cache_size_index,
+                     class_weight_svm_index,
+                     verbose_svm_index,
+                      max_iter_index,
+                      decision_function_shape_index,
+                     break_ties_index,
+                      random_state_index_2
+                      );
                 ViewBag.SVMResult = resultSVM;
-
+                 
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultSVM);
                 var acc = 98.2; int duree = -1;
                 if (jsonResult != null && jsonResult.accuracy != null)
