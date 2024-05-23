@@ -13,7 +13,7 @@
 <body>
     <div class="filtres">
         <form method="post" asp-action="FilterbyModeleName" asp-controller="Home">
-            <input type="checkbox" name="user" />
+            <input type="checkbox" name="user" value="true"/>
             <label>User</label>
             <select id="userSelect" name="userSelect" value="true">
                 @foreach(var user in ViewBag.users)
@@ -67,7 +67,7 @@
                             <td>@mod.Nom</td>
                             <td>@mod.DureeSec</td>
                             <td>@mod.Accuracy</td>
-                            <td> <button>See More</button></td>
+                            <td> <a asp-controller="Home" asp-action="Details" asp-route-id="@mod.ModeleID" class="btn btn-primary">See More</a></td>
                         </tr>
                     }
                 }

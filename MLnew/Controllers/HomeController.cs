@@ -1309,19 +1309,7 @@ namespace MLnew.Controllers
                         
             return View("NouvelHIstorique");
         }
-        /*
-        public async Task<ActionResult> FilterbyUserId(String userSelect)
-        {
-            var userList = GetAllUsers();
-            ViewBag.users = userList;
-            List<Modele> modeles = await _context.Modele.Include(b => b.Historique)
-                .Where(b => b.Historique.UserId == userSelect)
-                .ToListAsync();
-            ViewBag.modeles = modeles;
-            return View("NouvelHistorique");
-        }
-        public List<Modele> _models;
-        */
+       
         public async Task<ActionResult> FilterbyModeleName(bool user, bool modele, bool datesim, DateTime start, DateTime end, String userSelect, String modeleSelect)
         {
             var userList = GetAllUsers();
@@ -1383,6 +1371,20 @@ namespace MLnew.Controllers
             ViewBag.modeles = modeles;
 
             return View("NouvelHistorique");
+        }
+
+        public  async Task<ActionResult> Details(int Id)
+        {
+            List<Modele> m = await _context.Modele
+                .Include(b => b.Parametres)
+                .Where(b => b.ModeleID == Id)
+                 .ToListAsync();
+            ViewBag.OneModele = m[0];
+            if(ViewBag.OneModele == null)
+            {
+                return NotFound();
+            }
+            return View("DetailsModele");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
