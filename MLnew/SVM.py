@@ -235,7 +235,11 @@ def Xcols_func(features, Xcols_all):
         
     return X
 
-def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
+def train_and_evaluate_svm( gammas='scale', c=1.0, kernels='rbf',
+degree=3, coef0=0.0, shrinking=True,
+probability=False, tol=0.001, cache_size=200, class_weight=None,
+verbose=False, max_iter=-1, decision_function_shape='ovr', 
+break_ties=False, random_state=None):
     
     # print('In the function')
     # print((gammas, c, kernels))
@@ -250,7 +254,10 @@ def train_and_evaluate_svm( gammas: str, c: float, kernels: str):
     X = ds[Xcols_func('rssi & rc only',ds.columns)]
     ds['actual']=label_encoder.fit_transform(ds['actual'])
     y=ds['actual']
-    svm_model = SVC(gamma=gammas, C=c, kernel=kernels)
+    svm_model = SVC(gamma=gammas, C=c, kernel=kernels,degree=degree, coef0=coef0, shrinking=shrinking,
+probability=probability, tol=tol, cache_size=cache_size, class_weight=class_weight,
+verbose=verbose, max_iter=max_iter, decision_function_shape=decision_function_shape, 
+break_ties=break_ties, random_state=random_state)
     
    
     kf = KFold(n_splits=20, shuffle=True)
