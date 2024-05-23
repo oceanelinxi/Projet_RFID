@@ -647,13 +647,43 @@
                 const rfParams = {
                     n_estimators: document.getElementById('criterion-n_estimators-input').value,
                     max_depth: document.getElementById('criterion-max_depth-input').value,
-                    min_samples_leaf: document.getElementById('criterion-min_samples_leaf-input').value
+                    min_samples_leaf: document.getElementById('criterion-min_samples_leaf-input').value,
+                    criterion: document.getElementById('criterion-select').value,
+                    min_samples_split: document.getElementById('criterion-min_samples_split-input').value,
+                    min_weight_fraction: document.getElementById('criterion-min_weight_fraction_leaf-input').value,
+                    max_features: document.getElementById('max_features-select').value,
+                    max_leaf_nodes: document.getElementById('criterion-max_leaf_nodes-input').value,
+                    min_impurity_decrease: document.getElementById('criterion-min_impurity_decrease-input').value,
+                    bootstrap: document.getElementById('bootstrap-select').value,
+                    oob_score: document.getElementById('oob_score-select').value,
+                    n_jobs: document.getElementById('criterion-n_jobs-input').value,
+                    random_state: document.getElementById('criterion-random_state-input').value,
+                    verbose: document.getElementById('criterion-verbose-input').value,
+                    warm_start: document.getElementById('warm_start-select').value,
+                    class_weight: document.getElementById('class_weight-select').value,
+                    ccp_alpha: document.getElementById('criterion-ccp_alpha-input').value,
+                    max_samples: document.getElementById('criterion-max_samples-input').value,
                 };
                 params.randomForest = rfParams;
                 pdfContent.push("Random Forest:");
                 pdfContent.push(`n_estimators: ${rfParams.n_estimators}`);
                 pdfContent.push(`max_depth: ${rfParams.max_depth}`);
                 pdfContent.push(`min_samples_leaf: ${rfParams.min_samples_leaf}`);
+                pdfContent.push(`criterion: ${rfParams.criterion}`);
+                pdfContent.push(`min_samples_split: ${rfParams.min_samples_split}`);
+                pdfContent.push(`min_weight_fraction: ${rfParams.min_weight_fraction}`);
+                pdfContent.push(`max_features: ${rfParams.max_features}`);
+                pdfContent.push(`max_leaf_nodes: ${rfParams.max_leaf_nodes}`);
+                pdfContent.push(`min_impurity_decrease: ${rfParams.min_impurity_decrease}`);
+                pdfContent.push(`bootstrap: ${rfParams.bootstrap}`);
+                pdfContent.push(`oob_score: ${rfParams.oob_score}`);
+                pdfContent.push(` n_jobs: ${rfParams.n_jobs}`);
+                pdfContent.push(` random_state: ${rfParams.random_state}`);
+                pdfContent.push(` verbose: ${rfParams.verbose}`);
+                pdfContent.push(` warm_start: ${rfParams.warm_start}`);
+                pdfContent.push(`class_weight: ${rfParams.class_weight}`);
+                pdfContent.push(`ccp_alpha: ${rfParams.ccp_alpha}`);
+                pdfContent.push(`max_samples: ${rfParams.max_samples}`);
                 pdfContent.push('');
             }
 
