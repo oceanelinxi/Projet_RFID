@@ -1465,6 +1465,11 @@ namespace MLnew.Controllers
             }
             return View("DetailsModele");
         }
+        
+        [Authorize(Roles = "Administrateur")]
+        public ActionResult ClearHistory() {
+            return View("ClearHistory");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
