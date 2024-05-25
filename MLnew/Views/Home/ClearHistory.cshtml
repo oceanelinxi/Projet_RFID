@@ -14,19 +14,21 @@
     <link rel="stylesheet" href="/css/NouvelHistorique.css">
 </head>
 <body>
-    <form method="post" asp-controller="Home" asp-action="ClearHistory">
-        <h4>
+    <form method="post" asp-controller="Home" asp-action="DeleteHistorique">
+        <h2>
             Êtes-vous sûr de vouloir vider l'historique ??
-        </h4>
+        </h2>
         <br /><br />
-        <div float="center" margin="50px">
-            @if (User.IsInRole("Administrateur")) {
-                <button>
-                    <a asp-controller = "Home" asp-action = "IndexHistorique">NON</a>
-                </button>
-            }
-            <input type="submit" value="Oui" />
-        </div>
+        <h3>
+            <div float="center" margin="90px">
+                @if (User.IsInRole("Administrateur")) {
+                    <button>
+                        <a asp-controller = "Home" asp-action = "IndexHistorique">NON</a>
+                    </button>
+                }
+                <input type="submit" value="Oui" />
+            </div>
+        </h3>
     </form>
 
     <br />

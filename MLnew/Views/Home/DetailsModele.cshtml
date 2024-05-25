@@ -1,7 +1,7 @@
 ﻿@{
 
     Modele modele = new Modele();
-
+    
     modele = ViewBag.OneModele as Modele;
 }
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
     <body>
         
         <form method="post" asp-controller="Home" asp-action="IndexHistorique">
-        <h1> Détails du Modele</h1>
+        <strong><h1> Détails du Modele</h1></strong>
         @if(modele != null)
             {
                 <h2>Methode : @modele.Nom</h2>
@@ -28,10 +28,7 @@
                 @if(modele.Nom == "Analytique")
                 {
                     <div class="accordion-item" id="optionsAccordion">
-                        <h3 class="accordion-header" id="headingOption1">
-                            <label for="mainOption1">Analytique</label>
-                        </h3>
-                        
+                                                
                             <div class="accordion-body">
 
                                 @if (modele.Parametres != null)
@@ -41,7 +38,7 @@
                                         {
                                             <p>
                                                 <strong>@param.Nom</strong>
-                                                <label>@param.Valeur</label>
+                                                <label font="Cambria">@param.Valeur</label>
                                             </p>
                                             
                                         }
@@ -55,10 +52,7 @@
                 @if(modele.Nom == "RandomForest")
                 {
                     <div class="accordion-item" id="optionsAccordion">
-                        <h3 class="accordion-header" id="headingOption1">
-                            
-                        </h3>
-                        
+                                                
                             <div class="accordion-body">
 
                                 @if (modele.Parametres != null)
@@ -68,7 +62,7 @@
                                         {
                                             <p>
                                                 <strong>@param.Nom</strong>
-                                                <label>@param.Valeur</label>
+                                                <label font="Cambria">@param.Valeur</label>
                                             </p>                                            
                                         }
                                     </div>
@@ -81,10 +75,7 @@
                 @if (modele.Nom == "SVM")
                 {
                     <div class="accordion-item" id="optionsAccordion">
-                        <h3 class="accordion-header" id="headingOption1">
-                            
-                        </h3>
-                        
+                       
                             <div class="accordion-body">
 
                                 @if (modele.Parametres != null)
@@ -94,7 +85,7 @@
                                         {
                                             <p>
                                                 <strong>@param.Nom</strong>
-                                                <label>@param.Valeur</label>
+                                                <label font="Cambria">@param.Valeur</label>
                                             </p>                                            
                                         }
                                     </div>
@@ -107,9 +98,6 @@
                 @if (modele.Nom == "KNN")
                 {
                     <div class="accordion-item" id="optionsAccordion">
-                        <h3 class="accordion-header" id="headingOption1">
-                            
-                        </h3>
                         
                             <div class="accordion-body">
 
@@ -120,18 +108,23 @@
                                         {
                                             <p>
                                                 <strong>@param.Nom</strong>
-                                                <label>@param.Valeur</label>
+                                                <label font="Cambria">@param.Valeur</label>
                                             </p>                                            
                                         }
                                     </div>
                                 }
                             </div>
                         </div>
-                    
                 }
-           
         }
-        <input type="submit" id="submit" value="OK" />
+        <div float="center" margin="180px">
+            <input type="submit" id="submit" value="OK" />
+            @if (User.IsInRole("Administrateur"))
+            {
+                <button> <a asp-controller="Home" asp-action="RunAgain" asp-route-id="@modele.ModeleID">Relancer la simulation</a></button>
+            }
+        </div>
+       
 
     </form>
     <br />
