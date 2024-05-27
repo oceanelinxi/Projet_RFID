@@ -2,6 +2,7 @@ from sklearn.model_selection import cross_val_score, KFold, cross_val_predict
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
 from xgboost import XGBClassifier
+from xgboost import XGBRFClassifier
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import pandas as pd
@@ -287,14 +288,16 @@ break_ties=break_ties, random_state=random_state)
 
 
  
-def train_and_evaluate_xgboost(booster:str,n_estimators:int,  verbosity:int , objective:str ,eval_metric:str,early_stopping_rounds:int,seed:int,nthread:int):
+def train_and_evaluate_xgboost(nestimators:int,mx_depth:int, lrn_rate:float,subsample:float,colsample_bynode:float, rd_state:int):
     ds = dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2])
     X = ds[Xcols_func('rssi & rc only', dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2]).columns)]
     label_encoder = LabelEncoder()
     ds['actual'] = label_encoder.fit_transform(ds['actual'])
     y = ds['actual']
 
-    xgb_model = XGBClassifier(booster= booster, n_estimators=n_estimators, num_parallel_tree=n_estimators)
+    #xgb_model = XGBClassifier(booster= booster, n_estimators=n_estimators, num_parallel_tree=n_estimators)
+
+    xgb_model = XGBRFClassifier(n_estimators=100, subsample=subsample,colsample_bynode=colsample_bynode,max_depth=mx_depth,learning_rate=lrn_rate,random_state=rd_state)
     kf = KFold(n_splits=5, shuffle=True)
 
     cv_scores = cross_val_score(xgb_model, X, y, cv=kf)

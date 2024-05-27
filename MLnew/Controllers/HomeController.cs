@@ -467,7 +467,7 @@ namespace MLnew.Controllers
             }
         }
         //XGBoost
-        public async Task<string> XGBoost(string booster, int n_estimators, int verbosity, string objective, string eval_metric, int early_stopping_rounds, int seed, int nthread)
+        public async Task<string> XGBoost(int nestimators, int mx_depth, string lrn_rate, string subsample, string colsample_bynode, int rd_state)
         {
             using (var client = new HttpClient())
             {
@@ -475,15 +475,14 @@ namespace MLnew.Controllers
                 client.Timeout = TimeSpan.FromSeconds(200);
                 var requestData = new
                 {
-                    Booster = booster,
-                    N_estimators = n_estimators,
-                    Verbosity = verbosity,
-                    Objective = objective,
-                    EvalMetric = eval_metric,
+                    nestimators = nestimators,
+                    mx_depth = mx_depth,
+                    lrn_rate = lrn_rate,
+                    subsample = subsample,
+                    colsample_bynode = colsample_bynode,
+
+                    rd_state = rd_state
                    
-                    EarlyStopping = early_stopping_rounds,
-                    Seed = seed,
-                    Nthread = nthread
                 };
 
                 var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");
@@ -1214,14 +1213,14 @@ namespace MLnew.Controllers
 
         public async Task<ActionResult> MethodesEnsemblistes(bool? mainOption1, bool? mainOption2, int n_est, int max_d, int min_samples, string criterion, int min_samples_split, float min_weight_fraction_leaf, string max_features, int max_leaf_nodes, float min_impurity_decrease, bool bootstrap, bool oob_score, int n_jobs, int random_state, int verbose, bool warm_start, string class_weight, float ccp_alpha, int max_samples, int cv_folds, string algorithmSelect,
             string C_input_svm, string kernel_select, string gamma_select, int degree, float coef0, bool shrinking, bool probability, string tol, float cache_size, string class_weight_svm, bool verbose_svm, int max_iter, string decision_function_shape, bool break_ties, int random_state_svm, int cv_folds_svm,
-            int n_neighbors,string weights,string metric,string algorithm,int leaf_size,int n_jobs_knn,string p, int cv_folds_knn, string booster, int verbosity, string objective, string eval_metric, int n_estimators, int early_stopping_rounds, int seed, int nthread, int knn_neighbors, string svm_kernel)
+            int n_neighbors,string weights,string metric,string algorithm,int leaf_size,int n_jobs_knn,string p, int cv_folds_knn, int nestimators, int mx_depth, string lrn_rate, string subsample, string colsample_bynode, int rd_state, int seed, int nthread, int knn_neighbors, string svm_kernel)
         {
             if (mainOption1 == true)
             {
                 if (algorithmSelect == "Random Forest")
                 {
 
-                    var resultXGBoost = await  XGBoost(booster, n_estimators, verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
+                    var resultXGBoost = await  XGBoost(nestimators, mx_depth, lrn_rate, subsample, colsample_bynode, rd_state);
                     ViewBag.XGBoost = resultXGBoost;
                     
                     dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoost);
@@ -1233,26 +1232,26 @@ namespace MLnew.Controllers
                 }
                 if (algorithmSelect == "KNN")
                 {
-                    var resultXGBoostKNN = await XGBoostKNN(knn_neighbors,booster, n_estimators, verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread);
-                    ViewBag.XGBoostKNN = resultXGBoostKNN;
+                    //var resultXGBoostKNN = await XGBoostKNN(knn_neighbors,booster, n_estimators, verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread);
+                   // ViewBag.XGBoostKNN = resultXGBoostKNN;
 
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostKNN);
+                    //dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostKNN);
                     var acc = 98.2;
-                    if (jsonResult != null && jsonResult.mean_accuracy != null)
+                    //if (jsonResult != null && jsonResult.mean_accuracy != null)
                     {
-                        acc = (float)jsonResult.mean_accuracy;
+                      //  acc = (float)jsonResult.mean_accuracy;
                     }
                 }
                 if (algorithmSelect == "SVM")
                 {
-                    var resultXGBoostSVM = await XGBoostSVM(svm_kernel, booster, n_estimators ,verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
-                    ViewBag.XGBoostSVM = resultXGBoostSVM;
+                    //var resultXGBoostSVM = await XGBoostSVM(svm_kernel, booster, n_estimators ,verbosity, objective, eval_metric, early_stopping_rounds, seed, nthread);
+                    //ViewBag.XGBoostSVM = resultXGBoostSVM;
 
-                    dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostSVM);
+                    //dynamic jsonResult = JsonConvert.DeserializeObject(resultXGBoostSVM);
                     var acc = 98.2;
-                    if (jsonResult != null && jsonResult.mean_accuracy != null)
+                  //  if (jsonResult != null && jsonResult.mean_accuracy != null)
                     {
-                        acc = (float)jsonResult.mean_accuracy;
+                    //    acc = (float)jsonResult.mean_accuracy;
                     }
 
                 }

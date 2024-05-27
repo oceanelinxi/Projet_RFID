@@ -270,16 +270,15 @@ def ada_knn():
 @app.route('/XGBoost', methods=['POST'])
 def xgboost():
      input_params = request.get_json()
-     booster=str(input_params['Booster'])
-     n_estimators=int(input_params['N_estimators'])
-     verbosity=int(input_params['Verbosity'])
-     objective=str(input_params['Objective'])
-     eval_metric=str(input_params['EvalMetric'])
-     early_stopping_rounds=int(input_params['EarlyStopping'])
-     seed=int(input_params['Seed'])
-     nthread=int(input_params['Nthread'])
+     nestimators=int(input_params['nestimators'])
+     mx_depth=int(input_params['mx_depth'])
+     lrn_rate=float(input_params['lrn_rate'])
+     subsample=float(input_params['subsample'])
+     colsample_bynode=float(input_params['colsample_bynode'])
+     rd_state=int(input_params['rd_state'])
+    
      
-     mean_accuracy=train_and_evaluate_xgboost(booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
+     mean_accuracy=train_and_evaluate_xgboost(nestimators,mx_depth, lrn_rate,subsample,colsample_bynode, rd_state)
      return jsonify({'mean_accuracy': mean_accuracy})
     
 @app.route('/XGBoostKNN', methods=['POST'])
