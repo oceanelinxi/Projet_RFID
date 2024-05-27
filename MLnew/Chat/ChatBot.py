@@ -3,8 +3,8 @@ from config import OPENAI_API_KEY, PINECONE_API_KEY, PINECONE_API_ENV
 os.environ["OPENAI_API_KEY"]=OPENAI_API_KEY # Remplissez votre clé API OpenAI, ou entrez "export OPENAI_API_KEY='sk-...'" dans le terminal pour la définir comme variable d'environnement
 os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
 os.environ["PINECONE_API_ENV"] = PINECONE_API_ENV
-from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+# from langchain_community.document_loaders import PyPDFLoader
+# from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Pinecone
 from langchain_openai import OpenAI
@@ -12,21 +12,17 @@ from langchain.chains.question_answering import load_qa_chain
 from pinecone import Pinecone as PineconeClient,ServerlessSpec
 import streamlit as st
 
-# Chargement et découpe du document en petits morceaux de texte (chunks)
-def load_and_split(path: str):
-    # Chargement du document PDF
-    loader = PyPDFLoader(path)
-    docs = loader.load() # Lors du chargement du document avec pypdf, le document est divisé par défaut par page
-    print(f"Votre document a été divisé en {len(docs)} parties, la première partie contient {len(docs[0].page_content)} caractères.\n")
-
-
-    # Découpe du document en petits morceaux de texte
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=100)
-    texts = text_splitter.split_documents(docs)
-    print(f"Votre document a été (davantage) divisé en {len(texts)} parties, la première partie contient {len(texts[0].page_content)} caractères.\n")
-
-   
-    return texts
+# # Chargement et découpe du document en petits morceaux de texte (chunks)
+# def load_and_split(path: str):
+#     # Chargement du document PDF
+#     loader = PyPDFLoader(path)
+#     docs = loader.load() # Lors du chargement du document avec pypdf, le document est divisé par défaut par page
+#     print(f"Votre document a été divisé en {len(docs)} parties, la première partie contient {len(docs[0].page_content)} caractères.\n")
+#     # Découpe du document en petits morceaux de texte
+#     text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=100)
+#     texts = text_splitter.split_documents(docs)
+#     print(f"Votre document a été (davantage) divisé en {len(texts)} parties, la première partie contient {len(texts[0].page_content)} caractères.\n")
+#     return texts
 
 
 
@@ -37,9 +33,7 @@ embeddings = OpenAIEmbeddings()
 
 # # Création d'une nouvelle base de données vectorielle (à exécuter une seule fois)
 # texts = load_and_split("data/data.pdf") # Remplacez par votre fichier
-
 # pc = PineconeClient( api_key=os.environ.get("PINECONE_API_KEY") ) 
-
 # if index_name not in pc.list_indexes().names(): 
 #     pc.create_index( 
 #         name=index_name, 
@@ -50,8 +44,6 @@ embeddings = OpenAIEmbeddings()
 #             region='us-east-1' 
 #             ) 
 #         )
-
-
 # # Initialisation du stockage vectoriel Pinecone dans Langchain
 # vectordb = Pinecone.from_texts([t.page_content for t in texts], embeddings, index_name=index_name) # Remplacez par le nom de votre index Pinecone
 # print("***Mise à jour des vecteurs complétée (upsert)***")
