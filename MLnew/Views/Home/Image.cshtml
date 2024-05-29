@@ -5,6 +5,10 @@
     string knnResult = ExtractNumber(ViewBag.KNNResult).ToString().Replace(",", ".");
     string randomForestResult = ExtractNumber(ViewBag.RandomForestResult).ToString().Replace(",", ".");
 
+    var randomForestParamsJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RandomForestParams);
+    string svmParamsJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SVMParams);
+    string knnParamsJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.KNNParams);
+
     string Analytiqueduree = ExtractDuree(ViewBag.AnalytiqueResult).ToString();
     string RFduree = ExtractDuree(ViewBag.RandomForestResult).ToString();
     string SVMduree = ExtractDuree(ViewBag.SVMResult).ToString();
@@ -39,53 +43,6 @@
     }
 
 }
-<link rel="stylesheet" href="/css/Style_Image.css">
-@if (ViewBag.AnalytiqueResult != null)
-{
-    <main aria-labelledby="title">
-        <h2 id="title">@ViewBag.Title</h2>
-        <h3>Précision de la méthode Analytique : @analytiqueResult </h3>
-        <h3>Durée d'exécution de la méthode Analytique (en secondes) : @Analytiqueduree </h3>
-    </main>
-}
-@if (ViewBag.randomForestResult != null)
-{
-    <main aria-labelledby="title">
-        <h2 id="title">@ViewBag.Title</h2>
-        <h3>Précision de la méthode Random Forest : @randomForestResult </h3>
-        <h3>Durée d'exécution de la méthode Random Forest (en secondes) : @RFduree </h3>
-
-    </main>
-
-    <button id="showImageButton_rf">Afficher boxplot</button>
-    <img id="monImage_rf" src="" style="display:none;" width="500px" height="300px" />
-}
-
-@if (ViewBag.SVMResult != null)
-{
-    <main aria-labelledby="title">
-        <h2 id="title">@ViewBag.Title</h2>
-        <h3>Précision de la méthode SVM : @svmResult </h3>
-        <h3>Durée d'exécution de la méthode SVM (en secondes) : @SVMduree </h3>
-    </main>
-
-    <button id="showImageButton_svm">Afficher boxplot</button>
-    <img id="monImage_svm" src="" style="display:none;" width="500px" height="300px" />
-}
-@if (ViewBag.KNNResult != null)
-{
-    <main aria-labelledby="title">
-        <h2 id="title">@ViewBag.Title</h2>
-        <h3>Précision de la méthode KNN : @knnResult </h3>
-        <h3>Durée d'exécution de la méthode KNN (en secondes) : @KNNduree </h3>
-    </main>
-
-    <button id="showImageButton_knn">Afficher boxplot</button>
-    <img id="monImage_knn" src="" style="display:none;" width="500px" height="300px" />
-}
-
-
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -93,243 +50,320 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Inclure la bibliothèque Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
+    <link rel="stylesheet" href="/css/Style_Image.css">
     <style>
         canvas {
             width: 400px; /* Définir une largeur fixe */
             height: 300px; /* Définir une hauteur fixe */
         }
+
+        .green-button {
+            padding: 7px 15px; /* Bouton padding */
+            font-size: 16px; /* Taille de la police */
+            font-weight: bold; /* Gras */
+            color: #ffffff; /* Couleur du texte */
+            background-color: #5fbdb0; /* Couleur du fond */
+            border: none; /* Pas de bordure */
+            border-radius: 5px; /* Bordure arrondie */
+            cursor: pointer; /* Curseur pointeur */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
+            transition: background-color 0.3s ease; /* Transition couleur fond */
+        }
+
+            .green-button:hover {
+                background-color: #AFEEEE; /* Couleur fond au survol */
+            }
+
+        .bottom-spacer {
+            height: 50px; /* Espacement bas de page */
+        }
     </style>
 </head>
 <body>
+    <code>
+        <h3>Résultats des simulations</h3>
+    </code>
 
+    <!-- Affichage des résultats et des durées -->
+    <div>
+        @if (ViewBag.AnalytiqueResult != null)
+        {
+            <div>
+                <h3>Précision de la méthode Analytique : @analytiqueResult %</h3>
+                <h3>Durée d'exécution de la méthode Analytique : @Analytiqueduree secondes</h3>
 
+            </div>
+        }
+        @if (ViewBag.randomForestResult != null)
+        {
+            <div>
+                <h3>Précision de la méthode Random Forest : @randomForestResult %</h3>
+                <h3>Durée d'exécution de la méthode Random Forest : @RFduree secondes</h3>
+
+                <button id="showImageButton_rf">Afficher boxplot</button>
+                <img id="monImage_rf" src="" style="display:none;" width="500px" height="300px" />
+            </div>
+        }
+        @if (ViewBag.SVMResult != null)
+        {
+            <div>
+                <h3>Précision de la méthode SVM : @svmResult %</h3>
+                <h3>Durée d'exécution de la méthode SVM : @SVMduree secondes</h3>
+                <button id="showImageButton_svm">Afficher boxplot</button>
+                <img id="monImage_svm" src="" style="display:none;" width="500px" height="300px" />
+            </div>
+        }
+        @if (ViewBag.KNNResult != null)
+        {
+            <div>
+                <h3>Précision de la méthode KNN : @knnResult %</h3>
+                <h3>Durée d'exécution de la méthode KNN : @KNNduree </h3>
+                <button id="showImageButton_knn">Afficher boxplot</button>
+                <img id="monImage_knn" src="" style="display:none;" width="500px" height="300px" />
+            </div>
+        }
+    </div>
+
+    <!-- Graphique -->
     <canvas id="myChart"></canvas>
 
-    <script>
-        // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
-        function updateChart(selectedOptions) {
-            // Obtenir l'élément canvas
-            var ctx = document.getElementById('myChart').getContext('2d');
-            // Créer un nouveau graphique
-            var myChart = new Chart(ctx, {
-                type: 'bar', // Diagramme en barres
-                data: {
-                    labels: ['Analytique','Random Forest', 'SVM', 'KNN'], // Étiquettes pour chaque barre
-                    datasets: [{
-                        label: 'Exactitude %',
-                        data: selectedOptions, // Valeurs en pourcentage pour chaque barre
-                        backgroundColor: [ // Couleur de fond des barres
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
-                        ],
-                        borderColor: [ // Couleur de bordure des barres
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
+    <button id="generatePDFButton" class="green-button">Générer PDF</button>
 
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                callback: function (value) { return value + "%" } // Formatage des étiquettes de l'axe des y en pourcentage
-                            }
+    <!-- Espacement en bas de page -->
+    <div class="bottom-spacer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
+            function updateChart(selectedOptions) {
+                // Obtenir l'élément canvas
+                var ctx = document.getElementById('myChart').getContext('2d');
+                // Créer un nouveau graphique
+                var myChart = new Chart(ctx, {
+                    type: 'bar', // Diagramme en barres
+                    data: {
+                        labels: ['Analytique', 'Random Forest', 'SVM', 'KNN'], // Étiquettes pour chaque barre
+                        datasets: [{
+                            label: 'Exactitude %',
+                            data: selectedOptions, // Valeurs en pourcentage pour chaque barre
+                            backgroundColor: [ // Couleur de fond des barres
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)'
+                            ],
+                            borderColor: [ // Couleur de bordure des barres
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
                         }]
-                    }
-                }
-            });
-        }
-
-        // Appel de la fonction au chargement de la page avec les valeurs par défaut
-        updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult ]);
-    </script>
-
-
-<script>
-    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image randomforest
-    document.getElementById('showImageButton_rf').addEventListener('click', function () {
-  
-        var cheminImage_rf = "/Images/boxplot/rf/rf_accuracy.png";
-
-        // Obtenir l'élément image
-        var monImage_rf = document.getElementById('monImage_rf');
-
-        // Définir l'attribut src de l'image avec le chemin de l'image
-        monImage_rf.src = cheminImage_rf;
-        if (monImage_rf.style.display == 'none') {
-            monImage_rf.style.display = 'block';
-        } else {
-            monImage_rf.style.display = 'none';
-        }
-        // Afficher l'image
-        
-    });
-
-    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image svm
-    document.getElementById('showImageButton_svm').addEventListener('click', function () {
-
-        var cheminImage_svm = "/images/boxplot/svm/svm_accuracy.png";
-
-        var monImage_svm = document.getElementById('monImage_svm');
-
-        monImage_svm.src = cheminImage_svm;
-        if (monImage_svm.style.display == 'none') {
-            monImage_svm.style.display = 'block';
-        } else {
-            monImage_svm.style.display = 'none';
-        }
-    });
-
-    // Script JavaScript pour gérer le clic sur le bouton et afficher l'image knn
-    document.getElementById('showImageButton_knn').addEventListener('click', function () {
-
-        var cheminImage_knn = "/images/boxplot/knn/knn_accuracy.png";
-
-        var monImage_knn = document.getElementById('monImage_knn');
-
-        monImage_knn.src = cheminImage_knn;
-
-        if (monImage_knn.style.display == 'none') {
-            monImage_knn.style.display = 'block';
-        } else {
-            monImage_knn.style.display = 'none';
-        }
-    });
-</script>
-
-<script>
-  
-
-    // Fonction pour mettre à jour le graphique en fonction des sélections de l'utilisateur
-    function updateChart(selectedOptions) {
-        // Obtenir l'élément canvas
-        var ctx = document.getElementById('myChart').getContext('2d');
-        // Créer un nouveau graphique
-        var myChart = new Chart(ctx, {
-            type: 'bar', // Diagramme en barres
-            data: {
-                labels: ['Analytique', 'Random Forest', 'SVM', 'KNN'], // Étiquettes pour chaque barre
-                datasets: [{
-                    label: 'Exactitude %',
-                    data: selectedOptions, // Valeurs en pourcentage pour chaque barre
-                    backgroundColor: [ // Couleur de fond des barres
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)'
-                    ],
-                    borderColor: [ // Couleur de bordure des barres
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            callback: function (value) { return value + "%" } // Formatage des étiquettes de l'axe des y en pourcentage
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value) { return value + "%" } // Formatage des étiquettes de l'axe des y en pourcentage
+                                }
+                            }]
                         }
-                    }]
+                    }
+                });
+
+                return myChart;
+            }
+
+            // Appel de la fonction au chargement de la page avec les valeurs par défaut
+            var myChart = updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult]);
+
+            // Précharger les images des boxplots
+            var boxplotImages = {
+                rf: new Image(),
+                svm: new Image(),
+                knn: new Image()
+            };
+            boxplotImages.rf.src = "/images/boxplot/rf/rf_accuracy.png";
+            boxplotImages.svm.src = "/images/boxplot/svm/svm_accuracy.png";
+            boxplotImages.knn.src = "/images/boxplot/knn/knn_accuracy.png";
+
+            function addPageNumbers(doc) {
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    const pageWidth = doc.internal.pageSize.getWidth();
+                    const pageHeight = doc.internal.pageSize.getHeight();
+                    doc.setFontSize(10);
+                    doc.text(`Page ${i} of ${pageCount}`, pageWidth - 20, pageHeight - 10);
                 }
             }
+
+            // Fonction pour générer le PDF
+            document.getElementById('generatePDFButton').addEventListener('click', function () {
+                // Convertir le canvas en image
+                var canvas = document.getElementById('myChart');
+                var imgData = canvas.toDataURL('image/png');
+
+                var randomForestParams = @Html.Raw(randomForestParamsJson);
+                var svmParams = @Html.Raw(svmParamsJson);
+                var knnParams = @Html.Raw(knnParamsJson);
+
+                // Générer le PDF avec jsPDF
+                const { jsPDF } = window.jspdf;
+                var doc = new jsPDF();
+
+                // Ajouter le titre en gras, souligné et centré
+                doc.setFont('Helvetica', 'bold');
+                doc.setFontSize(16);
+                doc.text('Résultats de la simulation', doc.internal.pageSize.getWidth() / 2, 10, { align: 'center' });
+
+                doc.setFont('Helvetica', 'normal'); // Réinitialiser la police à normale
+                doc.setFontSize(12); // Réinitialiser la taille de la police
+
+                var yOffset = 20;
+                yOffset += 10;
+                // Ajouter les résultats et durées d'exécution pour Analytique
+                if (parseFloat(@analytiqueResult) != 0 || parseInt(@Analytiqueduree) != 0) {
+                    doc.text('• Précision de la méthode Analytique en % : ' + @analytiqueResult, 10, yOffset);
+                    yOffset += 10;
+                    doc.text('  Durée d\'exécution de la méthode Analytique (en secondes) : ' + @Analytiqueduree, 10, yOffset);
+                    yOffset += 10;
+                    var paramsAnalytique = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.AnalytiqueParams));
+                    for (const [key, value] of Object.entries(paramsAnalytique)) {
+                        doc.text(`  ${key}: ${value}`, 10, yOffset);
+                        yOffset += 10;
+                    }
+                    doc.addPage(); // Ajouter une nouvelle page
+                    yOffset = 20; // Réinitialiser yOffset pour la nouvelle page
+                }
+
+                // Ajouter les résultats et durées d'exécution pour Random Forest
+                if (parseFloat(@randomForestResult) != 0 || parseInt(@RFduree) != 0) {
+                    doc.text('• Précision de la méthode Random Forest en % : ' + @randomForestResult, 10, yOffset);
+                    yOffset += 10;
+                    doc.text('  Durée d\'exécution de la méthode Random Forest (en secondes) : ' + @RFduree, 10, yOffset);
+                    yOffset += 10;
+
+                    // Ajouter les paramètres de la méthode Random Forest
+                    if (randomForestParams != null) {
+                        doc.text('  Paramètres de la méthode Random Forest :', 10, yOffset);
+                        yOffset += 10;
+                        for (var key in randomForestParams) {
+                            if (randomForestParams.hasOwnProperty(key)) {
+                                doc.text('    ' + key + ': ' + randomForestParams[key], 10, yOffset);
+                                yOffset += 10;
+                            }
+                        }
+                    }
+                    doc.addPage(); // Ajouter une nouvelle page
+                    yOffset = 20; // Réinitialiser yOffset pour la nouvelle page
+
+                    // Ajouter le boxplot Random Forest
+                    if (boxplotImages.rf.src) {
+                        doc.addImage(boxplotImages.rf.src, 'PNG', 10, yOffset, 190, 100); // Augmenter les dimensions
+                        yOffset += 110;
+                    }
+                    doc.addPage(); // Ajouter une nouvelle page
+                    yOffset = 20; // Réinitialiser yOffset pour la nouvelle page
+                }
+
+                // Ajouter les résultats et durées d'exécution pour SVM
+                if (parseFloat(@svmResult) != 0 || parseInt(@SVMduree) != 0) {
+                    doc.text('• Précision de la méthode SVM en % : ' + @svmResult, 10, yOffset);
+                    yOffset += 10;
+                    doc.text('  Durée d\'exécution de la méthode SVM (en secondes) : ' + @SVMduree, 10, yOffset);
+                    yOffset += 10;
+
+                    // Ajouter les paramètres de la méthode SVM
+                    if (svmParams != null) {
+                        doc.text('  Paramètres de la méthode SVM :', 10, yOffset);
+                        yOffset += 10;
+                        for (var key in svmParams) {
+                            if (svmParams.hasOwnProperty(key)) {
+                                doc.text('    ' + key + ': ' + svmParams[key], 10, yOffset);
+                                yOffset += 10;
+                            }
+                        }
+                    }
+
+                    // Ajouter le boxplot SVM
+                    if (boxplotImages.svm.src) {
+                        doc.addImage(boxplotImages.svm.src, 'PNG', 10, yOffset, 190, 100); // Augmenter les dimensions
+                        yOffset += 110;
+                    }
+                    doc.addPage(); // Ajouter une nouvelle page
+                    yOffset = 20; // Réinitialiser yOffset pour la nouvelle page
+                }
+
+                // Ajouter les résultats et durées d'exécution pour KNN
+                if (parseFloat(@knnResult) != 0 || parseInt(@KNNduree) != 0) {
+                    doc.text('• Précision de la méthode KNN en % : ' + @knnResult, 10, yOffset);
+                    yOffset += 10;
+                    doc.text('  Durée d\'exécution de la méthode KNN (en secondes) : ' + @KNNduree, 10, yOffset);
+                    yOffset += 10;
+
+                    // Ajouter les paramètres de la méthode KNN
+                    if (knnParams != null) {
+                        doc.text('  Paramètres de la méthode KNN :', 10, yOffset);
+                        yOffset += 10;
+                        for (var key in knnParams) {
+                            if (knnParams.hasOwnProperty(key)) {
+                                doc.text('    ' + key + ': ' + knnParams[key], 10, yOffset);
+                                yOffset += 10;
+                            }
+                        }
+                    }
+
+                    // Ajouter le boxplot KNN
+                    if (boxplotImages.knn.src) {
+                        doc.addImage(boxplotImages.knn.src, 'PNG', 10, yOffset, 190, 100); // Augmenter les dimensions
+                        yOffset += 110;
+                    }
+                    doc.addPage();
+                    yOffset = 20; // Réinitialiser yOffset pour la nouvelle page
+                }
+
+                // Ajouter le graphique
+                if (imgData) {
+                    doc.addPage();
+                    doc.addImage(imgData, 'PNG', 10, 20, 190, 100); // Augmenter les dimensions
+                }
+
+                // Ajouter la numérotation des pages
+                addPageNumbers(doc);
+
+                // Télécharger le PDF
+                doc.save('SimulationResults.pdf');
+            });
+
+            // Scripts pour afficher les images de boxplot
+            document.getElementById('showImageButton_rf').addEventListener('click', function () {
+                var cheminImage_rf = "/images/boxplot/rf/rf_accuracy.png";
+                var monImage_rf = document.getElementById('monImage_rf');
+                monImage_rf.src = cheminImage_rf;
+                monImage_rf.style.display = (monImage_rf.style.display == 'none') ? 'block' : 'none';
+            });
+
+            document.getElementById('showImageButton_svm').addEventListener('click', function () {
+                var cheminImage_svm = "/images/boxplot/svm/svm_accuracy.png";
+                var monImage_svm = document.getElementById('monImage_svm');
+                monImage_svm.src = cheminImage_svm;
+                monImage_svm.style.display = (monImage_svm.style.display == 'none') ? 'block' : 'none';
+            });
+
+            document.getElementById('showImageButton_knn').addEventListener('click', function () {
+                var cheminImage_knn = "/images/boxplot/knn/knn_accuracy.png";
+                var monImage_knn = document.getElementById('monImage_knn');
+                monImage_knn.src = cheminImage_knn;
+                monImage_knn.style.display = (monImage_knn.style.display == 'none') ? 'block' : 'none';
+            });
         });
-    }
-
-    // Appel de la fonction au chargement de la page avec les valeurs par défaut
-    updateChart([@analytiqueResult, @randomForestResult, @svmResult, @knnResult ]);
-</script>
-
-
-   
-<script>
-    // Récupérer les valeurs des résultats et des durées d'exécution
-    var analytiqueResult = parseFloat("@analytiqueResult");
-    var randomForestResult = parseFloat("@randomForestResult");
-    var svmResult = parseFloat("@svmResult");
-    var knnResult = parseFloat("@knnResult");
-
-    var Analytiqueduree = parseInt("@Analytiqueduree");
-    var RFduree = parseInt("@RFduree");
-    var SVMduree = parseInt("@SVMduree");
-    var KNNduree = parseInt("@KNNduree");
-</script>
-    <button id="generatePDFButton">Générer PDF</button>
-
-    <script>
-        // Fonction pour extraire les paramètres de l'URL
-        function getParamsFromURL() {
-            // Récupérer l'URL actuelle
-            const urlParams = new URLSearchParams(window.location.search);
-            // Récupérer la valeur du paramètre 'params' de l'URL
-            const paramsString = urlParams.get('params');
-            // Décodez la valeur JSON
-            const decodedParams = decodeURIComponent(paramsString);
-            // Convertir la chaîne JSON en objet JavaScript
-            const params = JSON.parse(decodedParams);
-            return params;
-        }
-
-        // Appel de la fonction pour récupérer les paramètres de l'URL
-        const params = getParamsFromURL();
-
-        // Utiliser les paramètres récupérés
-        console.log(params);
-
-
-        document.getElementById('generatePDFButton').addEventListener('click', function () {
-            // Créer un nouvel objet jsPDF
-            var doc = new jspdf.jsPDF();
-
-            // Ajouter du contenu au PDF
-
-            if (analytiqueResult) {
-                doc.text(20, 20, 'Précision de la méthode Analytique : ' + analytiqueResult + '%');
-                doc.text(20, 30, 'Durée d\'exécution de la méthode Analytique : ' + Analytiqueduree + ' ms');
-                doc.text(20, 40, 'Paramètres de la méthode Analytique: ' + JSON.stringify(params));
-            }
-
-            if (randomForestResult) {
-                doc.text(20, 50, 'Précision de la méthode Random Forest : ' + randomForestResult + '%');
-                doc.text(20, 60, 'Durée d\'exécution de la méthode Random Forest : ' + RFduree + ' ms');
-                doc.text(20, 70, 'Paramètres de RandomForest: '  + JSON.stringify(params));
-            }
-
-            if (svmResult) {
-                doc.text(20, 90, 'Précision de la méthode SVM : ' + svmResult + '%');
-                doc.text(20, 100, 'Durée d\'exécution de la méthode SVM : ' + SVMduree + ' ms');
-                doc.text(20, 110, 'Paramètres de SVM: ' + JSON.stringify(params));
-            }
-
-            if (knnResult) {
-                doc.text(20, 130, 'Précision de la méthode KNN : ' + knnResult + '%');
-                doc.text(20, 140, 'Durée d\'exécution de la méthode KNN : ' + KNNduree + ' ms');
-                doc.text(20, 150, 'Paramètres de KNN: ' + JSON.stringify(params));
-            }
-
-            // Enregistrer le PDF
-            doc.save('informations.pdf');
-        });
-
-
     </script>
-
-
 </body>
 </html>

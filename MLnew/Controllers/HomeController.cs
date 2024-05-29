@@ -563,41 +563,41 @@ namespace MLnew.Controllers
         }
 
         public async Task<ActionResult> ExecuteMachineLearningTasks(bool? mainOption1, bool? mainOption2, bool? mainOption3, bool? mainOption4,
-                     int n_est, int max_d, int min_samples,
-                     string gamma_select, float C_input, string kernel_select,
-                     string n_neighbors, string weights, string metric,
-                     int step,int t0_run,
-                     string criterion_index,
-                     int min_samples_split_index,
-                     float min_weight_fraction_leaf_index,
-                     string max_features_index,
-                     int max_leaf_nodes_index,
-                     float min_impurity_decrease_index, 
-                     bool bootstrap_index,
-                     bool oob_score_index,
-                     int n_jobs_index,
-                     int random_state_index,
-                     int verbose_index,
-                     bool warm_start_index,
-                     string class_weight_index,
-                     float ccp_alpha_index,
-                     int max_samples_index,
-                     int degree_index,
-                     float coef0_index,
-                     bool shrinking_index,
-                     bool probability_index,
-                     string tol_index,
-                     float cache_size_index,
-                     string class_weight_svm_index,
-                     bool verbose_svm_index,
-                     int max_iter_index,
-                     string decision_function_shape_index,
-                     bool break_ties_index,
-                     int random_state_index_2,
-                     string algorithm_index,
-                     int leaf_size_index,
-                     int n_jobs_knn_index,
-                     string p_index)
+              int n_est, int max_d, int min_samples,
+              string gamma_select, float C_input, string kernel_select,
+              string n_neighbors, string weights, string metric,
+              int step, int t0_run,
+              string criterion_index,
+              int min_samples_split_index,
+              float min_weight_fraction_leaf_index,
+              string max_features_index,
+              int max_leaf_nodes_index,
+              float min_impurity_decrease_index,
+              bool bootstrap_index,
+              bool oob_score_index,
+              int n_jobs_index,
+              int random_state_index,
+              int verbose_index,
+              bool warm_start_index,
+              string class_weight_index,
+              float ccp_alpha_index,
+              int max_samples_index,
+              int degree_index,
+              float coef0_index,
+              bool shrinking_index,
+              bool probability_index,
+              string tol_index,
+              float cache_size_index,
+              string class_weight_svm_index,
+              bool verbose_svm_index,
+              int max_iter_index,
+              string decision_function_shape_index,
+              bool break_ties_index,
+              int random_state_index_2,
+              string algorithm_index,
+              int leaf_size_index,
+              int n_jobs_knn_index,
+              string p_index)
         {
             //Création de la simulation en  BDD
             Historique hist = new Historique
@@ -632,7 +632,7 @@ namespace MLnew.Controllers
                     HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
                     DureeSec = duree,
                     Nom = "Analytique",
-                    Accuracy=(float)acc
+                    Accuracy = (float)acc
                 };
                 _context.Modele.Add(model);
                 await _context.SaveChangesAsync();
@@ -659,15 +659,17 @@ namespace MLnew.Controllers
                 _context.Parametre.Add(param);
                 await _context.SaveChangesAsync();
 
-                
-
-
+                ViewBag.AnalytiqueParams = new Dictionary<string, string>
+        {
+            { "step", step.ToString() },
+            { "t0_run", t0_run.ToString() }
+        };
             }
 
             if (mainOption2 == true)
             {
                 // Obtention des resultats python
-                var resultRandomForest = await RandomForest(n_est, max_d, min_samples,  criterion_index,
+                var resultRandomForest = await RandomForest(n_est, max_d, min_samples, criterion_index,
                      min_samples_split_index,
                       min_weight_fraction_leaf_index,
                       max_features_index,
@@ -799,7 +801,7 @@ namespace MLnew.Controllers
                 _context.Parametre.Add(param2);
                 await _context.SaveChangesAsync();
 
-                
+
                 // bootstrap
                 param2 = new Parametre
                 {
@@ -820,7 +822,7 @@ namespace MLnew.Controllers
                 _context.Parametre.Add(param2);
                 await _context.SaveChangesAsync();
 
-              
+
                 // n_jobs
                 param2 = new Parametre
                 {
@@ -891,6 +893,27 @@ namespace MLnew.Controllers
                 _context.Parametre.Add(param2);
                 await _context.SaveChangesAsync();
 
+                ViewBag.RandomForestParams = new Dictionary<string, string>
+        {
+            { "n_estimators", n_est.ToString() },
+            { "max_depth", max_d.ToString() },
+            { "min_samples_leaf", min_samples.ToString() },
+            { "criterion", criterion_index },
+            { "min_samples_split", min_samples_split_index.ToString() },
+            { "min_weight_fraction_leaf", min_weight_fraction_leaf_index.ToString() },
+            { "max_features", max_features_index },
+            { "max_leaf_nodes", max_leaf_nodes_index.ToString() },
+            { "min_impurity_decrease", min_impurity_decrease_index.ToString() },
+            { "bootstrap", bootstrap_index.ToString() },
+            { "oob_score", oob_score_index.ToString() },
+            { "n_jobs", n_jobs_index.ToString() },
+            { "random_state", random_state_index.ToString() },
+            { "verbose", verbose_index.ToString() },
+            { "warm_start", warm_start_index.ToString() },
+            { "class_weight", class_weight_index },
+            { "ccp_alpha", ccp_alpha_index.ToString() },
+            { "max_samples", max_samples_index.ToString() }
+        };
             }
 
             if (mainOption3 == true)
@@ -909,7 +932,7 @@ namespace MLnew.Controllers
                       random_state_index_2
                       );
                 ViewBag.SVMResult = resultSVM;
-                 
+
                 dynamic jsonResult = JsonConvert.DeserializeObject(resultSVM);
                 var acc = 98.2; int duree = -1;
                 if (jsonResult != null && jsonResult.accuracy != null)
@@ -963,8 +986,8 @@ namespace MLnew.Controllers
                 };
                 _context.Parametre.Add(param3);
                 await _context.SaveChangesAsync();
-                
-                   
+
+
                 // degree
                 param3 = new Parametre
                 {
@@ -1084,7 +1107,24 @@ namespace MLnew.Controllers
                 };
                 _context.Parametre.Add(param3);
                 await _context.SaveChangesAsync();
-
+                ViewBag.SVMParams = new Dictionary<string, string>
+{
+    { "gamma", gamma_select.ToString() },
+    { "C", C_input.ToString() },
+    { "kernel", kernel_select.ToString() },
+    { "degree", degree_index.ToString() },
+    { "coef0", coef0_index.ToString() },
+    { "shrinking", shrinking_index.ToString() },
+    { "probability", probability_index.ToString() },
+    { "tol", tol_index.ToString() },
+    { "cache_size", cache_size_index.ToString() },
+    { "class_weight", class_weight_svm_index.ToString() },
+    { "verbose", verbose_svm_index.ToString() },
+    { "max_iter", max_iter_index.ToString() },
+    { "decision_function_shape", decision_function_shape_index.ToString() },
+    { "break_ties", break_ties_index.ToString() },
+    { "random_state", random_state_index_2.ToString() }
+};
 
             }
 
@@ -1111,7 +1151,7 @@ namespace MLnew.Controllers
                 {
                     HistoriqueID = all_hists[n_hist - 1].HistoriqueID,
                     DureeSec = duree,
-                    Nom ="KNN",
+                    Nom = "KNN",
                     Accuracy = (float)acc
                 };
                 _context.Modele.Add(model);
@@ -1188,9 +1228,24 @@ namespace MLnew.Controllers
                 };
                 _context.Parametre.Add(param4);
                 await _context.SaveChangesAsync();
-
+                ViewBag.KNNParams = new Dictionary<string, string>
+                {
+                 { "n_neighbors", n_neighbors.ToString() },
+                 { "metric", metric.ToString() },
+                 { "weights", weights.ToString() },
+                 { "algorithm", algorithm_index.ToString() },
+                 { "leaf_size", leaf_size_index.ToString() },
+                 { "n_jobs", n_jobs_knn_index.ToString() },
+                 { "p", p_index.ToString() }
+                };
             }
 
+            /*List<Historique> simulat = await _context.Historique.Include(h => h.Modeles)
+                .ToListAsync();
+            int n = simulat.Count;
+            Historique sim = simulat[n - 1];
+
+            ViewBag.sim = sim;*/
             // 返回到 Image 视图
             return View("Image");
         }
