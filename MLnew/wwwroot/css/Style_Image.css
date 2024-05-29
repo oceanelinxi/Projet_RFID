@@ -81,3 +81,20 @@ body {
     #showImageButton_knn:hover {
         background-color: #AFEEEE; /* 悬停时的背景颜色 */
     }
+
+#generatePDFButton {
+    padding: 7px 15px; /* 按钮内边距 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    color: #ffffff; /* 文本颜色 */
+    background-color: #5fbdb0; /* 背景颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 鼠标悬停样式为手型 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    transition: background-color 0.3s ease; /* 背景颜色过渡效果 */
+}
+
+    #generatePDFButton:hover {
+        background-color: #AFEEEE; /* 悬停时的背景颜色 */
+    }
