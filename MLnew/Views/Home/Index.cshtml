@@ -20,7 +20,7 @@
         <h1 class="Titre">Welcome</h1>
 
 
-        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload" target="uploadFrame" id="formUpload">
+        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload"  id="formUpload">
 
            
            
@@ -37,7 +37,7 @@
     </div>
 
     <form id="optionsForm" class="option-form" method="post" asp-controller="Home" asp-action="ExecuteMachineLearningTasks">
-        <div id="optionsSection" style="display:none;">
+        <div id="optionsSection" style="">
             <h1 class="sousTitre">Méthodes</h1>
             <div class="accordion-item" id="optionsAccordion">
                 <h3 class="accordion-header" id="headingOption1">
@@ -624,27 +624,9 @@
     </form>
 
     <script>
-        document.getElementById('okButton').addEventListener('click', function (event) {
-            var optionsSection = document.getElementById('optionsSection');
-            var okButton = document.getElementById('okButton');
-            var formUpload = document.getElementById('formUpload');
-           
-            optionsSection.style.display = "block";  // Affiche le bloc
-            okButton.style.display = "none";
-            formUpload.style.display = "none";// Cache le bouton
-        });
+     
 
-        document.getElementById('btnradio2').addEventListener('change', function (event) {
-            if (event.target.checked) {
-                document.getElementById('fileUploadSection').style.display = 'block';
-            }
-        });
-
-        document.getElementById('btnradio1').addEventListener('change', function (event) {
-            if (event.target.checked) {
-                document.getElementById('fileUploadSection').style.display = 'none';
-            }
-        });
+        
 
         document.getElementById('generatePdfButton').addEventListener('click', function () {
             const { jsPDF } = window.jspdf;

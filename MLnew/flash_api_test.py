@@ -10,9 +10,13 @@ from knn import evaluate_adaboost_svm
 from knn import evaluate_adaboost_knn
 from analytique import methode_analytique
 from datetime import datetime
-import zipfile
+import zipfile,pandas as pd
 import os
 app = Flask(__name__)
+
+# Chemin du dossier
+data = pd.DataFrame()
+dossier = 'Uploads/data_anonymous'
 
 
 def unzip_file(file_path, extract_to):
@@ -29,15 +33,14 @@ def analytique():
     steps=int(input_params['steps'])
     t0=int(input_params['t0'])
     # Call the predict() function to make a prediction
-    accuracy = methode_analytique(steps,t0)
+    accuracy = methode_analytique(steps,t0,pathfile = dossier)
     duree_ana = (datetime.now() - start).seconds
     print ("duree methode analytique : {}".format(duree_ana))
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy, 'duree':str(duree_ana)})
 
 
-# Chemin du dossier
-dossier = 'Uploads/data_anonymous'
+
 if os.path.exists(dossier):
     start = datetime.now()
     # Le dossier existe, donc tu peux executer la fonction de pretraitement
@@ -105,7 +108,7 @@ def svm():
         input_params['random_s']=None
 
     # Call the predict() function to make a prediction with SVM
-    accuracy = train_and_evaluate_svm(input_params['Gamma'], float(input_params['C']), input_params['Kernel'],
+    accuracy = train_and_evaluate_svm(data,input_params['Gamma'], float(input_params['C']), input_params['Kernel'],
     int(input_params['degre']), float(input_params['coef']), bool(input_params['shrinkings']), 
     bool(input_params['prob']), float(input_params['tols']),
     float(input_params['cach_size']),input_params['class_we'], 
@@ -120,19 +123,30 @@ def svm():
 
 @app.route('/Chemin', methods=['POST'])
 def chemin():
+    global data, dossier
     # Get the input parameters from the request
-    data = request.get_json()
-    chemin=data.get('chemin')
-    fileName=data['nomFichier']
-    fileName=fileName.rstrip('.zip')
+    data_ = request.get_json()
+    chemin = data_.get('chemin')
+    fileName=data_['nomFichier']
+    fileName = fileName.rstrip('.zip')
     upl="Uploads/"
     # Remplacer "\\" par "/"
     chemin = chemin.replace("\\", "/")
     print( "fileName")
     print( fileName)
     print( "fileName")
-    unzip_file(chemin,upl+fileName)
-    return chemin
+    dossier = upl+fileName
+    print("dossier:"+dossier)
+    unzip_file(chemin, dossier)
+    start = datetime.now()
+    # Le dossier existe, donc tu peux executer la fonction de pretraitement
+    pretrait = pretraitement_knn(dossier)
+    data = dataset(pretrait[0], pretrait[1], pretrait[2], pretrait[3])
+    
+
+    end = datetime.now()
+    print('Duree du pretraitement : {}'.format(end-start))
+    return dossier
 
 @app.route('/CourbesPrecision', methods=['POST'])
 def cheminCourbe():

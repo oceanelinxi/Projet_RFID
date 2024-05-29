@@ -386,18 +386,6 @@ def pretraitement_knn(path = r'Uploads/data_anonymous'):
 
 def random_forest_accuracy(data,n_estimator = BEST_PARAMETERS["n_estimators"], max_d = BEST_PARAMETERS["max_depth"], 
                                     min_samples = BEST_PARAMETERS["min_samples_leaf"]): 
-    
-    #reflist = define_reflist(pathfile)
-    #timing = define_timing(pathfile)
-    #df = df_tags(pathfile)
-    #timing_slices = define_timing_slices(timing)
-    #df_timing_slices = define_df_timing_slices(timing_slices, timing, df)
-    #windows = define_windows(timing)
-    #data = dataset(df_timing_slices, windows, 1, reflist)
-    
-    # importer les variables df_timing_slices, windows, le quartile (1) et reflist 
-    #   donnee = pretraitement_knn(pathfiles)
-    #   data = dataset(donnee[0], donnee[1], donnee[2], donnee[3])
 
 
     X = data[Xcols_func('all',data.columns)]

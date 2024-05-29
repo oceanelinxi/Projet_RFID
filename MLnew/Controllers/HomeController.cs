@@ -46,6 +46,7 @@ namespace MLnew.Controllers
                 }
             }
 
+
             return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
 
@@ -168,7 +169,7 @@ namespace MLnew.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Upload()
+        public async Task<IActionResult> Upload(string btnradio)
         {
             foreach (var file in Request.Form.Files)
             {
@@ -192,7 +193,8 @@ namespace MLnew.Controllers
                     var requestData = new
                     {
                         chemin = filePath,
-                        nomFichier= fileName
+                        nomFichier= fileName,
+                        btnradio= btnradio
                     };
 
                     var content = new StringContent(JsonConvert.SerializeObject(requestData), System.Text.Encoding.UTF8, "application/json");

@@ -180,9 +180,8 @@ def analytical(df_timing_slices, timing_slices, reflist):
 
     return ana
 
-def methode_analytique(step:int,t0_run:int):
+def methode_analytique(step:int,t0_run:int, pathfile = r'Uploads/data_anonymous'):
     start = datetime.datetime.now()
-    pathfile = r'Uploads/data_anonymous'
     Reflist = reflist(pathfile)
     Timing = timing(t0_run,pathfile)
     df = df_tags(pathfile)
