@@ -10,8 +10,6 @@
             <option value="RandomForest">Random Forest</option>
             <option value="svm">SVM</option>
             <option value="knn">KNN</option>
-            <option value="RegressionLogistique">Regresion Logistique</option>
-            <option value="NaiveBayes">Naive Bayes</option>
         </select>
         <button type="button" id="btnOK">OK</button><br><br>
     </div>
@@ -43,20 +41,29 @@
                 if (choixMethode === "svm") {
                     // Ajouter les options de paramètres SVM
                     addOption(parametreSelect, "svm-C", "C");
-                    addOption(parametreSelect, "svm-gamma", "Gamma");
+                    addOption(parametreSelect, "svm-tol", "tol");
+                    addOption(parametreSelect, "svm-max_iter", "max_iter");
+                    addOption(parametreSelect, "svm-random_state", "random_state");
+
                 } else if (choixMethode === "knn") {
                     // Ajouter les options de paramètres KNN
+                    addOption(parametreSelect, "knn-n_neighbors", "n_neighbors");
                     addOption(parametreSelect, "knn-n_neighbors", "n_neighbors");
                 } else if (choixMethode === "RandomForest") {
                     // Ajouter les options de paramètres Random Forest
                     addOption(parametreSelect, "rf-n_estimators", "n_estimators");
                     addOption(parametreSelect, "rf-max_depth", "max_depth");
                     addOption(parametreSelect, "rf-min_samples_leaf", "min_samples_leaf");
-                } else if (choixMethode === "NaiveBayes") {
-                    addOption(parametreSelect, "nb-alpha", "Alpha");
-                } else if (choixMethode === "RegressionLogistique") {
-                    addOption(parametreSelect, "rl-C", "C");
-                }
+                    addOption(parametreSelect, "rf-max_sapmles", "max_samples");
+                    addOption(parametreSelect, "rf-min_impurity_decrease", "min_impurtity_decrease");
+                    addOption(parametreSelect, "rf-min_samples_split", "min_samples_split");
+                    addOption(parametreSelect, "rf-min_weight_fraction_leaf", "min_weight_fraction_leaf");
+                    addOption(parametreSelect, "rf-n_jobs", "n_jobs");
+                    addOption(parametreSelect, "rf-random_state", "random_state");
+                    addOption(parametreSelect, "rf-verbose", "verbose");
+                    addOption(parametreSelect, "rf-ccp_alpha", "ccp_alpha");
+                    addOption(parametreSelect, "rf-max_leaf_nodes", "max_leaf_nodes");
+                } 
             } else {
                 optionsSection.style.display = "none";
             }
