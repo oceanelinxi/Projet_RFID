@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="/css/Style_Resultsvm.css">
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
-    <h3>Précision de la méthode SVM :  @pic</h3>
     @if (!string.IsNullOrEmpty(pic))
     {
         if(methodML == "RandomForest")
@@ -38,6 +37,53 @@
                 <img src="~/images/precision/RandomForest/max_depth.png"
                 alt="RandomForest max_depth " width="1000px" height="800px" />
             }
+            if (hp == "rf-max_samples")
+            {
+                <img src="~/images/precision/RandomForest/max_samples.png"
+                     alt="RandomForest max_samples " width="1000px" height="800px" />
+            }
+            if (hp == "rf-min_impurity_decrease")
+            {
+                <img src="~/images/precision/RandomForest/min_impurity_decrease.png"
+                     alt="RandomForest min_impurity_decrease" width="1000px" height="800px" />
+            }
+            if (hp == "rf-min_samples_split")
+            {
+                <img src="~/images/precision/RandomForest/min_samples_split.png"
+                     alt="RandomForest min_samples_split " width="1000px" height="800px" />
+            }
+            if (hp == "rf-min_weight_fraction_leaf")
+            {
+                <img src="~/images/precision/RandomForest/min_weight_fraction_leaf.png"
+                     alt="RandomForest min_weight_fraction_leaf " width="1000px" height="800px" />
+            }
+            if (hp == "rf-n_jobs")
+            {
+                <img src="~/images/precision/RandomForest/n_jobs.png"
+                     alt="RandomForest n_jobs " width="1000px" height="800px" />
+            }
+            if (hp == "rf-random_state")
+            {
+                <img src="~/images/precision/RandomForest/random_state.png"
+                     alt="RandomForest random_state " width="1000px" height="800px" />
+            }
+            if (hp == "rf-verbose")
+            {
+                <img src="~/images/precision/RandomForest/verbose.png"
+                     alt="RandomForest verbose " width="1000px" height="800px" />
+            }
+            if (hp == "rf-ccp_alpha")
+            {
+                <img src="~/images/precision/RandomForest/ccp_alpha.png"
+                     alt="RandomForest ccp_alpha " width="1000px" height="800px" />
+            }
+            if (hp == "rf-max_leaf_nodes")
+            {
+                <img src="~/images/precision/RandomForest/max_leaf_nodes.png"
+                     alt="RandomForest max_leaf_nodes " width="1000px" height="800px" />
+            }
+
+
         }
         if (methodML == "svm")
         {
@@ -49,6 +95,17 @@
                      alt="SVM C " width="1000px" height="800px" />
 
             }
+            if (hp == "svm-tol")
+            {
+                <img src="~/images/precision/SVM/tol.png"
+                     alt="SVM tol" width="1000px" height="800px" />
+            }
+            if (hp == "svm-max_iter")
+            {
+                <img src="~/images/precision/SVM/max_iter.png"
+                     alt="SVM random_state" width="1000px" height="800px" />
+            }
+
         }
         if (methodML == "knn")
         {
@@ -58,6 +115,11 @@
                      alt="KNN n_neighbors " width="1000px" height="800px" /> <br />
                 <img src="~/images/precision/KNN/n_neighbors.png"
                      alt="KNN n_neighbors " width="1000px" height="800px" />
+            }
+            if (hp == "knn-p")
+            {
+                <img src="~/images/precision/SVM/p.png"
+                     alt="KNN p" width="1000px" height="800px" />
             }
         }
 
