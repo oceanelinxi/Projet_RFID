@@ -19,8 +19,18 @@
     <div class="zip">
         <h1 class="Titre">Welcome</h1>
 
-        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload" target="uploadFrame">
-            <div>
+
+        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload" target="uploadFrame" id="formUpload">
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio1" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1">Données existantes</label>
+
+                <input type="radio" class="btn-check" name="btnradio2" id="btnradio2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Nouvelles données</label>
+
+             
+            </div>
+            <div id="fileUploadSection" style="display: none;">
                 <iframe id="uploadFrame" name="uploadFrame" style="display: none;"></iframe>
                 <label for="files" class="label-upload">Choisissez les fichiers à télécharger (ZIP autorisés) :</label>
                 <input id="fileInput" type="file" name="files" multiple>
@@ -621,10 +631,23 @@
     <script>
         document.getElementById('okButton').addEventListener('click', function (event) {
             var optionsSection = document.getElementById('optionsSection');
-            if (optionsSection.style.display === "none") {
-                optionsSection.style.display = "block";
-            } else {
-                optionsSection.style.display = "none";
+            var okButton = document.getElementById('okButton');
+            var formUpload = document.getElementById('formUpload');
+           
+            optionsSection.style.display = "block";  // Affiche le bloc
+            okButton.style.display = "none";
+            formUpload.style.display = "none";// Cache le bouton
+        });
+
+        document.getElementById('btnradio2').addEventListener('change', function (event) {
+            if (event.target.checked) {
+                document.getElementById('fileUploadSection').style.display = 'block';
+            }
+        });
+
+        document.getElementById('btnradio1').addEventListener('change', function (event) {
+            if (event.target.checked) {
+                document.getElementById('fileUploadSection').style.display = 'none';
             }
         });
 

@@ -35,6 +35,7 @@ def analytique():
     # Return the prediction as JSON
     return jsonify({'accuracy': accuracy, 'duree':str(duree_ana)})
 
+
 # Chemin du dossier
 dossier = 'Uploads/data_anonymous'
 if os.path.exists(dossier):
@@ -123,12 +124,14 @@ def chemin():
     data = request.get_json()
     chemin=data.get('chemin')
     fileName=data['nomFichier']
+    fileName=fileName.rstrip('.zip')
+    upl="Uploads/"
     # Remplacer "\\" par "/"
     chemin = chemin.replace("\\", "/")
     print( "fileName")
     print( fileName)
     print( "fileName")
-    unzip_file(chemin,"Uploads/data_anonymous")
+    unzip_file(chemin,upl+fileName)
     return chemin
 
 @app.route('/CourbesPrecision', methods=['POST'])
