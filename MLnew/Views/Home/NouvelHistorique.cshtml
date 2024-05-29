@@ -79,7 +79,7 @@
     </div>
     <div>
         <form method="post" asp-action="IndexHistorique" asp-controller="Home">
-            <input type="submit" value="Reinitialiser les filtres" />
+            <input type="submit" id="init" value="Reinitialiser les filtres" />
             @if (User.IsInRole("Administrateur"))
             {
                 <a asp-action="ClearHistory" asp-controller="Home">Supprimer tout l'historique'</a>
