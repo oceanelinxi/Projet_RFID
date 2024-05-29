@@ -81,6 +81,7 @@
                             <p>
                                 1. n_estimators:
                                     <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="@paramList["n_estimators"]" required>
+<<<<<<< HEAD
                             </p>
                             <div class="explication">
                                 <p>
@@ -102,6 +103,29 @@
                                 </p>
                             </div>
                             <p>
+=======
+                            </p>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    n_estimators int, default=33<br>
+                                    Le nombre d'arbres de décision dans la forêt. Plus il est élevé, plus le modèle aura de la facilité à apprendre.<br />
+                                    Cependant si la valeur est trop élevé pour les données, le modèle risque d'être surentraîné et de mal se généraliser.
+                                </p>
+                            </div>
+                            <p>
+                                2. max_depth:
+                                <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="@paramList["max_depth"]" min="1" max="100" required>
+                            </p>
+                            <div class="explication">
+                                <p>
+                                    Explication :
+                                    max_depthint, default=None<br>
+                                    The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
+                                </p>
+                            </div>
+                            <p>
+>>>>>>> f4d667986905475382a33ee40b13b1e1191c395b
                                 3. min_samples_leaf:
                                     <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="@paramList["min_samples_leaf"]" min="1" max="100" required>
                                 </p>

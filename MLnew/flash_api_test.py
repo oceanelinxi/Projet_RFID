@@ -3,6 +3,7 @@ from analytique import methode_analytique
 from RandomForest import RFcross_validation, pretraitement_knn, dataset
 from SVM import train_and_evaluate_xgboost
 from SVM import train_and_evaluate_svm
+from SVM import train_and_evaluate_dt_xgboost
 from knn import knnn
 from knn import evaluate_adaboost_rf
 from knn import evaluate_adaboost_svm
@@ -270,16 +271,15 @@ def ada_knn():
 @app.route('/XGBoost', methods=['POST'])
 def xgboost():
      input_params = request.get_json()
-     booster=str(input_params['Booster'])
-     n_estimators=int(input_params['N_estimators'])
-     verbosity=int(input_params['Verbosity'])
-     objective=str(input_params['Objective'])
-     eval_metric=str(input_params['EvalMetric'])
-     early_stopping_rounds=int(input_params['EarlyStopping'])
-     seed=int(input_params['Seed'])
-     nthread=int(input_params['Nthread'])
+     nestimators=int(input_params['nestimators'])
+     mx_depth=int(input_params['mx_depth'])
+     lrn_rate=float(input_params['lrn_rate'])
+     subsample=float(input_params['subsample'])
+     colsample_bynode=float(input_params['colsample_bynode'])
+     rd_state=int(input_params['rd_state'])
+    
      
-     mean_accuracy=train_and_evaluate_xgboost(booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
+     mean_accuracy=train_and_evaluate_xgboost(nestimators,mx_depth, lrn_rate,subsample,colsample_bynode, rd_state)
      return jsonify({'mean_accuracy': mean_accuracy})
     
 @app.route('/XGBoostKNN', methods=['POST'])
@@ -299,20 +299,20 @@ def xgboostknn():
     mean_accuracy=train_and_evaluate_knn_xgboost(knn_neighbors,booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
     return jsonify({'mean_accuracy': mean_accuracy})
     
-@app.route('/XGBoostSVM', methods=['POST'])
+@app.route('/XGBoostDT', methods=['POST'])
 def xgboostsvm():
     input_params = request.get_json()
-    svm_kernel=str(input_params['Svm_kernel'])
-    booster=str(input_params['Booster'])
-    n_estimators=int(input_params['N_estimators'])
-    verbosity=int(input_params['Verbosity'])
-    objective=str(input_params['Objective'])
-    eval_metric=str(input_params['EvalMetric'])
-    early_stopping_rounds=int(input_params['EarlyStopping'])
-    seed=int(input_params['Seed'])
-    nthread=int(input_params['Nthread'])
+    learning_rate=float(input_params['learning_rate'])
+    booster=str(input_params['booster'])
+    n_estimator3=int(input_params['n_estimator3'])
+    objective=str(input_params['objective'])
+    sample_type=str(input_params['sample_type'])
+    early_stopping_rounds=int(input_params['early_stopping_rounds'])
+    gamma3=float(input_params['gamma3'])
+    colsample_bylevel=float(input_params['colsample_bylevel'])
     
-    mean_accuracy=train_and_evaluate_knn_xgboost(svm_kernel,booster,n_estimators,verbosity,objective,eval_metric,early_stopping_rounds,seed,nthread)
+    mean_accuracy=train_and_evaluate_dt_xgboost(learning_rate,booster,n_estimator3,objective)
+    print(mean_accuracy)
     return jsonify({'mean_accuracy': mean_accuracy})
  
 

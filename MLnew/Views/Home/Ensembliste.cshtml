@@ -31,7 +31,7 @@
         function updateExplanation1() {
             const select = document.getElementById('algorithmSelect1');
             const KNNDiv = document.getElementById('KNNDiv1');
-            const SVMDiv = document.getElementById('SVMDiv1');
+            const SVMDiv = document.getElementById('DTDiv1');
             const RFDiv = document.getElementById('RFDiv1');
 
             if (select.value === 'KNN') {
@@ -39,7 +39,7 @@
                 SVMDiv.classList.add('hidden');
                 RFDiv.classList.add('hidden');
             }
-            if (select.value === 'SVM') {
+            if (select.value === 'DT') {
                 SVMDiv.classList.remove('hidden');
                 KNNDiv.classList.add('hidden');
                 RFDiv.classList.add('hidden');
@@ -99,9 +99,9 @@
                 </h>
                 <div id="collapseOption1" class="accordion-collapse collapse" aria-labelledby="headingOption1" data-bs-parent="#optionsAccordion">
                     <div class="accordion-body">
-                        <select id="algorithmSelect1" onchange="updateExplanation1()">
+                <select id="algorithmSelect1" onchange="updateExplanation1()" name="algorithmSelect1">
                             <option value="KNN">KNN</option>
-                            <option value="SVM">SVM</option>
+                            <option value="DT">Decision Tree</option>
                             <option value="Random Forest">Random Forest</option>
                         </select>
 
@@ -247,28 +247,28 @@
                             </div>
                         </div>
 
-                        <div id="SVMDiv1" class="hidden">
+                        <div id="DTDiv1" class="hidden">
                             <div class="accordion-body">
 
-                                <p>1. svm_kernel:</p>
-                                <select id="kernel-select" name="svm_kernel" class="form-select">
-                                    <option value="linear">linear</option>
-                                    <option value="poly">polynomial</option>
-                                    <option value="rbf" selected>rbf</option>
-                                    <option value="sigmoid">sigmoid</option>
-                                    <option value="precomputed">precomputed</option>
-                                </select>
+                        <p>1. learning_rate:</p>
+                        <div>
+                            <input class="form-number" type="number" id="learning_rate-input" name="learning_rate" style="width: 230px;" placeholder="Enter a positive float value" min="0" max="1.0" step="0.1" value="0.1" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                        </div>
                                 <div class="explication">
                                     <p>
-                                        Explanation:
-                                        Kernel: {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} or callable, default=’rbf’<br>
-                                        Description: Defines the shape of the boundary between the different classes of the model.
+                                Learning rate for the gradient boosting algorithm. When a new tree
+                                is trained, it will be added to the existing trees
+                                . Before doing so, it will be multiplied by the learning_rate.
+
+                                Decreasing this hyperparameter reduces the likelihood of overfitting.
+
+                                Range: [0, 1]
                                     </p>
                                 </div>
                                 <p>2.booster:</p>
                                 <select id="metric-select" name="booster" class="form-select">
                                     <option value="gblinear">gblinear</option>
-                                    <option value="gbtree">gbtree</option>
+                                    <option value="gbtree" selected>gbtree</option>
                                     <option value="dart">dart</option>
                                 </select>
                                 <div class="explication">
@@ -280,7 +280,7 @@
                                 </div>
                                 <p>3.n_estimators:</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_estimators" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="100" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_estimator3" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="100" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
@@ -290,35 +290,13 @@
                                         Cependant si la valeur est trop élevé pour les données, le modèle risque d'être surentraîné et de mal se généraliser.
                                     </p>
                                 </div>
-                                <p>4.verbosity:</p>
-                                <select id="metric-select" name="verbosity" class="form-select">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-
-                                <div class="explication">
-                                    <p>
-                                        Explication :
-                                        verbosity int<br>
-                                        Le paramètre verbosity dans XGBoost est utilisé pour contrôler le niveau de détail des messages de sortie pendant l'entraînement du modèle.<br />
-
-                                    </p>
-                                </div>
-                                <p>5.objective:</p>
+                             
+                                <p>4.objective:</p>
                                 <select id="metric-select" name="objective" class="form-select">
-                                    <option value="binary:logistic">binary:logistic</option>
+                                    <option value="binary:logistic" selected>binary:logistic</option>
                                     <option value="binary:logitraw">binary:logitraw</option>
-                                    <option value="multi:softprob">multi:softprob</option>
-                                    <option value="multi:softmax ">multi:softmax </option>
-                                    <option value="reg:squarederror ">reg:squarederror </option>
                                     <option value="reg:logistic ">reg:logistic </option>
-                                    <option value="reg:gamma">reg:gamma</option>
-                                    <option value="rank:pairwise">rank:pairwise</option>
-                                    <option value="rank:ndcg">rank:ndcg</option>
-                                    <option value="rank:map">rank:map</option>
-                                    <option value="survival:cox ">survival:cox </option>
+                                    
                                 </select>
                                 <div class="explication">
                                     <p>
@@ -328,64 +306,64 @@
 
                                     </p>
                                 </div>
-                                <p>6.eval_metric:</p>
-                                <select id="metric-select" name="eval_metric" class="form-select">
-                                    <option value="error">error</option>
-                                    <option value="auc">auc</option>
-                                    <option value="logloss">logloss</option>
-                                    <option value="merror">merror</option>
-                                    <option value="mlogloss">mlogloss</option>
-                                    <option value="rmse">rmse</option>
-                                    <option value="mae">mae</option>
-                                    <option value="rmsle">rmsle</option>
-                                    <option value="logloss">logloss</option>
-                                    <option value="map">map</option>
-                                    <option value="ndcg">ndcg</option>
-                                    <option value="ndcg@k">ndcg@k</option>
-                                    <option value="map@k">map@k</option>
+                        <p>5.sample_type:</p>
+                        <select id="sample_type-select" name="sample_type" class="form-select">
+                            <option value="uniform" selected>uniform</option>
+                            <option value="weighted">weighted</option>
+                                    
                                 </select>
                                 <div class="explication">
                                     <p>
                                         Explication :
-                                        eval_metric string,<br>
-                                        Dans XGBoost, le paramètre eval_metric est utilisé pour spécifier les métriques d'évaluation à surveiller pendant l'entraînement du modèle. <br />
+                                Possible values:
 
+                                ‘uniform’: every tree is equally likely to be dropped out
+
+                                ‘weighted’: the dropout probability will be proportional to a tree’s weight
+
+                                Please also refer to the remarks on rate_drop for further explanation.
+
+                                Will be ignored if booster is not set to ‘dart’.
                                     </p>
                                 </div>
-                                <p>7.early_stopping_rounds:</p>
+                                <p>6.early_stopping_rounds:</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="early_stopping_rounds" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="number" id="criterion-n_estimators-input" name="early_stopping_rounds" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="10" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
                                         Explication :
-                                        early_stopping_rounds int, default='None'<br>
+                                        early_stopping_rounds int<br>
                                         Le paramètre early_stopping_rounds est utilisé dans XGBoost pour activer le mécanisme d'arrêt anticipé (early stopping) pendant l'entraînement du modèle.<br />
 
                                     </p>
                                 </div>
-                                <p>8.seed:</p>
+                        <p>7.gamma:</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="seed" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="number" id="gamma-input" name="gamma3" style="width: 230px;" placeholder="Enter a positive integer value" min="0.0" max="100.0" step="1.0" value="0.0" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
                                         Explication :
-                                        seed int, default='None'<br>
-                                        Le paramètre seed est utilisé dans XGBoost pour spécifier une graine aléatoire afin de contrôler la reproductibilité des résultats lors de l'entraînement du modèle.<br />
+                                Minimum loss reduction required for any update to the tree. This means that every potential update will first be evaluated for its improvement to the loss function. If the improvement exceeds gamma, the update will be accepted.
 
+                                Increasing this hyperparameter reduces the likelihood of overfitting.
                                     </p>
                                 </div>
-                                <p>9.nthread:</p>
+                        <p>8.colsample_bylevel:</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="nthread" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="number" id="colsample_bylevel-input" name="colsample_bylevel" style="width: 230px;" placeholder="Enter a positive integer value" min="0" max="1.0" step="0.1" value="1.0" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
                                         Explication :
-                                        nthread int, default='None'<br>
-                                        Le paramètre nthread dans XGBoost est utilisé pour spécifier le nombre de threads parallèles à utiliser lors de l'entraînement du modèle. <br />
+                                Subsample ratio for the columns used, for each level inside a tree.
 
+                                Note that XGBoost grows its trees level-by-level, not node-by-node. At each level, a subselection of the features will be randomly picked and the best feature for each split will be chosen. This hyperparameter determines the share of features randomly picked at each level. When set to 1, then now such sampling takes place.
+
+                                Decreasing this hyperparameter reduces the likelihood of overfitting.
+
+                                Range: (0, 1]
                                     </p>
                                 </div>
 
@@ -398,22 +376,10 @@
                             <div class="accordion-body">
 
 
-                                <p>1.booster:</p>
-                                <select id="metric-select" name="booster" class="form-select">
-                                    <option value="gblinear">gblinear</option>
-                                    <option value="gbtree">gbtree</option>
-                                    <option value="dart">dart</option>
-                                </select>
-                                <div class="explication">
-                                    <p>
-                                        Explication :
-                                        booster string<br>
-                                        Le paramètre booster est utilisé dans les bibliothèques de machine learning pour spécifier le type d'algorithme de boosting à utiliser.<br />
-                                    </p>
-                                </div>
-                                <p>2.n_estimators:</p>
+                              
+                                <p>1.n_estimators:</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_estimators" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="100" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="nestimators" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="100" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
@@ -423,104 +389,71 @@
                                         Cependant si la valeur est trop élevé pour les données, le modèle risque d'être surentraîné et de mal se généraliser.
                                     </p>
                                 </div>
-                                <p>3.verbosity:</p>
-                                <select id="metric-select" name="verbosity" class="form-select">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                        
-                                <div class="explication">
-                                    <p>
-                                        Explication :
-                                        verbosity int<br>
-                                        Le paramètre verbosity dans XGBoost est utilisé pour contrôler le niveau de détail des messages de sortie pendant l'entraînement du modèle.<br />
-                        
-                                    </p>
-                                </div>
-                                <p>4.objective:</p>
-                                <select id="metric-select" name="objective" class="form-select">
-                                    <option value="binary:logistic">binary:logistic</option>
-                                    <option value="binary:logitraw">binary:logitraw</option>
-                                    <option value="multi:softprob">multi:softprob</option>
-                                    <option value="multi:softmax ">multi:softmax </option>
-                                    <option value="reg:squarederror ">reg:squarederror </option>
-                                    <option value="reg:logistic ">reg:logistic </option>
-                                    <option value="reg:gamma">reg:gamma</option>
-                                    <option value="rank:pairwise">rank:pairwise</option>
-                                    <option value="rank:ndcg">rank:ndcg</option>
-                                    <option value="rank:map">rank:map</option>
-                                    <option value="survival:cox ">survival:cox </option>
-                                </select>
-                                <div class="explication">
-                                    <p>
-                                        Explication :
-                                        objective string<br>
-                                        Le paramètre objective dans XGBoost spécifie la fonction de perte à optimiser pendant l'entraînement du modèle.<br />
 
-                                    </p>
-                                </div>
-                                <p>5.eval_metric:</p>
-                                <select id="metric-select" name="eval_metric" class="form-select">
-                                    <option value="error">error</option>
-                                    <option value="auc">auc</option>
-                                    <option value="logloss">logloss</option>
-                                    <option value="merror">merror</option>
-                                    <option value="mlogloss">mlogloss</option>
-                                    <option value="rmse">rmse</option>
-                                    <option value="mae">mae</option>
-                                    <option value="rmsle">rmsle</option>
-                                    <option value="logloss">logloss</option>
-                                    <option value="map">map</option>
-                                    <option value="ndcg">ndcg</option>
-                                    <option value="ndcg@k">ndcg@k</option>
-                                    <option value="map@k">map@k</option>
-                                </select>
-                                <div class="explication">
-                                    <p>
-                                        Explication :
-                                        eval_metric string,<br>
-                                        Dans XGBoost, le paramètre eval_metric est utilisé pour spécifier les métriques d'évaluation à surveiller pendant l'entraînement du modèle. <br />
+                        <p>2.max_depth:</p>
+                        <div>
+                            <input class="form-number" type="number" id="criterion-max_depth-input" name="mx_depth" style="width: 230px;" placeholder="Enter a positive integer value" min="0" max="100" step="1" value="6" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explication :
+                                max_depth int, default=6<br>
+                                Maximum allowed depth of the trees.
 
-                                    </p>
-                                </div>
-                                <p>6.early_stopping_rounds:</p>
+                                Decreasing this hyperparameter reduces the likelihood of overfitting.
+                            </p>
+                        </div>
+
+                        <p>3.learning_rate:</p>
+                        <div>
+                            <input class="form-number" type="number" id="lrn_rate-input" name="lrn_rate" style="width: 230px;" placeholder="Enter a positive integer value" min="0" max="1.0" step="0.1" value="1.0" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explication :
+                                Learning rate for the gradient boosting algorithm.<br>
+                                Decreasing this hyperparameter reduces the likelihood of overfitting.
+
+                                Range: [0, 1]
+
+                            </p>
+                        </div>
+                        <p>4.subsample:</p>
+                        <div>
+                            <input class="form-number" type="number" id="subsample-input" name="subsample" style="width: 230px;" placeholder="Enter a positive integer value" min="0" max="1.0" step="0.1" value="0.8" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                        </div>
+                        <div class="explication">
+                            <p>
+                                Explication :
+                                Subsample ratio from the training set. This means that for every tree a subselection of samples from the training set will be included into training. Please note that this samples without replacement - the common approach for random forests is to sample with replace.
+
+                                Decreasing this hyperparameter reduces the likelihood of overfitting.
+
+                                Range: (0, 1]
+
+                            </p>
+                        </div>
+                        <p>5.colsample_bynode:</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="early_stopping_rounds" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="number" id="colsample_bynode-input" name="colsample_bynode" style="width: 230px;" placeholder="Enter a positive integer value" min="0" max="1.0" step="0.1" value="0.8" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
                                         Explication :
-                                        early_stopping_rounds int, default='None'<br>
-                                        Le paramètre early_stopping_rounds est utilisé dans XGBoost pour activer le mécanisme d'arrêt anticipé (early stopping) pendant l'entraînement du modèle.<br />
                                         
                                     </p>
                                 </div>
-                                <p>7.seed:</p>
+                                <p>6.random_state:</p>
                                 <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="seed" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="number" id="rd_state-input" name="rd_state" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="42" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
                                 </div>
                                 <div class="explication">
                                     <p>
                                         Explication :
-                                        seed int, default='None'<br>
-                                        Le paramètre seed est utilisé dans XGBoost pour spécifier une graine aléatoire afin de contrôler la reproductibilité des résultats lors de l'entraînement du modèle.<br />
-
+                                       
                                     </p>
                                 </div>
-                                <p>8.nthread:</p>
-                                <div>
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="nthread" style="width: 230px;" placeholder="Enter a positive integer value" min="1" max="100" step="1" value="5" required oninput="this.value = this.value.replace(/[^\d.]/g,'')">
-                                </div>
-                                <div class="explication">
-                                    <p>
-                                        Explication :
-                                        nthread int, default='None'<br>
-                                        Le paramètre nthread dans XGBoost est utilisé pour spécifier le nombre de threads parallèles à utiliser lors de l'entraînement du modèle. <br />
-
-                                    </p>
-                                </div>
+                             
 
 
                                 
