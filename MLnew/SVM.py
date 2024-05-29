@@ -306,7 +306,7 @@ def train_and_evaluate_xgboost(nestimators:int,mx_depth:int, lrn_rate:float,subs
     y_pred_cv = cross_val_predict(xgb_model, X, y, cv=kf)
     return mean_score*100
 
-def train_and_evaluate_knn_xgboost(knn_neighbors:int, booster:str, n_estimators:int,  verbosity:int , objective:str ,eval_metric:str,early_stopping_rounds:int,seed:int,nthread:int):
+def train_and_evaluate_dt_xgboost(learning_rate:float,booster:str,n_estimator3:int,objective:str):
    
     ds = dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2])
     X = ds[Xcols_func('rssi & rc only', dataset(pretraitement_knn()[0], pretraitement_knn()[1], pretraitement_knn()[2]).columns)]
@@ -315,25 +315,14 @@ def train_and_evaluate_knn_xgboost(knn_neighbors:int, booster:str, n_estimators:
     ds['actual'] = label_encoder.fit_transform(ds['actual'])
     y = ds['actual']
     
-    X = np.ascontiguousarray(X)
-   
-    knn = KNeighborsClassifier(n_neighbors=knn_neighbors)
+    xgb_model = XGBClassifier(learning_rate=learning_rate, n_estimators=n_estimator3, booster=booster,objective=objective)
     
    
-    kf = KFold(n_splits=5, shuffle=True, random_state=42)
-    knn_preds = cross_val_predict(knn, X, y, cv=kf, method='predict_proba')
+    cv_scores = cross_val_score(xgb_model, X, y, cv=5,scoring='accuracy')
+    mean_score = cv_scores.mean()
+
     
-   
-    X_combined = np.hstack((X, knn_preds))
-    
-   
-    xgb_model = XGBClassifier(booster=booster, n_estimators=n_estimators, num_parallel_tree=n_estimators,verbosity=verbosity,objective=objective,eval_metric=eval_metric,early_stopping_rounds=early_stopping_rounds,seed=seed,nthread=nthread)
-    
-   
-    cv_scores = cross_val_score(xgb_model, X_combined, y, cv=kf)
-    mean_score = np.mean(cv_scores)
-    
-    return mean_score
+    return mean_score*100
 
 def train_and_evaluate_svm_xgboost(svm_kernel:str, booster:str, n_estimators:int,verbosity:int , objective:str ,eval_metric:str,early_stopping_rounds:int,seed:int,nthread:int):
     
