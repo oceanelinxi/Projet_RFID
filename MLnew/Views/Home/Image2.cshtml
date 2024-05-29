@@ -5,7 +5,7 @@
     string AdaBoostKNN = ExtractNumber(ViewBag.AdaBoostKNN).ToString().Replace(",", ".");
     string XGRF = ExtractNumber(ViewBag.XGBoost).ToString().Replace(",", ".");
     string XGKNN = ExtractNumber(ViewBag.XGBoostKNN).ToString().Replace(",", ".");
-    string XGSVM = ExtractNumber(ViewBag.XGBoostSVM).ToString().Replace(",", ".");
+    string XGDT = ExtractNumber(ViewBag.XGBoostDT).ToString().Replace(",", ".");
     
     
    // string AdaBoostRF = ExtractNumber(ViewBag.AdaBoostRF).ToString().Replace(",", ".");
@@ -79,11 +79,11 @@
 
 }
 
-@if (ViewBag.XGBoostSVM != null)
+@if (ViewBag.XGBoostDT != null)
 {
     <main aria-labelledby="title">
         <h2 id="title">@ViewBag.Title</h2>
-        <h3>Précision de la méthode ensembliste XGBoost avec SVM : @XGSVM </h3>
+        <h3>Précision de la méthode ensembliste XGBoost avec Decision Tree : @XGDT </h3>
     </main>
 
 
@@ -123,7 +123,7 @@
             var myChart = new Chart(ctx, {
                 type: 'bar', // Diagramme en barres
                 data: {
-                    labels: ['AdaBoostRF', 'AdaBoostSVM', 'AdaBoostKNN','XGRF','XGKNN','XGSVM'], // Étiquettes pour chaque barre
+                    labels: ['AdaBoostRF', 'AdaBoostSVM', 'AdaBoostKNN','XGRF','XGKNN','XGDT'], // Étiquettes pour chaque barre
                     datasets: [{
                         label: 'Exactitude %',
                         data: selectedOptions, // Valeurs en pourcentage pour chaque barre
@@ -157,7 +157,7 @@
         }
 
         // Appel de la fonction au chargement de la page avec les valeurs par défaut
-        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN, @XGRF , @XGKNN, @XGSVM]);
+        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN, @XGRF , @XGKNN, @XGDT]);
     </script>
 
 
@@ -168,7 +168,7 @@
 
 
         // Appel de la fonction au chargement de la page avec les valeurs par défaut
-        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN, @XGRF, @XGKNN, @XGSVM]);
+        updateChart([@AdaBoostRF, @AdaBoostSVM, @AdaBoostKNN, @XGRF, @XGKNN, @XGDT]);
     </script>
 
 
