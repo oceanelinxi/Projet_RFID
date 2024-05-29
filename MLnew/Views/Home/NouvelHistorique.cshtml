@@ -61,7 +61,7 @@
                     {
                         <tr>
                             <td>@mod.HistoriqueID</td>
-                            <td>@mod.Historique.UserId</td>
+                            <td>@mod.Historique.User.Email</td>
                             <td>@mod.Historique.DateSimulation </td>
                             <td>@mod.ModeleID</td>
                             <td>@mod.Nom</td>
@@ -85,29 +85,6 @@
         </form>
     </div>
         <br />
-
-    <div>
-        Correspondance userId et Email
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>userId</th>
-                    <th>    Email    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var user in ViewBag.users)
-                {
-                    <tr>
-                        <td>@user.Id</td>
-                        <td>@user.UserName</td>
-                    </tr>
-                }
-            </tbody>
-        <br />
-        <br />
-        </table>
-    </div>
     
     
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

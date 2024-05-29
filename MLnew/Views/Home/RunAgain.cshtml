@@ -80,7 +80,7 @@
                             <p><strong>Choose one or more sub-options:</strong></p>
                             <p>
                                 1. n_estimators:
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="@paramlist["n_estimators"]" required>
+                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="@paramList["n_estimators"]" required>
                             </p>
                             <div class="explication">
                                 <p>
@@ -478,7 +478,7 @@
                         </div>
                         <p>15.random_state</p>
                          <div>
-                                <input class="form-number" type="number" value="@paramlist["random_state"]" id="random_state-input" name="random_state_index_2" style="width: 230px;" placeholder="None" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                <input class="form-number" type="number" value="@paramList["random_state"]" id="random_state-input" name="random_state_index_2" style="width: 230px;" placeholder="None" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
                             <p>
@@ -558,7 +558,7 @@
                         </div>
                         <p>7.p</p>
                         <div>
-                            <input class="form-number" type="number" id="p-input" value="@aramList["p "]" name="p_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="2.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="number" id="p-input" value="@paramList["p "]" name="p_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="2.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
                             <p>Power parameter for the Minkowski metric. When p = 1, this is equivalent to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used. This parameter is expected to be positive.</p>

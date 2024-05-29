@@ -1381,7 +1381,7 @@ namespace MLnew.Controllers
             var userList = GetAllUsers();
             ViewBag.users = userList;
             
-            List<Modele> modeles = await _context.Modele.Include(b => b.Historique)
+            List<Modele> modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                 .ToListAsync();
             ViewBag.modeles = modeles;
                         
