@@ -31,7 +31,7 @@ import streamlit as st
 index_name = "finalbot"
 embeddings = OpenAIEmbeddings()
 
-# # Création d'une nouvelle base de données vectorielle (à exécuter une seule fois)
+# #Cas 1: Création d'une nouvelle base de données vectorielle (ou ajouter les nouveaux vecteurs)
 # texts = load_and_split("data/data.pdf") # Remplacez par votre fichier
 # pc = PineconeClient( api_key=os.environ.get("PINECONE_API_KEY") ) 
 # if index_name not in pc.list_indexes().names(): 
@@ -49,22 +49,9 @@ embeddings = OpenAIEmbeddings()
 # print("***Mise à jour des vecteurs complétée (upsert)***")
 
 
-
 # # # Cas 2: Chargement direct d'une base de données vectorielle existante
 pc = PineconeClient( api_key=os.environ.get("PINECONE_API_KEY") ) 
 vectordb = Pinecone.from_existing_index(index_name, OpenAIEmbeddings())
-
-
-# # # Cas 3: Ajout de nouvelles données à la base de données vectorielle
-# new_texts = ""
-# index = pinecone.Index(index_name)
-# # Initialisation de Pinecone
-# pinecone.init(
-#     api_key=PINECONE_API_KEY, # Trouvable dans la page "API Keys" de app.pinecone.io
-#     environment=PINECONE_API_ENV # À côté de la clé API
-# )
-# vectordb = Pinecone(index, OpenAIEmbeddings().embed_query, "text")
-# vectordb.add_texts(new_texts)
 
 
 
@@ -77,14 +64,9 @@ user_input = st.text_input('Entrez votre question') # Définit la question par d
 # Génération de la réponse en fonction de l'entrée de l'utilisateur
 if user_input:
     print(f"user input：{user_input}")
-    # Recherche des textes les plus similaires dans la base de données vectorielle en fonction de l'entrée de l'utilisateur
-   # most_relevant_texts = vectordb.similarity_search(user_input, k=5) # k est le nombre de textes à retourner, par défaut 4
 
-
-    most_relevant_texts = vectordb.max_marginal_relevance_search(user_input, k=8, fetch_k=20, lambda_mult=1)
+    most_relevant_texts = vectordb.max_marginal_relevance_search(user_input, k=8, fetch_k=20, lambda_mult=0.5)
     print("plus près：")
-    # print(most_relevant_texts[0].page_content[:200])
-    # print(most_relevant_texts[1].page_content[:200])
     for i, text in enumerate(most_relevant_texts):
         print(f"{i+1}. {text.page_content}")
 
