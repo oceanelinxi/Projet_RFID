@@ -80,7 +80,7 @@
                             <p><strong>Choose one or more sub-options:</strong></p>
                             <p>
                                 1. n_estimators:
-                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="@paramList["n_estimators"]" required>
+                                    <input class="form-number" type="number" id="criterion-n_estimators-input" name="n_est" placeholder="Enter a positive integer value" min="1" max="100" value="33" required>
                             </p>
                             <div class="explication">
                                 <p>
@@ -92,29 +92,7 @@
                             </div>
                             <p>
                                 2. max_depth:
-                                <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="@paramList["max_depth"]" min="1" max="100" required>
-                            </p>
-                            <div class="explication">
-                                <p>
-                                    Explication :
-                                    max_depthint, default=None<br>
-                                    The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
-                                </p>
-                            </div>
-                            <p>
-
-                            </p>
-                            <div class="explication">
-                                <p>
-                                    Explication :
-                                    n_estimators int, default=33<br>
-                                    Le nombre d'arbres de décision dans la forêt. Plus il est élevé, plus le modèle aura de la facilité à apprendre.<br />
-                                    Cependant si la valeur est trop élevé pour les données, le modèle risque d'être surentraîné et de mal se généraliser.
-                                </p>
-                            </div>
-                            <p>
-                                2. max_depth:
-                                <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="@paramList["max_depth"]" min="1" max="100" required>
+                                <input class="form-number" type="number" id="criterion-max_depth-input" name="max_d" placeholder="Enter a positive integer between 1 and 100" value="8" min="1" max="100" required>
                             </p>
                             <div class="explication">
                                 <p>
@@ -126,7 +104,7 @@
                             <p>
 
                                 3. min_samples_leaf:
-                                    <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="@paramList["min_samples_leaf"]" min="1" max="100" required>
+                                    <input class="form-number" type="number" id="criterion-min_samples_leaf-input" name="min_samples" placeholder="Enter a positive integer between 1 and 100" value="1" min="1" max="100" required>
                                 </p>
                             <div class="explication">
                                 <p>
@@ -137,7 +115,7 @@
 
                             </div>
                             <p>4.criterion:</p>
-                                <select id="criterion-select" name="criterion_index" class="form-select" value="@paramList["criterion"]">
+                                <select id="criterion-select" name="criterion_index" class="form-select">
                                     <option value="gini">gini</option>
                                     <option value="entropy">entropy</option>
                                     <option value="log_loss">log_loss</option>
@@ -152,7 +130,7 @@
                             <p>5.min_samples_split:</p>
 
                             <div>
-                                    <input class="form-number" type="number" id="criterion-min_samples_split-input" name="min_samples_split_index" placeholder="Enter a positive integer between 1 and 100" value="@paramList["min_samples_split"]" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
+                                    <input class="form-number" value="2"type="number" id="criterion-min_samples_split-input" name="min_samples_split_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3" required oninput="this.value = this.value.replace(/\D/g,'')">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -166,7 +144,7 @@
                             </div>
                             <p>6.min_weight_fraction_leaf</p>
                             <div>
-                                    <input class="form-number" value="@paramList["min_weight_fraction_leaf"]" type="number" id="criterion-min_weight_fraction_leaf-input" name="min_weight_fraction_leaf_index" placeholder="Enter a positive float between 1 and 100" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
+                                    <input class="form-number" value="0.01" type="number" id="criterion-min_weight_fraction_leaf-input" name="min_weight_fraction_leaf_index" placeholder="Enter a positive float between 1 and 100" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -176,7 +154,7 @@
 
                             </div>
                             <p>7.max_features</p>
-                            <select id="max_features-select" name="max_features_index" value="@paramList["max_features"]" class="form-select">
+                            <select id="max_features-select" name="max_features_index" class="form-select">
                                 <option value="sqrt">sqrt</option>
                                 <option value="log2">log2</option>
                                 <option value="None">None</option>
@@ -195,7 +173,7 @@
                             </div>
                             <p>8.max_leaf_nodes</p>
                             <div>
-                                <input class="form-number" value="@paramList["max_leaf_nodes"]" type="number" id="criterion-max_leaf_nodes-input" name="max_leaf_nodes_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3" />
+                                <input class="form-number" type="number" id="criterion-max_leaf_nodes-input" name="max_leaf_nodes_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3" />
                             </div>
                             <div class="explication">
                                 <p>
@@ -205,7 +183,7 @@
                             </div>
                             <p>9.min_impurity_decrease</p>
                             <div>
-                                    <input class="form-number" type="number" value="@paramList["min_impurity_decrease"]" id="criterion-min_impurity_decrease-input" name="min_impurity_decrease_index" placeholder="Enter a positive float between 1 and 100" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
+                                    <input class="form-number" value="0.01" type="number" id="criterion-min_impurity_decrease-input" name="min_impurity_decrease_index" placeholder="Enter a positive float between 1 and 100" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -215,7 +193,7 @@
 
                             </div>
                             <p>10.bootstrap</p>
-                                <select id="bootstrap-select" value="@paramList["bootstrap"]" name="bootstrap_index" class="form-select">
+                                <select id="bootstrap-select" name="bootstrap_index" class="form-select">
                                     <option value="True">True</option>
                                 <option value="False">False</option>
 
@@ -228,7 +206,7 @@
 
                             </div>
                             <p>11.oob_score</p>
-                                <select id="oob_score-select" value="@paramList["oob_score"]" name="oob_score_index" class="form-select">
+                                <select id="oob_score-select" name="oob_score_index" class="form-select">
                                     <option value="False">False</option>
                                 <option value="True">True</option>
                             </select>
@@ -241,7 +219,7 @@
                             </div>
                             <p>12.n_jobs</p>
                             <div>
-                                    <input class="form-number" value="@paramList["n_jobs"]" type="number" id="criterion-n_jobs-input" name="n_jobs_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
+                                    <input class="form-number" type="number" id="criterion-n_jobs-input" name="n_jobs_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -252,7 +230,7 @@
                             </div>
                             <p>13.random_state</p>
                             <div>
-                                    <input class="form-number" value="@paramList["random_state"]" type="number" id="criterion-random_state-input" name="random_state_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
+                                    <input class="form-number" type="number" id="criterion-random_state-input" name="random_state_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -263,7 +241,7 @@
                             </div>
                             <p>14.verbose</p>
                             <div>
-                                    <input class="form-number" value="@paramList["verbose"]" type="number" id="criterion-verbose-input" name="verbose_index" placeholder="Enter a positive integer between 1 and 100" min="0" max="100" step="1" maxlength="3">
+                                    <input class="form-number" type="number" id="criterion-verbose-input" name="verbose_index" placeholder="Enter a positive integer between 1 and 100" min="0" max="100" step="1" maxlength="3">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -273,7 +251,7 @@
 
                             </div>
                             <p>15.warm_start</p>
-                                <select id="warm_start-select" value="@paramList["warm_start"]" name="warm_start_index" class="form-select">
+                                <select id="warm_start-select" name="warm_start_index" class="form-select">
                                     <option value="False">False</option>
                                 <option value="true">True</option>
                             </select>
@@ -284,7 +262,7 @@
                                 </p>
                             </div>
                             <p>16.class_weight</p>
-                                <select id="class_weight-select" value="@paramList["class_weight"]" name="class_weight_index" class="form-select">
+                                <select id="class_weight-select" name="class_weight_index" class="form-select">
                                     <option value="none">None</option>
                                 <option value="balanced">balanced</option>
                                 <option value="balanced_subsample">balanced_subsample</option>
@@ -299,7 +277,7 @@
                             </div>
                             <p>17.ccp_alpha</p>
                             <div>
-                                    <input class="form-number" value="@paramList["ccp_alpha"]" type="number" id="criterion-ccp_alpha-input" name="ccp_alpha_index" placeholder="Enter a positive float between 1 and 100" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
+                                    <input class="form-number" value="0.01" type="number" id="criterion-ccp_alpha-input" name="ccp_alpha_index" placeholder="Enter a positive float between 1 and 100" min="0" max="100" step="0.01" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*?)\..*/g, '$1');">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -309,7 +287,7 @@
                             </div>
                             <p>18.max_samples</p>
                             <div>
-                                    <input class="form-number" value="@paramList["max_samples"]" type="number" id="criterion-max_samples-input" name="max_samples_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
+                                    <input class="form-number" type="number" id="criterion-max_samples-input" name="max_samples_index" placeholder="Enter a positive integer between 1 and 100" min="1" max="100" step="1" maxlength="3">
                                 </div>
                             <div class="explication">
                                 <p>
@@ -338,7 +316,7 @@
                     <div class="accordion-body">
                         <p>
                             1. C:
-                                <input class="form-number" step="@paramList["C"]" type="number" id="C-input" name="C_input" placeholder="Enter a positive float value" value="1" required>
+                                <input class="form-number" type="number" id="C-input" name="C_input" placeholder="Enter a positive float value" value="1" required>
                         </p>
                         <div class="explication">
                             <p>
@@ -349,7 +327,7 @@
                         </div>
                         <p>
                             2. Kernel:
-                            <select id="kernel-select" value="@paramList["kernel"]" name="kernel_select" class="form-select">
+                            <select id="kernel-select" value="rbf" name="kernel_select" class="form-select">
                                 <option value="linear">Linear</option>
                                 <option value="poly">Polynomial</option>
                                 <option value="rbf" selected>RBF</option>
@@ -367,7 +345,7 @@
 
                         <p>
                             3. Gamma:
-                            <select id="gamma-select" value="@paramList["gamma"]" name="gamma_select" class="form-select">
+                            <select id="gamma-select" value="scale" name="gamma_select" class="form-select">
                                 <option value="scale" selected>Scale</option>
                                 <option value="auto">Auto</option>
                             </select>
@@ -384,7 +362,7 @@
                         </div>
                         <p>4. degree:</p>
                         <div>
-                            <input class="form-number" value="@paramList["degree"]" type="number" id="degree-input" name="degree_index" style="width: 230px;" placeholder="Enter a positive int value" pattern="\d+(\.\d+)?" value="3">
+                            <input class="form-number" type="number" id="degree-input" name="degree_index" style="width: 230px;" placeholder="Enter a positive int value" pattern="\d+(\.\d+)?" value="3">
                         </div>
                         <div class="explication">
                             <p>
@@ -394,7 +372,7 @@
                         </div>
                         <p>5.coef0</p>
                         <div>
-                                <input class="form-number" value="@paramList["coef0"]" type="number" id="coef0-input" name="coef0_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                <input class="form-number" type="number" id="coef0-input" name="coef0_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
                             <p>
@@ -403,7 +381,7 @@
                             </p>
                         </div>
                         <p>6.shrinking</p>
-                        <select id="shrinking-select" value="@paramList["shrinking"]" name="shrinking_index" class="form-select">
+                        <select id="shrinking-select" name="shrinking_index" class="form-select">
                             <option value="True" selected>True</option>
                             <option value="False">False</option>
                         </select>
@@ -414,7 +392,7 @@
                             </p>
                         </div>
                         <p>7.probability</p>
-                            <select id="probability-select" value="@paramList["probability"]" name="probability_index" class="form-select">
+                            <select id="probability-select" name="probability_index" class="form-select">
                             <option value="True">True</option>
                             <option value="False" selected>False</option>
                         </select>
@@ -426,7 +404,7 @@
                         </div>
                         <p>8.tol</p>
                         <div>
-                            <input class="form-number" type="number" value="@paramList["tol"]" id="tol-input" name="tol_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" 
+                            <input class="form-number" type="number" id="tol-input" name="tol_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" 
                                    oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
@@ -437,7 +415,7 @@
                         </div>
                         <p>9.cache_size</p>
                         <div>
-                                <input class="form-number" type="number" value="@paramList["cache_size"]" id="cache_size-input" name="cache_size_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                <input class="form-number" type="number" id="cache_size-input" name="cache_size_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
                             <p>
@@ -446,7 +424,7 @@
                             </p>
                         </div>
                         <p>10.class_weight</p>
-                            <select id="class_weight-select" value="@paramList["class_weight"]" name="class_weight_svm_index" class="form-select">
+                            <select id="class_weight-select" name="class_weight_svm_index" class="form-select">
                             <option value="balanced">balanced</option>
                             <option value="None" selected>None</option>
                         </select>
@@ -457,7 +435,7 @@
                             </p>
                         </div>
                         <p>11.verbose</p>
-                        <select id="verbose-select" value="@paramList["verbose"]" name="verbose_svm_index" class="form-select">
+                        <select id="verbose-select" name="verbose_svm_index" class="form-select">
                             <option value="True">True</option>
                             <option value="False" selected>False</option>
                         </select>
@@ -469,7 +447,7 @@
                         </div>
                         <p>12.max_iter</p>
                         <div>
-                                <input class="form-number" type="number" id="max_iter-input" value="@paramList["max_iter"]" name="max_iter_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                <input class="form-number" type="number" id="max_iter-input" name="max_iter_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
                             <p>
@@ -478,7 +456,7 @@
                             </p>
                         </div>
                         <p>13.decision_function_shape</p>
-                            <select id="decision_function_shape-select" value="@paramList["decision_function_shape"]" name="decision_function_shape_index" class="form-select">
+                            <select id="decision_function_shape-select" name="decision_function_shape_index" class="form-select">
                             <option value="ovo">ovo</option>
                             <option value="ovr" selected>ovr</option>
                         </select>
@@ -489,7 +467,7 @@
                             </p>
                         </div>
                         <p>14.break_ties</p>
-                            <select id="break_ties-select" value="@paramList["break_ties"]" name="break_ties_index" class="form-select">
+                            <select id="break_ties-select" name="break_ties_index" class="form-select">
                             <option value="True">True</option>
                             <option value="False" selected>False</option>
                         </select>
@@ -501,7 +479,7 @@
                         </div>
                         <p>15.random_state</p>
                          <div>
-                                <input class="form-number" type="number" value="@paramList["random_state"]" id="random_state-input" name="random_state_index_2" style="width: 230px;" placeholder="None" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                                <input class="form-number" type="number" id="random_state-input" name="random_state_index_2" style="width: 230px;" placeholder="None" pattern="\d+(\.\d+)?" min="-1" max="100" oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
                             <p>
@@ -535,7 +513,7 @@
                         </div>
                         <p>
                             2. weights:
-                            <select id="weights-select"value="@paramList["weights"]" name="weights" class="form-select">
+                                <select id="weights-select" value="distance" name="weights" class="form-select">
                                 <option value="uniform">Uniform</option>
                                 <option value="distance">Distance</option>
                             </select>
@@ -555,7 +533,7 @@
                             <p>Metric to use for distance computation.</p>
                         </div>
                         <p>4.algorithm</p>
-                            <select id="algorithm-select" value="@paramList["algorithm"]" name="algorithm_index" class="form-select">
+                            <select id="algorithm-select" value="auto" name="algorithm_index" class="form-select">
                             <option value="ball_tree">ball_tree</option>
                             <option value="kd_tree">kd_tree</option>
                             <option value="brute">brute</option>
@@ -566,14 +544,14 @@
                         </div>
                         <p>5.leaf_size</p>
                         <div>
-                                <input class="form-number" type="number" value="@paramList["leaf_size"]" id="leaf_size-input" name="leaf_size_index" min="1" max="100" required>
+                                <input class="form-number" type="number" id="leaf_size-input" name="leaf_size_index" min="1" max="100" required>
                         </div>
                         <div class="explication">
                             <p>Leaf size passed to BallTree or KDTree. This can affect the speed of the construction and query, as well as the memory required to store the tree. The optimal value depends on the nature of the problem.</p>
                         </div>
                         <p>6.n_jobs</p>
                         <div>
-                            <input class="form-number" type="number" value="@paramList["n_jobs"]" id="n_jobs_knn-input" name="n_jobs_knn_index" min="1" max="100" placeholder="None">
+                            <input class="form-number" type="number" id="n_jobs_knn-input" name="n_jobs_knn_index" min="1" max="100" placeholder="None">
 
                         </div>
                         <div class="explication">
@@ -581,7 +559,7 @@
                         </div>
                         <p>7.p</p>
                         <div>
-                            <input class="form-number" type="number" id="p-input" value="@paramList["p "]" name="p_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="2.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
+                            <input class="form-number" type="number" id="p-input" name="p_index" style="width: 230px;" placeholder="Enter a positive float value" pattern="\d+(\.\d+)?" value="2.0" required oninput="this.value = parseFloat(this.value).replace(/[^\d.]/g,'')">
                         </div>
                         <div class="explication">
                             <p>Power parameter for the Minkowski metric. When p = 1, this is equivalent to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used. This parameter is expected to be positive.</p>
