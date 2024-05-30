@@ -1449,7 +1449,7 @@ namespace MLnew.Controllers
             var userList = GetAllUsers();
             ViewBag.users = userList;
 
-            List<Modele> modeles = await _context.Modele.Include(b => b.Historique)
+            List<Modele> modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                     .Where(b => b.Nom == modeleSelect)
                     .Where(b => b.Historique.UserId == userSelect)
                     .Where(b => b.Historique.DateSimulation> start && b.Historique.DateSimulation < end)
@@ -1458,46 +1458,46 @@ namespace MLnew.Controllers
             {
                 if (!user && modele)
                 {
-                    modeles = await _context.Modele.Include(b => b.Historique)
+                    modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                         .Where(b => b.Nom == modeleSelect)
                         .Where(b => b.Historique.DateSimulation > start && b.Historique.DateSimulation < end)
                          .ToListAsync();
                 }
                 else if (user && !modele)
                 {
-                    modeles = await _context.Modele.Include(b => b.Historique)
+                    modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                         .Where(b => b.Historique.UserId == userSelect)
                         .Where(b => b.Historique.DateSimulation > start && b.Historique.DateSimulation < end)
                          .ToListAsync();
                 }
                 else if (!user && !modele)
                 {
-                    modeles = await _context.Modele.Include(b => b.Historique)
+                    modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                         .Where(b => b.Historique.DateSimulation > start && b.Historique.DateSimulation < end)
                          .ToListAsync();
                 }
             }
             else
             {
-                modeles = await _context.Modele.Include(b => b.Historique)
+                modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                     .Where(b => b.Nom == modeleSelect).Where(b => b.Historique.UserId == userSelect)
                      .ToListAsync();
 
                 if (!user && modele)
                 {
-                    modeles = await _context.Modele.Include(b => b.Historique)
+                    modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                         .Where(b => b.Nom == modeleSelect)
                          .ToListAsync();
                 }
                 else if (user && !modele)
                 {
-                    modeles = await _context.Modele.Include(b => b.Historique)
+                    modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                         .Where(b => b.Historique.UserId == userSelect)
                          .ToListAsync();
                 }
                 else if (!user && !modele)
                 {
-                    modeles = await _context.Modele.Include(b => b.Historique)
+                    modeles = await _context.Modele.Include(b => b.Historique).Include(h => h.Historique.User)
                          .ToListAsync();
                 }
             }
