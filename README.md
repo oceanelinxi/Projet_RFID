@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 3) Editer chat/config.py.
 Ajouter mon api personnelle entre les guillemets de openai_api= :
-sk-proj-INypDEca2pXr7Vci1xwsT3BlbkFJOCyjC81Srhre2zdhhLK
+(demander moi)
 Sauvegarder
 
 4. enfin, vous pouvez lancer ChatBot depuis le terminal de vs code ou cmd (si vous êtes déjà dans le dossier chat) en tapant
